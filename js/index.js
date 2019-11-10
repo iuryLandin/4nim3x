@@ -1,4 +1,4 @@
-const base_url = 'https://qgeletronicos.com/animeapi';
+const base_url = 'https://cors-anywhere.herokuapp.com/https://qgeletronicos.com/animeapi';
 
 
 (function() {
