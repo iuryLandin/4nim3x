@@ -1,35 +1,27 @@
-const link = 'http://cinex.96.lt/animeapi/anime';
-const base_url = 'js/teste.json';
-
-
 (function() {
     animeList()
 })()
 
 function animeList() {
-    axios.get(base_url)
-        .then(function(response) {
-            montarTabelaAnime(response.data);
-        });
+    axios
+    .get(base_url)
+    .then(response => montarTabela(response.data.anime))
 }
 
-function montarTabelaAnime(data) {
-    const list = $('#lista');
-    for(i=0; i< data.anime.length; i++){
-        let html = `<div class='anime'> <img onclick="abrirModal('${data.anime[i].Nome}', '${encodeURIComponent(data.anime[i].Desc)}' )" src="${data.anime[i].Imagem}" />
-                    <legend>${data.anime[i].Nome}</legend> </div>
-                    `;
-        $("#lista").append( html )
-    }
+function montarTabela(data) {
+    data.forEach(element => {
+        let html = `
+        <div class="anime">
+            <img onclick="abrirModal('${element.Nome}', '${encodeURIComponent(element.Desc)}')" src="${element.Imagem}"/>
+            <legend>${element.Nome}</legend>
+        </div>`
+        $("#lista").append(html)
+    })
 }
 
-
-
-var modal = document.getElementById("modal");
-var span = document.getElementsByClassName("close")[0];
 
 function abrirModal(nome, desc) {
-    $("#desc").html("<h3> "+ nome +" </h3>" + decodeURIComponent(desc) );
+    $("#desc").html(`<h3>${nome}</h3>` + decodeURIComponent(desc));
     modal.style.display = "block";
 }
 
