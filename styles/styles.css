@@ -38,13 +38,13 @@ header .logo{
 /* Modal (background) */
 .modal {
   display: none;
-  position: fixed;
+  /* position: fixed; */
   z-index: 1;
   padding-top: 0;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
 }
@@ -52,8 +52,8 @@ header .logo{
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
-  margin: 0;
-  width: 80%;
+  margin: 5px;
+  width: 100%;
   overflow-y: scroll;
   overflow-x: scroll;
 }
@@ -74,7 +74,7 @@ header .logo{
     background: #963694;
 }
 
-#epLista a{
+#epsLista a {
     color: white;
     text-decoration: none;
     text-transform: uppercase;
