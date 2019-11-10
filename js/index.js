@@ -1,11 +1,20 @@
+const base_url = 'https://qgeletronicos.com/animeapi';
+
 (function() {
     animeList()
 })()
 
 function animeList() {
-    axios
-    .get(base_url)
-    .then(response => montarTabela(response.data.anime))
+    axios.get(base_url + '/anime', {
+            headers: {                
+                     "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Authorization", 
+                    "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
+                    "Content-Type": "application/json;charset=UTF-8"  
+                }
+            }).then(function(response) {
+            montarTabelaAnime(response.data);
+        });
 }
 
 function montarTabela(data) {
