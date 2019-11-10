@@ -3,16 +3,17 @@
 })()
 
 function animeList(next) {
-    if(!next) endpoint = '/anime';
-    else endpoint = '/anime?next=' + next;
+    if(!next) endpoint = endpAnime
+    else endpoint = endpAnime + '?next=' + next
     axios
-        .get(base_url + endpoint, headAxios ) //Coloquei o objeto que com o cabeçalho que é solicitado dentro de uma variável, salva em /js/rotas.js
+        .get((baseUrl + endpoint), headAxios ) //Coloquei o objeto que com o cabeçalho que é solicitado dentro de uma variável, salva em /js/rotas.js
         .then(res => montarTabelaAnime(res.data.anime)) //Arrow function que chama a função de exibir a lista de animes
+        .catch(err => console.log(err))
 }
 
 function getEpisodio(id) {
     axios
-        .get(base_url + '/episodio?id='+ id, headAxios)
+        .get(baseUrl + endpEpiso + id, headAxios)
         .then(res => montarTabelaEpisodio(res.data)) //Arrow function que chama a função de exibir a lista de episódios
 }
 
@@ -21,7 +22,7 @@ function montarTabelaAnime(data) {
     data.forEach(element => {
         let html = `
         <div class='anime'>
-            <img onclick="abrirModal(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}' )" src="${element.Imagem}" />
+            <img onclick="abrirModal(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}')" src="${element.Imagem}" />
             <legend>${element.Nome}</legend>
         </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
         list.append(html)
@@ -33,15 +34,20 @@ function montarTabelaAnime(data) {
 function montarTabelaEpisodio(data) {
     //LIMPAR UL
     $("#epsLista").html("");
+    console.log(data)
     data.forEach(element => {
-        let html =`<li>${element.Nome}</li>`;
+        let html =`<li><a href="#">${element.Nome}</a></li>`;
         $("#epsLista").append(html);
     });
 }
 
 
 function abrirModal(id, nome, desc) {
-    let HTMLdesc = `<h3>${nome}</h3>` + decodeURIComponent(desc);
+    let HTMLdesc = `
+    <div class="container">
+        <h3>${nome}</h3>
+        <div class="descricao">${decodeURIComponent(desc)}</div>
+    </div>`
     $("#desc").html(HTMLdesc);
     getEpisodio(id);
     modal.style.display = "block";
@@ -53,4 +59,11 @@ span.onclick = function() {
 
 window.onclick = (event) => {
   if (event.target == modal) modal.style.display = "none";
+}
+
+function abrirVideo(link) {
+    axios
+        .get(link)
+        .then(res => {
+            console.log(res.data[0])})
 }
