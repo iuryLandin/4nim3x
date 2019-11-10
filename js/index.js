@@ -1,5 +1,4 @@
-const link = 'http://cinex.96.lt/animeapi/anime';
-const base_url = 'js/teste.json';
+const base_url = 'https://qgeletronicos.com/animeapi';
 
 
 (function() {
@@ -7,7 +6,7 @@ const base_url = 'js/teste.json';
 })()
 
 function animeList() {
-    axios.get(base_url)
+    axios.get(base_url + '/anime')
         .then(function(response) {
             montarTabelaAnime(response.data);
         });
