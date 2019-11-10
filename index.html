@@ -5,32 +5,52 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="styles/menu.css">
 	<link rel="stylesheet" href="styles/styles.css">
 	<title>4nim3x</title>
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 </head>
 
 <body>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span style="float:right;" class="close">X</span> <br>
-                <p id='desc'>Descrição do Anime</p>
-                <ul id="epsLista">
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<span style="float:right;" class="close">X</span> <br>
+			<p id='desc'>Descrição do Anime</p>
+			<ul id="epsLista">
 
-                </ul>
-        </div>
-    </div>
-
-	<div id="lista">
-
+			</ul>
+		</div>
 	</div>
+	<nav id="mySidebar" class="sidebar">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"> <i class="fa fa-times"></i> </a>
+		<ul>
+			<li> <a href="">Home</a> </li>
+			<li> <a href="">Lançamentos</a> </li>
+			<li> <a href="">Dublados</a> </li>
+			<li> <a href="">Reportar Erro</a> </li>
+		</ul>
+	</nav>
+
+	<header>
+		<i class="fa fa-bars" onclick="openNav()"></i>
+		<span class='logo'>AnimeX</span>
+	</header>
+
+
+
+	<main>
+		<div id="lista">
+
+		</div>
+	</main>
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 	<script src="js/rotas.js"></script>
 	<script src="js/index.js"></script>
+	<script src="js/menu.js"></script>
 </body>
 
 </html>

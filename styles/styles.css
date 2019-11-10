@@ -1,3 +1,26 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    padding: 20px;
+    color: white;
+    background: #963694;
+    box-shadow: 0 0 8px black;
+}
+
+header .logo{
+    font-size: 14pt;
+    padding-left: 12px;
+}
+
+main{
+    padding-top: 20%;
+}
+
 #lista{
     margin-left: 5%;
 }
