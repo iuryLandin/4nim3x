@@ -1,4 +1,4 @@
-const link = 'http://cinex.96.lt/animeapi/anime'
-const base_url = 'js/teste.json'
+const base_url = 'https://cors-anywhere.herokuapp.com/https://qgeletronicos.com/animeapi'
 const modal = document.getElementById("modal")
-const span = document.getElementsByClassName("close")[0];
+const span = document.getElementsByClassName("close")[0]
+const headAxios = {headers: {'Access-Control-Allow-Origin': '*'}}
