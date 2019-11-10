@@ -59,10 +59,23 @@ header .logo{
 }
 
 .modal-header{
-    position: absolute;
     width: 100%;
     padding: 20px;
     color: white;
     background: #963694;
     box-shadow: 0 0 8px black;
+}
+
+#epsLista  li{
+    list-style: none;
+    padding: 12px;
+    border-bottom:solid 1px white;
+    border-top: solid 1px white;
+    background: #963694;
+}
+
+#epLista a{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
 }
