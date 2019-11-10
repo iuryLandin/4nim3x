@@ -1,1 +1,13 @@
-@charset "UTF-8";
+
+.anime img{
+    width: 150px !important;
+
+}
+
+.anime{
+    width: 150px;
+    height: 100%;
+    padding: 20px;
+    display: inline-block;
+    text-align: center;
+}
