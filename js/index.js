@@ -11,12 +11,6 @@ function animeList(next) {
         .catch(err => console.log(err))
 }
 
-function getEpisodio(id) {
-    axios
-        .get(baseUrl + endpEpiso + id, headAxios)
-        .then(res => montarTabelaEpisodio(res.data)) //Arrow function que chama a função de exibir a lista de episódios
-}
-
 function montarTabelaAnime(data) {
     const list = $('#lista')
     data.anime.forEach(element => {
@@ -30,37 +24,6 @@ function montarTabelaAnime(data) {
     if(!!data.Next) list.append(`<p align="center"><a id="verMais" href="#" onclick="verMais('${data.Next}')">VER MAIS</a></p>`)
     //fiz uma abstração nessa condicional aqui, qualquer coisa eu explico
 }
-
-function montarTabelaEpisodio(data) {
-    //LIMPAR UL
-    $("#epsLista").html("");
-    console.log(data)
-    data.forEach(element => {
-        let html =`<li><a href="#">${element.Nome}</a></li>`;
-        $("#epsLista").append(html);
-    });
-}
-
-
-function abrirModal(id, nome, desc) {
-    let HTMLdesc = `
-    <div class="container">
-        <h3>${nome}</h3>
-        <div class="descricao">${decodeURIComponent(desc)}</div>
-    </div>`
-    $("#desc").html(HTMLdesc);
-    getEpisodio(id);
-    modal.style.display = "block";
-}
-
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-window.onclick = (event) => {
-  if (event.target == modal) modal.style.display = "none";
-}
-
 
 function verMais(item){
     $(".anime").remove()
