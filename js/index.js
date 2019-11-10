@@ -5,8 +5,13 @@ const base_url = 'https://cors-anywhere.herokuapp.com/https://qgeletronicos.com/
     animeList()
 })()
 
-function animeList() {
-    axios.get(base_url + '/anime', { headers: {'Access-Control-Allow-Origin': '*'} } ).then(function(response) {
+function animeList(next) {
+    if(next != "" || next != null || next != NaN || next != undefined)
+        endpoint = '/anime';
+    else
+        endpoint = '/anime?next=' + next;
+
+     axios.get(base_url + endpoint, { headers: {'Access-Control-Allow-Origin': '*'} } ).then(function(response) {
             montarTabelaAnime(response.data);
         });
 }
@@ -25,7 +30,12 @@ function montarTabelaAnime(data) {
                     <legend>${data.anime[i].Nome}</legend> </div>
                     `;
         $("#lista").append( html )
+
+
     }
+     if(data.anime.Next != null || data.anime.Next != ""){
+            $("#lista").append( "<p align='center'> <a href='#' onclick='verMais("+ data.anime.Next +")'>VER MAIS</a> </p>" )
+        }
 }
 
 function montarTabelaEpisodio(data) {
