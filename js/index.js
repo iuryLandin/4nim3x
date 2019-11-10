@@ -6,7 +6,10 @@ const base_url = 'https://qgeletronicos.com/animeapi';
 })()
 
 function animeList() {
-    axios.get(base_url + '/anime')
+    axios.get(base_url + '/anime', {headers: {                
+          "Access-Control-Allow-Origin": "*"
+    }
+        )
         .then(function(response) {
             montarTabelaAnime(response.data);
         });
