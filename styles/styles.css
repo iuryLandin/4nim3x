@@ -17,6 +17,9 @@ header .logo{
     padding-left: 12px;
 }
 
+main {
+    transition-duration: .5s;
+}
 
 #lista{
     margin-left: 5%;
