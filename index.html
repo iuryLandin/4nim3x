@@ -14,50 +14,83 @@
 
 <body>
 
-	<div id="modal" class="modal">
-		<div class="modal-header">
-			<span style="float:right;" class="close"><a href="#"><i style="color: white" class="material-icons">clear</i></a></span>
-			<span class='tituloAnime'></span>
+	<div id="loading" class="loading">
+		<div class="loading-content">
+			<img src="https://loading.io/spinners/rolling/index.curve-bars-loading-indicator.svg" width="50"/>
+		</div>
 		</div>
 
-		<div class="modal-content">
-			<br>
-			<p id='desc'>Descrição do Anime</p>
-			<ul id="epsLista">
+		<div class="app">
+			<div class="page" id="home">
+				<nav id="mySidebar" class="sidebar">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"> <i class="fa fa-times"></i> </a>
+					<ul>
+						<li> <a href="">Home</a> </li>
+						<li> <a href="">Lançamentos</a> </li>
+						<li> <a href="">Dublados</a> </li>
+						<li> <a href="">Reportar Erro</a> </li>
+					</ul>
+				</nav>
 
-			</ul>
+				<header>
+					<i class="fa fa-bars" onclick="openNav()"></i>
+					<span class='logo'>AnimeX</span>
+				</header>
+
+				<main>
+					<div class="content">
+						<div id="lista" class="lista">
+
+						</div>
+					</div>
+				</main>
+
+			</div>
+
+			<div class="page" id="anime">
+				<header>
+					<i class="fa fa-chevron-left" onclick="voltar('anime' ,'home');"></i>
+					<span class='logo' id="titulo">AnimeX</span>
+				</header>
+
+				<main>
+					<div class="content">
+						<center> <img id="poster" src='' width="100"> </center>
+							<p id='desc'>Descrição do Anime</p>
+							<ul class='lista' id="epsLista">
+
+							</ul>
+					</div>
+				</main>
+			</div>
+
+			<div class="page" id="video">
+				<header>
+					<i class="fa fa-chevron-left" onclick="voltar('video' ,'anime');"></i>
+					<span class='logo' id="playerTitulo">AnimeX - Video Player</span>
+				</header>
+
+				<main>
+					<div class="content">
+						<center> <video id="videoPlayer" src='' controls></video> </center>
+						<p>Escolha uma opção abaixo:</p>
+						<ul class="lista" id="opcoes">
+
+						</ul>
+					</div>
+				</main>
+			</div>
+
 		</div>
-	</div>
-	<nav id="mySidebar" class="sidebar">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"> <i class="fa fa-times"></i> </a>
-		<ul>
-			<li> <a href="">Home</a> </li>
-			<li> <a href="">Lançamentos</a> </li>
-			<li> <a href="">Dublados</a> </li>
-			<li> <a href="">Reportar Erro</a> </li>
-		</ul>
-	</nav>
-
-	<header>
-		<i class="fa fa-bars" onclick="openNav()"></i>
-		<span class='logo'>AnimeX</span>
-	</header>
 
 
+		<script src="js/rotas.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+		<script src="js/modal.js"></script>
+		<script src="js/utils.js"></script>
+        <script src="js/index.js"></script>
 
-	<main>
-		<div id="lista">
-
-		</div>
-	</main>
-
-
-	<script src="js/rotas.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-	<script src="js/index.js"></script>
-	<script src="js/modal.js"></script>
-	<script src="js/menu.js"></script>
 </body>
 
 </html>

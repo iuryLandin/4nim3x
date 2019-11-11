@@ -3,6 +3,7 @@
 })()
 
 function animeList(next) {
+    loading(true);
     if(!next) endpoint = endpAnime
     else endpoint = endpAnime + '?next=' + next
     axios
@@ -12,11 +13,12 @@ function animeList(next) {
 }
 
 function montarTabelaAnime(data) {
+    loading(false);
     const list = $('#lista')
     data.anime.forEach(element => {
         let html = `
         <div class='anime'>
-            <img onclick="abrirModal(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}')" src="${element.Imagem}" />
+            <img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}" />
             <legend>${element.Nome}</legend>
         </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
         list.append(html)
@@ -30,3 +32,4 @@ function verMais(item){
     $("#verMais").remove()
     animeList(item)
 }
+
