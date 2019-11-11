@@ -29,6 +29,9 @@ main{
     clear: both;
 }
 
+main {
+    transition-duration: .5s;
+}
 
 #lista{
     margin-left: 5%;

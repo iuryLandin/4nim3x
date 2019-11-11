@@ -1,6 +1,4 @@
-(function() {
-    animeList()
-})()
+(() => animeList())()
 
 function animeList(next) {
     loading(true);
@@ -10,6 +8,7 @@ function animeList(next) {
         .get((baseUrl + endpoint), headAxios ) //Coloquei o objeto que com o cabeçalho que é solicitado dentro de uma variável, salva em /js/rotas.js
         .then(res => montarTabelaAnime(res.data)) //Arrow function que chama a função de exibir a lista de animes
         .catch(err => console.log(err))
+    closeNav()
 }
 
 function montarTabelaAnime(data) {
@@ -21,10 +20,28 @@ function montarTabelaAnime(data) {
             <img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}" />
             <legend>${element.Nome}</legend>
         </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
-        list.append(html)
+        $('#lista').append(html)
     })
-    if(!!data.Next) list.append(`<p align="center"><a id="verMais" href="#" onclick="verMais('${data.Next}')">VER MAIS</a></p>`)
+    if(!!data.Next) $('#lista').append(`<p align="center"><a id="verMais" href="#" onclick="verMais('${data.Next}')">VER MAIS</a></p>`)
     //fiz uma abstração nessa condicional aqui, qualquer coisa eu explico
+}
+
+function animeLanc() {
+    $("#lista")[0].innerHTML = ""
+    axios
+        .get(baseUrl + endpLanca, headAxios)
+        .then(res => {
+            res.data.forEach(element => {
+                let html = `
+                <div class='anime'>
+                    <img onclick="abrirModal(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}')" src="${element.Imagem}" />
+                    <legend>${element.Nome}</legend>
+                </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
+                $('#lista').append(html)
+            })
+        })
+        .catch(err => console.warn(err))
+    closeNav()
 }
 
 function verMais(item){
