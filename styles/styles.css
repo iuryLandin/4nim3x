@@ -88,3 +88,19 @@ main {
 #videoPlayer{
     width: 90%;
 }
+
+@media screen and (max-width: 450px) {
+   .anime{
+    width: 100px;
+    height: 200px !important;
+    padding: 10px;
+    display: inline-table;
+    text-align: center;
+    text-overflow: ellipsis;
+}
+legend{ 
+     text-overflow: ellipsis;
+}
+ 
+
+}
