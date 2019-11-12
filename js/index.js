@@ -1,6 +1,7 @@
 (() => animeList())()
 
-function animeList(next) {
+function animeList(next = null) {
+    lista[0].innerHTML = ""
     loading(true);
     if(!next) endpoint = endpAnime
     else endpoint = endpAnime + '?next=' + next
@@ -13,21 +14,20 @@ function animeList(next) {
 
 function montarTabelaAnime(data) {
     loading(false);
-    const list = $('#lista')
     data.anime.forEach(element => {
         let html = `
         <div class='anime'>
             <img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}" />
             <legend>${element.Nome}</legend>
         </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
-        $('#lista').append(html)
+        lista.append(html)
     })
-    if(!!data.Next) $('#lista').append(`<p align="center"><a id="verMais" href="#" onclick="verMais('${data.Next}')">VER MAIS</a></p>`)
+    if(!!data.Next) lista.append(`<p align="center"><a id="verMais" href="#" onclick="verMais('${data.Next}')">VER MAIS</a></p>`)
     //fiz uma abstração nessa condicional aqui, qualquer coisa eu explico
 }
 
 function animeLanc() {
-    $("#lista")[0].innerHTML = ""
+    lista[0].innerHTML = ""
     axios
         .get(baseUrl + endpLanca, headAxios)
         .then(res => {
@@ -37,7 +37,7 @@ function animeLanc() {
                     <img onclick="abrirModal(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}')" src="${element.Imagem}" />
                     <legend>${element.Nome}</legend>
                 </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
-                $('#lista').append(html)
+                lista.append(html)
             })
         })
         .catch(err => console.warn(err))
