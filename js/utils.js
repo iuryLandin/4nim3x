@@ -9,10 +9,8 @@
 }
 
 function loading(status){
-    if(status)
-        $("#loading").show();
-    else
-        $("#loading").hide();
+    if(status) $("#loading").show()
+    else $("#loading").hide()
 }
 
 function player(vid){

@@ -9,6 +9,14 @@ function verAnime(id, nome, desc, img) {
     getEpisodio(id);
 }
 
+
+function getEpisodio(id) {
+    loading(true);
+    axios
+    .get(baseUrl + endpEpiso + id, headAxios)
+    .then(res => montarTabelaEpisodio(res.data)) //Arrow function que chama a função de exibir a lista de episódios
+}
+
 function montarTabelaEpisodio(data) {
     loading(false);
     //LIMPAR UL
@@ -16,15 +24,10 @@ function montarTabelaEpisodio(data) {
     console.log(data)
     data.forEach(element => {
         let html = `<li><a href="#" onclick="getlink(${element.Id})">${element.Nome}</a></li>`;
-        $("#epsLista").append(html);
+        $("#epsLista").append(html)
     });
-}
-
-function getEpisodio(id) {
-    loading(true);
-    axios
-        .get(baseUrl + endpEpiso + id, headAxios)
-        .then(res => montarTabelaEpisodio(res.data)) //Arrow function que chama a função de exibir a lista de episódios
+    $("#epsLista").append(disqus)
+    disqusChat()
 }
 
 function getlink(id) {

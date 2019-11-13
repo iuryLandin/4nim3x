@@ -8,3 +8,4 @@ const endpLanca = "/lancamento"
 const endpVideo = "/video?id="
 const endpCateg = "/categoria"
 const endpEpiso = "/episodio?id="
+const disqus = `<div id="disqus_thread"></div>`
