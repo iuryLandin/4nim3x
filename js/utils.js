@@ -17,4 +17,5 @@ function loading(status){
 
 function player(vid){
     $("#videoPlayer").attr("src", vid);
+    document.getElementById("videoPlayer").play();
 }
