@@ -14,3 +14,7 @@ function loading(status){
     else
         $("#loading").hide();
 }
+
+function player(vid){
+    $("#videoPlayer").attr("src", vid);
+}
