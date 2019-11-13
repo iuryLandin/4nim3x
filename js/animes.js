@@ -1,9 +1,7 @@
 function verAnime(id, nome, desc, img) {
-
+    let HTMLdesc = `<div class="descricao">${decodeURIComponent(desc)}</div>`
     $("#poster").attr('src', img);
     $("#titulo").html(nome);
-
-    let HTMLdesc = `<div class="descricao">${decodeURIComponent(desc)}</div>`
     $("#desc").html(HTMLdesc);
     $("#home").hide();
     $("#anime").fadeIn();

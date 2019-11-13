@@ -34,7 +34,7 @@ function animeLanc() {
             res.data.forEach(element => {
                 let html = `
                 <div class='anime'>
-                    <img onclick="abrirModal(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}')" src="${element.Imagem}" />
+                    <img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}')" src="${element.Imagem}" />
                     <legend>${element.Nome}</legend>
                 </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
                 lista.append(html)
