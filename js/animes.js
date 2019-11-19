@@ -4,7 +4,7 @@ function verAnime(id, nome, desc, img) {
     $("#titulo").html(nome);
     $("#desc").html(HTMLdesc);
     $("#home").hide();
-    $("#anime").fadeIn();
+    anime.fadeIn();
 
     getEpisodio(id);
 }
@@ -14,38 +14,31 @@ function getEpisodio(id) {
     loading(true);
     axios
     .get(baseUrl + endpEpiso + id, headAxios)
-    .then(res => montarTabelaEpisodio(res.data)) //Arrow function que chama a função de exibir a lista de episódios
+    .then(res => montarTabelaEpisodio(res.data))
 }
 
 function montarTabelaEpisodio(data) {
+    epsLista.html("");
     loading(false);
-    //LIMPAR UL
-    $("#epsLista").html("");
-    console.log(data)
-    data.forEach(element => {
-        let html = `<li><a href="#" onclick="getlink(${element.Id})">${element.Nome}</a></li>`;
-        $("#epsLista").append(html)
-    });
-    $("#epsLista").append(disqus)
+    data.forEach(element => montaLink(element.Nome, "getlink", element.Id, epsLista))
+    epsLista.append(disqus)
     disqusChat()
 }
 
 function getlink(id) {
+    opcoes.html("");
     loading(true);
-    $("#anime").hide();
-    $("#video").fadeIn();
-
+    anime.hide();
+    video.fadeIn();
     axios
         .get(baseUrl + endpVideo + id, headAxios)
-        .then(res => {
-            $("#opcoes").html("");
-            console.log(res.data)
-            res.data.forEach(element => {
-                let html = `<li><a href="javascript: player('${element.Endereco}')">${element.Nome}</a></li>`
-                $("#opcoes").append(html)
-                loading(false);
-            });
-        })
+        .then(res => res.data.forEach(element => montaLink(element.Nome, "player", element.Endereco, opcoes)))
+}
+
+function montaLink(nome, funcao, parametro, agregar){
+    let html = `<a href="javascript: ${funcao}('${parametro}')"><li>${nome}</li></a>`
+    agregar.append(html)
+    loading(false)
 }
 
 
