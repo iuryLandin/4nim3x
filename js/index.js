@@ -14,31 +14,15 @@ function animeList(next = null) {
 
 function montarTabelaAnime(data) {
     loading(false);
-    data.anime.forEach(element => {
-        let html = `
-        <div class='anime'>
-            <img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}" />
-            <legend>${element.Nome}</legend>
-        </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
-        lista.append(html)
-    })
-    if(!!data.Next) lista.append(`<p align="center"><a id="verMais" href="#" onclick="verMais('${data.Next}')">VER MAIS</a></p>`)
+    data.anime.forEach(element => montarAnime(element))
+    if(data.Next) lista.append(`<p align="center"><a id="verMais" href="#" onclick="verMais('${data.Next}')">VER MAIS</a></p>`)
 }
 
 function animeLanc() {
     lista[0].innerHTML = ""
     axios
         .get(baseUrl + endpLanca, headAxios)
-        .then(res => {
-            res.data.forEach(element => {
-                let html = `
-                <div class='anime'>
-                    <img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}')" src="${element.Imagem}" />
-                    <legend>${element.Nome}</legend>
-                </div>` //eu identei o codigo html para ficar mais fácil pra mim compreender o que ta acontecendo aqui
-                lista.append(html)
-            })
-        })
+        .then(res => res.data.forEach(element => montarAnime(element)))
         .catch(err => console.warn(err))
     closeNav()
 }
@@ -48,6 +32,7 @@ function verMais(item){
     $("#verMais").remove()
     animeList(item)
 }
+
 // Descomente para configurar o Disqus
 // var disqus_config = function () {
 //     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
