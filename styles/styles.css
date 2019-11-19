@@ -88,6 +88,7 @@ main {
     color: white;
 }
 #videoPlayer{
+    display: none;
     width: 90%;
 }
 
