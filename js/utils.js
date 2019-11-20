@@ -19,15 +19,11 @@ function player(vid){
 }
 
 function montarAnime(element){
-  lista.append(htmlAnime(element))
-}
-
-function htmlAnime(element) {
-  return `
+  lista.append(`
   <div class='anime'>
-    <img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}" />
+    <a href="#"><img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}"/></a>
     <legend>${element.Nome}</legend>
-  </div>`
+  </div>`)
 }
 
 function getlink(id) {
