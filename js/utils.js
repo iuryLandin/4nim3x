@@ -28,20 +28,25 @@ function montarAnime(element){
 
 function getlink(id, nome) {
   $("#episodioAtual")[0].innerHTML = nome
-  opcoes.html("");
+  opcoes.html("");  
   loading(true);
   anime.hide();
   video.fadeIn();
   axios
     .get(baseUrl+endpVideo+id, headAxios)
     .then(res => res.data.forEach(element => montaLink(element.Nome, "player", element.Endereco, opcoes, true)))
+    .catch(err => console.warn(err))
 }
 
 function voltar(de , para){
   $('#'+de).fadeOut();
   $("#"+para).show();
+  document.getElementById("videoPlayer").pause()
 }
 
 function mostraVideo(condicao){
     d.getElementById("videoPlayer").style.display = (condicao)?"block":"none"
+    if (d.getElementById("videoPlayer").style.display == "none") {
+      document.getElementById("videoPlayer").pause()
+    }
 }
