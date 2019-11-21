@@ -26,7 +26,8 @@ function montarAnime(element){
   </div>`)
 }
 
-function getlink(id) {
+function getlink(id, nome) {
+  $("#episodioAtual")[0].innerHTML = nome
   opcoes.html("");
   loading(true);
   anime.hide();
@@ -39,4 +40,8 @@ function getlink(id) {
 function voltar(de , para){
   $('#'+de).fadeOut();
   $("#"+para).show();
+}
+
+function mostraVideo(condicao){
+    d.getElementById("videoPlayer").style.display = (condicao)?"block":"none"
 }

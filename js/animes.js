@@ -25,11 +25,7 @@ function montarTabelaEpisodio(data) {
 }
 
 function montaLink(nome, funcao, parametro, agregar, status = false){
-    let html = `<a href="javascript: ${funcao}('${parametro}')" onclick="mostraVideo(${status})"><li>${nome}</li></a>`
+    let html = `<a href="javascript: ${funcao}('${parametro}', '${nome}')" onclick="mostraVideo(${status})"><li>${nome}</li></a>`
     agregar.append(html)
     loading(false)
-}
-
-function mostraVideo(condicao){
-    d.getElementById("videoPlayer").style.display = (condicao)?"block":"none"
 }
