@@ -1,14 +1,14 @@
-document.addEventListener('swiped-right', e => {
-  if(e) openNav()
+document.addEventListener('swiped-right', html => {
+  if(html) openNav()
 })
 
-document.addEventListener('swiped-left', e => {
-  if(e) closeNav()
+document.addEventListener('swiped-left', html => {
+  if(html) closeNav()
 })
 
 function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-  document.querySelector("main").style.marginLeft = "250px";
+  document.getElementById("mySidebar").style.width = "250px"
+  document.querySelector("main").style.marginLeft = "250px"
 }
 
 function closeNav() {
@@ -32,6 +32,7 @@ function montarAnime(element){
     <a href="#"><img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}"/></a>
     <legend>${element.Nome}</legend>
   </div>`)
+  loading(false);
 }
 
 function getlink(id, nome) {

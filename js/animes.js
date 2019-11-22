@@ -19,7 +19,6 @@ function getEpisodio(id) {
 function montarTabelaEpisodio(data) {
     epsLista.html("");
     mostraVideo(false)
-    loading(false);
     data.forEach(element => montaLink(element.Nome, "getlink", element.Id, epsLista))
     loading(false)
     epsLista.append(disqus)
@@ -29,4 +28,5 @@ function montarTabelaEpisodio(data) {
 function montaLink(nome, funcao, parametro, agregar, status = false){
     let html = `<a href="javascript: ${funcao}('${parametro}', '${nome}')" onclick="mostraVideo(${status})"><li>${nome}</li></a>`
     agregar.append(html)
+    loading(false);
 }

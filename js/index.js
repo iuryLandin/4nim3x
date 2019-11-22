@@ -19,6 +19,7 @@ function montarTabelaAnime(data) {
 }
 
 function animeLanc() {
+    loading(true);
     lista[0].innerHTML = ""
     axios
         .get(baseUrl + endpLanca, headAxios)
