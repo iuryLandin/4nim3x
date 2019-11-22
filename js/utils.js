@@ -1,3 +1,11 @@
+document.addEventListener('swiped-right', e => {
+  if(e) openNav()
+})
+
+document.addEventListener('swiped-left', e => {
+  if(e) closeNav()
+})
+
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.querySelector("main").style.marginLeft = "250px";
