@@ -43,7 +43,7 @@ function getlink(id, nome) {
   video.fadeIn();
   axios
     .get(baseUrl+endpVideo+id, headAxios)
-    .then(res => res.data.forEach(element => montaLink(element.Nome, "player", element.Endereco, opcoes, true)))
+    .then(res => res.data.forEach(element => montaLink(id, element.Nome, "player", element.Endereco, opcoes, true)))
     .catch(err => console.warn(err))
 }
 
