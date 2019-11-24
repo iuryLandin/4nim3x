@@ -1,10 +1,5 @@
-document.addEventListener('swiped-right', html => {
-  if(html) openNav()
-})
-
-document.addEventListener('swiped-left', html => {
-  if(html) closeNav()
-})
+document.addEventListener('swiped-right', () => openNav())
+document.addEventListener('swiped-left', () => closeNav())
 
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px"
@@ -28,10 +23,7 @@ function player(vid){
 
 function montarAnime(element){
   lista.append(`
-  <div class='anime'>
-    <a href="#"><img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}"/></a>
-    <legend>${element.Nome}</legend>
-  </div>`)
+  <div class='anime'><a href="#"><img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this)" src="${element.Imagem}"/></a><legend>${element.Nome}</legend></div>`)
   loading(false);
 }
 

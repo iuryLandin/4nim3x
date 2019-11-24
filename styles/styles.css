@@ -79,6 +79,10 @@ main {
     background: #963694;
 }
 
+.epVisto {
+    background: #692567 !important;
+}
+
 .lista a {
     color: #963694;
     text-decoration: none;
