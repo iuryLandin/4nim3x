@@ -9,6 +9,7 @@ function verAnime(id, nome, desc, img) {
 }
 
 function getEpisodio(id) {
+    epsLista.html("")
     let Endp = new EndPoints()
     loading(true);
     axios
@@ -18,7 +19,6 @@ function getEpisodio(id) {
 }
 
 function montarTabelaEpisodio(data, id) {
-    epsLista.html("");
     mostraVideo(false)
     data.forEach(element => montaLink(element.Nome, "getlink", element.Id, epsLista, '', id))
     loading(false)
