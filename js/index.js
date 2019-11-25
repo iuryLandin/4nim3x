@@ -1,7 +1,3 @@
-(() => {
-    animeList()
-})()
-
 function animeList(next = 0) {
     let Endp = new EndPoints()
     loading(true)
@@ -15,16 +11,34 @@ function animeList(next = 0) {
 }
 
 function montarTabelaAnime(res) {
-    nextPage = res.data.Next
-    loading(false)
-    res.data.anime.forEach(element => montarAnime(element))
-    if(res.data.Next) lista.append(`<p style="text-align: center"><a id="verMais" href="javascript:void(0)" onclick="animeList('${res.data.Next}')">VER MAIS</a></p>`)
+nextPage = res.data.Next
+loading(false)
+res.data.anime.forEach(element => montarAnime(element))
+if(res.data.Next) lista.append(`<p style="text-align: center"><a id="verMais" href="javascript:void(0)" onclick="animeList('${res.data.Next}')">VER MAIS</a></p>`)
+}
+
+function getlink(id, nome) {
+let Endp = new EndPoints()
+$("#episodioAtual")[0].innerHTML = nome
+opcoes.html("");  
+loading(true);
+anime.hide();
+video.fadeIn();
+axios
+    .get(Endp.getApi(Endp.video+id), headAxios)
+    .then(res => res.data.forEach(element => montaLink(element.Nome, "player", element.Endereco, opcoes, true)))
+    .catch(err => console.warn(err))
+}
+
+function montarAnime(element){
+loading(false);
+lista.append(`
+<div class='anime'><a href="#"><img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this)" src="${element.Imagem}"/></a><legend>${element.Nome}</legend></div>`)
 }
 
 function animeLanc() {
     let Endp = new EndPoints()
     loading(true)
-    d.getElementById("verMais").parentElement.remove()
     d.querySelectorAll(".anime").forEach(element => element.remove())
     axios
         .get(Endp.getApi(Endp.lanca), headAxios)
@@ -44,4 +58,4 @@ function disqusChat() {
     s.src = 'https://e-baka-1.disqus.com/embed.js';
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
-}
+}  

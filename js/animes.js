@@ -35,34 +35,3 @@ function montaLink(nome, funcao, parametro, agregar, status = false, id) {
     agregar.append(html)
     loading(false);
 }
-
-function marcarEp(funcao, html, id) {
-    if (funcao == "getlink") {
-        html.classList.add("epVisto")
-        html.attributes[2].nodeValue = true
-    }
-    salvaProgresso(id, html)
-}
-
-function salvaProgresso(id, html) {
-    let array = []
-    if (!!localStorage.getItem(`${id}`) ) array = JSON.parse(localStorage.getItem(`${id}`))
-    let jaExiste = false
-    for (let i=0;i<array.length;i++){
-        if (html.innerHTML == array[i]) jaExiste = true
-    }
-    if (!jaExiste) array.push(html.innerHTML)
-    
-    localStorage.setItem(`${id}`, JSON.stringify(array))
-}
-
-function lerProgresso(id) {
-    let array = JSON.parse(localStorage.getItem(`${id}`))
-    const episodios = document.querySelectorAll(".listaEpisodios")
-    for (let i = 0; i < episodios.length; i++) {
-        if (array.includes(episodios[i].innerHTML)) {
-            episodios[i].classList.add("epVisto")
-            episodios[i].attributes[2].nodeValue = 'true'
-        }
-    }
-}
