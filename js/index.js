@@ -1,37 +1,36 @@
-(() => animeList())()
+(() => {
+    animeList()
+})()
 
-function animeList(next = null) {
-    lista[0].innerHTML = ""
-    loading(true);
-    if(!next) endpoint = endpAnime
-    else endpoint = endpAnime + '?next=' + next
+function animeList(next = 0) {
+    let Endp = new EndPoints()
+    loading(true)
+    if (d.getElementById("verMais")) d.getElementById("verMais").parentElement.remove()
+    if (next==0)d.querySelectorAll(".anime").forEach(element => element.remove())
     axios
-        .get((baseUrl+endpoint),headAxios)
-        .then(res => montarTabelaAnime(res.data))
+        .get(Endp.getApi(Endp.anime+next), headAxios)
+        .then(res => montarTabelaAnime(res))
         .catch(err => console.warn(err))
     closeNav()
 }
 
-function montarTabelaAnime(data) {
-    loading(false);
-    data.anime.forEach(element => montarAnime(element))
-    if(data.Next) lista.append(`<p align="center"><a id="verMais" href="#" onclick="verMais('${data.Next}')">VER MAIS</a></p>`)
+function montarTabelaAnime(res) {
+    nextPage = res.data.Next
+    loading(false)
+    res.data.anime.forEach(element => montarAnime(element))
+    if(res.data.Next) lista.append(`<p style="text-align: center"><a id="verMais" href="javascript:void(0)" onclick="animeList('${res.data.Next}')">VER MAIS</a></p>`)
 }
 
 function animeLanc() {
-    loading(true);
-    lista[0].innerHTML = ""
+    let Endp = new EndPoints()
+    loading(true)
+    d.getElementById("verMais").parentElement.remove()
+    d.querySelectorAll(".anime").forEach(element => element.remove())
     axios
-        .get(baseUrl + endpLanca, headAxios)
+        .get(Endp.getApi(Endp.lanca), headAxios)
         .then(res => res.data.forEach(element => montarAnime(element)))
         .catch(err => console.warn(err))
     closeNav()
-}
-
-function verMais(item){
-    $(".anime").remove()
-    $("#verMais").remove()
-    animeList(item)
 }
 
 // Descomente para configurar o Disqus

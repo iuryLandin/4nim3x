@@ -1,13 +1,18 @@
 //Configuração referentes à página e os links que irão ser carregados
-//Estas constantes contêm os EndPoints usados na API
-const baseUrl = 'https://cors-anywhere.herokuapp.com/http://cinex.96.lt/animeapi'
+//Estas staticantes contêm os EndPoints usados na API
+class EndPoints {
+    baseUrl = 'https://cors-anywhere.herokuapp.com/http://cinex.96.lt/animeapi'
+    anime = '/anime?next='    //lista de animes em ordem alfabética
+    categ = '/categoria'      //endpoint das categorias para seleção
+    video = '/video?id='      //endpoint para acesso aos videos
+    lanca = '/lancamento'     //lista de animes da temporada
+    episo = '/episodio?id='   //endpoint para acesso aos episodios
+    getApi(endp) {
+        return `${this.baseUrl+endp}`
+    }
+}
+
 const headAxios = {headers: {'Access-Control-Allow-Origin': '*'}}
-//endpoints
-const endpAnime = '/anime'          //lista de animes em ordem alfabética
-const endpCateg = '/categoria'      //endpoint das categorias para seleção
-const endpVideo = '/video?id='      //endpoint para acesso aos videos
-const endpLanca = '/lancamento'     //lista de animes da temporada
-const endpEpiso = '/episodio?id='   //endpoint para acesso aos episodios
 
 //links relativos à pagina
 const d = document
@@ -16,6 +21,7 @@ const epsLista = $("#epsLista")
 const opcoes = $("#opcoes")
 const anime = $("#anime")
 const video = $("#video")
+let nextPage = 0
 
 // disqus
 const disqus = `<div id="disqus_thread"></div>`

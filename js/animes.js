@@ -9,9 +9,10 @@ function verAnime(id, nome, desc, img) {
 }
 
 function getEpisodio(id) {
+    let Endp = new EndPoints()
     loading(true);
     axios
-        .get(baseUrl + endpEpiso + id, headAxios)
+        .get(Endp.getApi(Endp.episo+id), headAxios)
         .then(res => montarTabelaEpisodio(res.data, id))
         .catch(err => console.warn(err))
 }
@@ -40,15 +41,18 @@ function marcarEp(funcao, html, id) {
         html.classList.add("epVisto")
         html.attributes[2].nodeValue = true
     }
-    salvaProgresso(id)
+    salvaProgresso(id, html)
 }
 
-function salvaProgresso(id) {
+function salvaProgresso(id, html) {
     let array = []
-    const episodios = document.querySelectorAll(".listaEpisodios")
-    for (let i = 0; i < episodios.length; i++) {
-        array[i] = (episodios[i].attributes[2].nodeValue) ? true : false
+    if (!!localStorage.getItem(`${id}`) ) array = JSON.parse(localStorage.getItem(`${id}`))
+    let jaExiste = false
+    for (let i=0;i<array.length;i++){
+        if (html.innerHTML == array[i]) jaExiste = true
     }
+    if (!jaExiste) array.push(html.innerHTML)
+    
     localStorage.setItem(`${id}`, JSON.stringify(array))
 }
 
@@ -56,7 +60,7 @@ function lerProgresso(id) {
     let array = JSON.parse(localStorage.getItem(`${id}`))
     const episodios = document.querySelectorAll(".listaEpisodios")
     for (let i = 0; i < episodios.length; i++) {
-        if (array[i]) {
+        if (array.includes(episodios[i].innerHTML)) {
             episodios[i].classList.add("epVisto")
             episodios[i].attributes[2].nodeValue = 'true'
         }

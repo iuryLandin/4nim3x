@@ -22,19 +22,20 @@ function player(vid){
 }
 
 function montarAnime(element){
+  loading(false);
   lista.append(`
   <div class='anime'><a href="#"><img onclick="verAnime(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this)" src="${element.Imagem}"/></a><legend>${element.Nome}</legend></div>`)
-  loading(false);
 }
 
 function getlink(id, nome) {
+  let Endp = new EndPoints()
   $("#episodioAtual")[0].innerHTML = nome
   opcoes.html("");  
   loading(true);
   anime.hide();
   video.fadeIn();
   axios
-    .get(baseUrl+endpVideo+id, headAxios)
+    .get(Endp.getApi(Endp.video+id), headAxios)
     .then(res => res.data.forEach(element => montaLink(element.Nome, "player", element.Endereco, opcoes, true)))
     .catch(err => console.warn(err))
 }
@@ -47,7 +48,7 @@ function voltar(de , para){
 
 function mostraVideo(condicao){
     d.getElementById("videoPlayer").style.display = (condicao)?"block":"none"
-    if (d.getElementById("videoPlayer").style.display == "none") {
+    if (!d.getElementById("videoPlayer").style.display) {
       document.getElementById("videoPlayer").pause()
     }
 }
