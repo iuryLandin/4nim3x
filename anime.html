@@ -20,32 +20,6 @@
 	</div>
 
 		<div class="app">
-			<div class="page" id="home">
-				<nav id="mySidebar" class="sidebar">
-					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"> <i class="fa fa-times"></i> </a>
-					<ul>
-						<a href="javascript: animeList()"><li>Home</li></a>
-						<a href="lancamentos.html"><li>Lançamentos</li></a>
-						<a href=""><li>Dublados</li></a>
-						<a href=""><li>Reportar Erro</li></a>
-					</ul>
-				</nav>
-
-				<header>
-					<i class="fa fa-bars" onclick="openNav()"></i>
-					<span class='logo'>AnimeX</span>
-				</header>
-
-				<main>
-					<div class="content">
-						<div id="lista" class="lista">
-
-						</div>
-					</div>
-				</main>
-
-			</div>
-
 			<div class="page" id="anime">
 				<header>
 					<i class="fa fa-chevron-left" onclick="voltar('anime' ,'home');"></i>
@@ -62,25 +36,6 @@
 					</div>
 				</main>
 			</div>
-
-			<div class="page" id="video">
-				<header>
-					<i class="fa fa-chevron-left" onclick="voltar('video' ,'anime');"></i>
-					<span class='logo' id="playerTitulo">AnimeX - Video Player</span>
-				</header>
-
-				<main>
-					<div class="content">
-						<h2 id="episodioAtual"></h2>
-						<center> <video id="videoPlayer" poster='https://i.ibb.co/7gmPPpK/Prancheta-1.png' controls></video> </center>
-						<p>Escolha uma opção abaixo:</p>
-						<ul class="lista" id="opcoes">
-
-						</ul>
-					</div>
-				</main>
-			</div>
-
 		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -90,7 +45,7 @@
 		<script src="js/animes.js"></script>
 		<script src="js/utils.js"></script>
 		<script src="js/index.js"></script>
-		<script>(() => verMais())()</script>
+		<script>(() => verAnime())()</script>
 </body>
 
 </html>

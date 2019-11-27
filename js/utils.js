@@ -11,9 +11,10 @@ function closeNav() {
   document.querySelector("main").style.marginLeft = "0";
 }
 
-function player(vid){
-  $("#videoPlayer").attr("src", vid);
+function player(src){
+  $("#videoPlayer").attr("src", src);
   document.getElementById("videoPlayer").play();
+  document.getElementById("videoPlayer").style.display = "block"
 }
 
 function voltar(de , para){
@@ -35,7 +36,7 @@ function loading(status){
 }
 
 function marcarEp(funcao, html, id) {
-  if (funcao == "getlink") {
+  if (funcao == "videoEscolhido") {
     html.classList.add("epVisto")
     html.attributes[2].nodeValue = true
 }
