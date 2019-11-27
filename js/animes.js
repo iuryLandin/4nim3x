@@ -10,7 +10,6 @@ function verAnime() {
 
 function getEpisodio() {
     loading(true);
-    let Endp = new EndPoints()
     let id = sessionStorage.getItem("id")
     axios
         .get(Endp.getApi(Endp.episo+id), headAxios)
@@ -19,12 +18,9 @@ function getEpisodio() {
 }
 
 function montarTabelaEpisodio(data, id) {
-    // mostraVideo(false)
-    console.log(data)
     data.forEach(element => montaLink(element.Nome, "videoEscolhido", element.Id, epsLista, id))
     loading(false)
     lerProgresso(id)
-    epsLista.append(disqus)
     disqusChat()
 }
 

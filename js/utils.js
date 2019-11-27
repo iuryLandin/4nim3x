@@ -7,61 +7,56 @@ function openNav() {
   document.querySelector("main").style.marginLeft = "250px"
 }
 function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.querySelector("main").style.marginLeft = "0";
+  document.getElementById("mySidebar").style.width = "0"
+  document.querySelector("main").style.marginLeft = "0"
+}
+function loading(status) {
+  return (status)?$("#loading").show():$("#loading").hide()
 }
 
-function player(src){
-  $("#videoPlayer").attr("src", src);
-  document.getElementById("videoPlayer").play();
-  document.getElementById("videoPlayer").style.display = "block"
+function playVid(src) {
+  $("#videoPlayer").attr("src", src)
+  vidPlayer.play()
+  vidPlayer.style.display = "block"
 }
 
-function voltar(de , para){
-  $('#'+de).fadeOut();
-  $("#"+para).show();
-  document.getElementById("videoPlayer").pause()
+function voltar(html) {
+  html.href = sessionStorage.getItem("origem")
+  console.log(html)
 }
 
-function mostraVideo(condicao){
-  d.getElementById("videoPlayer").style.display = (condicao)?"block":"none"
-  if (!d.getElementById("videoPlayer").style.display) {
-    document.getElementById("videoPlayer").pause()
-  }
-}
-
-function loading(status){
-  if(status) $("#loading").show()
-  else $("#loading").hide()
+function mostraVideo(condicao) {
+  vidPlayer.style.display = (condicao) ? "block" : "none"
+  if (!vidPlayer.style.display) vidPlayer.pause()
 }
 
 function marcarEp(funcao, html, id) {
   if (funcao == "videoEscolhido") {
     html.classList.add("epVisto")
     html.attributes[2].nodeValue = true
-}
-salvaProgresso(id, html)
+  }
+  salvaProgresso(id, html)
 }
 
 function salvaProgresso(id, html) {
-let array = []
-if (!!localStorage.getItem(`${id}`) ) array = JSON.parse(localStorage.getItem(`${id}`))
-let jaExiste = false
-for (let i=0;i<array.length;i++){
+  let array = []
+  if (!!localStorage.getItem(`${id}`)) array = JSON.parse(localStorage.getItem(`${id}`))
+  let jaExiste = false
+  for (let i = 0; i < array.length; i++) {
     if (html.innerHTML == array[i]) jaExiste = true
-}
-if (!jaExiste) array.push(html.innerHTML)
+  }
+  if (!jaExiste) array.push(html.innerHTML)
 
-localStorage.setItem(`${id}`, JSON.stringify(array))
+  localStorage.setItem(`${id}`, JSON.stringify(array))
 }
 
 function lerProgresso(id) {
-let array = JSON.parse(localStorage.getItem(`${id}`))
-const episodios = document.querySelectorAll(".listaEpisodios")
-for (let i = 0; i < episodios.length; i++) {
+  let array = JSON.parse(localStorage.getItem(`${id}`))
+  const episodios = document.querySelectorAll(".listaEpisodios")
+  for (let i = 0; i < episodios.length; i++) {
     if (array.includes(episodios[i].innerHTML)) {
-        episodios[i].classList.add("epVisto")
-        episodios[i].attributes[2].nodeValue = 'true'
+      episodios[i].classList.add("epVisto")
+      episodios[i].attributes[2].nodeValue = 'true'
     }
-}
+  }
 }

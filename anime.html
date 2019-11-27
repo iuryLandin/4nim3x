@@ -12,6 +12,8 @@
 	<title>4nim3x</title>
 </head>
 
+<script src="js/utils.js"></script>
+
 <body>
 
 	<div id="loading" class="loading">
@@ -22,7 +24,7 @@
 		<div class="app">
 			<div class="page" id="anime">
 				<header>
-					<i class="fa fa-chevron-left" onclick="voltar('anime' ,'home');"></i>
+					<a style="color: white" href="" onload="voltar(this)"><i class="fa fa-chevron-left"></i></a>
 					<span class='logo' id="titulo">AnimeX</span>
 				</header>
 
@@ -33,6 +35,7 @@
 							<ul class='lista' id="epsLista">
 
 							</ul>
+							<div id="disqus_thread"></div>
 					</div>
 				</main>
 			</div>
@@ -43,7 +46,6 @@
 		<script src="js/swiped.js"></script>
         <script src="js/rotas.js"></script>
 		<script src="js/animes.js"></script>
-		<script src="js/utils.js"></script>
 		<script src="js/index.js"></script>
 		<script>(() => verAnime())()</script>
 </body>

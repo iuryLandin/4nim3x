@@ -1,69 +1,67 @@
+const Endp = new EndPoints()
+
 function animeList(next = 0) {
-    let Endp = new EndPoints()
-    loading(true)
-    if (d.getElementById("verMais")) d.getElementById("verMais").parentElement.remove()
-    if (next==0)d.querySelectorAll(".anime").forEach(element => element.remove())
-    axios
-        .get(Endp.getApi(Endp.anime+next), headAxios)
-        .then(res => montarTabelaAnime(res))
-        .catch(err => console.warn(err))
     closeNav()
-}
-
-function montarTabelaAnime(res) {
-nextPage = res.data.Next
-loading(false)
-res.data.anime.forEach(element => montarAnime(element))
-if(nextPage) lista.append(`<p style="text-align: center"><a id="verMais" href="javascript:void(0)" onclick="animeList('${nextPage}')">VER MAIS</a></p>`)
-}
-
-function getlink() {
-    let Endp = new EndPoints()
-    let id = sessionStorage.getItem("videoId")
-    $("#episodioAtual")[0].innerHTML = sessionStorage.getItem("videoNome")
-    opcoes.html("");  
-    loading(true);
+    loading(true)
+    if (!next) d.querySelectorAll(".anime").forEach(element => element.remove())
+    if (verMais) verMais.parentElement.remove()
     axios
-        .get(Endp.getApi(Endp.video+id), headAxios)
-        .then(res => {
-            console.log(res)
-            res.data.forEach(element => montaLink(element.Nome, "player", element.Endereco, opcoes, true))
-        })
+        .get(Endp.getApi(Endp.anime + next), headAxios)
+        .then(res => montarTabelaAnime(res.data))
         .catch(err => console.warn(err))
 }
 
-function montarAnime(element){
-loading(false);
-lista.append(`
+function montarTabelaAnime(data) {
+    loading(false)
+    data.anime.forEach(element => montarAnime(element, "index.html"))
+    if (data.Next) lista.append(`
+    <p style="text-align: center">
+        <a id="verMais" href="javascript:void(0)" onclick="animeList('${data.Next}')">VER MAIS</a>
+    </p>`)
+}
+
+function montarAnime(element, origem) {
+    loading(false)
+    lista.append(`
     <div class='anime'>
         <a href="anime.html">
-            <img onclick="animeEscolhido(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', this.src)" src="${element.Imagem}"/>
+            <img onclick="animeEscolhido(${element.Id}, '${element.Nome}', '${encodeURIComponent(element.Desc)}', '${origem}', this.src)" src="${element.Imagem}"/>
         </a>
         <legend>${element.Nome}</legend>
     </div>`)
 }
 
-function animeEscolhido(id, nome, desc, capa){
+function getlink() {
+    let id = sessionStorage.getItem("videoId")
+    epAtual[0].innerHTML = sessionStorage.getItem("videoNome")
+    loading(true);
+    axios
+        .get(Endp.getApi(Endp.video + id), headAxios)
+        .then(res => res.data.forEach(element => montaLink(element.Nome, "player", element.Endereco, opcoes, true)))
+        .catch(err => console.warn(err))
+}
+
+function animeEscolhido(id, nome, desc, origem, capa) {
     sessionStorage.setItem("nome", nome)
     sessionStorage.setItem("desc", desc)
     sessionStorage.setItem("capa", capa)
     sessionStorage.setItem("id", id)
+    sessionStorage.setItem("origem", origem)
 }
 
-function videoEscolhido(id, nome){
+function videoEscolhido(id, nome) {
     sessionStorage.setItem("videoId", id)
     sessionStorage.setItem("videoNome", nome)
 }
 
 
 function animeLanc() {
-    let Endp = new EndPoints()
+    closeNav()
     loading(true)
     axios
         .get(Endp.getApi(Endp.lanca), headAxios)
-        .then(res => res.data.forEach(element => montarAnime(element)))
+        .then(res => res.data.forEach(element => montarAnime(element, "lancamentos.html")))
         .catch(err => console.warn(err))
-    closeNav()
 }
 
 // Descomente para configurar o Disqus

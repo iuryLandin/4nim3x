@@ -2,11 +2,11 @@
 //Estas staticantes contêm os EndPoints usados na API
 class EndPoints {
     baseUrl = 'https://cors-anywhere.herokuapp.com/http://cinex.96.lt/animeapi'
-    anime = '/anime?next='    //lista de animes em ordem alfabética
-    categ = '/categoria'      //endpoint das categorias para seleção
-    video = '/video?id='      //endpoint para acesso aos videos
-    lanca = '/lancamento'     //lista de animes da temporada
-    episo = '/episodio?id='   //endpoint para acesso aos episodios
+    anime   = '/anime?next='    //lista de animes em ordem alfabética
+    categ   = '/categoria'      //endpoint das categorias para seleção
+    video   = '/video?id='      //endpoint para acesso aos videos
+    lanca   = '/lancamento'     //lista de animes da temporada
+    episo   = '/episodio?id='   //endpoint para acesso aos episodios
     getApi(endp) {
         return `${this.baseUrl+endp}`
     }
@@ -15,13 +15,13 @@ class EndPoints {
 const headAxios = {headers: {'Access-Control-Allow-Origin': '*'}}
 
 //links relativos à pagina
-const d = document
-const lista = $('#lista')
-const epsLista = $("#epsLista")
-const opcoes = $("#opcoes")
-const anime = $("#anime")
-const video = $("#video")
-let nextPage = 0
-
-// disqus
-const disqus = `<div id="disqus_thread"></div>`
+const d         = document
+const lista     = $("#lista")
+const epsLista  = $("#epsLista")
+const epAtual   = $("#episodioAtual")
+const opcoes    = $("#opcoes")
+const anime     = $("#anime")
+const video     = $("#video")
+const vidPlayer = d.getElementById("videoPlayer")
+const verMais   = d.getElementById("verMais")
+let nextPage    = 0
