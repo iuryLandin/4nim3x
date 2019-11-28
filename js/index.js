@@ -37,7 +37,7 @@ function getlink() {
     loading(true);
     axios
         .get(Endp.getApi(Endp.video + id), headAxios)
-        .then(res => res.data.forEach(element => montaLink(element.Nome, "player", element.Endereco, opcoes, true)))
+        .then(res => res.data.forEach(element => montaLink(element.Nome, "playVid", element.Endereco, opcoes, true)))
         .catch(err => console.warn(err))
 }
 

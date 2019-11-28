@@ -26,7 +26,7 @@ function montarTabelaEpisodio(data, id) {
 
 function montaLink(nome, funcao, parametro, agregar, id) {
     let html = `
-    <a href="${funcao!="player"?"video.html":"#"}" onclick="${funcao}('${parametro}', '${nome}')">
+    <a href="${(funcao!="playVid")?"video.html":"#"}" onclick="${funcao}('${parametro}', '${nome}')">
         <li class="listaEpisodios" onclick="marcarEp('${funcao}', this, '${id}')" clicado="">${nome}</li>
     </a>`
     agregar.append(html)
