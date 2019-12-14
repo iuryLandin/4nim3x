@@ -18,7 +18,7 @@ function animeList(next = 0) {
         .then(res => montarTabelaAnime(res.data))
         .catch(err => console.warn(err))
     saveSession()
-    document.getElementById("searchbar").style.display = none
+    document.getElementById("searchbar").style.display = "none"
 }
 
 function montarTabelaAnime(data) {

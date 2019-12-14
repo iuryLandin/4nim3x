@@ -23,8 +23,7 @@ function criaMotor() {
     return temparray
 }
 function animeListFromSession(next = 1) {
-    d.querySelectorAll(".anime").forEach(elem => elem.remove())
-    if (next == 1) 
+    if (next == 1) d.querySelectorAll(".anime").forEach(elem => elem.remove())
     loading(true)
     if (d.getElementById("verMais")) d.getElementById("verMais").parentElement.remove()
     let animeList = JSON.parse(localStorage.getItem("animes"))
