@@ -1,14 +1,24 @@
 const Endp = new EndPoints()
 
+function openIndexPage(){
+    if (!localStorage.getItem("animes")) animeList()
+    else if (((new Date().getTime()) >= localStorage.getItem("animes")[0])) {
+        localStorage.setItem("animes", [])
+        animeListFromSession()
+    }
+    else animeListFromSession()
+}
+
 function animeList(next = 0) {
     closeNav()
     loading(true)
-    if (!next) d.querySelectorAll(".anime").forEach(element => element.remove())
-    if (verMais) verMais.parentElement.remove()
+    if (d.getElementById("verMais")) d.getElementById("verMais").parentElement.remove()
     axios
         .get(Endp.getApi(Endp.anime + next), headAxios)
         .then(res => montarTabelaAnime(res.data))
         .catch(err => console.warn(err))
+    saveSession()
+    document.getElementById("searchbar").style.display = none
 }
 
 function montarTabelaAnime(data) {
@@ -16,7 +26,7 @@ function montarTabelaAnime(data) {
     data.anime.forEach(element => montarAnime(element, "index.html"))
     if (data.Next) lista.append(`
     <p style="text-align: center">
-        <a id="verMais" href="javascript:void(0)" onclick="animeList('${data.Next}')">VER MAIS</a>
+        <a id="verMais" href="javascript:animeList('${data.Next}')">CARREGAR MAIS</a>
     </p>`)
 }
 

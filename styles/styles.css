@@ -6,26 +6,46 @@ body{
 header{
     position: fixed;
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     color: white;
     background: #963694;
     box-shadow: 0 0 8px black;
 }
-
+    
 header .logo{
     font-size: 14pt;
     padding-left: 12px;
- }
+}
+#search {
+    float: right;
+    transform: translateX(-40px);
+}
 
+#searchbar {
+    transform: translateY(-6px);
+    background: #832981;
+    border: none;
+    height: 25px;
+    width: 0px;
+    color: white;
+    transition-duration: .5s;
+}
+
+#searchbar:focus{
+    border: none;
+    outline: 2px solid purple;
+}
+
+
+.searchbtn {
+    color: white;
+}
 
 main{
     padding-top: 10vh;
 }
 
 .content{
-    margin: 10px;
-    width: 90%;
-    text-align: justify;
     clear: both;
 }
 
@@ -42,14 +62,14 @@ main {
 }
 
 .anime img{
-    width: 100% !important;
+    width: 150px !important;
 
 }
 
 .anime{
     width: 150px;
     height: 100%;
-    padding: 20px;
+    padding: 12px;
     display: inline-block;
     text-align: center;
 }

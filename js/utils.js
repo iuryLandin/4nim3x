@@ -39,8 +39,7 @@ function marcarEp(funcao, html, id) {
 }
 
 function salvaProgresso(id, html) {
-  let array = []
-  if (!!localStorage.getItem(`${id}`)) array = JSON.parse(localStorage.getItem(`${id}`))
+  let array = JSON.parse(localStorage.getItem(`${id}`)) || []
   let jaExiste = false
   for (let i = 0; i < array.length; i++) {
     if (html.innerHTML == array[i]) jaExiste = true
@@ -51,7 +50,7 @@ function salvaProgresso(id, html) {
 }
 
 function lerProgresso(id) {
-  let array = JSON.parse(localStorage.getItem(`${id}`))
+  let array = JSON.parse(localStorage.getItem(`${id}`)) || []
   const episodios = document.querySelectorAll(".listaEpisodios")
   for (let i = 0; i < episodios.length; i++) {
     if (array.includes(episodios[i].innerHTML)) {
@@ -59,4 +58,11 @@ function lerProgresso(id) {
       episodios[i].attributes[2].nodeValue = 'true'
     }
   }
+}
+
+function mudaPesq(test) {
+  term.focus()
+  term.style.width = test?"200px":"0px"
+  term.style.outline = test?"":"none"
+  term.style.paddingLeft = test?"7px":"0px"
 }
