@@ -6,8 +6,8 @@ term.addEventListener("input", () => {
 async function saveSession(next=0){
     let temp = await axios.get(Endp.getApi(Endp.anime+next), headAxios)
     criaLista(temp)
+    localStorage.setItem("motorDeBusca", JSON.stringify(criaMotor()))
     if (temp.data.Next) saveSession(temp.data.Next)
-    else localStorage.setItem("motorDeBusca", JSON.stringify(criaMotor()))
 }
 
 function criaLista(res) {
