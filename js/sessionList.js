@@ -67,7 +67,7 @@ function pesquisa() {
 
 function getAnimeById(idAnime) {
     let result = JSON.parse(localStorage.getItem("motorDeBusca"))
-        .filter(row => row[0].indexOf(idAnime) !== -1)
+        .filter(row => row[0] == idAnime)
 
     if (result.length > 500)
         animeListFromSession()

@@ -20,7 +20,7 @@ function verAnimeCompartilhado() {
     let animeDetails = getAnimeById(param);
     
     //Salvar todas as informações separadamente no sessionStorage
-    animeEscolhido(animeDetails.Id, animeDetails.Nome, animeDetails.Descricao, null, animeDetails.Capa);
+    animeEscolhido(animeDetails.Id, animeDetails.Nome, animeDetails.Descricao, "index.html", animeDetails.Capa);
 
     //renderiza o anime na tela
      let HTMLdesc = `<div class="descricao">${decodeURIComponent(sessionStorage.getItem("desc"))}</div>`
@@ -29,7 +29,7 @@ function verAnimeCompartilhado() {
     $("#desc").html(HTMLdesc);
     $("#home").hide();
     anime.fadeIn();
-    getEpisodio();
+    //getEpisodio();
 }
 
 
