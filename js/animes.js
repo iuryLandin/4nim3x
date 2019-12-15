@@ -20,7 +20,7 @@ function verAnimeCompartilhado() {
     let animeDetails = getAnimeById(param);
     
     //Salvar todas as informações separadamente no sessionStorage
-    animeEscolhido(animeDetails.Id, animeDetails.Nome, animeDetails.Descricao, "index.html", animeDetails.Capa);
+    animeEscolhido(animeDetails[0][0], animeDetails[0][1], animeDetails[0][2], "index.html", animeDetails[0][3]);
 
     //renderiza o anime na tela
      let HTMLdesc = `<div class="descricao">${decodeURIComponent(sessionStorage.getItem("desc"))}</div>`
