@@ -3,17 +3,17 @@ term.addEventListener("input", () => {
     setTimeout(() => pesquisa(), 1000)
 })
 
-async function saveSession(next=0){
+async function saveSession(next = 0) {
     $('#loading').show();
     $('.loading-msg').html("Estamos sincronizando os animes, aguarde um momento! <br> O tempo de espera pode variar de acordo com a velocidade da sua conexão")
-    let temp = await axios.get(Endp.getApi(Endp.anime+next), headAxios)
+    let temp = await axios.get(Endp.getApi(Endp.anime + next), headAxios)
     criaLista(temp)
     localStorage.setItem("motorDeBusca", JSON.stringify(criaMotor()))
     if (temp.data.Next) saveSession(temp.data.Next)
 }
 
-function criaLista(res) { 
-    let array = JSON.parse(localStorage.getItem("animes")) || [new Date().getTime() + (15*1000*3600*24) ]
+function criaLista(res) {
+    let array = JSON.parse(localStorage.getItem("animes")) || [new Date().getTime() + (15 * 1000 * 3600 * 24)]
     array.push(res.data)
     localStorage.setItem("animes", JSON.stringify(array))
     $('#loading').hide();
@@ -23,8 +23,8 @@ function criaLista(res) {
 function criaMotor() {
     let temp = JSON.parse(localStorage.getItem("animes"))
     let temparray = []
-    for (let i=1;i<temp.length-1;i++){
-        for (let j=0;j<50;j++){
+    for (let i = 1; i < temp.length - 1; i++) {
+        for (let j = 0; j < 50; j++) {
             temparray.push(Object.values(temp[i].anime[j]))
         }
     }
@@ -42,7 +42,7 @@ function montTabAnimeFromSession(data, pos) {
     data[pos].anime.forEach(element => montarAnimeFromSession(element, "index.html"))
     if (!!data[pos].Next) lista.append(`
     <p style="text-align: center">
-    <a id="verMais" href="javascript:animeListFromSession('${(data[pos].Next/50)+1}')">CARREGAR MAIS</a>
+    <a id="verMais" href="javascript:animeListFromSession('${(data[pos].Next / 50) + 1}')">CARREGAR MAIS</a>
     </p>`)
     loading(false)
 }
@@ -64,6 +64,17 @@ function pesquisa() {
     else resultPesquisa(result)
 }
 
+
+function getAnimeById(idAnime) {
+    let result = JSON.parse(localStorage.getItem("motorDeBusca"))
+        .filter(row => row[0].indexOf(idAnime) !== -1)
+
+    if (result.length > 500)
+        animeListFromSession()
+    else
+        return result;
+}
+
 function resultPesquisa(elements) {
     d.querySelectorAll(".anime").forEach(elem => elem.remove())
     if (d.getElementById("verMais")) d.getElementById("verMais").parentElement.remove()
@@ -77,6 +88,6 @@ function resultPesquisa(elements) {
     })
 }
 
-$("#searchbtn").click(function() {
+$("#searchbtn").click(function () {
     $("#searchbar").val("");
 });
