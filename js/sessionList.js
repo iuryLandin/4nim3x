@@ -53,8 +53,6 @@ function montarAnimeFromSession(element, origem) {
     loading(false)
 }
 
-
-
 function pesquisa() {
     let result = JSON.parse(localStorage.getItem("motorDeBusca"))
         .filter(row => row[1].toLocaleLowerCase().indexOf(term.value.toLowerCase()) !== -1)

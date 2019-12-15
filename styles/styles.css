@@ -22,7 +22,7 @@ header .logo{
 }
 
 #searchbar {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     background: #832981;
     border: none;
     height: 25px;

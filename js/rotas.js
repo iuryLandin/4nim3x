@@ -23,5 +23,5 @@ const opcoes    = $("#opcoes")
 const anime     = $("#anime")
 const video     = $("#video")
 const vidPlayer = d.getElementById("videoPlayer")
-const term = document.querySelector('#searchbar')
+const term      = document.querySelector('#searchbar')
 let nextPage    = 0

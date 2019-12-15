@@ -60,8 +60,11 @@ function lerProgresso(id) {
   }
 }
 
-function mudaPesq(test) {
+function mudaPesq(html) {
   term.focus()
+  let test = !term.attributes[1].value
+  html.innerHTML = test?"close":"search"
+  term.attributes[1].value = test?"true":""
   term.style.width = test?"200px":"0px"
   term.style.outline = test?"":"none"
   term.style.paddingLeft = test?"7px":"0px"
