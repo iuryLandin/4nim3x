@@ -63,6 +63,7 @@ function lerProgresso(id) {
 function mudaPesq(html) {
   let test = !term.attributes[1].value
   if (test) term.focus()
+  else animeListFromSession()
   html.innerHTML = test?"close":"search"
   term.attributes[1].value = test?"true":""
   term.style.width = test?"200px":"0px"

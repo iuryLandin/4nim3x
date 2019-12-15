@@ -18,7 +18,7 @@ header .logo{
 }
 #search {
     float: right;
-    transform: translateX(-40px);
+    transform: translateX(-25px);
 }
 
 #searchbar {
@@ -129,11 +129,13 @@ main {
         text-align: center;
         text-overflow: ellipsis;
     }
+
     legend{ 
         text-overflow: ellipsis;
     }
 
     #lista{
-    margin-left: 0;
-}
+        text-align: center;
+        margin-left: 0;
+    }
 }
