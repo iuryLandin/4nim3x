@@ -1,8 +1,12 @@
+term.addEventListener("input", () => {
+    clearTimeout()
+    setTimeout(() => pesquisa(), 1000)
+})
+
 async function saveSession(next=0){
     let temp = await axios.get(Endp.getApi(Endp.anime+next), headAxios)
     criaLista(temp)
-    if (temp.data.Next)
-        saveSession(temp.data.Next)
+    if (temp.data.Next) saveSession(temp.data.Next)
     else localStorage.setItem("motorDeBusca", JSON.stringify(criaMotor()))
 }
 
@@ -49,18 +53,14 @@ function montarAnimeFromSession(element, origem) {
     loading(false)
 }
 
-term.addEventListener("input", () => {
-    const lowerTerms = term.value?term.value.toLowerCase():''
-    const result = JSON.parse(localStorage.getItem("motorDeBusca")).filter(row => {
-        const values = Object.values(row)
-        for (let i = 0; i < values.length; i++) {
-            if (values[1].toLocaleLowerCase().indexOf(lowerTerms) !== -1) return true
-        }
-        return false
-    })
-    if (result.length < 50) resultPesquisa(result)
-    else animeListFromSession()
-})
+
+
+function pesquisa() {
+    let result = JSON.parse(localStorage.getItem("motorDeBusca"))
+        .filter(row => row[1].toLocaleLowerCase().indexOf(term.value.toLowerCase()) !== -1)
+    if (result.length > 500) animeListFromSession()
+    else resultPesquisa(result)
+}
 
 function resultPesquisa(elements) {
     d.querySelectorAll(".anime").forEach(elem => elem.remove())
