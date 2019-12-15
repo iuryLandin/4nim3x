@@ -24,7 +24,7 @@
 		<div class="app">
 			<div class="page" id="anime">
 				<header>
-					<a style="color: white" href="" onload="voltar(this)"><i class="fa fa-chevron-left"></i></a>
+					<a style="color: white" href="index.html"  ><i class="fa fa-chevron-left"></i></a>
 					<span class='logo' id="titulo">AnimeX</span>
 				</header>
 
@@ -48,6 +48,23 @@
 		<script src="js/animes.js"></script>
 		<script src="js/index.js"></script>
 		<script>(() => verAnime())()</script>
+
+        <script>
+        
+        // Descomente para configurar o Disqus
+        var disqus_config = function () {
+            this.page.url = window.location.href + '?id=' + sessionStorage.getItem("id");  // pega a url atual da pagina
+            this.page.identifier = sessionStorage.getItem("id"); // pega o ID do anime
+        };
+
+        function disqusChat() {
+            var s = d.createElement('script');
+            s.src = 'https://e-baka-1.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }  
+
+    </script>
 </body>
 
 </html>

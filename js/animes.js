@@ -1,5 +1,5 @@
 function verAnime() {
-    let HTMLdesc = `<div class="descricao">${decodeURIComponent(sessionStorage.getItem("desc"))}</div>`
+     let HTMLdesc = `<div class="descricao">${decodeURIComponent(sessionStorage.getItem("desc"))}</div>`
     $("#poster").attr('src', sessionStorage.getItem("capa"));
     $("#titulo").html(sessionStorage.getItem("nome"));
     $("#desc").html(HTMLdesc);

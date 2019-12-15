@@ -86,6 +86,11 @@ main {
     background-color: rgba(0,0,0,0.4);
 }
 
+.loading-msg{
+    text-align: center;
+    color: white;
+}
+
 .lista{
     padding-left: 0;
 }
@@ -127,4 +132,8 @@ main {
     legend{ 
         text-overflow: ellipsis;
     }
+
+    #lista{
+    margin-left: 0;
+}
 }

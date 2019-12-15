@@ -4,16 +4,20 @@ term.addEventListener("input", () => {
 })
 
 async function saveSession(next=0){
+    $('#loading').show();
+    $('.loading-msg').html("Estamos sincronizando os animes, aguarde um momento! <br> O tempo de espera pode variar de acordo com a velocidade da sua conexão")
     let temp = await axios.get(Endp.getApi(Endp.anime+next), headAxios)
     criaLista(temp)
     localStorage.setItem("motorDeBusca", JSON.stringify(criaMotor()))
     if (temp.data.Next) saveSession(temp.data.Next)
 }
 
-function criaLista(res) {
+function criaLista(res) { 
     let array = JSON.parse(localStorage.getItem("animes")) || [new Date().getTime() + (15*1000*3600*24) ]
     array.push(res.data)
     localStorage.setItem("animes", JSON.stringify(array))
+    $('#loading').hide();
+    $('.loading-msg').html(" ");
 }
 
 function criaMotor() {
@@ -72,3 +76,7 @@ function resultPesquisa(elements) {
         </div>`)
     })
 }
+
+$("#searchbtn").click(function() {
+    $("#searchbar").val("");
+});
