@@ -61,8 +61,8 @@ function lerProgresso(id) {
 }
 
 function mudaPesq(html) {
-  term.focus()
   let test = !term.attributes[1].value
+  if (test) term.focus()
   html.innerHTML = test?"close":"search"
   term.attributes[1].value = test?"true":""
   term.style.width = test?"200px":"0px"
