@@ -22,14 +22,8 @@ function verAnimeCompartilhado() {
     //Salvar todas as informações separadamente no sessionStorage
     animeEscolhido(animeDetails[0][0], animeDetails[0][1], animeDetails[0][2], "index.html", animeDetails[0][3]);
 
-    //renderiza o anime na tela
-     let HTMLdesc = `<div class="descricao">${decodeURIComponent(sessionStorage.getItem("desc"))}</div>`
-    $("#poster").attr('src', sessionStorage.getItem("capa"));
-    $("#titulo").html(sessionStorage.getItem("nome"));
-    $("#desc").html(HTMLdesc);
-    $("#home").hide();
-    anime.fadeIn();
-    //getEpisodio();
+    //redireciona para pagina de anime
+    location = "anime.html"
 }
 
 
