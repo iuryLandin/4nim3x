@@ -31,6 +31,7 @@ header{
      box-shadow: 0 0 8px black;
     display: none;
  }
+ 
 
  .shareDiv > .social{
     display: inline-table;
@@ -133,14 +134,25 @@ main {
     background: #692567 !important;
 }
 
+.epVisto::before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f06e";
+    padding-right: 12px;
+}
+
 .lista a {
     color: #963694;
     text-decoration: none;
     text-transform: uppercase;
 }
+ 
+
 #epsLista > a, #opcoes > a {
     color: white;
 }
+
+
+
 #videoPlayer{
     display: none;
     width: 90%;
