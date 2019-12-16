@@ -32,6 +32,8 @@ function mostraVideo(condicao) {
 }
 
 function marcarEp(funcao, html, id) {
+
+    
   if (funcao == "videoEscolhido") {
     html.classList.add("epVisto")
     html.attributes[2].nodeValue = true

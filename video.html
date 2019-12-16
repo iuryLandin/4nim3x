@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 	<title>4nim3x</title>
+    
+
+         <script src="https://cdn.jwplayer.com/libraries/s5L7ymlv.js"></script>
 </head>
 
 <body>
@@ -28,6 +31,8 @@
 
 				<main>
 					<div class="content">
+                     <div id="myElement"></div>
+                     
 						<h2 id="episodioAtual"></h2>
 						<center> <video id="videoPlayer" style="width: 100%;" poster='https://i.ibb.co/7gmPPpK/Prancheta-1.png' controls></video> </center>
 						<p>Escolha uma opção abaixo:</p>
@@ -50,7 +55,12 @@
 		<script src="js/animes.js"></script>
 		<script src="js/utils.js"></script>
 		<script src="js/index.js"></script>
-		<script>(() => getlink())()</script>
+		<!-- <script>(() => getlink())()</script> -->
+
+        <script>
+            playlist();
+            montarPlaylist();
+        </script>
 </body>
 
 </html>
