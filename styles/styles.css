@@ -105,7 +105,7 @@ main {
 .loading {
     position: fixed;
     z-index: 999;
-    left: 20%;
+    left: 40%;
     top: 40%;
     border-radius: 10px;
     padding: 5px;
