@@ -186,6 +186,10 @@ main {
         text-overflow: ellipsis;
     }
 
+    .anime img {
+        width: 40vw !important;
+    }
+
     legend{ 
         text-overflow: ellipsis;
     }
