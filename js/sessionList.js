@@ -1,8 +1,3 @@
-term.addEventListener("input", () => {
-    clearTimeout()
-    setTimeout(() => pesquisa(), 1000)
-})
-
 async function saveSession(next = 0) {
     $('#loading').show();
     $('.loading-msg').html("Estamos sincronizando os animes, aguarde um momento! <br> O tempo de espera pode variar de acordo com a velocidade da sua conexão")
@@ -10,14 +5,16 @@ async function saveSession(next = 0) {
     criaLista(temp)
     localStorage.setItem("motorDeBusca", JSON.stringify(criaMotor()))
     if (temp.data.Next) saveSession(temp.data.Next)
+    else {
+        $('#loading').hide();
+        $('.loading-msg').html(" ");
+    }
 }
 
 function criaLista(res) {
-    let array = JSON.parse(localStorage.getItem("animes")) || [new Date().getTime() + (15 * 1000 * 3600 * 24)]
+    let array = JSON.parse(localStorage.getItem("animes")) || [getDate() + (15 * 1000 * 3600 * 24)]
     array.push(res.data)
     localStorage.setItem("animes", JSON.stringify(array))
-    $('#loading').hide();
-    $('.loading-msg').html(" ");
 }
 
 function criaMotor() {
@@ -31,8 +28,11 @@ function criaMotor() {
     return temparray
 }
 function animeListFromSession(next = 1) {
-    if (next == 1) d.querySelectorAll(".anime").forEach(elem => elem.remove())
     loading(true)
+    if (next == 1) 
+        document
+            .querySelectorAll(".anime")
+            .forEach(elem => elem.remove())
     if (d.getElementById("verMais")) d.getElementById("verMais").parentElement.remove()
     let animeList = JSON.parse(localStorage.getItem("animes"))
     montTabAnimeFromSession(animeList, next)
@@ -40,10 +40,7 @@ function animeListFromSession(next = 1) {
 
 function montTabAnimeFromSession(data, pos) {
     data[pos].anime.forEach(element => montarAnimeFromSession(element, "index.html"))
-    if (!!data[pos].Next) lista.append(`
-    <p style="text-align: center">
-    <a id="verMais" href="javascript:animeListFromSession('${(data[pos].Next / 50) + 1}')">CARREGAR MAIS</a>
-    </p>`)
+    if (!!data[pos].Next) lista.append(verMais((data[pos].Next / 50) + 1))
     loading(false)
 }
 
@@ -57,14 +54,6 @@ function montarAnimeFromSession(element, origem) {
     loading(false)
 }
 
-function pesquisa() {
-    let result = JSON.parse(localStorage.getItem("motorDeBusca"))
-        .filter(row => row[1].toLocaleLowerCase().indexOf(term.value.toLowerCase()) !== -1)
-    if (result.length > 500) animeListFromSession()
-    else resultPesquisa(result)
-}
-
-
 function getAnimeById(idAnime) {
     let result = JSON.parse(localStorage.getItem("motorDeBusca"))
         .filter(row => row[0] == idAnime)
@@ -75,18 +64,6 @@ function getAnimeById(idAnime) {
         return result;
 }
 
-function resultPesquisa(elements) {
-    d.querySelectorAll(".anime").forEach(elem => elem.remove())
-    if (d.getElementById("verMais")) d.getElementById("verMais").parentElement.remove()
-    elements.forEach(element => {
-        lista.append(`
-        <div class='anime'>
-            <a href="anime.html">
-                <img onclick="animeEscolhido(${element[0]}, '${element[1]}', '${encodeURIComponent(element[2])}', 'index.html', this.src)" src="${element[3]}"/></a>
-            <legend>${element[1]}</legend>
-        </div>`)
-    })
-}
 
 $("#searchbtn").click(function () {
     $("#searchbar").val("");

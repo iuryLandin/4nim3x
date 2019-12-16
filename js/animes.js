@@ -9,6 +9,21 @@ function verAnime() {
     getEpisodio();
 }
 
+/***************************************************************************************
+/* 
+/* */
+function getlink() {
+    let id = sessionStorage.getItem("videoId")
+    epAtual[0].innerHTML = sessionStorage.getItem("videoNome")
+    loading(true);
+    axios
+        .get(Endp.getApi(Endp.video + id), headAxios)
+        .then(res => res.data
+            .forEach(element => montaLink(element.Nome, "playVid", element.Endereco, opcoes, true)))
+        .catch(err => console.warn(err))
+}
+
+
 
 
 function verAnimeCompartilhado() {
@@ -129,7 +144,7 @@ function montarTabelaEpisodio(data, id) {
 function montaLink(nome, funcao, parametro, agregar, id) {
     let html = `
     <a href="${(funcao != "playVid") ? "video.html" : "javascript:void(0)"}" onclick="${funcao}('${parametro}', '${nome}')">
-        <li class="listaEpisodios" onclick="marcarEp('${funcao}', this, '${id}')" clicado="">${nome}</li>
+        <li class="listaEpisodios" onclick="marcarEp('${funcao}', this, '${id}')">${nome}</li>
     </a>`
     agregar.append(html)
     loading(false);

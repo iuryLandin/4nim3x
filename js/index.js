@@ -1,4 +1,7 @@
 const Endp = new EndPoints() //Instância do Objeto Endp, que contêm a função que devolve o link que é usado no axios.
+d.addEventListener('swiped-right', () => openNav()) // escutador do evento de swipe para a direita,  abre  o menu
+d.addEventListener('swiped-left', () => closeNav()) // escutador do evento de swipe para a esquerda, fecha o menu
+searchBar.addEventListener("input", () => busca())  // escutador de entrada na caixa de pesquisa, executa a busca do anime digitado
 
 /*************************************************************************************
 /* Função que analisa como a página vai ser criada: openIndexPage()                  *
@@ -85,4 +88,41 @@ async function animeLanc() {
             .forEach(element => montarAnime(element, "lancamentos.html")))
         .catch(err => console.warn(err))
     loading(false)
+}
+
+/****************************************************************************************
+/* Realiza a pesquisa após um tempo que o usuário digitar a primeira letra na           *
+/* caixa de pesquisa: busca()                                                           *
+/***************************************************************************************/
+function busca() {
+    clearTimeout()
+    setTimeout(() => pesquisa(), 1000)
+}
+
+/****************************************************************************************
+/* Realiza a leitura dos dados salvos no motor de busca da localStorage e os compara    *
+/* com a entrada do usuário na caixa de pesquisa                                        *
+****************************************************************************************/
+function pesquisa() {
+    let result = JSON.parse(localStorage.getItem("motorDeBusca")) //aqui é recebido da localStorage o Motor de busca salvo.
+        .filter(row => row[1]           //filtra os elementos do array, se o teste der true, ele inclui o elemento, se false, exclui.
+            .toLowerCase()              //converte todas as letras pra minúsculo, ampliando o acerto da busca pelos animes.
+            .indexOf(searchBar.value    //analisa o String como se fosse um array de "char", ampliando mais ainda o acerto.
+                .toLowerCase()) != -1)  //IndexOf compara devolve -1 caso não encontre nada no array de "char", por isso a comparação com ele.
+    if (result.length > 500) animeListFromSession() // testa se a busca resultou em menos de 500 resultados antes de exibir na tela.
+    else resultPesquisa(result) // exibe o resultado na tela caso o filtro retorne menos de 500 valores.
+}
+
+//Cria na Tela a grade de resultados da pesquisa
+function resultPesquisa(elements) {
+    d.querySelectorAll(".anime").forEach(elem => elem.remove())
+    if (d.getElementById("verMais")) d.getElementById("verMais").parentElement.remove()
+    elements.forEach(element => {
+        lista.append(`
+        <div class='anime'>
+            <a href="anime.html">
+                <img onclick="animeEscolhido(${element[0]}, '${element[1]}', '${encodeURIComponent(element[2])}', 'index.html', this.src)" src="${element[3]}"/></a>
+            <legend>${element[1]}</legend>
+        </div>`)
+    })
 }

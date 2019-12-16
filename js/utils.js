@@ -1,6 +1,10 @@
-document.addEventListener('swiped-right', () => openNav())
-document.addEventListener('swiped-left', () => closeNav())
+function getDate() {
+  return (new Date().getTime())
+}
 
+function verMais(next){
+  return `<p style="text-align: center"><a id="verMais" href="javascript:animeListFromSession('${next}')">CARREGAR MAIS</a></p>`
+}
 
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px"
@@ -31,14 +35,22 @@ function mostraVideo(condicao) {
   if (!vidPlayer.style.display) vidPlayer.pause()
 }
 
-function marcarEp(funcao, html, id) {
-
-    
-  if (funcao == "videoEscolhido") {
-    html.classList.add("epVisto")
-    html.attributes[2].nodeValue = true
-  }
+function marcarEp(funcao, html, id) {   
+  if (funcao == "videoEscolhido") html.classList.add("epVisto")
   salvaProgresso(id, html)
+}
+
+function animeEscolhido(id, nome, desc, origem, capa) {
+    sessionStorage.setItem("nome"  , nome  )
+    sessionStorage.setItem("desc"  , desc  )
+    sessionStorage.setItem("capa"  , capa  )
+    sessionStorage.setItem("id"    , id    )
+    sessionStorage.setItem("origem", origem)
+}
+
+function videoEscolhido(id, nome) {
+    sessionStorage.setItem("videoId"  , id  )
+    sessionStorage.setItem("videoNome", nome)
 }
 
 function salvaProgresso(id, html) {
@@ -58,24 +70,20 @@ function lerProgresso(id) {
   for (let i = 0; i < episodios.length; i++) {
     if (array.includes(episodios[i].innerHTML)) {
       episodios[i].classList.add("epVisto")
-      episodios[i].attributes[2].nodeValue = 'true'
     }
   }
 }
 
 function mudaPesq(html) {
-  let test = !term.attributes[1].value
-  if (test) term.focus()
+  let testLog = !searchBar.attributes[1].value
+  if (testLog) searchBar.focus()
   else animeListFromSession()
-  html.innerHTML = test?"close":"search"
-  term.attributes[1].value = test?"true":""
-  term.style.width = test?"200px":"0px"
-  term.style.outline = test?"":"none"
-  term.style.paddingLeft = test?"7px":"0px"
+  html.innerHTML                = testLog?"close" :"search"
+  searchBar.style.width         = testLog?"200px" :"0px"
+  searchBar.style.outline       = testLog?""      :"none"
+  searchBar.style.paddingLeft   = testLog?"7px"   :"0px"
+  searchBar.attributes[1].value = testLog?"true"  :""
 }
-
-
-
 
 function compartilhar(){
      $('.shareDiv').slideToggle();
