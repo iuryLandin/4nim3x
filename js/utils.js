@@ -15,6 +15,7 @@ function loading(status) {
 }
 
 function playVid(src) {
+  $("#videoPlayer").attr("poster", sessionStorage.getItem("capa") )
   $("#videoPlayer").attr("src", src)
   vidPlayer.play()
   vidPlayer.style.display = "block"

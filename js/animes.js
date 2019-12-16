@@ -1,12 +1,15 @@
 function verAnime() {
      let HTMLdesc = `<div class="descricao">${decodeURIComponent(sessionStorage.getItem("desc"))}</div>`
     $("#poster").attr('src', sessionStorage.getItem("capa"));
+     $(".back").css('background-image', "url("+sessionStorage.getItem("capa")+")" );
     $("#titulo").html(sessionStorage.getItem("nome"));
     $("#desc").html(HTMLdesc);
     $("#home").hide();
     anime.fadeIn();
     getEpisodio();
 }
+
+
 
 function verAnimeCompartilhado() {
 
