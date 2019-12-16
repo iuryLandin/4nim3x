@@ -11,6 +11,32 @@ header{
     background: #963694;
     box-shadow: 0 0 8px black;
 }
+
+.shareBtn{
+    float: right;
+ }
+
+ .content{
+     padding: 3%;
+ }
+
+ .shareDiv{
+    padding: 1%;
+    width: 98%;
+    height: 200px;
+    position: fixed;
+    bottom: 0;
+    margin-top: 80%;
+    background: white;
+     box-shadow: 0 0 8px black;
+    display: none;
+ }
+
+ .shareDiv > .social{
+    display: inline-table;
+    padding: 12px;
+    cursor: pointer;
+ }
     
 header .logo{
     font-size: 14pt;
