@@ -13,9 +13,9 @@ class EndPoints {
 }
 
 const headAxios = {headers: {'Access-Control-Allow-Origin': '*'}}
+//cabeçalho usado no axios para obter as requisições
 
-//links relativos à pagina
-const d         = document
+const d         = document // Constante que referência de forma rápida a base do DOM
 const lista     = $("#lista")
 const epsLista  = $("#epsLista")
 const epAtual   = $("#episodioAtual")
@@ -23,5 +23,4 @@ const opcoes    = $("#opcoes")
 const anime     = $("#anime")
 const video     = $("#video")
 const vidPlayer = d.getElementById("videoPlayer")
-const term      = document.querySelector('#searchbar')
-let nextPage    = 0
+const term      = d.getElementById("searchbar")
