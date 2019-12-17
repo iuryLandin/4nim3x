@@ -19,15 +19,15 @@ function loading(status) {
 }
 
 function playVid(src) {
+  src = JSON.parse(src)
   $("#videoPlayer").attr("poster", sessionStorage.getItem("capa") )
-  $("#videoPlayer").attr("src", src)
+  $("#videoPlayer").attr("src", src[2])
   vidPlayer.play()
   vidPlayer.style.display = "block"
 }
 
 function voltar(html) {
   html.href = sessionStorage.getItem("origem")
-  console.log(html)
 }
 
 function mostraVideo(condicao) {
@@ -35,32 +35,14 @@ function mostraVideo(condicao) {
   if (!vidPlayer.style.display) vidPlayer.pause()
 }
 
-function marcarEp(funcao, html, id) {   
-  if (funcao == "videoEscolhido") html.classList.add("epVisto")
-  salvaProgresso(id, html)
+function animeEscolhido(id, origem) {
+  sessionStorage.setItem("origem", origem)
+  location = `anime.html?id=${id}`
 }
 
-function animeEscolhido(id, nome, desc, origem, capa) {
-    sessionStorage.setItem("nome"  , nome  )
-    sessionStorage.setItem("desc"  , desc  )
-    sessionStorage.setItem("capa"  , capa  )
-    sessionStorage.setItem("id"    , id    )
-    sessionStorage.setItem("origem", origem)
-}
-
-function videoEscolhido(id, nome) {
-    sessionStorage.setItem("videoId"  , id  )
-    sessionStorage.setItem("videoNome", nome)
-}
-
-function salvaProgresso(id, html) {
+function salvaProgresso(id, nomeEp) {
   let array = JSON.parse(localStorage.getItem(`${id}`)) || []
-  let jaExiste = false
-  for (let i = 0; i < array.length; i++) {
-    if (html.innerHTML == array[i]) jaExiste = true
-  }
-  if (!jaExiste) array.push(html.innerHTML)
-
+  array.push(nomeEp)
   localStorage.setItem(`${id}`, JSON.stringify(array))
 }
 
@@ -73,27 +55,31 @@ function lerProgresso(id) {
     }
   }
 }
-
-function mudaPesq(html) {
-  let testLog = !searchBar.attributes[1].value
-  if (testLog) searchBar.focus()
-  else animeListFromSession()
-  html.innerHTML                = testLog?"close" :"search"
-  searchBar.style.width         = testLog?"200px" :"0px"
-  searchBar.style.outline       = testLog?""      :"none"
-  searchBar.style.paddingLeft   = testLog?"7px"   :"0px"
-  searchBar.attributes[1].value = testLog?"true"  :""
-}
-
 function compartilhar(){
      $('.shareDiv').slideToggle();
 }
 
 function share(rede){
-    let animeId = sessionStorage.getItem('id');
-    if(rede == 'fb') url = 'https://www.facebook.com/sharer/sharer.php?u=https://animexonline.herokuapp.com/share.html?id=' + animeId;
-    if(rede == 'wpp') url = 'https://api.whatsapp.com/send?text=Ei,%20assiste%20esse%20anime...%20%0A%20Clica%20no%20link%20%0A%20%0A%20https://animexonline.herokuapp.com/share.html?id=' + animeId
+    let animeId = location.search.split('id=')[1];
+    if(rede == 'fb') url = 'https://www.facebook.com/sharer/sharer.php?u=https://animexonline.herokuapp.com/anime.html?id=' + animeId;
+    if(rede == 'wpp') url = 'https://api.whatsapp.com/send?text=Ei,%20assiste%20esse%20anime...%20%0A%20Clica%20no%20link%20%0A%20%0A%20https://animexonline.herokuapp.com/anime.html?id=' + animeId
 
     $('.shareDiv').slideToggle();
     window.open(url);
+}
+
+function getAnimeById(idAnime) {
+    let result = JSON.parse(localStorage.getItem("motorDeBusca"))
+        .filter(row => row[0] == idAnime)
+    return result;
+}
+function hideKeyboard(element) {
+  element.attr('readonly', 'readonly'); // Force keyboard to hide on input field.
+  element.attr('disabled', 'true'); // Force keyboard to hide on textarea field.
+  setTimeout(function() {
+      element.blur();  //actually close the keyboard
+      // Remove readonly attribute after keyboard is hidden.
+      element.removeAttr('readonly');
+      element.removeAttr('disabled');
+  }, 100);
 }

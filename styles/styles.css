@@ -84,10 +84,6 @@ main {
     margin-left: 5%;
 }
 
-#anime{
-    display: none;
-}
-
 .anime img{
     width: 150px !important;
 
@@ -131,7 +127,7 @@ main {
     background-color: rgba(0,0,0,0.4);
 }
 
-.loading-msg{
+#loading-msg{
     text-align: center;
     color: white;
 }
@@ -163,13 +159,10 @@ main {
     text-decoration: none;
     text-transform: uppercase;
 }
- 
 
-#epsLista > a, #opcoes > a {
+#listaDeItens > a {
     color: white;
 }
-
-
 
 #videoPlayer{
     display: none;
