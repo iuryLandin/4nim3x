@@ -151,21 +151,20 @@ function montarPlaylistProx() {
 
 }
 
-/// Depreciado
-// function verAnimeCompartilhado() {
+function verAnimeCompartilhado() {
 
-//     //verifica se a lista de busca ta criada, se ja estiver so carrega a lista
-//     openIndexPage()
+    //verifica se a lista de busca ta criada, se ja estiver so carrega a lista
+    openIndexPage()
 
-//     //pega parametro passado pela url
-//     let id = location.search.split('id=')[1]
+    //pega parametro passado pela url
+    let id = location.search.split('id=')[1]
 
-//     //a funcao retorna um objeto instanciado com os dados do anime passado pelo idetro
-//     let animeDetails = getAnimeById(param)[0];
+    //a funcao retorna um objeto instanciado com os dados do anime passado pelo idetro
+    let animeDetails = getAnimeById(param)[0];
 
-//     //Salvar todas as informações separadamente no sessionStorage
-//     animeEscolhido(animeDetails[0], animeDetails[1], animeDetails[2], "index.html", animeDetails[3]);
+    //Salvar todas as informações separadamente no sessionStorage
+    animeEscolhido(animeDetails[0], animeDetails[1], animeDetails[2], "index.html", animeDetails[3]);
 
-//     //redireciona para pagina de anime
-//     location = "anime.html"
-// }
+    //redireciona para pagina de anime
+    location = "anime.html"
+}
