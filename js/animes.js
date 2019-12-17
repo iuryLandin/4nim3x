@@ -1,5 +1,6 @@
-const id   = sessionStorage.getItem("idAnime")                        //Pega o id no link da página
+const id   = sessionStorage.getItem("idAnime")                      //Pega o id na Sessão
 const nome = decodeURIComponent(location.search.split('nome=')[1])  //Pega o nome no link da página
+const idVideo = sessionStorage.getItem("idVideo")
 
 //Prepara a página com as informações salvas na localStorage
 function verAnime() {
@@ -23,7 +24,7 @@ function getEpisodios() {
 //Monta a tabela de episodios item por item, recebe os dados dos animes como parametro em forma de array
 function montTabEpisodios(data) {
     data.forEach(elem => montaItem("videoEscolhido", Object.values(elem)))
-    lerProgresso(id)
+    lerProgresso(idVideo)
     loading(false)
     disqusChat()
 }
@@ -43,6 +44,8 @@ function montaItem(fn, elem) {
 // Salva os dados do anime escolhido no link e carrega a pagina video.html
 function videoEscolhido(anime) {
   anime = JSON.parse(decodeURIComponent(anime))
+  console.log(anime[0])
+  sessionStorage.setItem("idVideo", anime[0])
   location = `video.html?id=${anime[0]}&nome=${anime[1]}`
 }
 
@@ -50,7 +53,7 @@ async function getlinks() {
     loading(true);
     epAtual.innerHTML = nome
     await axios
-        .get(Endp.getApi(Endp.video + id), headAxios)                   //pega os dados do video com base no id
+        .get(Endp.getApi(Endp.video + idVideo), headAxios)                   //pega os dados do video com base no id
         .then(res => res.data                                           //contém os links para cada qualidade disponível
             .forEach(elem => montaItem("playVid", Object.values(elem)))) //para cada item anterior é criado um botão
         .catch(err => console.warn(err))
