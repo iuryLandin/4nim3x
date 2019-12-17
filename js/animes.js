@@ -1,4 +1,4 @@
-const id   = location.search.split('id=')[1]                        //Pega o id no link da página
+const id   = sessionStorage.getItem("idAnime")                        //Pega o id no link da página
 const nome = decodeURIComponent(location.search.split('nome=')[1])  //Pega o nome no link da página
 
 //Prepara a página com as informações salvas na localStorage

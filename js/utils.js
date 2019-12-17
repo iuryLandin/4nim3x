@@ -36,6 +36,7 @@ function mostraVideo(condicao) {
 }
 
 function animeEscolhido(id, origem) {
+  sessionStorage.setItem("idAnime", id)
   sessionStorage.setItem("origem", origem)
   location = `anime.html?id=${id}`
 }
