@@ -1,6 +1,6 @@
-const id   = sessionStorage.getItem("idAnime")                      //Pega o id na Sessão
-const nome = decodeURIComponent(location.search.split('nome=')[1])  //Pega o nome no link da página
-const idVideo = sessionStorage.getItem("idVideo")
+const id   = sessionStorage.getItem("idAnime") || null;             //Pega o id do anime na Session
+const nome = decodeURIComponent(location.search.split('nome=')[1]); //Pega o nome no link da página
+const idVideo = sessionStorage.getItem("idVideo") || null;          //Pega o id do episodio na session
 
 //Prepara a página com as informações salvas na localStorage
 function verAnime() {
@@ -18,15 +18,15 @@ function getEpisodios() {
     axios
     .get(Endp.getApi(Endp.episo + id), headAxios)
         .then(res => montTabEpisodios(res.data))
-        .catch(err => console.warn(err))
+        .catch(err => console.warn(err));
 }
 
 //Monta a tabela de episodios item por item, recebe os dados dos animes como parametro em forma de array
 function montTabEpisodios(data) {
-    data.forEach(elem => montaItem("videoEscolhido", Object.values(elem)))
-    lerProgresso(idVideo)
-    loading(false)
-    disqusChat()
+    data.forEach(elem => montaItem("videoEscolhido", Object.values(elem)));
+    lerProgresso(id);
+    loading(false);
+    disqusChat();
 }
 
 /********************************************************************************************
@@ -38,33 +38,32 @@ function montaItem(fn, elem) {
     listaDeItens.append(`
     <a href="javascript: ${fn}('${encodeURIComponent(JSON.stringify(elem))}')">
         <li class="listaEpisodios" onclick="marcarEp(this)">${elem[1]}</li>
-    </a>`)
+    </a>`);
 }
 
 // Salva os dados do anime escolhido no link e carrega a pagina video.html
 function videoEscolhido(anime) {
-  anime = JSON.parse(decodeURIComponent(anime))
-  console.log(anime[0])
-  sessionStorage.setItem("idVideo", anime[0])
-  location = `video.html?id=${anime[0]}&nome=${anime[1]}`
+  anime = JSON.parse(decodeURIComponent(anime));
+  sessionStorage.setItem("idVideo", anime[0]);
+  location = `video.html?id=${anime[0]}&nome=${anime[1]}`;
 }
 
 async function getlinks() {
     loading(true);
-    epAtual.innerHTML = nome
+    epAtual.innerHTML = nome;
     await axios
-        .get(Endp.getApi(Endp.video + idVideo), headAxios)                   //pega os dados do video com base no id
+        .get(Endp.getApi(Endp.video + idVideo), headAxios)              //pega os dados do video com base no id
         .then(res => res.data                                           //contém os links para cada qualidade disponível
             .forEach(elem => montaItem("playVid", Object.values(elem)))) //para cada item anterior é criado um botão
-        .catch(err => console.warn(err))
-    loading(false)
+        .catch(err => console.warn(err));
+    loading(false);
 }
 
 //usado para marcar os eps como "já visualizados", recebe um parâmetro html que é um path direto para o episódio clicado
 function marcarEp(html) {
     if (location.pathname != "/video.html"){
-        html.classList.add("epVisto")
-        salvaProgresso(id, html.innerHTML)
+        html.classList.add("epVisto");
+        salvarProgresso(id, html.innerHTML);
     }
 }
 
@@ -77,11 +76,11 @@ function marcarEp(html) {
 
 function playlist() {
     loading(true);
-    let id = sessionStorage.getItem("id")
+    let id = sessionStorage.getItem("id");
     axios
         .get(Endp.getApi(Endp.episo + id), headAxios)
         .then(res => criarPlaylist(res.data, id))
-        .catch(err => console.warn(err))
+        .catch(err => console.warn(err));
 }                
 
 function criarPlaylist(data, animeId) {

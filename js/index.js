@@ -1,7 +1,7 @@
 const Endp = new EndPoints() //Instância do Objeto Endp, que contêm a função que devolve o link que é usado no axios.
-d.addEventListener('swiped-right', () => openNav()) // escutador do evento de swipe para a direita,  abre  o menu
-d.addEventListener('swiped-left', () => closeNav()) // escutador do evento de swipe para a esquerda, fecha o menu
-if (!!searchBar)searchBar.addEventListener("keydown", () => busca())  // escutador de entrada na caixa de pesquisa, executa a busca do anime digitado
+d.addEventListener('swiped-right', () => openNav()); // escutador do evento de swipe para a direita,  abre  o menu
+d.addEventListener('swiped-left', () => closeNav()); // escutador do evento de swipe para a esquerda, fecha o menu
+if (!!searchBar)searchBar.addEventListener("keydown", () => busca());  // escutador de entrada na caixa de pesquisa, executa a busca do anime digitado
 
 /*************************************************************************************
 /* Função que analisa como a página vai ser criada: openIndexPage()                  *
@@ -17,13 +17,13 @@ if (!!searchBar)searchBar.addEventListener("keydown", () => busca())  // escutad
 /*      ainda.                                                                       *
 /************************************************************************************/
 function openIndexPage(){
-    let dataExp = JSON.parse(localStorage.getItem("animes")) || null
-    if (!dataExp) animeList()
+    let dataExp = JSON.parse(localStorage.getItem("animes")) || null;
+    if (!dataExp) animeList();
     else if (getDate() >= dataExp[0]) {
-        localStorage.removeItem("animes")
-        animeList()
+        localStorage.removeItem("animes");
+        animeList();
     }
-    else animeListFromSession()
+    else animeListFromSession();
 }
 
 /**************************************************************************************
@@ -39,8 +39,8 @@ function animeList() {
     axios
         .get(Endp.getApi(Endp.anime+0), headAxios)
         .then(res => montarTabelaAnime(res.data))
-        .catch(err => console.warn(err))
-    saveSession()
+        .catch(err => console.warn(err));
+    saveSession();
 }
 
 /***************************************************************************************
@@ -54,9 +54,9 @@ function animeList() {
 /**************************************************************************************/
 function montarTabelaAnime(data) {
     data.anime
-        .forEach(element => montarAnime(Object.values(element)))
-    if (data.Next) lista.append(verMais((data.Next/50)+1))
-    loading(false)
+        .forEach(element => montarAnime(Object.values(element)));
+    if (data.Next) lista.append(verMais((data.Next/50)+1));
+    loading(false);
 }
 
 /***************************************************************************************
@@ -73,7 +73,7 @@ function montarAnime(element, origem = "index.html") {
         <a href="javascript: animeEscolhido('${element[0]}', '${origem}')">
             <img src="${(origem=="lancamentos.html")?element[4]:element[3]}"/></a>
         <legend>${element[1]}</legend>
-    </div>`)
+    </div>`);
 }
 
 // Carrega a lista de lancamentos
@@ -82,15 +82,15 @@ async function animeLanc() {
         .get(Endp.getApi(Endp.lanca), headAxios)
         .then(res => res.data
             .forEach(element => montarAnime(Object.values(element), "lancamentos.html")))
-        .catch(err => console.warn(err))
-    loading(false)
+        .catch(err => console.warn(err));
+    loading(false);
 }
 
 
 // Realiza a pesquisa após um tempo que o usuário digitar a primeira letra na caixa de pesquisa:
 function busca() {
-    clearTimeout()
-    setTimeout(() => pesquisa(), 1000)
+    clearTimeout();
+    setTimeout(() => pesquisa(), 1000);
 }
 
 /*****************************************************************************************
@@ -109,30 +109,30 @@ function pesquisa() {
     let result = JSON.parse(localStorage.getItem("motorDeBusca"))   // 1
     .filter(row => row[1]                                           // 2
         .toLowerCase()                                              // 3
-        .indexOf(searchBar.value                                    // 4
-            .toLowerCase()) != -1)                                  // 5
-        if (result.length > 500) animeListFromSession()             // 6
-        else resultPesquisa(result)                                 // 7
+        .indexOf(searchBar.value
+            .toLowerCase()) != -1);                                 // 5
+        if (result.length > 500) animeListFromSession();            // 6
+        else resultPesquisa(result);                                // 7
 }
 
 //Cria na Tela a grade de resultados da pesquisa
 function resultPesquisa(elements) {
     d.querySelectorAll(".anime")  //remove da tela todos os animes que estão sendo exibidos
-        .forEach(elem => elem.remove())
+        .forEach(elem => elem.remove());
     if (d.getElementById("verMais")) //remove o botão "verMais", se existir
-        d.getElementById("verMais").parentElement.remove()
-    elements.forEach(element => montarAnime(element)) //cria de fato os animes que serão exibidos
+        d.getElementById("verMais").parentElement.remove();
+    elements.forEach(element => montarAnime(element)); //cria de fato os animes que serão exibidos
 }
 
 //Muda o estado da barra de pesquisa com base em um teste lógico que verifíca se a barra de
 //pesquisa tem conteudo para ser pesquisado
 function mudaPesq(html) {
-    let testLog = !searchBar.attributes[1].value
-    if (testLog) searchBar.focus()
-    else animeListFromSession()
-    html.innerHTML                = testLog?"close" :"search"
-    searchBar.style.width         = testLog?"200px" :"0px"
-    searchBar.style.outline       = testLog?""      :"none"
-    searchBar.style.paddingLeft   = testLog?"7px"   :"0px"
-    searchBar.attributes[1].value = testLog?"true"  :""
+    let testLog = !searchBar.attributes[1].value;
+    if (testLog) searchBar.focus();
+    else animeListFromSession();
+    html.innerHTML                = testLog?"close" :"search";
+    searchBar.style.width         = testLog?"200px" :"0px"   ;
+    searchBar.style.outline       = testLog?""      :"none"  ;
+    searchBar.style.paddingLeft   = testLog?"7px"   :"0px"   ;
+    searchBar.attributes[1].value = testLog?"true"  :""      ;
 }

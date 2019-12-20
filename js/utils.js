@@ -41,7 +41,7 @@ function animeEscolhido(id, origem) {
   location = `anime.html?id=${id}`
 }
 
-function salvaProgresso(id, nomeEp) {
+function salvarProgresso(id, nomeEp) {
   let array = JSON.parse(localStorage.getItem(`${id}`)) || []
   array.push(nomeEp)
   localStorage.setItem(`${id}`, JSON.stringify(array))
@@ -71,16 +71,6 @@ function share(rede){
 
 function getAnimeById(idAnime) {
     let result = JSON.parse(localStorage.getItem("motorDeBusca"))
-        .filter(row => row[0] == idAnime)
+        .filter(row => row[0] == idAnime);
     return result;
-}
-function hideKeyboard(element) {
-  element.attr('readonly', 'readonly'); // Force keyboard to hide on input field.
-  element.attr('disabled', 'true'); // Force keyboard to hide on textarea field.
-  setTimeout(function() {
-      element.blur();  //actually close the keyboard
-      // Remove readonly attribute after keyboard is hidden.
-      element.removeAttr('readonly');
-      element.removeAttr('disabled');
-  }, 100);
 }
