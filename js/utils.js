@@ -43,7 +43,7 @@ function animeEscolhido(id, origem) {
 
 function salvarProgresso(id, nomeEp) {
   let array = JSON.parse(localStorage.getItem(`${id}`)) || []
-  array.push(nomeEp)
+  if (!array.includes(nomeEp)) array.push(nomeEp)
   localStorage.setItem(`${id}`, JSON.stringify(array))
 }
 
