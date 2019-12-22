@@ -15,18 +15,26 @@ function verAnime() {
 // Carrega os dados da lista de episoóios, como links e id's de video
 function getEpisodios() {
     loading(true);
-    axios
-    .get(Endp.getApi(Endp.episo + id), headAxios)
-        .then(res => montTabEpisodios(res.data))
-        .catch(err => console.warn(err));
+    if (sessionStorage.getItem(`${id}`)){
+        let data = JSON.parse(sessionStorage.getItem(`${id}`));
+        montTabEpisodios(data);
+    }else {
+        axios
+            .get(Endp.getApi(Endp.episo + id), headAxios)
+            .then(res => {
+                montTabEpisodios(res.data)
+                setEpsLista(res.data) //envia os dados do anime para uma função que vai criar uma lista na sessão
+            })
+            .catch(err => console.warn(err));
+    }
 }
 
 //Monta a tabela de episodios item por item, recebe os dados dos animes como parametro em forma de array
 function montTabEpisodios(data) {
     data.forEach(elem => montaItem("videoEscolhido", Object.values(elem)));
     lerProgresso(id);
-    loading(false);
     disqusChat();
+    loading(false);
 }
 
 /********************************************************************************************
@@ -45,6 +53,7 @@ function montaItem(fn, elem) {
 function videoEscolhido(anime) {
   anime = JSON.parse(decodeURIComponent(anime));
   sessionStorage.setItem("idVideo", anime[0]);
+  montarPlaylist(anime);
   location = `video.html?id=${anime[0]}&nome=${anime[1]}`;
 }
 
@@ -67,103 +76,119 @@ function marcarEp(html) {
     }
 }
 
-
-
-
-
-
-
-
-function playlist() {
-    loading(true);
-    let id = sessionStorage.getItem("id");
-    axios
-        .get(Endp.getApi(Endp.episo + id), headAxios)
-        .then(res => criarPlaylist(res.data, id))
-        .catch(err => console.warn(err));
-}                
-
-function criarPlaylist(data, animeId) {
-    sessionStorage.setItem('playlist', JSON.stringify(data));
-    loading(false);
-}        
-
-function posEpAtual() {
-    let playlist = JSON.parse(sessionStorage.getItem('playlist'));
-    let epAtual = sessionStorage.getItem('videoId');
-
-    //let result = playlist.filter((x)=>x.Id === epAtual);
-
-    let pos = playlist.findIndex((x) => x.Id === epAtual);
-
-    console.log(playlist[pos]);
-    return pos;
-}        
-
-var videoPlaylist = new Array;
-function montarPlaylist() {
-    let playlist = JSON.parse(sessionStorage.getItem('playlist'));
-    let pos = posEpAtual();
-    let prox = pos + 1;
-
-
-
-    //adiciona o primeiro video a playlist
-    $.ajax({
-        url: Endp.getApi(Endp.video + sessionStorage.getItem('videoId')),
-        success: function (data) {
-            videoPlaylist.push({ 'file': data[0].Endereco, 'mediaid': pos });
-            console.log("=============");
-            montarPlaylistProx();
-           
-        }    
-    });        
-
+//Salva a lista de episodios na sessão pra diminuir o gasto da api em animes muito grandes.
+//Ajuda a criar a playlist de episodios 
+function setEpsLista(data){
+    sessionStorage.setItem(`${id}`, JSON.stringify(data))
 }
 
-function montarPlaylistProx() {
-    let playlist = JSON.parse(sessionStorage.getItem('playlist'));
-    let pos = posEpAtual();
-    let prox = pos + 1;
+// Descomente para configurar o Disqus
+var disqus_config = function () {
+    this.page.url = window.location.href + '?id=' + sessionStorage.getItem("idAnime");  // pega a url atual da pagina
+    this.page.identifier = sessionStorage.getItem("idAnime"); // pega o ID do anime
+};
+			
+function disqusChat() {
+    var s = d.createElement('script');
+    s.src = 'https://e-baka-1.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+}
 
-    let max = playlist.length;
 
 
-    if(max > 10) max = 9;
 
-    for (i = 0; i < max ; i++) {
-        let id = playlist[prox + i].Id;
-        $.ajax({
-            url: Endp.getApi(Endp.video + id),
-            success: function (data) {
-                videoPlaylist.push({ 'file': data[0].Endereco, 'mediaid': prox });
-                
-                var pl = JSON.stringify(videoPlaylist);
-                jwplayer.key = "ABCdeFG123456SeVenABCdeFG123456SeVen=="
-                jwplayer("myElement").setup({
-                    "playlist": JSON.parse(pl)
-                });
-            }
-        });
+
+//função assíncrona que cria a playlist na sessionStorage no formato
+//recebe como parametro um objeto que contém o Id, o nome e a Data de postagem do anime;
+//
+//na minha visão é semi-recursiva, você pode passar os objetos que ela salva na session como
+//parametro pra função funcionar, e na verdade, recomendo que faça isso.
+//
+// ["anterior": Object, "proximo": Object]
+async function montarPlaylist(anime) {
+    //pega da session a lista de episodios salva em "setEpsLista()"
+    let videos = JSON.parse(sessionStorage.getItem(id))
+
+    //procura a posição do anime atual pra salvar o objeto anterior e o proximo na sessionStorage
+    for (let i=0; i<videos.length;i++){
+        if (videos[i].Nome == anime[1]) {
+            sessionStorage
+                .setItem("playlist", JSON.stringify({"anterior": videos[i+1], "proximo": videos[i-1]}))
+        }
     }
-
-
 }
 
-function verAnimeCompartilhado() {
 
-    //verifica se a lista de busca ta criada, se ja estiver so carrega a lista
-    openIndexPage()
 
-    //pega parametro passado pela url
-    let id = location.search.split('id=')[1]
-
-    //a funcao retorna um objeto instanciado com os dados do anime passado pelo idetro
-    let animeDetails = getAnimeById(param)[0];
-
-    //Salvar todas as informações separadamente no sessionStorage
-    animeEscolhido(animeDetails[0], animeDetails[1], animeDetails[2], "index.html", animeDetails[3]);
-
-    //redireciona para pagina de anime
-    location = "anime.html"
-}
+// function montarPlaylistProx() {
+//     let playlist = JSON.parse(sessionStorage.getItem('playlist'));
+//     let pos = posEpAtual();
+//     let prox = pos + 1;
+// 
+//     let max = playlist.length;
+// 
+// 
+//     if(max > 10) max = 9;
+// 
+//     for (i = 0; i < max ; i++) {
+//         let id = playlist[prox + i].Id;
+//         $.ajax({
+//             url: Endp.getApi(Endp.video + id),
+//             success: function (data) {
+//                 videoPlaylist.push({ 'file': data[0].Endereco, 'mediaid': prox });
+// 
+//                 var pl = JSON.stringify(videoPlaylist);
+//                 jwplayer.key = "ABCdeFG123456SeVenABCdeFG123456SeVen=="
+//                 jwplayer("myElement").setup({
+//                     "playlist": JSON.parse(pl)
+//                 });
+//             }
+//         });
+//     }
+// 
+// 
+// }
+// 
+// function verAnimeCompartilhado() {
+// 
+//     //verifica se a lista de busca ta criada, se ja estiver so carrega a lista
+//     openIndexPage()
+// 
+//     //pega parametro passado pela url
+//     let id = location.search.split('id=')[1]
+// 
+//     //a funcao retorna um objeto instanciado com os dados do anime passado pelo idetro
+//     let animeDetails = getAnimeById(param)[0];
+// 
+//     //Salvar todas as informações separadamente no sessionStorage
+//     animeEscolhido(animeDetails[0], animeDetails[1], animeDetails[2], "index.html", animeDetails[3]);
+// 
+//     //redireciona para pagina de anime
+//     location = "anime.html"
+// }
+// 
+// function posEpAtual() {
+//     let playlist = JSON.parse(sessionStorage.getItem('playlist'));
+//     let epAtual = sessionStorage.getItem('videoId');
+// 
+//     //let result = playlist.filter((x)=>x.Id === epAtual);
+// 
+//     let pos = playlist.findIndex((x) => x.Id === epAtual);
+// 
+//     console.log(playlist[pos]);
+//     return pos;
+// }        
+// 
+//function playlist() {
+//     loading(true);
+//     axios
+//         .get(Endp.getApi(Endp.episo + id), headAxios)
+//         .then(res => criarPlaylist(res.data, id))
+//         .catch(err => console.warn(err));
+// }                
+// 
+// function criarPlaylist(data, animeId) {
+//     sessionStorage.setItem('playlist', JSON.stringify(data));
+//     loading(false);
+// }

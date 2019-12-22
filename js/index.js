@@ -107,12 +107,12 @@ function busca() {
 /****************************************************************************************/
 function pesquisa() {
     let result = JSON.parse(localStorage.getItem("motorDeBusca"))   // 1
-    .filter(row => row[1]                                           // 2
-        .toLowerCase()                                              // 3
-        .indexOf(searchBar.value
-            .toLowerCase()) != -1);                                 // 5
-        if (result.length > 500) animeListFromSession();            // 6
-        else resultPesquisa(result);                                // 7
+        .filter(row => row[1]                                           // 2
+            .toLowerCase()                                              // 3
+            .indexOf(searchBar.value
+                .toLowerCase()) != -1);                                 // 5
+    if (result.length > 500) animeListFromSession();            // 6
+    else resultPesquisa(result);                                // 7
 }
 
 //Cria na Tela a grade de resultados da pesquisa
@@ -124,8 +124,8 @@ function resultPesquisa(elements) {
     elements.forEach(element => montarAnime(element)); //cria de fato os animes que serão exibidos
 }
 
-//Muda o estado da barra de pesquisa com base em um teste lógico que verifíca se a barra de
-//pesquisa tem conteudo para ser pesquisado
+//Muda o estado da barra de pesquisa com base em um teste lógico que verifíca se ela tem conteudo
+//para ser pesquisado.
 function mudaPesq(html) {
     let testLog = !searchBar.attributes[1].value;
     if (testLog) searchBar.focus();

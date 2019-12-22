@@ -2,7 +2,7 @@ function getDate() {
   return (new Date().getTime())
 }
 
-function verMais(next){
+function verMais(next) {
   return `<p style="text-align: center"><a id="verMais" href="javascript:animeListFromSession('${next}')">CARREGAR MAIS</a></p>`
 }
 
@@ -15,12 +15,12 @@ function closeNav() {
   document.querySelector("main").style.marginLeft = "0"
 }
 function loading(status) {
-  return (status)?$("#loading").show():$("#loading").hide()
+  return (status) ? $("#loading").show() : $("#loading").hide()
 }
 
 function playVid(src) {
   src = JSON.parse(src)
-  $("#videoPlayer").attr("poster", sessionStorage.getItem("capa") )
+  $("#videoPlayer").attr("poster", sessionStorage.getItem("capa"))
   $("#videoPlayer").attr("src", src[2])
   vidPlayer.play()
   vidPlayer.style.display = "block"
@@ -56,21 +56,21 @@ function lerProgresso(id) {
     }
   }
 }
-function compartilhar(){
-     $('.shareDiv').slideToggle();
+function compartilhar() {
+  $('.shareDiv').slideToggle();
 }
 
-function share(rede){
-    let animeId = location.search.split('id=')[1];
-    if(rede == 'fb') url = 'https://www.facebook.com/sharer/sharer.php?u=https://animexonline.herokuapp.com/share.html?id=' + animeId;
-    if(rede == 'wpp') url = 'https://api.whatsapp.com/send?text=Ei,%20assiste%20esse%20anime...%20%0A%20Clica%20no%20link%20%0A%20%0A%20https://animexonline.herokuapp.com/share.html?id=' + animeId
+function share(rede) {
+  let animeId = location.search.split('id=')[1];
+  if (rede == 'fb') url = 'https://www.facebook.com/sharer/sharer.php?u=https://animexonline.herokuapp.com/share.html?id=' + animeId;
+  if (rede == 'wpp') url = 'https://api.whatsapp.com/send?text=Ei,%20assiste%20esse%20anime...%20%0A%20Clica%20no%20link%20%0A%20%0A%20https://animexonline.herokuapp.com/share.html?id=' + animeId
 
-    $('.shareDiv').slideToggle();
-    window.open(url);
+  $('.shareDiv').slideToggle();
+  window.open(url);
 }
 
 function getAnimeById(idAnime) {
-    let result = JSON.parse(localStorage.getItem("motorDeBusca"))
-        .filter(row => row[0] == idAnime);
-    return result;
+  let result = JSON.parse(localStorage.getItem("motorDeBusca"))
+    .filter(row => row[0] == idAnime);
+  return result;
 }

@@ -102,7 +102,7 @@ main {
     background-attachment: fixed;
     background-size: cover;
     filter: blur(2px);
-    width: 100%;
+    width: 92.5vw; 
     height: 160px;
     float: left;
     position: absolute;
@@ -110,7 +110,6 @@ main {
 }
 
 .posterAnime{
-    
     margin-top: 3px;
     z-index: 999;
 }
