@@ -1,9 +1,9 @@
-body{
+body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif
 }
 
-header{
+header {
     position: fixed;
     width: 100%;
     padding: 15px;
@@ -12,15 +12,15 @@ header{
     box-shadow: 0 0 8px black;
 }
 
-.shareBtn{
+.shareBtn {
     float: right;
- }
+}
 
- .content{
-     padding: 3%;
- }
+.content {
+    padding: 3%;
+}
 
- .shareDiv{
+.shareDiv {
     padding: 1%;
     width: 98%;
     height: 200px;
@@ -28,21 +28,21 @@ header{
     bottom: 0;
     margin-top: 80%;
     background: white;
-     box-shadow: 0 0 8px black;
+    box-shadow: 0 0 8px black;
     display: none;
- }
- 
+}
 
- .shareDiv > .social{
+.shareDiv>.social {
     display: inline-table;
     padding: 12px;
     cursor: pointer;
- }
-    
-header .logo{
+}
+
+header .logo {
     font-size: 14pt;
     padding-left: 12px;
 }
+
 #search {
     float: right;
     transform: translateX(-25px);
@@ -58,21 +58,20 @@ header .logo{
     transition-duration: .5s;
 }
 
-#searchbar:focus{
+#searchbar:focus {
     border: none;
     outline: 2px solid purple;
 }
-
 
 .searchbtn {
     color: white;
 }
 
-main{
+main {
     padding-top: 10vh;
 }
 
-.content{
+.content {
     clear: both;
 }
 
@@ -80,16 +79,15 @@ main {
     transition-duration: .5s;
 }
 
-#lista{
+#lista {
     margin-left: 5%;
 }
 
-.anime img{
+.anime img {
     width: 150px !important;
-
 }
 
-.anime{
+.anime {
     width: 150px;
     height: 100%;
     padding: 12px;
@@ -97,24 +95,28 @@ main {
     text-align: center;
 }
 
-.back{
+.back {
     background: url(https://playreplay.com.br/wp-content/uploads/2018/02/seven-deadly-sins-playreplay.jpg);
     background-attachment: fixed;
     background-size: cover;
     filter: blur(2px);
-    width: 92.5vw; 
+    width: 92.5vw;
     height: 160px;
     float: left;
     position: absolute;
     z-index: -9999;
 }
 
-.posterAnime{
+.posterAnime {
     margin-top: 3px;
     z-index: 999;
 }
 
+.descricao {
+    text-align: justify;
+}
 /* Modal (background) */
+
 .loading {
     position: fixed;
     z-index: 999;
@@ -123,22 +125,22 @@ main {
     border-radius: 10px;
     padding: 5px;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-#loading-msg{
+#loading-msg {
     text-align: center;
     color: white;
 }
 
-.lista{
+.lista {
     padding-left: 0;
 }
 
-.lista  li{
+.lista li {
     list-style: none;
     padding: 15px;
-    border-bottom:solid 1px white;
+    border-bottom: solid 1px white;
     border-top: solid 1px white;
     background: #963694;
 }
@@ -159,11 +161,11 @@ main {
     text-transform: uppercase;
 }
 
-#listaDeItens > a {
+#listaDeItens>a {
     color: white;
 }
 
-#videoPlayer{
+#videoPlayer {
     display: none;
     width: 90%;
 }
@@ -179,7 +181,7 @@ main {
 }
 
 @media screen and (max-width: 450px) {
-   .anime{
+    .anime {
         width: 100px;
         height: 200px !important;
         padding: 10px;
@@ -187,16 +189,13 @@ main {
         text-align: center;
         text-overflow: ellipsis;
     }
-
     .anime img {
         width: 40vw !important;
     }
-
-    legend{ 
+    legend {
         text-overflow: ellipsis;
     }
-
-    #lista{
+    #lista {
         text-align: center;
         margin-left: 0;
     }
