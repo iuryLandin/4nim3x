@@ -70,7 +70,7 @@ function montarTabelaAnime(data) {
 function montarAnime(element, origem = "index.html") {
     lista.append(`
     <div class='anime'>
-        <a href="javascript: animeEscolhido('${element[0]}', '${origem}')">
+        <a href="javascript: animeEscolhido(${element[0]})">
             <img src="${(origem=="lancamentos.html")?element[4]:element[3]}"/></a>
         <legend>${element[1]}</legend>
     </div>`);

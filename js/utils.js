@@ -35,10 +35,9 @@ function mostraVideo(condicao) {
   if (!vidPlayer.style.display) vidPlayer.pause()
 }
 
-function animeEscolhido(id, origem) {
-  sessionStorage.setItem("idAnime", id)
-  sessionStorage.setItem("origem", origem)
-  location = `anime.html?id=${id}`
+function animeEscolhido(id) {
+  sessionStorage.setItem("idAnime", id);
+  location = `anime.html`;
 }
 
 function salvarProgresso(id, nomeEp) {

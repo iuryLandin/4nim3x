@@ -1,15 +1,24 @@
 const id   = sessionStorage.getItem("idAnime") || null;             //Pega o id do anime na Session
-const nome = decodeURIComponent(location.search.split('nome=')[1]); //Pega o nome no link da página
+const nome = decodeURIComponent(location.search.split('=')[1]); //Pega o nome no link da página
 const idVideo = sessionStorage.getItem("idVideo") || null;          //Pega o id do episodio na session
 
 //Prepara a página com as informações salvas na localStorage
-function verAnime() {
-    let elem = getAnimeById(id)[0] //pega os dados dos animes salvo na LS
+async function verAnime() {
+    let elem = getAnimeById(id)[0] || []; //pega os dados dos animes salvo na LS
+    if (elem.length==0) elem = await getAnimeFromApi(id); //confirma que vai ser aberto o anime
     $("#titulo").html(elem[1]);
     $("#desc")  .html(`<div class="descricao">${elem[2]}</div>`);
     $(".back")  .css('background-image', `url(${elem[3]})`);
     $("#poster").attr('src', elem[3]);
     getEpisodios();
+}
+
+//
+async function getAnimeFromApi() {
+    let animes = await axios.get(Endp.getApi(Endp.lanca));
+    animes = Object.values(animes.data.filter(row => row.Id == id)[0]);
+    animes.splice(3, 1);
+    return animes;
 }
 
 // Carrega os dados da lista de episoóios, como links e id's de video
@@ -54,7 +63,7 @@ function videoEscolhido(anime) {
   anime = JSON.parse(decodeURIComponent(anime));
   sessionStorage.setItem("idVideo", anime[0]);
   montarPlaylist(anime);
-  location = `video.html?id=${anime[0]}&nome=${anime[1]}`;
+  location = `video.html?nome=${anime[1]}`;
 }
 
 async function getlinks() {
