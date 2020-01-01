@@ -78,12 +78,32 @@ function montarAnime(element, origem = "index.html") {
 
 // Carrega a lista de lancamentos
 async function animeLanc() {
+    // recebe da localStorage a lista de lancamentos ou um item nulo
+    let lancamentos = JSON.parse(localStorage.getItem("animeLanc")) || null;
+
+    // analiza se o item anterior ja existe ou se expirou, cria um novo caso um seja verdadeiro
+    if (!lancamentos || getDate() > lancamentos[0]) lancamentos = await saveLanc();
+
+    // monta a lista na tela carregando os dados que foram salvos, ou ja existiam na localStorage
+    lancamentos[1].forEach(elem => montarAnime(Object.values(elem), "lancamentos.html"));
+    loading(false);
+}
+
+async function saveLanc() {
+    // cria uma variável que será usada pra salvar a lista de lançamentos na localStorage
+    // a lista terá uma duração de 3 horas.
+    let lancamentos = [getDate() + (3 * 1000 * 3600)];
+
+    // Pega a lista de lançamentos da API e salva na variável "lancamentos".
     await axios
         .get(Endp.getApi(Endp.lanca), headAxios)
-        .then(res => res.data
-            .forEach(element => montarAnime(Object.values(element), "lancamentos.html")))
+        .then(res => lancamentos.push(res.data))
         .catch(err => console.warn(err));
-    loading(false);
+    
+    // salva o conteudo da variável "lancamentos" na localStorage e retorna o valor da variável
+    // o retorno serve para atualizar a lista de lancamentos com os dados dos animes.
+    localStorage.setItem("animeLanc", JSON.stringify(lancamentos));
+    return lancamentos;
 }
 
 
@@ -101,18 +121,18 @@ function busca() {
 /* 2 - Filtra os elementos do array, se "true", inclui o elemento, se "false", exclui.   *
 /* 3 - Converte todas as letras pra minúsculo, ampliando o acerto da busca pelos animes. *
 /* 4 - Analisa o String como se fosse um array de "char", ampliando mais ainda o acerto. *
-/* 5 - IndexOf devolve -1 caso não encontre o item dentro da String                      *                                                               *
+/* 5 - IndexOf devolve -1 caso não encontre o item dentro da String                      *
 /* 6 - Testa se a busca resultou em menos de 500 resultados antes de exibir na tela.     *
 /* 7 - Exibe o resultado na tela caso o filtro retorne menos de 500 valores.             *
 /****************************************************************************************/
 function pesquisa() {
-    let result = JSON.parse(localStorage.getItem("motorDeBusca"))   // 1
+    let result = JSON.parse(localStorage.getItem("motorDeBusca"))       // 1
         .filter(row => row[1]                                           // 2
             .toLowerCase()                                              // 3
-            .indexOf(searchBar.value
+            .indexOf(searchBar.value                                    // 4
                 .toLowerCase()) != -1);                                 // 5
-    if (result.length > 500) animeListFromSession();            // 6
-    else resultPesquisa(result);                                // 7
+    if (result.length > 500) animeListFromSession();                    // 6
+    else resultPesquisa(result);                                        // 7
 }
 
 //Cria na Tela a grade de resultados da pesquisa
