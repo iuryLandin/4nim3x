@@ -1,6 +1,4 @@
 const Endp = new EndPoints() //Instância do Objeto Endp, que contêm a função que devolve o link que é usado no axios.
-d.addEventListener('swiped-right', () => openNav()); // escutador do evento de swipe para a direita,  abre  o menu
-d.addEventListener('swiped-left', () => closeNav()); // escutador do evento de swipe para a esquerda, fecha o menu
 if (!!searchBar)searchBar.addEventListener("keydown", () => busca());  // escutador de entrada na caixa de pesquisa, executa a busca do anime digitado
 
 /*************************************************************************************
