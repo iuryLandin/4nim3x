@@ -63,6 +63,10 @@ header .logo {
     outline: 2px solid purple;
 }
 
+#searchbar::placeholder {
+    color: rgba(255, 255, 255, 0.609);
+}
+
 .searchbtn {
     color: white;
 }
