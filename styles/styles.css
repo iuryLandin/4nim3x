@@ -55,6 +55,11 @@ header .logo {
     transform: translateX(-25px);
 }
 
+.contentAnime {
+    margin-top: 3vw;
+    padding: 2vw;
+}
+
 #searchbar {
     transform: translateY(-8px);
     background: #832981;
@@ -200,6 +205,9 @@ main {
     }
     .content {
         padding: 0;
+    }
+    .contentAnime {
+        margin-top: 5vw;
     }
     .anime {
         padding: 2vw;
