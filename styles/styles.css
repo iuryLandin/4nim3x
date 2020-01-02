@@ -12,12 +12,19 @@ header {
     box-shadow: 0 0 8px black;
 }
 
+.sidebarOpen {
+    width: 200px !important;
+}
+.sidebarMargin {
+    margin-left: 200px !important;
+}
+
 .shareBtn {
     float: right;
 }
 
 .content {
-    padding: 3%;
+    padding: 3vw;
 }
 
 .shareDiv {
@@ -84,7 +91,7 @@ main {
 }
 
 #lista {
-    margin-left: 5%;
+    margin: auto 1vw;
 }
 
 .anime img {
@@ -185,16 +192,24 @@ main {
 }
 
 @media screen and (max-width: 450px) {
+    .sidebarOpen {
+        width: 55vw !important;
+    }
+    .sidebarMargin {
+        margin-left: 55vw !important;
+    }
+    .content {
+        padding: 1vw;
+    }
     .anime {
-        width: 100px;
         height: 200px !important;
-        padding: 10px;
+        padding: 2vw;
         display: inline-table;
         text-align: center;
         text-overflow: ellipsis;
     }
     .anime img {
-        width: 40vw !important;
+        width: 34vw !important;
     }
     legend {
         text-overflow: ellipsis;

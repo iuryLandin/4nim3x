@@ -7,12 +7,12 @@ function verMais(next) {
 }
 
 function openNav() {
-  document.getElementById("mySidebar").style.width = "250px"
-  document.querySelector("main").style.marginLeft = "250px"
+  document.getElementById("mySidebar").classList.add("sidebarOpen");
+  document.querySelector("main").classList.add("sidebarMargin");
 }
 function closeNav() {
-  document.getElementById("mySidebar").style.width = "0"
-  document.querySelector("main").style.marginLeft = "0"
+  document.getElementById("mySidebar").classList.remove("sidebarOpen");
+  document.querySelector("main").classList.remove("sidebarMargin");
 }
 function loading(status) {
   return (status) ? $("#loading").show() : $("#loading").hide()
