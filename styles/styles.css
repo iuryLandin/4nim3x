@@ -199,23 +199,22 @@ main {
         margin-left: 55vw !important;
     }
     .content {
-        padding: 1vw;
+        padding: .5vw;
     }
     .anime {
-        height: 200px !important;
-        padding: 2vw;
+        padding: 1.5vw;
         display: inline-table;
         text-align: center;
         text-overflow: ellipsis;
     }
     .anime img {
-        width: 34vw !important;
+        width: 35vw !important;
     }
     legend {
         text-overflow: ellipsis;
     }
     #lista {
         text-align: center;
-        margin-left: 0;
+        margin: 8vw 0;
     }
 }
