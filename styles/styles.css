@@ -199,10 +199,10 @@ main {
         margin-left: 55vw !important;
     }
     .content {
-        padding: .5vw;
+        padding: 0;
     }
     .anime {
-        padding: 1.5vw;
+        padding: 2vw;
         display: inline-table;
         text-align: center;
         text-overflow: ellipsis;
