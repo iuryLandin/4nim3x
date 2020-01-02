@@ -8,8 +8,8 @@ async function verAnime() {
     if (elem.length==0) elem = await getAnimeFromApi(id); //confirma que vai ser aberto o anime
     $("#titulo").html(elem[1]);
     $("#desc")  .html(`<div class="descricao">${elem[2]}</div>`);
-    $(".back")  .css('background-image', `url(${elem[3]})`);
-    $("#poster").attr('src', elem[3]);
+    $(".back")  .css('background-image', `url(${Endp.safeImg(elem[3])})`);
+    $("#poster").attr('src', Endp.safeImg(elem[3]));
     getEpisodios();
 }
 
