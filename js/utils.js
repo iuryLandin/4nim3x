@@ -10,9 +10,9 @@ function openNav() {
   document.getElementById("mySidebar").classList.add("sidebarOpen");
   setTimeout( () => {
     clearTimeout();
-    document.getElementById("mySidebar").classList.add("sidebarShadow");
     document.getElementById("mySidebar").style.transitionDuration = "0s";
-  }, 400)
+    document.getElementById("mySidebar").classList.add("sidebarShadow");
+  }, 450)
 }
 function closeNav() {
   

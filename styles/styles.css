@@ -18,11 +18,13 @@ header {
     box-shadow: 1px 1px 1px 100vmax rgba(0, 0, 0, 0.5);
 }
 
+
 .shareBtn {
     float: right;
 }
 
 .content {
+    clear: both;
     width: 94vw;
     margin: 3vw;
 }
@@ -85,10 +87,6 @@ header .logo {
 
 main {
     padding-top: 10vh;
-}
-
-.content {
-    clear: both;
 }
 
 main {
@@ -199,6 +197,7 @@ main {
 
 @media screen and (max-width: 450px) {
     .sidebarOpen {
+        display: inline-block;
         width: 60vw !important;
         box-shadow: none;
     }
@@ -212,8 +211,8 @@ main {
         margin-top: 5vw;
     }
     .anime {
-        width: 34vw;
-        height: 47.6vw;
+        width: 36vw;
+        height: 50.4vw;
         padding: 2vw;
         display: inline-table;
         text-align: center;
@@ -228,6 +227,6 @@ main {
     }
     #lista {
         text-align: center;
-        margin: 8vw 0;
+        margin: 3vw 0;
     }
 }
