@@ -199,7 +199,7 @@ main {
 @media screen and (max-width: 450px) {
     .sidebarOpen {
         width: 60vw !important;
-        box-shadow: 1px 1px 1px 40vw rgba(0, 0, 0, 0.5);
+        box-shadow: none;
     }
     .content {
         padding: 0;
