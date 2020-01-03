@@ -11,9 +11,12 @@ function openNav() {
   setTimeout( () => {
     clearTimeout();
     document.getElementById("mySidebar").classList.add("sidebarShadow");
-  }, 500)
+    document.getElementById("mySidebar").style.transitionDuration = "0s";
+  }, 400)
 }
 function closeNav() {
+  
+  document.getElementById("mySidebar").style.transitionDuration = ".5s";
   document.getElementById("mySidebar").classList.remove("sidebarShadow");
   document.getElementById("mySidebar").classList.remove("sidebarOpen");
 }
