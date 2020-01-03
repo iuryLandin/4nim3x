@@ -8,11 +8,9 @@ function verMais(next) {
 
 function openNav() {
   document.getElementById("mySidebar").classList.add("sidebarOpen");
-  document.querySelector("main").classList.add("sidebarMargin");
 }
 function closeNav() {
   document.getElementById("mySidebar").classList.remove("sidebarOpen");
-  document.querySelector("main").classList.remove("sidebarMargin");
 }
 function loading(status) {
   return (status) ? $("#loading").show() : $("#loading").hide()
@@ -72,4 +70,9 @@ function getAnimeById(idAnime) {
   let result = JSON.parse(localStorage.getItem("motorDeBusca"))
     .filter(row => row[0] == idAnime);
   return result;
+}
+
+function truncate(str) {
+  if (str.length > 15) str = str.substring(0, 14) + "..."
+  return str
 }

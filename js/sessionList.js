@@ -4,9 +4,9 @@ async function saveSession(next = 0) {
     $('#loading').show();
     $('#loading-msg').html("Estamos sincronizando os animes, aguarde um momento!<br>O tempo de espera pode variar de acordo com a velocidade da sua conexão<br>IMPORTANTE esse processo é essêncial para o funcionamento do app!<br>Não feche a página enquanto essa mensagem é exibida!")
     let res = await axios.get(Endp.getApi(Endp.anime + next), headAxios)
-    criaLista(res)
+    res = criaLista(res)
     localStorage.setItem("motorDeBusca", JSON.stringify(criaMotor()))
-    if (res.data.Next) saveSession(res.data.Next)
+    if (!!res.data.Next) saveSession(res.data.Next)
     else {
         $('#loading').hide();
         $('#loading-msg').html("Carregando");
@@ -16,8 +16,11 @@ async function saveSession(next = 0) {
 // cria um array com o conteudo da localStorage, caso não exista, cria um novo com a data de 15 dias no futuro
 function criaLista(res) {
     let array = JSON.parse(localStorage.getItem("animes")) || [getDate() + (15 * 1000 * 3600 * 24)] 
+    if (typeof res.data != "object")
+        res.data = JSON.parse(res.data.substring(302, res.data.length))
     array.push(res.data)
     localStorage.setItem("animes", JSON.stringify(array))
+    return res
 }
 
 // Cria uma lista mais compacta na LS, usada para pesquisas de anime

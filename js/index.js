@@ -70,7 +70,7 @@ function montarAnime(element, origem = "index.html") {
     <div class='anime'>
         <a href="javascript: animeEscolhido(${element[0]})">
             <img src="${Endp.safeImg((origem=="lancamentos.html")?element[4]:element[3])}"/></a>
-        <legend>${element[1]}</legend>
+        <legend>${truncate(element[1])}</legend>
     </div>`);
 }
 
