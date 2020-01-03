@@ -14,7 +14,7 @@ header {
 
 .sidebarOpen {
     width: 200px !important;
-    box-shadow: 1px 1px 100vmax 100vmax rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 1px 100vmax rgba(0, 0, 0, 0.5);
 }
 
 .shareBtn {
