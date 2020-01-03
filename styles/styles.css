@@ -6,6 +6,7 @@ body {
 header {
     position: fixed;
     width: 100%;
+    height: 25px;
     padding: 15px;
     color: white;
     background: #963694;
@@ -200,6 +201,10 @@ main {
     .sidebarOpen {
         width: 60vw !important;
         box-shadow: none;
+        border-right: solid 40vw solid;
+    }
+    .sidebarShadow {
+        box-shadow: 1px 1px 1px 40vw rgba(0,0,0,.5);
     }
     .content {
         padding: 0;

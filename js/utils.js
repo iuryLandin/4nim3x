@@ -8,8 +8,13 @@ function verMais(next) {
 
 function openNav() {
   document.getElementById("mySidebar").classList.add("sidebarOpen");
+  setTimeout( () => {
+    clearTimeout();
+    document.getElementById("mySidebar").classList.add("sidebarShadow");
+  }, 500)
 }
 function closeNav() {
+  document.getElementById("mySidebar").classList.remove("sidebarShadow");
   document.getElementById("mySidebar").classList.remove("sidebarOpen");
 }
 function loading(status) {
