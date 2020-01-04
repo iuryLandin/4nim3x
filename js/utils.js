@@ -15,7 +15,6 @@ function openNav() {
   }, 450)
 }
 function closeNav() {
-  
   document.getElementById("mySidebar").style.transitionDuration = ".5s";
   document.getElementById("mySidebar").classList.remove("sidebarShadow");
   document.getElementById("mySidebar").classList.remove("sidebarOpen");

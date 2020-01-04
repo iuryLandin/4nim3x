@@ -1,5 +1,5 @@
 const Endp = new EndPoints() //Instância do Objeto Endp, que contêm a função que devolve o link que é usado no axios.
-if (!!searchBar)searchBar.addEventListener("keydown", () => busca());  // escutador de entrada na caixa de pesquisa, executa a busca do anime digitado
+if (!!searchBar)searchBar.addEventListener("keyup", () => busca());  // escutador de entrada na caixa de pesquisa, executa a busca do anime digitado
 
 /*************************************************************************************
 /* Função que analisa como a página vai ser criada: openIndexPage()                  *
@@ -107,8 +107,19 @@ async function saveLanc() {
 
 // Realiza a pesquisa após um tempo que o usuário digitar a primeira letra na caixa de pesquisa:
 function busca() {
-    clearTimeout();
-    setTimeout(() => pesquisa(), 1000);
+    clearTimeout()
+    //Texto especial para limpar a lista de animes no celular
+    if (searchBar.value == "audit.clearAnimes") {
+        let escolha = window.confirm("Está ação irá apagar a lista de animes e irá criar uma nova, não feche o site durante o processo.");
+        if (escolha) {
+            localStorage.removeItem("animes");
+            saveSession();
+        }else {
+            searchBar.value = ""
+            busca()
+        }
+    }
+    else setTimeout(() => pesquisa(), 1000);
 }
 
 /*****************************************************************************************
