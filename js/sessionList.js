@@ -32,8 +32,7 @@ function criaMotor() {
 }
 
 // Carrega a lista de animes a partir dos dados salvos na LS
-function animeListFromSession(next = 1) {
-    loading(true)
+function animeListFromSession(next = 1) {   
     if (next == 1) //Como essa função é chama novamente em varias funções que adicionam animes na tela, mais
         document   //a frente, essa condicional limpa todos os animes que estão na lista caso o valor do next
             .querySelectorAll(".anime") //seja igual a 1, que é o primeiro.

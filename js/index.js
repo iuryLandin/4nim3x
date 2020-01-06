@@ -106,15 +106,19 @@ async function saveLanc() {
 
 
 // Realiza a pesquisa após um tempo que o usuário digitar a primeira letra na caixa de pesquisa:
-function busca() {
+async function busca() {
     clearTimeout()
     //Texto especial para limpar a lista de animes no celular
     if (searchBar.value == "audit.clearAnimes") {
         let escolha = window.confirm("Está ação irá apagar a lista de animes e irá criar uma nova, não feche o site durante o processo.");
         if (escolha) {
             searchBar.value = ""
+            searchBtn.innerHTML           = "search";
+            searchBar.style.width         = "0px"   ;
+            searchBar.style.outline       = "none"  ;
+            searchBar.style.paddingLeft   = "0px"   ;
             localStorage.removeItem("animes");
-            saveSession();
+            await saveSession();
         }else {
             searchBar.value = ""
             busca()
