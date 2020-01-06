@@ -112,12 +112,14 @@ function busca() {
     if (searchBar.value == "audit.clearAnimes") {
         let escolha = window.confirm("Está ação irá apagar a lista de animes e irá criar uma nova, não feche o site durante o processo.");
         if (escolha) {
+            searchBar.value = ""
             localStorage.removeItem("animes");
             saveSession();
         }else {
             searchBar.value = ""
             busca()
         }
+        mudaPesq()
     }
     else setTimeout(() => pesquisa(), 1000);
 }
@@ -155,11 +157,11 @@ function resultPesquisa(elements) {
 
 //Muda o estado da barra de pesquisa com base em um teste lógico que verifíca se ela tem conteudo
 //para ser pesquisado.
-function mudaPesq(html) {
+function mudaPesq() {
     let testLog = !searchBar.attributes[1].value;
     if (testLog) searchBar.focus();
     else animeListFromSession();
-    html.innerHTML                = testLog?"close" :"search";
+    searchBtn.innerHTML           = testLog?"close" :"search";
     searchBar.style.width         = testLog?"200px" :"0px"   ;
     searchBar.style.outline       = testLog?""      :"none"  ;
     searchBar.style.paddingLeft   = testLog?"7px"   :"0px"   ;
