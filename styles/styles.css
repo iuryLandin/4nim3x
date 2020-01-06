@@ -134,6 +134,7 @@ main {
 /* Modal (background) */
 
 .loading {
+    display: none;
     position: fixed;
     z-index: 999;
     width: 10vw;
