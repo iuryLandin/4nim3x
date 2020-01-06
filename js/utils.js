@@ -23,6 +23,10 @@ function loading(status) {
   return (status) ? $("#loading").show() : $("#loading").hide()
 }
 
+function loadingAnimes(status) {
+  return (status) ? $("#loading-animes").show() : $("#loading-animes").hide()
+}
+
 function playVid(src) {
   src = JSON.parse(src)
   $("#videoPlayer").attr("poster", sessionStorage.getItem("capa"))

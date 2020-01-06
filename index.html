@@ -36,17 +36,22 @@
 
 
 
-	<div id="loading" class="loading" style="left: 20%;">
+	<div id="loading" class="loading">
 		<div class="loading-content" align='center'>
-			<img src="img/loading.svg" width="50"/></div>
-			<div id="loading-msg">Carregando</div>
-		</div>
+		<img src="img/loading.svg" width="50"/></div>
+		<div class="loading-msg">Carregando</div>
+	</div>
+	<div id="loading-animes" class="loading-animes">
+		<div class="loading-content" align='center'>
+		<img src="img/loading.svg" width="50"/></div>
+		<div class="loading-msg">Estamos sincronizando os animes, aguarde um momento!<br>O tempo de espera pode variar de acordo com a velocidade da sua conexão<br>IMPORTANTE esse processo é essêncial para o funcionamento do app!<br>Não feche a página enquanto essa mensagem é exibida!</div>
+	</div>
 
 		<div class="app">
 			<div class="page" id="home">
 				<nav id="mySidebar" class="sidebar">
 					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-times"></i></a>
-					<ul>
+					<ul id="sidebarItens">
 						<a href="javascript: closeNav()">
 							<li>Home</li>
 						</a>

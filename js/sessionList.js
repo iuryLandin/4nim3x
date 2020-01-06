@@ -1,16 +1,12 @@
 // Função assíncrona que cria na localStorage ambos, a lista de animes "animes"
 // e uma lista de animes de forma mais compacta usada para buscas "motorDeBusca"
 async function saveSession(next = 0) {
-    $('#loading').show();
-    $('#loading-msg').html("Estamos sincronizando os animes, aguarde um momento!<br>O tempo de espera pode variar de acordo com a velocidade da sua conexão<br>IMPORTANTE esse processo é essêncial para o funcionamento do app!<br>Não feche a página enquanto essa mensagem é exibida!")
+    $('#loading-animes').show();
     let res = await axios.get(Endp.getApi(Endp.anime + next), headAxios)
     res = criaLista(res)
     localStorage.setItem("motorDeBusca", JSON.stringify(criaMotor()))
     if (!!res.data.Next) saveSession(res.data.Next)
-    else {
-        $('#loading').hide();
-        $('#loading-msg').html("Carregando");
-    }
+    else $('#loading-animes').hide();
 }
 
 // cria um array com o conteudo da localStorage, caso não exista, cria um novo com a data de 15 dias no futuro

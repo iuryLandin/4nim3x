@@ -136,15 +136,33 @@ main {
 .loading {
     position: fixed;
     z-index: 999;
-    left: 40%;
-    top: 40%;
+    width: 10vw;
+    height: 12vh;
+    left: 45vw;
+    top: 40vh;
     border-radius: 10px;
     padding: 5px;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 50vmax 100vmax rgba(0, 0, 0, 0.2);
 }
 
-#loading-msg {
+.loading-animes{
+    display: none;
+    position: fixed;
+    z-index: 999;
+    width: 40vw;
+    height: 30vh;
+    left: 30vw;
+    top: 35vh;
+    border-radius: 10px;
+    padding: 5px;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 50vmax 100vmax rgba(0, 0, 0, 0.2);
+}
+
+.loading-msg {
     text-align: center;
     color: white;
 }
@@ -196,7 +214,17 @@ main {
     border: 0.4vw solid #963694;
 }
 
-@media screen and (max-width: 450px) {
+@media (max-width: 450px) {
+    .loading{
+        left: 36vw;
+        width: 28vw;
+    }
+    .loading-animes{
+        width: 70vw;
+        height: 40vh;
+        left: 15vw;
+        top: 30vh;
+    }
     .sidebarOpen {
         display: inline-block;
         width: 60vw !important;
@@ -229,4 +257,61 @@ main {
     #lista {
         margin: 3vw 0;
     }
+    #back-btn {
+        color: white;
+        float: left;
+    }
+    #share-btn{
+        color: white;
+        float: right;
+        padding-right: 7vw;
+    }
+
+}
+
+@media (max-width: 750px) and (orientation: landscape) {
+    .loading{
+        top: 38vh;
+        height: 20vh;
+        left: 43vw;
+        width: 14vw;
+    }
+    .sidebarOpen {
+        display: inline-block;
+        width: 27vw !important;
+        box-shadow: none;
+    }
+    .sidebarShadow {
+        box-shadow: 1px 1px 40vw 100vw rgba(0,0,0,.5);
+    }
+    #sidebarItens {
+        transform: translateY(3vh);
+    }
+    .loading-animes {
+        top: 22.5vh;
+        height: 55vh;
+        left: 25vw;
+        width: 50vw;
+    }
+    .anime {
+        width: 20vw;
+        display: inline-table;
+        text-align: center;
+        text-overflow: ellipsis;
+        padding: 1vw;
+    }
+    #back-btn {
+        color: white;
+        float: left;
+    }
+    #share-btn{
+        color: white;
+        float: right;
+        padding-right: 5vw;
+    }
+
+    #lista {
+        text-align: center;
+    }
+
 }
