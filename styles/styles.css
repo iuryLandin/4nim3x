@@ -221,7 +221,7 @@ main {
     }
     .loading-animes{
         width: 70vw;
-        height: 40vh;
+        height: auto;
         left: 15vw;
         top: 30vh;
     }
@@ -269,10 +269,10 @@ main {
 
 }
 
-@media (max-width: 750px) and (orientation: landscape) {
+@media (max-width: 850px) and (orientation: landscape) {
     .loading{
         top: 38vh;
-        height: 20vh;
+        height: auto;
         left: 43vw;
         width: 14vw;
     }
@@ -289,7 +289,7 @@ main {
     }
     .loading-animes {
         top: 22.5vh;
-        height: 55vh;
+        height: auto;
         left: 25vw;
         width: 50vw;
     }
