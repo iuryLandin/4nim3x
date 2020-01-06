@@ -113,17 +113,12 @@ async function busca() {
         let escolha = confirm("Está ação irá apagar a lista de animes e irá criar uma nova, não feche o site durante o processo.");
         if (escolha) {
             searchBar.value = ""
-            searchBtn.innerHTML           = "search";
-            searchBar.style.width         = "0px"   ;
-            searchBar.style.outline       = "none"  ;
-            searchBar.style.paddingLeft   = "0px"   ;
             localStorage.removeItem("animes");
             await saveSession();
         }else {
             searchBar.value = ""
-            busca()
         }
-        mudaPesq()
+        busca()
     }
     else setTimeout(() => pesquisa(), 1000);
 }
@@ -146,7 +141,7 @@ function pesquisa() {
             .toLowerCase()                                              // 3
             .indexOf(searchBar.value                                    // 4
                 .toLowerCase()) != -1);                                 // 5
-    if (result.length > 500) animeListFromSession();                    // 6
+    if (result.length > 500 || !result.length) animeListFromSession();  // 6
     else resultPesquisa(result);                                        // 7
 }
 
