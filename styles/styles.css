@@ -116,7 +116,7 @@ main {
     background-attachment: fixed;
     background-size: cover;
     filter: blur(2px);
-    width: 92.5vw;
+    width: 95.5vw;
     height: 160px;
     float: left;
     position: absolute;
@@ -213,6 +213,15 @@ main {
     width: 25vw;
     border-radius: 50%;
     border: 0.4vw solid #963694;
+}
+#back-btn {
+    color: white;
+    float: left;
+}
+#share-btn{
+    color: white;
+    float: right;
+    margin-right: 3vw;
 }
 
 @media (max-width: 450px) {
