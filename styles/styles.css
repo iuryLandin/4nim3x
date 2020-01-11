@@ -138,12 +138,11 @@ main {
     position: fixed;
     z-index: 999;
     width: 10vw;
-    height: 12vh;
+    height: auto;
     left: 45vw;
     top: 40vh;
     border-radius: 10px;
-    padding: 5px;
-    overflow: auto;
+    padding: 1vh;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 1px 1px 50vmax 100vmax rgba(0, 0, 0, 0.2);
 }
@@ -153,16 +152,20 @@ main {
     position: fixed;
     z-index: 999;
     width: 40vw;
-    height: 30vh;
-    left: 30vw;
-    top: 35vh;
+    height: auto;
+    left: 29vw;
+    top: 30vh;
     border-radius: 10px;
-    padding: 5px;
-    overflow: auto;
+    padding: 1vh;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 1px 1px 50vmax 100vmax rgba(0, 0, 0, 0.2);
 }
 
+#ver-mais {
+    display: block;
+    text-align: center;
+    margin-top: 5vh;
+}
 .loading-msg {
     text-align: center;
     color: white;
@@ -180,11 +183,11 @@ main {
     background: #963694;
 }
 
-.epVisto {
+.episodio-visto {
     background: #692567 !important;
 }
 
-.epVisto::before {
+.episodio-visto::before {
     font-family: 'Font Awesome 5 Free';
     content: "\f06e";
     padding-right: 12px;
@@ -196,7 +199,7 @@ main {
     text-transform: uppercase;
 }
 
-#listaDeItens>a {
+.episodio-visto, .episodio, .opcoes {
     color: white;
 }
 
@@ -226,7 +229,7 @@ main {
 
 @media (max-width: 450px) {
     .loading{
-        left: 36vw;
+        left: 34vw;
         width: 28vw;
     }
     .loading-animes{

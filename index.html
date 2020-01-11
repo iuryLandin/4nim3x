@@ -25,8 +25,8 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="theme-color" content="#80257e">
 	<link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
-	<link rel="stylesheet" href="styles/menu.css">
-	<link rel="stylesheet" href="styles/styles.css">
+	<link rel="stylesheet" href="../styles/menu.css">
+	<link rel="stylesheet" href="../styles/styles.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 	<title>4nim3x</title>
@@ -38,12 +38,12 @@
 
 	<div id="loading" class="loading">
 		<div class="loading-content" align='center'>
-		<img src="img/loading.svg" width="50"/></div>
+		<img src="../img/loading.svg" width="50"/></div>
 		<div class="loading-msg">Carregando</div>
 	</div>
 	<div id="loading-animes" class="loading-animes">
 		<div class="loading-content" align='center'>
-		<img src="img/loading.svg" width="50"/></div>
+		<img src="../img/loading.svg" width="50"/></div>
 		<div class="loading-msg">Estamos sincronizando os animes, aguarde um momento!<br>O tempo de espera pode variar de acordo com a velocidade da sua conexão<br>IMPORTANTE esse processo é essencial para o funcionamento do app!<br>Não feche a página enquanto essa mensagem é exibida!</div>
 	</div>
 
@@ -74,7 +74,7 @@
 					<i class="fa fa-bars" onclick="openNav()"></i>
 					<span class='logo'>AnimeX</span>
 					<div id="search">
-						<input id="searchbar" barra="" placeholder="Ex: Noragami">
+						<input id="searchbar" barra="" placeholder="Digite o nome do anime">
 						<a type="submit" href="javascript:void(0)"
 							class="searchbtn"><i class="material-icons" id="searchbtn" onclick="mudaPesq()">search</i></a>
 					</div>
@@ -94,15 +94,14 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-		<script src="js/rotas.js"></script>
+		<script src="https://julczar.github.io/CzarK/index.js"></script>
 		<script src="js/swiped.js"></script>
-		<script src="js/animes.js"></script>
+		<script src="js/sidebar.js"></script>
+		<script src="js/endpoints.js"></script>
 		<script src="js/utils.js"></script>
-		<script src="js/sessionList.js"></script>
 		<script src="js/index.js"></script>
-		<script>
-			(() => openIndexPage())()
-		</script>
+		<script src="js/searchEngine.js"></script>
+		<script src="js/tempAdjusts.js"></script>
 </body>
 
 </html>

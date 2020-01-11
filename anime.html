@@ -37,10 +37,10 @@
 <body>
 
 	<div id="loading" class="loading">
-		<div class="loading-content">
-			<img src="img/loading.svg" width="50"/>
-        </div>
-		</div>
+		<div class="loading-content" align='center'>
+		<img src="img/loading.svg" width="50"/></div>
+		<div class="loading-msg">Carregando</div>
+	</div>
 
 
 		<div class="shareDiv">
@@ -73,9 +73,7 @@
                             </div>
 						
  						<p id='desc'>Descrição do Anime</p>
-						<ul class='lista' id="listaDeItens">
-
-						</ul>
+						<ul class='lista' id="lista-de-episodios"></ul>
 						<div id="disqus_thread"></div>
 					</div>
 				</main>
@@ -84,12 +82,11 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-		<script src="js/rotas.js"></script>
-		<script src="js/animes.js"></script>
-		<script src="js/index.js"></script>
-		<script>
-			(() => verAnime())()
-		</script>
+		<script src="https://julczar.github.io/CzarK/index.js"></script>
+		<script src="js/endpoints.js"></script>
+		<script src="js/searchEngine.js"></script>
+		<script src="js/anime.js"></script>
+		<script src="js/disqus.js"></script>
 </body>
 
 </html>

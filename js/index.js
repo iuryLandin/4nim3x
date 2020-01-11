@@ -1,168 +1,128 @@
-const Endp = new EndPoints() //Instância do Objeto Endp, que contêm a função que devolve o link que é usado no axios.
-if (!!searchBar)searchBar.addEventListener("keyup", () => busca());  // escutador de entrada na caixa de pesquisa, executa a busca do anime digitado
+const Endp = new EndPoints();
+(() => checkLocalAnimeList())()
 
-/*************************************************************************************
-/* Função que analisa como a página vai ser criada: openIndexPage()                  *
-/*                                                                                   *
-/*    - O primeiro "if" procura na localStorage a lista criada, caso nao exista,     *
-/*      a página vai ser criada pegando as informações direto da api.                *
-/*                                                                                   *
-/*    - No "else if" é analisado se a lista na localStorage já expirou analisando    *
-/*      a data atual com a data de expiração salva, caso tenha expirado, a           *
-/*      lista na local Storage é resetada.                                           *
-/*                                                                                   *
-/*    - E por fim entra no caso da lista ja estar na localStorage e nao ter vencido  *
-/*      ainda.                                                                       *
-/************************************************************************************/
-function openIndexPage(){
-    let dataExp = JSON.parse(localStorage.getItem("animes")) || null;
-    if (!dataExp) animeList();
-    else if (getDate() >= dataExp[0]) {
-        localStorage.removeItem("animes");
-        animeList();
+
+async function checkLocalAnimeList() {
+    // Recebe lista de animes da LocalStorage, caso existe
+    const animeList = get.Local("animeList") || null
+
+    // Série de checagens do estado da lista com base no retorno
+    if (!animeList) {
+        await createLocalAnimeList()
+    }else if (get.Date() > animeList.expireDate) {
+        remove.fromLocal("animeList")
+        await createLocalAnimeList()
     }
-    else animeListFromSession();
+
+    // Exibe a lista depois de conferir se a lista existe e ainda tem validade
+    showAnimeList()
 }
 
-/**************************************************************************************
-/* Função que busca dados para a criação da grade de animes na home: animeList()      *
-/*                                                                                    *
-/*    - Realizasse uma busca dos dados para a criação da grade de animes, processo é  *
-/*      realizado uma unica vez a cada 15 dias.                                       *
-/*                                                                                    *
-/*    - Em seguida os dados são salvos na localStorage para que o carregamento seja   *
-/*      mais rapido.                                                                  *
-/*************************************************************************************/
-function animeList() {
-    axios
-        .get(Endp.getApi(Endp.anime+0), headAxios)
-        .then(res => montarTabelaAnime(res.data))
-        .catch(err => console.warn(err));
-    saveSession();
+function showAnimeList (pos = 0) {
+    loading(true)
+    // Analiza se ja existem animes na tela e os remove se necessário
+    if (!pos) get.Queries(".anime").forEach(elem => elem.remove())
+
+    // Recebe da Local Storage os dados da página que será renderizada na tela
+    const page = get.Local("animeList").data[pos]
+
+    if (get.Id("ver-mais")) get.Id("ver-mais").remove()
+    // Percorre todos os itens que serão renderizados
+    for (const item of page.animes) {
+        // Cria uma div com a classe "anime" na variável "anime"
+        let anime = d.createElement("div")
+        anime.classList.add("anime")
+
+        // Insere os dados do anime na div recem criada
+        anime.insertAdjacentHTML("beforeEnd", `
+            <a href="anime.html?id=${item[0]}">
+                <img src="${Endp.safeImg(item[3])}"/>
+            </a>
+            <legend>${truncate(item[1], 15)}</legend>`)
+        
+            // Adiciona a div na tela
+        get.Id("lista").appendChild(anime)
+    }
+    loading(false)
+
+    // Cria um botão ver mais caso tenha mais animes para exibir na tela
+    if (!!page.Next) {
+        let verMais = d.createElement("a")
+        verMais.setAttribute("id", "ver-mais")
+        verMais.setAttribute("href", `javascript: showAnimeList('${page.Next/50}')`)
+        verMais.innerHTML = "CARREGAR MAIS"
+        get.Id("lista").appendChild(verMais)
+    }
+    loading(false)
 }
 
-/***************************************************************************************
-/* Recebe o resultado da busca por dados de animes e os repassa para a função que cria *
-/* a grade de animes: montarTabelaAnime(data)                                          *
-/*                                                                                     *
-/*    - Recebe o parametro "data", que contem um array com os dados dos animes         *
-/*                                                                                     *
-/*    - Chama a função que cria cada o item de cada anime e, após terminar, um botão   *
-/*      "ver Mais".                                                                    *
-/**************************************************************************************/
-function montarTabelaAnime(data) {
-    data.anime
-        .forEach(element => montarAnime(Object.values(element)));
-    if (data.Next) lista.append(verMais((data.Next/50)+1));
-    loading(false);
-}
+async function createLocalAnimeList(pos = 0) {
+    loadingAnimes(true)
 
-/***************************************************************************************
-/* Cria o item do anime na tela inicial: montarAnime()                                 *
-/*                                                                                     *
-/*    - Recebe o parametro "element", que contém os dados dos animes em forma de array.*                                                               *
-/*      recebe também o parametro "origem", que é usado para aplicar no botão "voltar" *
-/*                                                                                     *
-/*    - Aplica os dados num HTML pronto.                                               *
-/**************************************************************************************/
-function montarAnime(element, origem = "index.html") {
-    lista.append(`
-    <div class='anime'>
-        <a href="javascript: animeEscolhido(${element[0]})">
-            <img src="${Endp.safeImg((origem=="lancamentos.html")?element[4]:element[3])}"/></a>
-        <legend>${truncate(element[1])}</legend>
-    </div>`);
-}
-
-// Carrega a lista de lancamentos
-async function animeLanc() {
-    // recebe da localStorage a lista de lancamentos ou um item nulo
-    let lancamentos = JSON.parse(localStorage.getItem("animeLanc")) || null;
-
-    // analiza se o item anterior ja existe ou se expirou, cria um novo caso um seja verdadeiro
-    if (!lancamentos || getDate() > lancamentos[0]) lancamentos = await saveLanc();
-
-    // monta a lista na tela carregando os dados que foram salvos, ou ja existiam na localStorage
-    lancamentos[1].forEach(elem => montarAnime(Object.values(elem), "lancamentos.html"));
-    loading(false);
-}
-
-async function saveLanc() {
-    // cria uma variável que será usada pra salvar a lista de lançamentos na localStorage
-    // a lista terá uma duração de 3 horas.
-    let lancamentos = [getDate() + (3 * 1000 * 3600)];
-
-    // Pega a lista de lançamentos da API e salva na variável "lancamentos".
     await axios
-        .get(Endp.getApi(Endp.lanca), headAxios)
-        .then(res => lancamentos.push(res.data))
-        .catch(err => console.warn(err));
-    
-    // salva o conteudo da variável "lancamentos" na localStorage e retorna o valor da variável
-    // o retorno serve para atualizar a lista de lancamentos com os dados dos animes.
-    localStorage.setItem("animeLanc", JSON.stringify(lancamentos));
-    return lancamentos;
+        .get(Endp.getApi(Endp.anime+pos))
+        .then(res => {
+            // Recebe da localStorage a lista mais recente, caso nao exista
+            // Cria uma do zero
+            let animeList = get.Local("animeList") ||
+                            {"expireDate": get.Date() + (1000 * 3600 * 24 * 15), "data": []}
+
+            let data = res.data
+
+            // Corrige o problema da ultima página da Api retornar conteudo HTML
+            if(typeof data == "string") data = fixApiBug(res.data)
+            
+            // Reduz o tamanho da lista de animes salva na Local Storage
+            // Transformando-a em array
+            let animes = []
+            for (const item of data.anime) {
+                animes.push(Object.values(item))
+            }
+            let page = {"animes": animes, "Next": data.Next}
+
+            // Adiciona à lista de animes o retorno do axios "comprimido"
+            animeList.data.push(page)
+
+            // Salva na Local Storage a lista de Animes
+            set.Local("animeList", animeList)
+
+            // Aciona Recursividade caso exista mais itens para salvar
+            if (!!res.data.Next) createLocalAnimeList(data.Next)
+            else loadingAnimes(false)
+        })
+        .catch(err => console.warn(err))
+        .finally(createSearchEngine())
 }
 
+function createSearchEngine() {
+    // Recebe da Local Storage a lista de animes salva para criar o motor de busca
+    const animeList = get.Local("animeList") || null
 
-// Realiza a pesquisa após um tempo que o usuário digitar a primeira letra na caixa de pesquisa:
-async function busca() {
-    clearTimeout()
-    //Texto especial para limpar a lista de animes no celular
-    if (searchBar.value == "audit.clearAnimes") {
-        let escolha = confirm("Está ação irá apagar a lista de animes e irá criar uma nova, não feche o site durante o processo.");
-        if (escolha) {
-            searchBar.value = ""
-            localStorage.removeItem("animes");
-            await saveSession();
-        }else {
-            searchBar.value = ""
+    // Adicionei essa condicional por estarmos lidando com um ambiente assíncrono
+    // Houveram casos em que essa função spamava erros então blindei contra isso
+    if (animeList) {
+        // Array auxiliar usado para receber os valores
+        let auxArray = []
+
+        // Percorre todas as linhas de dados dentro do array salvo na localStorage
+        for (const row of animeList.data) {
+
+            //percorre cada anime dentro da linha
+            for (const item of row.animes) {
+
+                // Remove "keys" do objeto e adiciona o array que o método retorna isso
+                // Reduz o espaço usado  a lista e acelera a velocidade da pesquisa.
+                auxArray.push(item)
+            }
         }
-        busca()
+        
+        // Salva na localStorage o motor de buscas otimizado
+        set.Local("searchEngine", auxArray)
     }
-    else setTimeout(() => pesquisa(), 1000);
 }
 
-/*****************************************************************************************
-/* Realiza a leitura dos dados salvos no motor de busca da localStorage e os compara     *
-/* com a entrada do usuário na caixa de pesquisa                                         *
-/*                                                                                       *
-/* 1 - Aqui é recebido da localStorage o Motor de busca salvo.                           *
-/* 2 - Filtra os elementos do array, se "true", inclui o elemento, se "false", exclui.   *
-/* 3 - Converte todas as letras pra minúsculo, ampliando o acerto da busca pelos animes. *
-/* 4 - Analisa o String como se fosse um array de "char", ampliando mais ainda o acerto. *
-/* 5 - IndexOf devolve -1 caso não encontre o item dentro da String                      *
-/* 6 - Testa se a busca resultou em menos de 500 resultados antes de exibir na tela.     *
-/* 7 - Exibe o resultado na tela caso o filtro retorne menos de 500 valores.             *
-/****************************************************************************************/
-function pesquisa() {
-    let result = JSON.parse(localStorage.getItem("motorDeBusca"))       // 1
-        .filter(row => row[1]                                           // 2
-            .toLowerCase()                                              // 3
-            .indexOf(searchBar.value                                    // 4
-                .toLowerCase()) != -1);                                 // 5
-    if (result.length > 500 || !result.length) animeListFromSession();  // 6
-    else resultPesquisa(result);                                        // 7
-}
-
-//Cria na Tela a grade de resultados da pesquisa
-function resultPesquisa(elements) {
-    d.querySelectorAll(".anime")  //remove da tela todos os animes que estão sendo exibidos
-        .forEach(elem => elem.remove());
-    if (d.getElementById("verMais")) //remove o botão "verMais", se existir
-        d.getElementById("verMais").parentElement.remove();
-    elements.forEach(element => montarAnime(element)); //cria de fato os animes que serão exibidos
-}
-
-//Muda o estado da barra de pesquisa com base em um teste lógico que verifíca se ela tem conteudo
-//para ser pesquisado.
-function mudaPesq() {
-    let testLog = !searchBar.attributes[1].value;
-    if (testLog) searchBar.focus();
-    else animeListFromSession();
-    searchBtn.innerHTML           = testLog?"close" :"search";
-    searchBar.style.width         = testLog?"200px" :"0px"   ;
-    searchBar.style.outline       = testLog?""      :"none"  ;
-    searchBar.style.paddingLeft   = testLog?"7px"   :"0px"   ;
-    searchBar.attributes[1].value = testLog?"true"  :""      ;
+function fixApiBug(data) {
+    let resFixed = data.split("</b><br />")
+    resFixed = JSON.parse(resFixed[resFixed.length-1])
+    return resFixed
 }
