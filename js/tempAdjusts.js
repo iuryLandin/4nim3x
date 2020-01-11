@@ -35,7 +35,6 @@ async function updateOldData(){
     remove.fromLocal("motorDeBusca")
     set.Local("updated", "true")
     console.log("app atualizado com sucesso")
-    alert("seu app foi atualizado e está mais rápido! =D")
 }
 
 function marcarEp(episodeId) {
