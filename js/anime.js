@@ -122,7 +122,9 @@ async function setPlaylist(episodeId) {
         if (videos[i].Id == episodeId) {
             set.Session("playlist", {
                 previous: videos[i+1],
-                next: videos[i-1]
+                next:     videos[i-1],
+                "next+1": videos[i-2],
+                "next+2": videos[i-3]
             })
         }
     }
