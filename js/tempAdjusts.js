@@ -4,13 +4,7 @@ const oldSearchEngine   = get.Local("searchEngine")
 const atualizado        = get.Local("updated");
 let id = 0;
 
-(()=> checkUpdate())()
-function checkUpdate() {
-    if (!atualizado) {
-        console.log("limpando dados antigos...")
-        updateOldData()
-    }else console.log("O app ja estava atualizado! =D")
-}
+(()=> updateOldData())()
 
 async function updateOldData(){
     for (const anime of oldSearchEngine) {
@@ -34,7 +28,6 @@ async function updateOldData(){
     remove.fromLocal("animeLanc")
     remove.fromLocal("motorDeBusca")
     set.Local("updated", "true")
-    console.log("app atualizado com sucesso")
 }
 
 function marcarEp(episodeId) {
