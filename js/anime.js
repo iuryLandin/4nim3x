@@ -1,5 +1,6 @@
 const Endp = new EndPoints();
 const id = location.search.split("=")[1];
+set.Session("currentAnime", id);
 var title, desc, img;
 (() => openAnimeDetails())()
 
@@ -111,21 +112,4 @@ function getStyle2Ep(episodeId) {
     // retorno padrão caso tudo falhe
     // nunca vai entrar, mas tá ai se precisar....
     return "episodio"
-}
-
-async function setPlaylist(episodeId) {
-    //pega da session a lista de episodios salva em "setEpsLista()"
-    let videos = get.Session(id)
-
-    //procura a posição do anime atual pra salvar o objeto anterior e o proximo na sessionStorage
-    for (let i = 0; i < videos.length; i++){
-        if (videos[i].Id == episodeId) {
-            set.Session("playlist", {
-                previous: videos[i+1],
-                next:     videos[i-1],
-                "next+1": videos[i-2],
-                "next+2": videos[i-3]
-            })
-        }
-    }
 }
