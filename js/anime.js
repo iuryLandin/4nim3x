@@ -1,5 +1,6 @@
 const Endp = new EndPoints();
 const id = location.search.split("=")[1];
+let title, desc, img;
 (() => openAnimeDetails())()
 
 async function openAnimeDetails() {
@@ -16,11 +17,15 @@ async function openAnimeDetails() {
 }
 
 function setAnimeDetails(data) {
-    let safeImg = Endp.safeImg(data[3])
-    $("#titulo").html(data[1]);
-    $("#desc")  .html(`<div class="descricao">${data[2]}</div>`);
+    // Salva os dados dos anime para a função de compartilhar
+    [title, desc, img] = [data[1], data[2], data[3]]
+
+    // Carrega os dados na página
+    let safeImg = Endp.safeImg(img)
+    $("#titulo").html(title);
+    $("#desc")  .html(`<div class="descricao">${desc}</div>`);
     $(".back")  .css('background-image', `url(${safeImg})`);
-    $("#poster").attr('src', Endp.safeImg(data[3]));
+    $("#poster").attr('src', safeImg);
 }
 
 async function getEpisodes() {

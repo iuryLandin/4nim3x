@@ -1,21 +1,32 @@
 function loading(status) {
-  const loading = $("#loading")
-  return (status) ? loading.show() : loading.hide()
+    const loading = $("#loading")
+    return (status) ? loading.show() : loading.hide()
 }
 
 function loadingAnimes(status) {
-  const loadingAnimes = $("#loading-animes")
-  return (status) ? loadingAnimes.show() : loadingAnimes.hide()
+    const loadingAnimes = $("#loading-animes")
+    return (status) ? loadingAnimes.show() : loadingAnimes.hide()
 }
 function compartilhar() {
-  $('.shareDiv').slideToggle();
+    $('.shareDiv')
+        .slideToggle();
 }
 
 function share(rede) {
-  let animeId = location.search.split('id=')[1];
-  if (rede == 'fb') url = 'https://www.facebook.com/sharer/sharer.php?u=https://animexonline.herokuapp.com/share.html?id=' + animeId;
-  if (rede == 'wpp') url = 'https://api.whatsapp.com/send?text=Ei,%20assiste%20esse%20anime...%20%0A%20Clica%20no%20link%20%0A%20%0A%20https://animexonline.herokuapp.com/share.html?id=' + animeId
+    // remove os espaços do titulo e da descrição
+    title = title.replace(/ /g, "§")
+    desc = desc.replace(/ /g, "§")
 
-  $('.shareDiv').slideToggle();
-  window.open(url);
+    // remove o link inseguro da imagem
+    img = img.split("http://png.techrevolution.com.br/")[1]
+
+    const link = `${location.origin}/share.html?id=${id}=${title}=${desc}=${img}`
+    const msg = 'Ei, assiste esse anime... Clica no link: \n'
+    
+    // detecta a rede social escolhida para compartilhar o anime
+    if (rede == 'fb' ) url = `https://www.facebook.com/sharer/sharer.php?u=${link}`
+    if (rede == 'wpp') url = `https://api.whatsapp.com/send?text=${msg + link}`
+
+    $('.shareDiv').slideToggle();
+    window.open(url);
 }

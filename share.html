@@ -30,60 +30,24 @@
 	<title>4nim3x</title>
 </head>
 
- 
 <body>
+	<script src="https://julczar.github.io/CzarK/index.js"></script>
+	<script>
+		// recebe os dados do anime que vai ser carregado da URL
+		let data = location.search.split("=")
 
-	<div id="loading" class="loading">
-		<div class="loading-content" align='center'>
-		<img src="img/loading.svg" width="50"/></div>
-		<div class="loading-msg">Carregando</div>
-	</div>
+		// remove o "id?" do array
+		data.splice(0, 1)
 
-		<div class="app">
-			<div class="page" id="anime">
-				<header>
-					<a style="color: white" href="index.html"  ><i class="fa fa-chevron-left"></i></a>
-					<span class='logo' id="titulo">AnimeX</span>
-				</header>
+		// adiciona novamente os espaços nos textos e o link inseguro da imagem
+		data[1] = decodeURIComponent(data[1]).replace(/§/g, " ")
+		data[2] = decodeURIComponent(data[2]).replace(/§/g, " ")
+		data[3] = `http://png.techrevolution.com.br/${data[3]}`
 
-				<main>
-					<div class="content">
-						<center> <img id="poster" src='' width="100"> </center>
-							<p id='desc'>Descrição do Anime</p>
-							<ul class='lista' id="epsLista">
-
-							</ul>
-							<div id="disqus_thread"></div>
-					</div>
-				</main>
-			</div>
-		</div>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-		<script src="js/endpoints.js"></script>
-		<script src="js/animes.js"></script>
-		<script src="js/utils.js"></script>
-		<script src="js/sessionList.js"></script>
-		<script src="js/index.js"></script>
-		<script>(() => verAnimeCompartilhado())()</script>
-
-        <script>
-        
-        // Descomente para configurar o Disqus
-        var disqus_config = function () {
-            this.page.url = window.location.href + '?id=' + sessionStorage.getItem("id");  // pega a url atual da pagina
-            this.page.identifier = sessionStorage.getItem("id"); // pega o ID do anime
-        };
-
-        function disqusChat() {
-            var s = d.createElement('script');
-            s.src = 'https://e-baka-1.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        }  
-
-    </script>
+		// Salva os dados na sessão 
+		set.Session("sharedAnime", [data])
+		location = `anime.html?id=${data[0]}`
+	</script>
 </body>
 
 </html>

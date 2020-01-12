@@ -105,23 +105,33 @@ function getAnimeById(idAnime) {
     // Recebe da localStorage o motor de busca que será usado para buscar o anime
     let searchEngine = get.Local("searchEngine")
 
+    let result = []
     // Procura o anime com o id solicitado
-    let result = searchEngine
-        .filter(row => row[0] == idAnime)
+    if (searchEngine) {
+        result = searchEngine
+            .filter(row => row[0] == idAnime)
+    }
 
     // Animes recentes as vezes não são adicionados a lista, então caso o resultado
     // anterior esteja vazio, é realizada uma busca na lista de lançamentos
     if (!result.length) {
         // Recebe a lista de Lançamentos da localStorage
-        searchEngine = get.Local("releaseList").data
+        searchEngine = get.Local("releaseList")
 
         // Procura o anime com o id solicitado
-        result = searchEngine
-            .filter(row => row[0] == idAnime)
-        
-        //remove o "status" do resultado, que indica se o anime está saindo ou não
-        result[0].splice(3, 1)
+        if (searchEngine) {
+            result = searchEngine
+                .data
+                .filter(row => row[0] == idAnime)
+
+            //remove o "status" do resultado, que indica se o anime está saindo ou não
+            result[0].splice(3, 1)
+        }
     }
+
+    // Ultima esperança, usada para animes que estão sendo compartilhados pra alguém que nunca abriu o app
+    if (!result.length) result = get.Session("sharedAnime")
+    
     return result
 }
 
