@@ -1,6 +1,6 @@
 const Endp = new EndPoints();
 const id = location.search.split("=")[1];
-let title, desc, img;
+var title, desc, img;
 (() => openAnimeDetails())()
 
 async function openAnimeDetails() {
