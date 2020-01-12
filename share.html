@@ -41,6 +41,7 @@
 
 		// adiciona novamente os espaços nos textos e o link inseguro da imagem
 		data[1] = decodeURIComponent(data[1]).replace(/§/g, " ")
+		data[2] = decodeURIComponent(data[2]).replace(/£/g, `${String.fromCharCode(39)}`)
 		data[2] = decodeURIComponent(data[2]).replace(/§/g, " ")
 		data[3] = `http://png.techrevolution.com.br/${data[3]}`
 

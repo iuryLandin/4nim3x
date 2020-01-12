@@ -14,11 +14,14 @@ function compartilhar() {
 
 function share(rede) {
     // remove os espaços do titulo e da descrição
-    title = title.replace(/ /g, "§")
-    desc = desc.replace(/ /g, "§")
+    title = title.replace(/ /g, '§')
+    desc = desc.replace(/ /g, '§')
+    desc = desc.replace(/“/g, '£')
+    desc = desc.replace(/'/g, '£')
+    desc = desc.replace(/"/g, '£')
 
     // remove o link inseguro da imagem
-    img = img.split("http://png.techrevolution.com.br/")[1]
+    img = img.split('http://png.techrevolution.com.br/')[1]
 
     const link = `${location.origin}/share.html?id=${id}=${title}=${desc}=${img}`
     const msg = 'Ei, assiste esse anime... Clica no link: \n'
