@@ -46,6 +46,7 @@ function share(rede) {
     else if (rede == 'copy') {
         get.Id("url-2-copy").select()
         document.execCommand('copy')
+        setTimeout(() => alert('Texto copiado para a area de transferência'), 100)
     }
     
     setTimeout(() => $('.shareDiv').slideToggle(), 250)
