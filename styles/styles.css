@@ -140,6 +140,7 @@ main {
 }
 
 .descricao {
+    padding-top: 3vmin;
     text-align: justify;
 }
 /* Modal (background) */
