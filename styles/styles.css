@@ -41,6 +41,17 @@ header {
     display: none;
 }
 
+.url-2-copy {
+    transform: translateY(-1vh) translateX(1.2vw);
+    background-color: #e2e2e2;
+    outline: none;
+    border: none;
+    padding: 1.5vmin;
+    border-radius: 2.5vmin;
+}
+.jq-toast-wrap {
+    z-index: 9999;
+}
 .shareDiv>.social {
     display: inline-table;
     padding: 12px;
@@ -228,6 +239,9 @@ main {
 }
 
 @media (max-width: 450px) {
+    .url-2-copy {
+        width: 45vw;
+    }
     .loading{
         left: 34vw;
         width: 28vw;

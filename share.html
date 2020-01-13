@@ -39,7 +39,8 @@
 		// remove o "id?" do array
 		data.splice(0, 1)
 
-		// adiciona novamente os espaços nos textos e o link inseguro da imagem
+		// adiciona novamente os espaços e as aspas nos textos e o link da imagem
+		data[1] = decodeURIComponent(data[1]).replace(/£/g, String.fromCharCode(39))
 		data[1] = decodeURIComponent(data[1]).replace(/§/g, " ")
 		data[2] = decodeURIComponent(data[2]).replace(/£/g, String.fromCharCode(39))
 		data[2] = decodeURIComponent(data[2]).replace(/§/g, " ")

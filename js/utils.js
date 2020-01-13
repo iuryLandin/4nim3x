@@ -8,6 +8,17 @@ function loadingAnimes(status) {
     return (status) ? loadingAnimes.show() : loadingAnimes.hide()
 }
 function compartilhar() {
+    // remove os espaços do titulo e da descrição
+    title = title.replace(/ /g, '§')
+    title = title.replace(/“/g, '£')
+    title = title.replace(/'/g, '£')
+    title = title.replace(/"/g, '£')
+    desc = desc.replace(/ /g, '§')
+    desc = desc.replace(/“/g, '£')
+    desc = desc.replace(/'/g, '£')
+    desc = desc.replace(/"/g, '£')
+    const link = `${location.origin}/share.html?id=${id}=${title}=${desc}=${img}`
+    get.Id("url-2-copy").value = link
     $('.shareDiv')
         .slideToggle();
 }
@@ -15,6 +26,9 @@ function compartilhar() {
 function share(rede) {
     // remove os espaços do titulo e da descrição
     title = title.replace(/ /g, '§')
+    title = title.replace(/“/g, '£')
+    title = title.replace(/'/g, '£')
+    title = title.replace(/"/g, '£')
     desc = desc.replace(/ /g, '§')
     desc = desc.replace(/“/g, '£')
     desc = desc.replace(/'/g, '£')
@@ -27,11 +41,16 @@ function share(rede) {
     const msg = 'Ei, assiste esse anime... Clica no link: \n'
     
     // detecta a rede social escolhida para compartilhar o anime
-    if (rede == 'fb' ) url = `https://www.facebook.com/sharer/sharer.php?u=${link}`
-    if (rede == 'wpp') url = `https://api.whatsapp.com/send?text=${msg + link}`
-
-    $('.shareDiv').slideToggle();
-    window.open(url);
+    if (rede == 'fb'  ) url = `https://www.facebook.com/sharer/sharer.php?u=${link}`
+    else if (rede == 'wpp' ) url = `https://api.whatsapp.com/send?text=${msg + link}`
+    else if (rede == 'copy') {
+        get.Id("url-2-copy").select()
+        document.execCommand('copy')
+    }
+    
+    setTimeout(() => $('.shareDiv').slideToggle(), 250)
+    if (rede != 'copy') window.open(url);
+    // else setTimeout(alert('Texto copiado para a area de transferência'), 250)
 }
 
 // Quando for implementar a playlist, lembra de colocar uma chamada pra esse função passando
