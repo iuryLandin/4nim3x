@@ -3,10 +3,6 @@ function loading(status) {
     return (status) ? loading.show() : loading.hide()
 }
 
-function loadingAnimes(status) {
-    const loadingAnimes = $("#loading-animes")
-    return (status) ? loadingAnimes.show() : loadingAnimes.hide()
-}
 function compartilhar() {
     // remove os espaços do titulo e da descrição
     title = title.replace(/ /g, '§')

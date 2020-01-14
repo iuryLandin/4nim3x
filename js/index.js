@@ -1,19 +1,15 @@
 const Endp = new EndPoints();
 (() => checkLocalAnimeList())()
-set.Local('appVersion', '1.0.0')
+set.Local('appVersion', '1.0.1')
 
 
 async function checkLocalAnimeList() {
     // Recebe lista de animes da LocalStorage, caso existe
-    const animeList = get.Local("animeList") || null
+    const animeList = get.Local("animeList")
 
     // Série de checagens do estado da lista com base no retorno
-    if (!animeList) {
-        await createLocalAnimeList()
-    }else if (get.Date() > animeList.expireDate) {
-        remove.fromLocal("animeList")
-        await createLocalAnimeList()
-    }
+    if (!animeList) await getAnimeListFromApi()
+    else chechListStatus()
 
     // Exibe a lista depois de conferir se a lista existe e ainda tem validade
     showAnimeList()
@@ -57,44 +53,70 @@ function showAnimeList (pos = 0) {
     loading(false)
 }
 
-async function createLocalAnimeList(pos = 0) {
-    loadingAnimes(true)
+async function chechListStatus() {
+    const animeList = get.Local("animeList").data
+    // Recebe o tamanho do array salvo na local Storage
+    const i = animeList.length
 
+    //Recebe a ultima pagina página salva na local Storage
+    const localLastPage = animeList[i-1]
+
+    // Recebe o "next" necessário para obter a ultima lista salva na local Storage da API
+    const nextOfLP = animeList[i-2].Next
+
+    // Recebe da session a página salva, caso exista
+    let lastPageFromApi = get.Session(nextOfLP)
+    if (!lastPageFromApi) {
+        // Recebe da api a última página salva na session, para comparação
+        lastPageFromApi = await axios.get(Endp.getApi(Endp.anime+nextOfLP))
+        lastPageFromApi = lastPageFromApi.data
+        if (typeof lastPageFromApi == "string") lastPageFromApi = fixApiBug(lastPageFromApi)
+
+        // Salva na sessão o resultado do axios para evitar sobrecarga na api
+        set.Session(nextOfLP, lastPageFromApi)
+    }
+
+    // Analiza se ainda existem itens a serem adicionados a lista de animes
+    if (lastPageFromApi.Next || lastPageFromApi.anime.length > localLastPage.animes.length) {
+        createLocalAnimeList(lastPageFromApi, nextOfLP)
+    }
+}
+
+async function getAnimeListFromApi(pos = 0) {
     await axios
         .get(Endp.getApi(Endp.anime+pos))
-        .then(res => {
-            // Recebe da localStorage a lista mais recente, caso nao exista
-            // Cria uma do zero
-            let animeList = get.Local("animeList") ||
-                            {"expireDate": get.Date() + (1000 * 3600 * 24 * 15), "data": []}
-
-            let data = res.data
-
-            // Corrige o problema da ultima página da Api retornar conteudo HTML
-            if(typeof data == "string") data = fixApiBug(res.data)
-            
-            // Reduz o tamanho da lista de animes salva na Local Storage
-            // Transformando-a em array
-            let animes = []
-            for (const item of data.anime) {
-                animes.push(Object.values(item))
-            }
-            let page = {"animes": animes, "Next": data.Next}
-
-            // Adiciona à lista de animes o retorno do axios "comprimido"
-            animeList.data.push(page)
-
-            // Salva na Local Storage a lista de Animes
-            set.Local("animeList", animeList)
-
-            // Aciona Recursividade caso exista mais itens para salvar
-            if (!!res.data.Next) createLocalAnimeList(data.Next)
-            else loadingAnimes(false)
-
-            createSearchEngine()
-        })
+        .then(res => createLocalAnimeList(res.data, pos))
         .catch(err => console.warn(err))
         .finally(createSearchEngine())
+}
+
+function createLocalAnimeList(data, pos) {
+    // Recebe da localStorage a lista mais recente, caso nao exista
+    // Cria uma do zero
+    let animeList = get.Local("animeList") ||
+                    {createdDate: get.Date(), data: []}
+
+    // Corrige o problema da ultima página da Api retornar conteudo HTML
+    if(typeof data == "string") data = fixApiBug(data)
+    
+    // Reduz o tamanho da lista de animes salva na Local Storage
+    // Transformando-a em array
+    let animes = []
+    for (const item of data.anime) {
+        animes.push(Object.values(item))
+    }
+    let page = {"animes": animes, "Next": data.Next}
+
+    // Adiciona à lista de animes o retorno do axios "comprimido"
+    animeList.data[pos/50] = page
+
+    // Salva na Local Storage a lista de Animes
+    set.Local("animeList", animeList)
+
+    // Aciona Recursividade caso exista mais itens para salvar
+    if (!!data.Next) getAnimeListFromApi(data.Next)
+
+    createSearchEngine()
 }
 
 function createSearchEngine() {
