@@ -89,6 +89,8 @@ async function createLocalAnimeList(pos = 0) {
             // Aciona Recursividade caso exista mais itens para salvar
             if (!!res.data.Next) createLocalAnimeList(data.Next)
             else loadingAnimes(false)
+
+            createSearchEngine()
         })
         .catch(err => console.warn(err))
         .finally(createSearchEngine())
@@ -122,7 +124,11 @@ function createSearchEngine() {
 }
 
 function fixApiBug(data) {
-    let resFixed = data.split("</b><br />")
-    resFixed = JSON.parse(resFixed[resFixed.length-1])
+    let resFixed = data
+        .split("</b><br />")
+
+    let arrLength = resFixed.length - 1
+    resFixed = JSON.parse(resFixed[arrLength])
+
     return resFixed
 }
