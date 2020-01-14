@@ -80,6 +80,8 @@ async function chechListStatus() {
     if (lastPageFromApi.Next || lastPageFromApi.anime.length > localLastPage.animes.length) {
         createLocalAnimeList(lastPageFromApi, nextOfLP)
     }
+    
+    createSearchEngine()
 }
 
 async function getAnimeListFromApi(pos = 0) {
