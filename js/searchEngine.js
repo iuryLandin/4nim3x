@@ -1,6 +1,6 @@
 const searchBar = get.Id('searchbar')
 // Dispara o evento de busca toda vez que é digitado algo na barra de pesquisa
-if (!!searchBar) searchBar.addEventListener('keyup', () => busca());
+if (!!searchBar) searchBar.addEventListener('keyup', busca);
 
 // Limpa a caixa de busca toda vez que o botão é clicado para abrir ou fechar a barra de pesquisa
 $('#searchbtn').click(() => $('#searchbar').val(''))
@@ -16,7 +16,12 @@ async function busca() {
   if (audit) audit()
 
   // Pesquisa propriamente dita
-  else setTimeout(() => pesquisa(), 1000);
+  else {
+    //Salva na sessão a última busca realizada pelo usuário
+    set.Session("lastSearch", searchBar.value)
+    
+    setTimeout(pesquisa, 1000)
+  }
 }
 
 /*****************************************************************************************
@@ -71,13 +76,24 @@ function resultPesquisa(elements) {
 function mudaPesq() {
   let testLog = !searchBar.attributes[1].value;
   if (testLog) searchBar.focus();
-  else showAnimeList();
+  else {
+    remove.fromSession("lastSearch")
+    showAnimeList();
+  }
   get.Id('searchbtn')
-    .innerHTML        = testLog?'close' :'search';
-  searchBar.style.width     = testLog?'200px' :'0px'  ;
-  searchBar.style.outline    = testLog?''    :'none'  ;
-  searchBar.style.paddingLeft  = testLog?'7px'  :'0px'  ;
-  searchBar.attributes[1].value = testLog?'true'  :''    ;
+    .innerHTML    = testLog?'close' :'search';
+  searchBar
+    .style
+    .width        = testLog?'200px' :'0px'  ;
+  searchBar
+    .style
+    .outline      = testLog?''      :'none'  ;
+  searchBar
+    .style
+    .paddingLeft  = testLog?'7px'   :'0px'  ;
+  searchBar
+    .attributes[1]
+    .value        = testLog?'true'  :''    ;
 }
 /***************************************************************************************
 /* Cria o item do anime na tela inicial: mountResult()                 *

@@ -11,8 +11,18 @@ async function checkLocalAnimeList() {
     if (!animeList) await getAnimeListFromApi()
     else chechListStatus()
 
-    // Exibe a lista depois de conferir se a lista existe e ainda tem validade
-    showAnimeList()
+    // Verifica se alguma busca foi feita pelo usuário anteriormente
+    let lastSearch = get
+        .Session("lastSearch")
+    if(lastSearch) {
+        // Refaz a busca para o usuário ter a sensação de continuidade
+        mudaPesq()
+        searchBar.value = lastSearch
+        pesquisa()
+    }else {
+        // Exibe a lista depois de conferir se a lista existe e ainda tem validade
+        showAnimeList()
+    }
 }
 
 function showAnimeList (pos = 0) {
