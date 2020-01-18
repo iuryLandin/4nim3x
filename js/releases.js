@@ -1,9 +1,10 @@
 const Endp = new EndPoints();
-(() => checkLocalReleaseList())()
+(checkLocalReleaseList)()
 
 async function checkLocalReleaseList() {
     // Recebe lista de animes da LocalStorage, caso existe
-    const releaseList = get.Local("releaseList") || null
+    const releaseList = get
+        .Local("releaseList")
 
     // Série de checagens do estado da lista com base no retorno
     if (!releaseList) {
@@ -62,5 +63,5 @@ async function createLocalReleaseList() {
             set.Local("releaseList", releaseList)
             loading(false)
         })
-        .catch(err => console.warn(err))
+        .catch(console.warn)
 }

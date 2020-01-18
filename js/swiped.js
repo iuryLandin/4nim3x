@@ -1,5 +1,5 @@
-d.addEventListener('swiped-right', () => openNav()); // escutador do evento de swipe para a direita,  abre  o menu
-d.addEventListener('swiped-left', () => closeNav()); // escutador do evento de swipe para a esquerda, fecha o menu
+d.addEventListener('swiped-right', openNav); // escutador do evento de swipe para a direita,  abre  o menu
+d.addEventListener('swiped-left', closeNav); // escutador do evento de swipe para a esquerda, fecha o menu
 
 /*!
  * swiped-events.js - v1.0.9

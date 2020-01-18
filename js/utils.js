@@ -41,11 +41,11 @@ function share(rede) {
     else if (rede == 'wpp' ) url = `https://api.whatsapp.com/send?text=${msg + link}`
     else if (rede == 'copy') {
         get.Id("url-2-copy").select()
-        document.execCommand('copy')
+        d.execCommand('copy')
         setTimeout(() => alert('Texto copiado para a area de transferência'), 100)
     }
     
-    setTimeout(() => $('.shareDiv').slideToggle(), 250)
+    setTimeout($('.shareDiv').slideToggle, 250)
     if (rede != 'copy') window.open(url);
     // else setTimeout(alert('Texto copiado para a area de transferência'), 250)
 }

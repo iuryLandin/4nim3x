@@ -1,5 +1,5 @@
 const Endp = new EndPoints();
-(() => checkLocalAnimeList())()
+(checkLocalAnimeList)()
 set.Local('appVersion', '1.0.1')
 
 
@@ -100,7 +100,7 @@ async function getAnimeListFromApi(pos = 0) {
     await axios
         .get(Endp.getApi(Endp.anime+pos))
         .then(res => createLocalAnimeList(res.data, pos))
-        .catch(err => console.warn(err))
+        .catch(console.warn)
         .finally(createSearchEngine())
 }
 
