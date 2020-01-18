@@ -160,23 +160,33 @@ let devFunctions = {
   },
   listAllAnimes() {
     if(confirm("Você tem certeza?")) {
-        for (const item of get.Local('searchEngine')) {
-          setTimeout(() => {
-            // Cria uma div com a classe "anime" na variável "anime"
-            let anime = d.createElement("div")
-            anime.classList.add("anime")
-        
-            // Insere os dados do anime na div recem criada
-            anime.insertAdjacentHTML("beforeEnd", `
-              <a href="anime.html?id=${item[0]}">
-                <img src="${Endp.safeImg(item[3])}"/>
-              </a>
-              <legend>${truncate(item[1], 15)}</legend>`)
-            
-              // Adiciona a div na tela
-            get.Id("lista").appendChild(anime)
-          }, 500)
-        }
+      // Analiza se ja existem animes na tela e os remove se necessário
+      if (!!get.Queries('.anime').length) get
+        .Queries(".anime")
+        .forEach(elem => elem.remove())
+      
+      // remove o botão "vermais", caso exista
+      if (get.Id("ver-mais")) get
+        .Id("ver-mais")
+        .remove()
+
+      for (const item of get.Local('searchEngine')) {
+        setTimeout(() => {
+          // Cria uma div com a classe "anime" na variável "anime"
+          let anime = d.createElement("div")
+          anime.classList.add("anime")
+      
+          // Insere os dados do anime na div recem criada
+          anime.insertAdjacentHTML("beforeEnd", `
+            <a href="anime.html?id=${item[0]}">
+              <img src="${Endp.safeImg(item[3])}"/>
+            </a>
+            <legend>${truncate(item[1], 15)}</legend>`)
+          
+            // Adiciona a div na tela
+          get.Id("lista").appendChild(anime)
+        }, 500)
+      }
     }else {
       searchBar.value = ''
       busca()

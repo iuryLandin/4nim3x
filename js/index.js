@@ -18,7 +18,9 @@ async function checkLocalAnimeList() {
 function showAnimeList (pos = 0) {
     loading(true)
     // Analiza se ja existem animes na tela e os remove se necessário
-    if (!pos) get.Queries(".anime").forEach(elem => elem.remove())
+    if (!!get.Queries('.anime')) get
+        .Queries(".anime")
+        .forEach(elem => elem.remove())
 
     // Recebe da Local Storage os dados da página que será renderizada na tela
     const page = get.Local("animeList").data[pos]
@@ -142,6 +144,14 @@ function createSearchEngine() {
                 auxArray.push(item)
             }
         }
+
+        // Organiza o array do motor de busca em ordem alfábetica
+        auxArray
+            .sort((a, b) => {
+                if ( a[1] > b[1] ) return 1
+                if ( b[1] > a[1] ) return -1
+                return 0
+            })
         
         // Salva na localStorage o motor de buscas otimizado
         set.Local("searchEngine", auxArray)
