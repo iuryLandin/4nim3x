@@ -35,6 +35,7 @@ async function busca() {
 /* 5 - IndexOf devolve -1 caso não encontre o item dentro da String            *
 /****************************************************************************************/
 function pesquisa() {
+  remove.fromSession('nextPage')
   // Recebe o motor de buscas da Local Storage
   const searchEngine = get.Local('searchEngine')  // 1
 
@@ -208,7 +209,6 @@ let devFunctions = {
             .appendChild(anime)
         }, 500)
       }
-      remove.fromSession('nextPage')
     }else {
       searchBar.value = ''
       busca()
