@@ -203,9 +203,12 @@ let devFunctions = {
             <legend>${truncate(item[1], 15)}</legend>`)
           
             // Adiciona a div na tela
-          get.Id("lista").appendChild(anime)
+          get
+            .Id("lista")
+            .appendChild(anime)
         }, 500)
       }
+      remove.fromSession('nextPage')
     }else {
       searchBar.value = ''
       busca()

@@ -1,6 +1,5 @@
 const Endp = new EndPoints();
 (checkLocalAnimeList)();
-(window.onscroll = nextPage)();
 set.Local('appVersion', '1.0.1')
 
 
@@ -138,7 +137,6 @@ function createLocalAnimeList(data, pos) {
 }
 
 function createSearchEngine() {
-    console.log("nao quebroy")
     // Recebe da Local Storage a lista de animes salva para criar o motor de busca
     const animeList = get.Local("animeList") || null
 
@@ -185,12 +183,24 @@ function fixApiBug(data) {
 
 
 
-function nextPage() {
-    let scrollPos = window.innerHeight + window.scrollY
-    let pageHeight = d.body.offsetHeight
-    let nextPage = get.Session('nextPage')
-
-    if (scrollPos>=pageHeight) {
-        showAnimeList(nextPage)
+let nextPage = {
+    load() {
+        const scrollPos = window.innerHeight + window.scrollY
+        const pageHeight = d.body.offsetHeight
+        const nextPage = get.Session('nextPage')
+        
+        if (scrollPos>=pageHeight && nextPage) {
+            showAnimeList(nextPage)
+        }
+    },
+    activate() {
+        setTimeout(
+            () => {
+                window.onscroll = this.load
+            },
+            500
+        )
     }
 };
+
+(nextPage.activate)();
