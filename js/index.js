@@ -28,7 +28,7 @@ async function checkLocalAnimeList() {
 function showAnimeList (pos = 0) {
     loading(true)
     // Analiza se ja existem animes na tela e os remove se necessário
-    if (!!get.Queries('.anime')) get
+    if (!pos) get
         .Queries(".anime")
         .forEach(elem => elem.remove())
 
