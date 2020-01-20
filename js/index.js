@@ -1,5 +1,6 @@
 const Endp = new EndPoints();
-(checkLocalAnimeList)()
+(checkLocalAnimeList)();
+(window.onscroll = nextPage)();
 set.Local('appVersion', '1.0.1')
 
 
@@ -19,10 +20,7 @@ async function checkLocalAnimeList() {
         mudaPesq()
         searchBar.value = lastSearch
         pesquisa()
-    }else {
-        // Exibe a lista depois de conferir se a lista existe e ainda tem validade
-        showAnimeList()
-    }
+    }else showAnimeList()
 }
 
 function showAnimeList (pos = 0) {
@@ -35,7 +33,12 @@ function showAnimeList (pos = 0) {
     // Recebe da Local Storage os dados da página que será renderizada na tela
     const page = get.Local("animeList").data[pos]
 
-    if (get.Id("ver-mais")) get.Id("ver-mais").remove()
+
+
+    // if (get.Id("ver-mais")) get.Id("ver-mais").remove()
+
+
+
     // Percorre todos os itens que serão renderizados
     for (const item of page.animes) {
         // Cria uma div com a classe "anime" na variável "anime"
@@ -56,11 +59,12 @@ function showAnimeList (pos = 0) {
 
     // Cria um botão ver mais caso tenha mais animes para exibir na tela
     if (!!page.Next) {
-        let verMais = d.createElement("a")
-        verMais.setAttribute("id", "ver-mais")
-        verMais.setAttribute("href", `javascript: showAnimeList('${page.Next/50}')`)
-        verMais.innerHTML = "CARREGAR MAIS"
-        get.Id("lista").appendChild(verMais)
+        // let verMais = d.createElement("a")
+        // verMais.setAttribute("id", "ver-mais")
+        // verMais.setAttribute("href", `javascript: showAnimeList('${page.Next/50}')`)
+        // verMais.innerHTML = "CARREGAR MAIS"
+        // get.Id("lista").appendChild(verMais)
+        set.Session("nextPage", page.Next/50)
     }
     loading(false)
 }
@@ -98,10 +102,10 @@ async function chechListStatus() {
 
 async function getAnimeListFromApi(pos = 0) {
     await axios
-        .get(Endp.getApi(Endp.anime+pos))
+        .get(Endp.getApi(Endp.anime + pos))
         .then(res => createLocalAnimeList(res.data, pos))
         .catch(console.warn)
-        .finally(createSearchEngine())
+        .finally(createSearchEngine)
 }
 
 function createLocalAnimeList(data, pos) {
@@ -134,6 +138,7 @@ function createLocalAnimeList(data, pos) {
 }
 
 function createSearchEngine() {
+    console.log("nao quebroy")
     // Recebe da Local Storage a lista de animes salva para criar o motor de busca
     const animeList = get.Local("animeList") || null
 
@@ -177,3 +182,15 @@ function fixApiBug(data) {
 
     return resFixed
 }
+
+
+
+function nextPage() {
+    let scrollPos = window.innerHeight + window.scrollY
+    let pageHeight = d.body.offsetHeight
+    let nextPage = get.Session('nextPage')
+
+    if (scrollPos>=pageHeight) {
+        showAnimeList(nextPage)
+    }
+};

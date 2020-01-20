@@ -94,6 +94,9 @@ async function marcarEp(episodeId) {
 
     // Finalmente é salvo na localStorage a nova lista com o episódio clicado salvo
     set.Local("watchedList", watchedList)
+
+    // lista é recarregada em tempo real para melhorar a continuidade do site
+    getEpisodes()
 }
 
 function getStyle2Ep(episodeId) {

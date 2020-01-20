@@ -16,7 +16,13 @@ let share = {
         // detecta a rede social escolhida para compartilhar o anime
         let func = this.redes[rede]
         func(this.link(this.animeName, this.animeDesc, this.imgUrl))
-        setTimeout(() => $('.shareDiv').slideToggle(), 250)
+        setTimeout(
+            function openDiv() {
+                $('.shareDiv')
+                    .slideToggle()
+            },
+            250
+        )
     },
 
     redes: {
