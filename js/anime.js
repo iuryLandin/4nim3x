@@ -2,7 +2,7 @@ const Endp = new EndPoints();
 const id = location.search.split("=")[1];
 set.Session("currentAnime", id);
 var title, desc, img;
-(() => openAnimeDetails())()
+(openAnimeDetails)()
 
 async function openAnimeDetails() {
     // Recebe os dados dos animes da localStorage, animes recentes as vezes nao estão salvos

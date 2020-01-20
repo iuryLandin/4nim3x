@@ -162,6 +162,7 @@ let devFunctions = {
     searchBar.value = ''
     busca()
   },
+  
   clearWatchedList() {
     if (confirm('Seu progresso salvo será completamente excluído.\n Deseja continuar?')) {
       searchBar.value = ''
@@ -170,10 +171,12 @@ let devFunctions = {
     searchBar.value = ''
     busca()
   },
+
   animexAppVersion() {
     searchBar.value = ''
     alert(get.Local('appVersion'))
   },
+
   listAllAnimes() {
     if(confirm("Você tem certeza?")) {
       // Analiza se ja existem animes na tela e os remove se necessário

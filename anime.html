@@ -32,7 +32,7 @@
 		<title>4nim3x</title>
 	</head>
 
-<script src="js/utils.js"></script>
+<script src="js/utils/utils.js"></script>
 
 <body>
 
@@ -46,22 +46,23 @@
 		<div class="shareDiv">
 			<h3>Escolha uma rede social:</h3>
 			<hr>
-			<div onclick="share('fb')" class="social">
+			<div onclick="share.selected('fb')" class="social">
 				<i class="fab fa-2x fa-facebook"></i>
 			</div>
 
-			<div onclick="share('wpp')" class="social">
+			<div onclick="share.selected('wpp')" class="social">
 				<i class="fab fa-2x fa-whatsapp"></i>
 			</div>
 			<div 
-				onclick="share('copy')"
+				onclick="share.selected('copy')"
 				class="social"><i class="far fa-2x fa-clipboard"></i>
 			</div>
-			<input 	type="text"
-					id="url-2-copy"
-					class="url-2-copy"
-					size="60"
-					onclick="share('copy')">
+			<input
+				type="text"
+				id="url-2-copy"
+				class="url-2-copy"
+				size="60"
+				onclick="share.selected('copy')">
 
 		</div>
 
@@ -69,7 +70,7 @@
 			<div class="page" id="anime">
 				<header>
 					<a id="back-btn" href="javascript: history.back()"><i class="fa fa-chevron-left"></i></a>
-					<a id="share-btn" href="javascript: compartilhar();"><i class="fa fa-share-alt"></i></a>
+					<a id="share-btn" href="javascript: share.openBar()"><i class="fa fa-share-alt"></i></a>
 
 					<span class='logo' id="titulo">AnimeX</span>
 				</header>
@@ -92,11 +93,11 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 		<script src="https://julczar.github.io/CzarK/index.js"></script>
-		<script src="js/endpoints.js"></script>
-		<script src="js/searchEngine.js"></script>
+		<script src="js/utils/endpoints.js"></script>
+		<script src="js/utils/searchEngine.js"></script>
+		<script src="js/utils/disqus.js"></script>
 		<script src="js/anime.js"></script>
-		<script src="js/disqus.js"></script>
-		<script src="js/utils.js"></script>
+		<script src="js/utils/share.js"></script>
 </body>
 
 </html>
