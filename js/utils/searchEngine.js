@@ -13,7 +13,10 @@ async function busca() {
   const audit = devFunctions[searchBar.value]
 
   // Checa se a função existe e executa caso exista
-  if (audit) audit()
+  if (audit) {
+    remove.fromSession('lastSearch')
+    audit()
+  }
 
   // Pesquisa propriamente dita
   else {
@@ -55,16 +58,8 @@ function pesquisa() {
 
 //Cria na Tela a grade de resultados da pesquisa
 function resultPesquisa(elements) {
-  let animes = get.Queries('.anime')  // Recebe da tela todos os animes listados
-  let verMais = get.Id('ver-mais')  // Recebe da tela o status do botão 'ver mais'
-
-  //remove o botão "verMais", se existir
-  if (verMais) verMais.remove();
-  
-  // Remove todos os animes em tela para listar novos
-  for (const anime of animes) {
-    anime.remove()
-  }
+  get.Queries(".anime")
+  .forEach(elem => elem.remove())
 
   // Itera sobre os resultados e os monta em tela
   for(const result of elements) {
@@ -154,64 +149,62 @@ function getAnimeById(idAnime) {
 
 let devFunctions = {
   clearAnimeList() {
+    searchBar.value = ''
+    pesquisa()
     let escolha = confirm('Está ação irá apagar a lista de animes e irá criar uma nova, não feche o site durante o processo.');
     if (escolha) {
-      searchBar.value = ''
       remove.fromLocal('animeList');
       checkLocalAnimeList();
     }
-    searchBar.value = ''
-    busca()
   },
   
   clearWatchedList() {
+    searchBar.value = ''
+    pesquisa()
     if (confirm('Seu progresso salvo será completamente excluído.\n Deseja continuar?')) {
-      searchBar.value = ''
       remove.fromLocal('watchedList')
     }
-    searchBar.value = ''
-    busca()
   },
 
   animexAppVersion() {
     searchBar.value = ''
+    pesquisa()
     alert(get.Local('appVersion'))
   },
 
   listAllAnimes() {
     if(confirm("Você tem certeza?")) {
       // Analiza se ja existem animes na tela e os remove se necessário
-      if (!!get.Queries('.anime').length) get
+      get
         .Queries(".anime")
         .forEach(elem => elem.remove())
-      
-      // remove o botão "vermais", caso exista
-      if (get.Id("ver-mais")) get
-        .Id("ver-mais")
-        .remove()
 
       for (const item of get.Local('searchEngine')) {
-        setTimeout(() => {
-          // Cria uma div com a classe "anime" na variável "anime"
-          let anime = d.createElement("div")
-          anime.classList.add("anime")
-      
-          // Insere os dados do anime na div recem criada
-          anime.insertAdjacentHTML("beforeEnd", `
-            <a href="anime.html?id=${item[0]}">
-              <img src="${Endp.safeImg(item[3])}"/>
-            </a>
-            <legend>${truncate(item[1], 15)}</legend>`)
-          
-            // Adiciona a div na tela
-          get
-            .Id("lista")
-            .appendChild(anime)
-        }, 500)
+        setTimeout(
+          function listAnimes() {
+            // Cria uma div com a classe "anime" na variável "anime"
+            let anime = d.createElement("div")
+            anime.classList.add("anime")
+        
+            // Insere os dados do anime na div recem criada
+            anime.insertAdjacentHTML("beforeEnd", `
+              <a href="anime.html?id=${item[0]}">
+                <img src="${Endp.safeImg(item[3])}"/>
+              </a>
+              <legend>${truncate(item[1], 15)}</legend>`)
+            
+              // Adiciona a div na tela
+            get
+              .Id("lista")
+              .appendChild(anime)
+          },
+          500
+        )
       }
+      remove.fromSession('nextPage')
     }else {
       searchBar.value = ''
-      busca()
+      pesquisa()
     }
   }
 }

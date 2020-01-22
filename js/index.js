@@ -1,6 +1,6 @@
 const Endp = new EndPoints();
 (checkLocalAnimeList)();
-set.Local('appVersion', '1.0.1')
+set.Local('appVersion', '1.1.5')
 
 
 async function checkLocalAnimeList() {
@@ -16,8 +16,8 @@ async function checkLocalAnimeList() {
         .Session("lastSearch")
     if(lastSearch) {
         // Refaz a busca para o usuário ter a sensação de continuidade
-        mudaPesq()
         searchBar.value = lastSearch
+        mudaPesq()
         pesquisa()
     }else showAnimeList()
 }
@@ -31,11 +31,6 @@ function showAnimeList (pos = 0) {
 
     // Recebe da Local Storage os dados da página que será renderizada na tela
     const page = get.Local("animeList").data[pos]
-
-
-
-    // if (get.Id("ver-mais")) get.Id("ver-mais").remove()
-
 
 
     // Percorre todos os itens que serão renderizados
