@@ -59,6 +59,8 @@ function showAnimeList (pos = 0) {
         // verMais.innerHTML = "CARREGAR MAIS"
         // get.Id("lista").appendChild(verMais)
         set.Session("nextPage", page.Next/50)
+    }else {
+        remove.fromSession('nextPage')
     }
     loading(false)
 }
