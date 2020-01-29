@@ -1,4 +1,3 @@
-const Endp = new EndPoints();
 const id = location.search.split("=")[1];
 set.Session("currentAnime", id);
 var title, desc, img;

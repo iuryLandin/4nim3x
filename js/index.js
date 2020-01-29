@@ -1,4 +1,3 @@
-const Endp = new EndPoints();
 (checkLocalAnimeList)();
 set.Local('appVersion', '1.1.5')
 

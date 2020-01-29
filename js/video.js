@@ -1,5 +1,3 @@
-const Endp = new EndPoints();
-
 // Recebe o id do video que será carregado
 const id   = location.search.split("=")[1];
 // Recebe o nome do episodio que será reproduzido

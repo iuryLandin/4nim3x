@@ -1,4 +1,3 @@
-const Endp = new EndPoints();
 (checkLocalReleaseList)()
 
 async function checkLocalReleaseList() {
