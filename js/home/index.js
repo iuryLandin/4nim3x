@@ -1,15 +1,12 @@
 import { busca, pesquisa, mudaPesq } from '../utils/SearchEngine/index.js'
 import { Endp, getApiLink as api } from '../utils/endpoints.js'
 import { get, set, del, listen } from '../frameworks/czark.js'
-import { openNav, closeNav } from '../utils/sidebar.js'
 import createAnimeCard from '../templates/animes.js'
 import nextPage from './utils/loadNextPage.js'
 import fixApiBug from './utils/fixApiBug.js'
 
 listen('keyup', busca)
 $('#searchbtn').click(mudaPesq)
-$('#navbarOpen').click(openNav)
-$('#navbarClose').click(closeNav)
 
 async function principal() {
     // checa se a lista de animes existe e se ela está atualizada

@@ -3,6 +3,8 @@ import { listen } from './czark.js'
 
 listen('swiped-right', openNav); // escutador do evento de swipe para a direita,  abre  o menu
 listen('swiped-left', closeNav); // escutador do evento de swipe para a esquerda, fecha o menu
+$('#navbarOpen').click(openNav)
+$('#navbarClose').click(closeNav)
 
 /*!
  * swiped-events.js - v1.0.9

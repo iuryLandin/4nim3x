@@ -2,11 +2,8 @@ import { Endp, getApiLink as api } from '../utils/endpoints.js'
 import { get, set, del } from '../frameworks/czark.js'
 import createAnimeCard from '../templates/animes.js'
 import loading from '../utils/loading.js'
-import { openNav,closeNav } from '../utils/sidebar.js'
 
 const releaseList = get.Local('releaseList')
-$('#navbarOpen').click(openNav)
-$('#navbarClose').click(closeNav)
 
 async function principal() {
     if (!releaseList) 

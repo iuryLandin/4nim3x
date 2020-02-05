@@ -58,13 +58,14 @@ function pesquisa() {
 }
 
 function getAnimeById(animeId) {
-    const animeData = findAnimeDataInLocalFiles()
+    let animeData = findAnimeDataInLocalFiles()
 
     if (!animeData) animeData = findAnimeInReleases()
 
     if (!animeData) animeData = getSharedData()
 
     return animeData
+    //End of getAnimeById(0)
 
     function findAnimeDataInLocalFiles() {
         const match = searchEngine

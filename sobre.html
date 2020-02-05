@@ -35,7 +35,7 @@
     <div class="app">
         <div class="page" id="home">
             <nav id="mySidebar" class="sidebar">
-                <a href="javascript:closeNav()" class="closebtn"><i class="fa fa-times"></i></a>
+                <a id="navbarClose" href="javascript:void(0)" class="closebtn" onclick="void(0)"><i class="fa fa-times"></i></a>
                 <ul>
                     <a href="index.html">
                         <li>Home</li>
@@ -56,7 +56,7 @@
             </nav>
 
             <header>
-                <i class="fa fa-bars" onclick="openNav()"></i>
+                <i id="navbarOpen" class="fa fa-bars" onclick="void(0)"></i>
                 <span class='logo'>AnimeX</span>
             </header>
 
@@ -79,9 +79,8 @@
 
     </div>
 
-    <script src="https://julczar.github.io/CzarK/index.js"></script>
-    <script src="js/utils/sidebar.js"></script>
-    <script src="js/utils/swiped.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="module" src="js/frameworks/swiped.js"></script>
 </body>
 
 </html>

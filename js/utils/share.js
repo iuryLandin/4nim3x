@@ -1,48 +1,71 @@
-function delQuotesAndSpaces(elem) {
-    elem = elem.replace(/ /g, '§')
-    elem = elem.replace(/“/g, '£')
-    elem = elem.replace(/'/g, '£')
-    return elem.replace(/"/g, '£')
-}
+import { get } from '../frameworks/czark.js'
+import anime from '../anime/index.js'
 
-const share = {
-    animeName: delQuotesAndSpaces(title),
-    animeDesc: delQuotesAndSpaces(desc),
-    imgUrl: img.split('http://png.techrevolution.com.br/')[1],
-    link(a, b, c) {
-        return`${location.origin}/share.html?id=${id}=${a}=${b}=${c}`
-    },
-    openBar() {
-        get.Id("url-2-copy").value = this.link(this.animeName, this.animeDesc, this.imgUrl)
-        $('.shareDiv')
-            .slideToggle();
-    },
-    selected(rede) {
-        // detecta a rede social escolhida para compartilhar o anime
-        let func = this.redes[rede]
-        func(this.link(this.animeName, this.animeDesc, this.imgUrl))
-        setTimeout(
-            function openDiv() {
-                $('.shareDiv')
-                    .slideToggle()
-            },
-            250
-        )
-    },
+const d = document
 
-    redes: {
-        fb(link) {
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${link}`)
+function shareBy(social) {
+    const rede = {
+        fb() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${getShareLink()}`)
         },
-        wpp(link) {
-            window.open(`https://api.whatsapp.com/send?text=Ei%2C%20assiste%20esse%20anime...%20Clica%20no%20link%3A%20${link}`)
+        wpp() {
+            window.open(`https://api.whatsapp.com/send?text=Ei%2C%20assiste%20esse%20anime...%20Clica%20no%20link%3A%20${getShareLink()}`)
         },
         copy() {
-            get.Id("url-2-copy").select()
+            get.Id('url-2-copy').select()
             d.execCommand('copy')
-            setTimeout(() => alert('Texto copiado para a area de transferência'), 100)
+            setTimeout(notify, 100)
+            
+            function notify() {
+                alert('Texto copiado para a area de transferência')
+            }
         }
+    }
+    
+    // detecta a rede social escolhida para compartilhar o anime
+    const openShareLink = rede[social]
+
+    openShareLink()
+
+    closeSharebar()
+    //End of shareBy()
+
+    function closeSharebar() {
+        setTimeout(
+            toogleShareBar,
+            250
+        )
+    }
+
+    
+}
+
+function toogleShareBar() {
+    get.Id("url-2-copy")
+    .value = getShareLink()
+    $('.shareDiv').slideToggle()
+}
+
+function getShareLink() {
+    const data2Share = [
+        anime[0],
+        replaceQuotesAndSpaces(anime[1]),
+        replaceQuotesAndSpaces(anime[2]),
+        anime[3].split('.br/')[1]
+    ]
+
+    return ( `${location.origin}/share.html?id=${data2Share.join('=')}` )
+    //End of getShareLink()
+
+    function replaceQuotesAndSpaces(elem) {
+        elem = elem.replace(/ /g, '§')
+        elem = elem.replace(/“/g, '£')
+        elem = elem.replace(/'/g, '£')
+        return elem.replace(/"/g, '£')
     }
 }
 
-export default share
+export {
+    shareBy,
+    toogleShareBar,
+}

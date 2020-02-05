@@ -5,10 +5,7 @@ function createAnimeCard(animeData) {
     const anime = (
        `<div class='anime'>
             <a href="anime.html?id=${animeData[0]}">
-                <img
-                    src="${safeImg(animeData[3])}"
-                    onclick="loading(true)"
-                />
+                <img src="${safeImg(animeData[3])}"/>
             </a>
             <legend>${truncate(animeData[1], 15)}</legend>
         </div>`
