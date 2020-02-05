@@ -2,26 +2,33 @@ import { get, set } from '../frameworks/czark.js'
 
 // Quando for implementar a playlist, lembra de colocar uma chamada pra esse função passando
 // o id do episódio pra ela atualizar a playlist com os valores pro episódio atual.
-async function createPlaylist(episodeId) {
-    // Pega o id do anime atualmente aberto
-    const currentAnime = (
-        get.Session("currentAnime")
-    )
-
-    //pega da session a lista de episodios salva em "setEpsLista()"
-    const videos = (
-        get.Session(currentAnime)
-    )
+function createPlaylist(episodeId) {
+    const episodes = getEpisodesOnPage()
     
-    //procura a posição do episódio atual pra salvar o proximo e o anterior na sessionStorage
-    for (let i in videos) {
-        if (videos[i].Id == episodeId) {
-            set.Session(
-                "playlist", {
-                    previous: videos[i+1],
-                    next: videos[i-1]
+    savePlaylist()
+    //End of createPlaylist()
+    
+    function getEpisodesOnPage() {
+        const currentAnime = (
+            get.Session('currentAnime')
+        )
+
+        return (
+            get.Session(currentAnime)
+        )
+    }
+
+    function savePlaylist() {
+        for (let i=0; i < episodes.length; i++) {
+            if (episodes[i].Id == episodeId) {
+    
+                const playlist = {
+                    'previous': episodes[i+1],
+                    'next': episodes[i-1]
                 }
-            )
+    
+                set.Session('playlist', playlist)
+            }
         }
     }
 }

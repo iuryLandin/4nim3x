@@ -11,6 +11,7 @@ function busca() {
 
     if (audit) runAudit()
     else runSearch()
+    //End of busca()
     
     function runAudit() {
         del.fromSession('lastSearch')
@@ -30,6 +31,7 @@ function pesquisa() {
 
     if (results.length > 500) showAnimeList()
     else displayResults()
+    //End of pesquisa()
 
     function findResults() {
         const term = searchBar.value.toLowerCase()
@@ -65,7 +67,7 @@ function getAnimeById(animeId) {
     if (!animeData) animeData = getSharedData()
 
     return animeData
-    //End of getAnimeById(0)
+    //End of getAnimeById()
 
     function findAnimeDataInLocalFiles() {
         const match = searchEngine

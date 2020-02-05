@@ -1,7 +1,6 @@
 function Loading(status) {
     const loading = $("#loading")
 
-
     if (status)
         loading.show()
     else

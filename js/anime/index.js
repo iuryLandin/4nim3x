@@ -1,10 +1,11 @@
-import { getAnimeById } from '../utils/SearchEngine/index.js'
 import { getStyle2Ep, marcarEp, getIdFromUrl } from './utils/index.js'
 import { Endp, getApiLink as api, safeImg } from '../utils/endpoints.js'
+import { getAnimeById } from '../utils/SearchEngine/index.js'
+import { toogleShareBar, shareBy } from '../utils/share.js'
+import createPlaylist from '../utils/playlist.js'
 import { get, set } from '../frameworks/czark.js'
 import disqusChat from '../frameworks/disqus.js'
 import loading from '../utils/loading.js'
-import { toogleShareBar, shareBy } from '../utils/share.js'
 
 const id = getIdFromUrl()
 const anime = getAnimeById(id)[0]
@@ -54,7 +55,6 @@ async function principal() {
             }
             
             function saveProgress() {
-                console.log('entrou')
                 $(`#${ep.Id}`).click(() => marcarEp(`${ep.Id}`))
             }
         }
@@ -73,6 +73,7 @@ async function principal() {
                 .catch(console.warn)
             
             set.Session(id, epData)
+            set.Session('currentAnime', id)
         }
         
         return epData

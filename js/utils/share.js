@@ -22,7 +22,6 @@ function shareBy(social) {
         }
     }
     
-    // detecta a rede social escolhida para compartilhar o anime
     const openShareLink = rede[social]
 
     openShareLink()

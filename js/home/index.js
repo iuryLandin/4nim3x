@@ -1,9 +1,8 @@
 import { busca, pesquisa, mudaPesq } from '../utils/SearchEngine/index.js'
 import { Endp, getApiLink as api } from '../utils/endpoints.js'
 import { get, set, del, listen } from '../frameworks/czark.js'
+import { fixApiBug, nextPage } from './utils/index.js'
 import createAnimeCard from '../templates/animes.js'
-import nextPage from './utils/loadNextPage.js'
-import fixApiBug from './utils/fixApiBug.js'
 
 listen('keyup', busca)
 $('#searchbtn').click(mudaPesq)
@@ -19,8 +18,9 @@ async function principal() {
     
     nextPage.activate()
 
-    set.Local('appVersion', '1.1.5')
-    // Refaz a ultima busca, caso exista
+    set.Local('appVersion', '1.2.8')
+    //End of principal()
+
     function showLastSearch() {
         current.searchBar
            .value = current.lastSearch
@@ -77,15 +77,20 @@ async function principal() {
 }
 
 async function getAnimeListFromApi(page = 0){
-    await axios
-        .get(
-            api(Endp.anime + page)
-        )
-        .then(res => createLocalAnimeList(res.data))
-        .catch(console.warn)
+    await callApi()
     
     createSearchEngine()
+    //End of getAnimeListFromApi()
     
+    async function callApi() {
+        await axios
+            .get(
+                api(Endp.anime + page)
+            )
+            .then(res => createLocalAnimeList(res.data))
+            .catch(console.warn)
+    }
+
     function createLocalAnimeList(data) {
         // Recebe da localStorage a lista mais recente, caso nao exista
         // Cria uma do zero
@@ -154,18 +159,27 @@ async function getAnimeListFromApi(page = 0){
 }
 
 function showAnimeList(page = 0) {
-    if (!page) get.Queries('.anime')
-        .forEach(del.element)
-
+    deleteOldAnimeCards()
+    
     const currentPage = (
         get.Local('animeList').data[page]
     )
 
-    for (const anime of currentPage.animes) {
-        createAnimeCard(anime)
-    }
+    mountCurrentPage()
 
     setNextPage()
+    //End of showAnimeList()
+
+    function deleteOldAnimeCards() {
+        if (!page) get.Queries('.anime')
+            .forEach(del.element)
+    }
+
+    function mountCurrentPage() {
+        for (const anime of currentPage.animes) {
+            createAnimeCard(anime)
+        }
+    }
 
     function setNextPage() {
         if (currentPage.Next) 
