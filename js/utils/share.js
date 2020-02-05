@@ -1,17 +1,22 @@
-let share = {
+function delQuotesAndSpaces(elem) {
+    elem = elem.replace(/ /g, '§')
+    elem = elem.replace(/“/g, '£')
+    elem = elem.replace(/'/g, '£')
+    return elem.replace(/"/g, '£')
+}
+
+const share = {
     animeName: delQuotesAndSpaces(title),
     animeDesc: delQuotesAndSpaces(desc),
     imgUrl: img.split('http://png.techrevolution.com.br/')[1],
     link(a, b, c) {
         return`${location.origin}/share.html?id=${id}=${a}=${b}=${c}`
     },
-
     openBar() {
         get.Id("url-2-copy").value = this.link(this.animeName, this.animeDesc, this.imgUrl)
         $('.shareDiv')
             .slideToggle();
     },
-
     selected(rede) {
         // detecta a rede social escolhida para compartilhar o anime
         let func = this.redes[rede]
@@ -40,9 +45,4 @@ let share = {
     }
 }
 
-function delQuotesAndSpaces(elem) {
-    elem = elem.replace(/ /g, '§')
-    elem = elem.replace(/“/g, '£')
-    elem = elem.replace(/'/g, '£')
-    return elem.replace(/"/g, '£')
-}
+export default share

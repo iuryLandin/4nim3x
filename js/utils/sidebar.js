@@ -1,4 +1,6 @@
-const sidebar = get.Id("mySidebar")
+import { get } from '../frameworks/czark.js'
+
+const sidebar = get.Id('mySidebar')
 
 function openNav() {
     sidebar.classList.add("sidebarOpen")
@@ -12,4 +14,9 @@ function closeNav() {
     sidebar.style.transitionDuration = ".5s";
     sidebar.classList.remove("sidebarShadow");
     sidebar.classList.remove("sidebarOpen");
+}
+
+export {
+    openNav,
+    closeNav,
 }
