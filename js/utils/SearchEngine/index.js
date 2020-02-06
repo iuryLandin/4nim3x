@@ -70,22 +70,27 @@ function getAnimeById(animeId) {
     //End of getAnimeById()
 
     function findAnimeDataInLocalFiles() {
-        const match = searchEngine
-            .filter(anime => {
-                return ( anime[0] == animeId )
-            })
+        let match = null
         
+        if(searchEngine) {
+            match = searchEngine
+                .filter(
+                    anime => ( anime[0] == animeId )
+                )
+        }
         return match
     }
 
     function findAnimeInReleases() {
-        const releases = get.Local('releaselist').data
+        const releases = get.Local('releaselist')
 
-        const match = releases
-            .filter(anime => {
-                anime[0] == animeId
-            })
-        
+        let match = null
+        if (releases) {
+            match = releases.data
+                .filter(
+                    anime => (anime[0] == animeId)
+                )
+        }
         return match
     }
 

@@ -36,18 +36,10 @@ function principal() {
         fix.Desc()
         fix.ImgUrl()
 
-        function fixString(str) {
-            str = decodeURIComponent(str)
-            str.replace(
-                /£/g,
-                String.fromCharCode(39)
-            )
-            str.replace(
-                /§/g,
-                ' '
-            )
-    
-            return str
+        function fixString(strg) {
+            strg = decodeURIComponent(strg)
+            strg = strg.replace(/§/g, ' ')
+            return strg.replace(/£/g, String.fromCharCode(39) )
         }
     }
 
