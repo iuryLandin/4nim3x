@@ -31,15 +31,18 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 	<title>4nim3x</title>
 	<script src="https://cdn.jwplayer.com/libraries/s5L7ymlv.js"></script>
+
+    <link rel="stylesheet" href="player/player.css">
+    
 </head>
 
 <body>
 
 	<div id="loading" class="loading">
 		<div class="loading-content" align='center'>
-		<img src="img/loading.svg" width="50"/></div>
-		<div class="loading-msg">Carregando</div>
-	</div>
+			<img src="img/loading.svg" width="50"/></div>
+			<div class="loading-msg">Carregando</div>
+		</div>
 
 		<div class="app">
 			<div class="page" id="video">
@@ -50,18 +53,65 @@
 
 				<main>
 					<div class="contentAnime">
-                     <div id="myElement"></div>
-                     
+						<div id="myElement"></div>
+
 						<h2 id="episodioAtual"></h2>
-						<center> <video id="videoPlayer" style="width: 100%;" poster='https://i.ibb.co/7gmPPpK/Prancheta-1.png' controls></video> </center>
-						<p>Escolha uma opção abaixo:</p>
-						<ul class="lista" id="lista-de-opcoes">
 
-						</ul>
 
-                        <div id="disqus_thread"></div>
-                        
-					</div>
+						<div class="player">
+							<div class="player-loader"></div>
+
+							<div class="playlist">
+								<div class="pl-item">
+									<img class="a-seguir" src="https://via.placeholder.com/200x100" />
+									<br> <span style="color: white;">A seguir</span>
+                                    <i class="a-seguir-titulo"></i>
+								</div>
+							 
+								</div>
+
+
+								<video class="player-video" id="videoPlayer" style="width: 100%;"
+										poster='https://i.ibb.co/7gmPPpK/Prancheta-1.png'></video>
+
+								<div class="player-controls">
+
+									<div class="progress">
+										<div class="filled-progress"></div>
+									</div>
+									<div class="ply-btn">
+										<button class="player-btn toggle-play" title="Toggle Play">
+                                            <svg class="" width="16" height="16" viewBox="0 0 16 16">
+                                            <title>play</title>
+                                            <path d="M3 2l10 6-10 6z"></path>
+                                            </svg>
+                                    </button>
+									</div>
+
+
+									<div class="sliders">
+										<input type="range" name="volume" class="player-slider" min="0" max="1" step="0.05" value="1">
+                                    </div>
+
+										<button data-skip="-10" class="player-btn">« 10s</button>
+
+										<button data-skip="10" class="player-btn">10s »</button>
+
+										<button class="player-btn  playlistBtn"> <i class="fa fa-bars"></i> </button>
+
+										<button class="player-btn expand"> <i class="fa fa-expand"></i> </button>
+
+									</div>
+								</div>
+
+								<p>Escolha uma opção abaixo:</p>
+								<ul class="lista" id="lista-de-opcoes">
+
+								</ul>
+
+								<div id="disqus_thread"></div>
+
+							</div>
 				</main>
 			</div>
 
@@ -70,6 +120,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 		<script type="module" src="js/video/index.js"></script>
+        <script src="player/player.js"></script>
 </body>
 
 </html>
