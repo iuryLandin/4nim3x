@@ -1,9 +1,9 @@
-import { getStyle2Ep, marcarEp, getIdFromUrl } from './utils/index.js'
 import { Endp, getApiLink as api, safeImg } from '../utils/endpoints.js'
+import { getStyle2Ep, marcarEp, getIdFromUrl } from './utils/index.js'
+import { disqusChat as loadDisqus } from '../frameworks/disqus.js'
 import { getAnimeById } from '../utils/SearchEngine/index.js'
 import { toogleShareBar, shareBy } from '../utils/share.js'
 import { get, set } from '../frameworks/czark.js'
-import disqusChat from '../frameworks/disqus.js'
 import loading from '../utils/loading.js'
 
 const id = getIdFromUrl()
@@ -38,7 +38,7 @@ async function principal() {
             
             const epElem = (
                `<div id="${ep.Id}">
-                    <a href="video.html?id=${ep.Id}=${ep.Nome}">
+                    <a href="../video/?id=${ep.Id}=${ep.Nome}">
                         <li class="${epStyle}">${ep.Nome}</li>
                     </a>
                 </div>`
@@ -79,7 +79,7 @@ async function principal() {
     }
 
     function loadShareFunc() {
-        $('#share-btn').click(toogleShareBar)
+        $('#aside').click(toogleShareBar)
 
         $('#facebook').click(
             () => shareBy('fb')
@@ -93,10 +93,6 @@ async function principal() {
         $('#url-2-copy').click(
             () => shareBy('copy')
         )
-    }
-
-    function loadDisqus() {
-        disqusChat()
     }
 }
 

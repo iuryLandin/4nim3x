@@ -9,7 +9,7 @@ function loadVid(url) {
     videoPlayer.play()
 
     //Exibe o vídeo para o usuario
-    videoPlayer
+    get.Query('.player')
         .style
         .display = "block"
 }

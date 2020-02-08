@@ -53,7 +53,7 @@ function getShareLink() {
         anime[3].split('.br/')[1]
     ]
 
-    return ( `${location.origin}/share.html?id=${data2Share.join('=')}` )
+    return ( `${location.origin}/page/share/?id=${data2Share.join('=')}` )
     //End of getShareLink()
 
     function replaceQuotesAndSpaces(elem) {

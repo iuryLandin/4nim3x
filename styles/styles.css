@@ -1,16 +1,66 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-decoration: none;
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif
 }
 
 header {
-    position: fixed;
-    width: 100%;
-    height: auto;
-    padding: 15px;
-    color: white;
-    background: #963694;
+    justify-content: space-between;
     box-shadow: 0 0 8px black;
+    align-items: center;
+    background: #963694;
+    position: fixed;
+    display: flex;
+    z-index: 2;
+    height: 60px;
+    color: white;
+    width: 100vw;
+    top: 0;
+}
+
+.material-icons {
+    cursor: pointer;
+    margin: auto 10px;
+    font-size: 30px !important;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#aside {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#searchbar {
+    font-weight: bold;
+    color: white;
+    background: #832981;
+    border: none;
+    height: 25px;
+    width: 0px;
+    transition-duration: .5s;
+}
+
+#searchbar:focus {
+    border: none;
+    outline: 2px solid purple;
+}
+
+#searchbar::placeholder {
+    color: rgba(255, 255, 255, 0.609);
 }
 
 .sidebarOpen {
@@ -18,37 +68,6 @@ header {
     box-shadow: 1px 1px 50px 100vmax rgba(0, 0, 0, 0.5);
 }
 
-
-.shareBtn {
-    float: right;
-}
-
-.content {
-    clear: both;
-    width: 94vw;
-    margin: 3vw;
-}
-
-.shareDiv {
-    padding: 1%;
-    width: 98%;
-    height: 200px;
-    position: fixed;
-    bottom: 0;
-    margin-top: 80%;
-    background: white;
-    box-shadow: 0 0 8px black;
-    display: none;
-}
-
-.url-2-copy {
-    transform: translateY(-1vh) translateX(1.2vw);
-    background-color: #e2e2e2;
-    outline: none;
-    border: none;
-    padding: 1.5vmin;
-    border-radius: 2.5vmin;
-}
 .jq-toast-wrap {
     z-index: 9999;
 }
@@ -63,44 +82,12 @@ header .logo {
     padding-left: 12px;
 }
 
-#search {
-    float: right;
-    transform: translateX(-25px);
-}
-
 .contentAnime {
     margin-top: 3vw;
     padding: 2vw;
 }
-
-#searchbar {
-    transform: translateY(-8px);
-    background: #832981;
-    border: none;
-    height: 25px;
-    width: 0px;
-    color: white;
-    transition-duration: .5s;
-}
-
-#searchbar:focus {
-    border: none;
-    outline: 2px solid purple;
-}
-
-#searchbar::placeholder {
-    color: rgba(255, 255, 255, 0.609);
-}
-
-.searchbtn {
-    color: white;
-}
-
 main {
-    padding-top: 10vh;
-}
-
-main {
+    margin-top: 100px;
     transition-duration: .5s;
 }
 
@@ -138,11 +125,6 @@ main {
     margin-top: 3px;
     z-index: 999;
 }
-
-.descricao {
-    padding-top: 3vmin;
-    text-align: justify;
-}
 /* Modal (background) */
 
 .loading {
@@ -178,6 +160,7 @@ main {
     text-align: center;
     margin-top: 5vh;
 }
+
 .loading-msg {
     text-align: center;
     color: white;
@@ -195,28 +178,22 @@ main {
     background: #963694;
 }
 
-.episodio-visto {
-    background: #692567 !important;
-}
-
-.episodio-visto::before {
-    font-family: 'Font Awesome 5 Free';
-    content: "\f06e";
-    padding-right: 12px;
-}
-
 .lista a {
     color: #963694;
     text-decoration: none;
     text-transform: uppercase;
 }
 
-.episodio-visto, .episodio, .opcoes {
+.opcoes {
+    cursor: pointer;
     color: white;
 }
 
-#videoPlayer {
+.player {
     display: none;
+}
+
+#videoPlayer {
     width: 90%;
 }
 
@@ -229,20 +206,8 @@ main {
     border-radius: 50%;
     border: 0.4vw solid #963694;
 }
-#back-btn {
-    color: white;
-    float: left;
-}
-#share-btn{
-    color: white;
-    float: right;
-    margin-right: 3vw;
-}
 
 @media (max-width: 450px) {
-    .url-2-copy {
-        width: 45vw;
-    }
     .loading{
         left: 34vw;
         width: 28vw;
@@ -285,15 +250,6 @@ main {
     #lista {
         margin: 3vw 0;
     }
-    #back-btn {
-        color: white;
-        float: left;
-    }
-    #share-btn{
-        color: white;
-        float: right;
-        padding-right: 7vw;
-    }
 
 }
 
@@ -328,18 +284,14 @@ main {
         text-overflow: ellipsis;
         padding: 1vw;
     }
-    #back-btn {
-        color: white;
-        float: left;
-    }
-    #share-btn{
-        color: white;
-        float: right;
-        padding-right: 5vw;
-    }
-
     #lista {
         text-align: center;
     }
 
+}
+
+@media (min-width: 850px) {
+    #aside {
+        padding-right: 10px;
+    }
 }

@@ -67,17 +67,17 @@ function toggleFullScreen() {
 }
 
 function getNextCover(){
-    let obj =  JSON.parse(sessionStorage.getItem('playlist'));
+    let obj = JSON.parse(sessionStorage.getItem('playlist'));
 
-    if(!obj.next){
-        html = `
-            <p style='color: white;'> Você chegou ao fim da lista :) </p>
-        `;
+    if(!obj['next']){
+        html = (
+          `<p style='color: white;'> Você chegou ao fim da lista :) </p>`
+        );
         $(".pl-item").html(html);
         return 0;
     }
 
-    let newUrl = 'https://qgeletronicos.com/animeapi/thumb?anim='  + obj.next.Nome  ;
+    let newUrl = `https://qgeletronicos.com/animeapi/thumb?anim=${obj.next.Nome}`;
     let videoId = obj.next.Id;
     let titulo = obj.next.Nome;
     $(".a-seguir").attr('src', newUrl);
@@ -101,9 +101,9 @@ function getNextCover(){
         return 0;
     }
 
-     html = `
-            <p style='color: white;' class="a-seguir" onclick='iniciarProximo();'> Próximo episódio <i class='fa fa-forward'></i> </p>
-        `;
+     html = (
+       `<p style='color: white;' class="a-seguir" onclick='iniciarProximo();'> Próximo episódio <i class='fa fa-forward'></i> </p>`
+     );
         $(".pl-item").html(html);
 
     let newUrl = 'https://qgeletronicos.com/animeapi/thumb?anim='  + obj.next.Nome  ;
@@ -117,10 +117,24 @@ function getNextCover(){
 
 
  function iniciarProximo(){
-     let videoId =  $('.a-seguir').attr('video');
+    let videoId =  $('.a-seguir').attr('video');
     let titulo  =  $('.a-seguir').attr('titulo');
+    
+    saveNextAnime2Watchedlist()
 
-    location = 'video.html?id=' + videoId + '=' + titulo;
+    location = `/page/video/?id=${videoId}=${titulo}`;
+
+    function saveNextAnime2Watchedlist() {
+      const curAnime = sessionStorage.getItem('currentAnime')
+      let watchedList = JSON.parse(localStorage.getItem('watchedList'))
+
+      if(!watchedList[curAnime].includes(videoId)) {
+        watchedList[curAnime].push(videoId)
+        localStorage.setItem('watchedList', JSON.stringify(watchedList))
+      }
+
+
+    }
  }
 
 // Event listeners

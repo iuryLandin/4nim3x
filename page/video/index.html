@@ -25,8 +25,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="theme-color" content="#80257e">
 	<link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
-	<link rel="stylesheet" href="styles/menu.css">
-	<link rel="stylesheet" href="styles/styles.css">
+	<link rel="stylesheet" href="../../styles/styles.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 	<title>4nim3x</title>
@@ -40,15 +39,17 @@
 
 	<div id="loading" class="loading">
 		<div class="loading-content" align='center'>
-			<img src="img/loading.svg" width="50"/></div>
+			<img src="../../img/loading.svg" width="50"/></div>
 			<div class="loading-msg">Carregando</div>
 		</div>
 
 		<div class="app">
 			<div class="page" id="video">
-				<header>
-					<a style="color: white;" href="javascript: history.back()"><i class="fa fa-chevron-left"></i></a>
-					<span class='logo' id="playerTitulo">AnimeX - Video Player</span>
+				<header id="cabecalho">
+					<div id="logo">
+						<i class="material-icons" onclick="history.back()">arrow_back</i>
+						<h2 id="playerTitulo">AnimeX - Video Player</h2>
+					</div>
 				</header>
 
 				<main>
@@ -119,7 +120,7 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-		<script type="module" src="js/video/index.js"></script>
+		<script type="module" src="../../js/video/index.js"></script>
         <script src="player/player.js"></script>
 </body>
 

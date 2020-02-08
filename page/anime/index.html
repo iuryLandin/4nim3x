@@ -24,9 +24,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="theme-color" content="#80257e">
-		<link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
-		<link rel="stylesheet" href="styles/menu.css">
-		<link rel="stylesheet" href="styles/styles.css">
+		<link rel="shortcut icon" href="../../img/fav.png" type="image/x-icon">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="../../styles/styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 		<title>4nim3x</title>
@@ -36,54 +36,62 @@
 
 	<div id="loading" class="loading">
 		<div class="loading-content" align='center'>
-		<img src="img/loading.svg" width="50"/></div>
+		<img src="../../img/loading.svg" width="50"/></div>
 		<div class="loading-msg">Carregando</div>
 	</div>
 
-		<div class="app">
-			<div class="page" id="home">
-				<nav id="mySidebar" class="sidebar">
-					<a id="navbarClose" href="javascript:void(0)" class="closebtn" onclick="void(0)"><i class="fa fa-times"></i></a>
-					<ul id="sidebarItens">
-						<a href="index.html">
-							<li>Home</li>
-						</a>
-						<a href="javascript: closeNav()">
-							<li>Lançamentos</li>
-						</a>
-						<a href="#">
-							<li>Dublados</li>
-						</a>
-						<a href="reportar.html">
-							<li>Reportar Erro</li>
-						</a>
-						<a href="sobre.html">
-							<li>Sobre</li>
-						</a>
-					</ul>
-				</nav>
 
-				<header>
-					<i id="navbarOpen" class="fa fa-bars" onclick="void(0)"></i>
-					<span class='logo'>AnimeX</span>
-				</header>
-
-				<main>
-					<div class="content">
-						<div id="lista" class="lista">
-
-						</div>
-					</div>
-				</main>
-
+		<div class="shareDiv">
+			<h3>Escolha uma rede social:</h3>
+			<hr>
+			<div id="facebook" class="social">
+				<i class="fab fa-2x fa-facebook"></i>
 			</div>
+
+			<div id="whatsapp" class="social">
+				<i class="fab fa-2x fa-whatsapp"></i>
+			</div>
+			<div
+				id="copy-btn"
+				class="social"><i class="far fa-2x fa-clipboard"></i>
+			</div>
+			<input
+				type="text"
+				id="url-2-copy"
+				class="url-2-copy"
+				size="60"
+			>
 
 		</div>
 
+		<div class="app">
+			<div class="page" id="anime">
+				<header id="cabecalho">
+					<div id="logo">
+						<i onclick="history.back()" id="back" class="material-icons">arrow_back</i>
+						<h2>AnimeX</h2>
+					</div>
+					<i id="aside" class="material-icons">share</i>
+				</header>
+
+				<main>
+					<div class="contentAnime">
+						<div class="back" align='center'></div>
+							<div class="posterAnime"  align='center'>
+								<img id="poster" src='' width="100">
+                            </div>
+						
+ 						<p id='desc'>Descrição do Anime</p>
+						<ul class='lista' id="episode-list"></ul>
+						<div id="disqus_thread"></div>
+					</div>
+				</main>
+			</div>
+		</div>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<script type="module" src="js/frameworks/swiped.js"></script>
-        <script type="module" src="js/releases/index.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+		<script type="module" src="../../js/anime/index.js"></script>
 </body>
 
 </html>

@@ -7,4 +7,4 @@ function disqusChat() {
     (d.head || d.body).appendChild(s);
 }
 
-export default disqusChat
+export { disqusChat }

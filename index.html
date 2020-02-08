@@ -28,7 +28,6 @@
 	<link rel="stylesheet" href="styles/menu.css">
 	<link rel="stylesheet" href="styles/styles.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 	<title>4nim3x</title>
 </head>
 
@@ -44,33 +43,31 @@
 		<div class="app">
 			<div class="page" id="home">
 				<nav id="mySidebar" class="sidebar">
-					<a id="navbarClose" href="javascript:void(0)" class="closebtn" onclick="void(0)"><i class="fa fa-times"></i></a>
+					<i class="navbarClose material-icons" style="color: white;">clear</i>
 					<ul id="sidebarItens">
-						<a href="javascript: closeNav()">
+						<a href="/">
 							<li>Home</li>
 						</a>
-						<a href="lancamentos.html">
+						<a href="/page/releases">
 							<li>Lançamentos</li>
 						</a>
-						<a href="#">
-							<li>Dublados</li>
-						</a>
-						<a href="reportar.html">
+						<a href="page/report">
 							<li>Reportar Erro</li>
 						</a>
-						<a href="sobre.html">
+						<a href="page/about">
 							<li>Sobre</li>
 						</a>
 					</ul>
 				</nav>
 
-				<header>
-					<i id="navbarOpen" class="fa fa-bars" onclick="void(0)"></i>
-					<span class='logo'>AnimeX</span>
-					<div id="search">
+				<header id="cabecalho">
+					<div id="logo">
+						<i class="material-icons" id="navbarOpen">menu</i>
+						<h2 class=>AnimeX</h2>
+					</div>
+					<div id="aside">
 						<input id="searchbar" barra="" placeholder="Digite o nome do anime">
-						<a type="submit" href="javascript:void(0)"
-							class="searchbtn"><i class="material-icons" id="searchbtn">search</i></a>
+						<i class="material-icons" id="searchbtn">search</i>
 					</div>
 				</header>
 

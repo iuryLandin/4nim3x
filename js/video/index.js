@@ -1,5 +1,5 @@
 import { Endp, getApiLink as api } from '../utils/endpoints.js'
-// import createPlaylist from '../utils/playlist.js' // será usado pra adicionar a playlist nos videos
+import createPlaylist from '../utils/playlist.js'
 import { get } from '../frameworks/czark.js'
 import loading from '../utils/loading.js'
 import loadVid from './utils/loadVid.js'
@@ -17,9 +17,10 @@ async function principal() {
     loading(true)
 
     applyEpDataOnPage()
-    
-    const options = await getVideOptions()
-    mountOptionsList()
+
+    createPlaylist(video.id)
+
+    await mountOptionsList()
 
     loading(false)
 
@@ -36,14 +37,14 @@ async function principal() {
             .catch(console.warn)
     }
 
-    function mountOptionsList() {
+    async function mountOptionsList() {
+        const options = await getVideOptions()
+
         for(const item of options) {
             // Cria o HTML de cada opção de qualidade de vídeo
             const elem = (
                `<div id='${item.Id}'>
-                    <a href="javascript: void(0)">
-                        <li class="opcoes">${item.Nome}</li>
-                    </a>
+                    <li class="opcoes">${item.Nome}</li>
                 </div>`
             )
             

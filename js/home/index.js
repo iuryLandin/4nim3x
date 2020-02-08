@@ -5,7 +5,9 @@ import { fixApiBug, nextPage } from './utils/index.js'
 import createAnimeCard from '../templates/animes.js'
 
 listen('keyup', busca)
-$('#searchbtn').click(mudaPesq)
+if (
+    get.Id('searchbtn')
+) $('#searchbtn').click(mudaPesq)
 
 async function principal() {
     // checa se a lista de animes existe e se ela está atualizada

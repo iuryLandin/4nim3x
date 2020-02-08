@@ -1,4 +1,3 @@
-import createPlaylist from '../../utils/playlist.js'
 import { get, set } from '../../frameworks/czark.js'
 import loading from '../../utils/loading.js'
 import anime from '../index.js'
@@ -38,9 +37,6 @@ function marcarEp(episodeId) {
     // para evitar episodios duplicados.
     if (!watchedList[id].includes(episodeId))
         watchedList[id].push(episodeId)
-
-    // Chama a função que cria a playlist com base no episódio clicado
-    createPlaylist(episodeId)
 
     // Finalmente é salvo na localStorage a nova lista com o episódio clicado salvo
     set.Local('watchedList', watchedList)
