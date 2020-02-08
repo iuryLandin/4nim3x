@@ -90,7 +90,7 @@ async function getAnimeListFromApi(page = 0){
     //End of getAnimeListFromApi()
     
     async function callApi() {
-        await axios
+        return await axios
             .get(
                 api(Endp.anime + page)
             )
@@ -111,13 +111,12 @@ async function getAnimeListFromApi(page = 0){
         // Reduz o tamanho da lista de animes salva na Local Storage
         // Transformando-a em array
         let animes = []
+        
         for (const item of data.anime) {
             animes.push(
                 Object.values(item)
             )
         }
-
-        console.log()
 
         // Adiciona à lista de animes o retorno do axios "comprimido"
         animeList.data[page/50] = {
