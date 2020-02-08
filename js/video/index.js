@@ -1,5 +1,4 @@
 import { Endp, getApiLink as api } from '../utils/endpoints.js'
-import createPlaylist from '../utils/playlist.js'
 import { get } from '../frameworks/czark.js'
 import loading from '../utils/loading.js'
 import loadVid from './utils/loadVid.js'
@@ -17,8 +16,6 @@ async function principal() {
     loading(true)
 
     applyEpDataOnPage()
-
-    createPlaylist(video.id)
 
     await mountOptionsList()
 

@@ -1,4 +1,5 @@
 import { get, set } from '../../frameworks/czark.js'
+import createPlaylist from '../../utils/playlist.js'
 import loading from '../../utils/loading.js'
 import anime from '../index.js'
 
@@ -17,6 +18,8 @@ function getStyle2Ep(episodeId) {
 }
 
 function marcarEp(episodeId) {
+    createPlaylist(episodeId)
+
     const id = anime[0]    
     loading(true)
     //Recebe da localStorage o array atual com os dados dos animes vistos
