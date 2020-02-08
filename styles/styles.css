@@ -9,7 +9,7 @@
 
 .material-icons {
     cursor: pointer;
-    margin: auto 10px;
+    margin: auto 14px;
     font-size: 30px !important;
 }
 
@@ -235,9 +235,6 @@ header .logo {
     }
     .content {
         padding: 0;
-    }
-    .contentAnime {
-        margin-top: 5vw;
     }
     .anime {
         width: 36vw;

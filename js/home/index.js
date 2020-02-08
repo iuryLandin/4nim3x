@@ -1,8 +1,7 @@
 import { busca, pesquisa, mudaPesq } from '../utils/SearchEngine/index.js'
 import { Endp, getApiLink as api } from '../utils/endpoints.js'
-import { get, set, del, listen } from '../frameworks/czark.js'
-import { fixApiBug, nextPage } from './utils/index.js'
-import createAnimeCard from '../templates/animes.js'
+import { get, set, listen } from '../frameworks/czark.js'
+import { fixApiBug, nextPage, showAnimeList } from './utils/index.js'
 
 listen('keyup', busca)
 if (
@@ -10,25 +9,19 @@ if (
 ) $('#searchbtn').click(mudaPesq)
 
 async function principal() {
-    // checa se a lista de animes existe e se ela está atualizada
+    const lastSearch = get.Session('lastSearch')
+    
     if (!current.animeList) {
         await getAnimeListFromApi()
     }
     else checkListStatus()
 
-    montAnimeList()
+    mountAnimeList()
     
     nextPage.activate()
 
     set.Local('appVersion', '1.2.8')
     //End of principal()
-
-    function showLastSearch() {
-        current.searchBar
-           .value = get.Session('lastSearch')
-        mudaPesq()
-        pesquisa()
-    }
 
     async function checkListStatus() {
         const animeList = current.animeList.data
@@ -70,17 +63,29 @@ async function principal() {
         }
     }
 
-    function montAnimeList() {
-        if (current.lastSearch)
+
+    function mountAnimeList() {
+        if (lastSearch)
             showLastSearch()
         else 
             showAnimeList()
     }
+
+    function showLastSearch() {
+        mudaPesq()
+
+        current.searchBar
+            .value = lastSearch
+
+        pesquisa()
+    }
 }
 
 async function getAnimeListFromApi(page = 0){
-    await callApi()
+    let data = await callApi()
     
+    createLocalAnimeList()
+
     createSearchEngine()
     //End of getAnimeListFromApi()
     
@@ -89,11 +94,11 @@ async function getAnimeListFromApi(page = 0){
             .get(
                 api(Endp.anime + page)
             )
-            .then(res => createLocalAnimeList(res.data))
+            .then(res => res.data)
             .catch(console.warn)
     }
 
-    function createLocalAnimeList(data) {
+    function createLocalAnimeList() {
         // Recebe da localStorage a lista mais recente, caso nao exista
         // Cria uma do zero
         let animeList = get.Local('animeList') ||
@@ -111,6 +116,8 @@ async function getAnimeListFromApi(page = 0){
                 Object.values(item)
             )
         }
+
+        console.log()
 
         // Adiciona à lista de animes o retorno do axios "comprimido"
         animeList.data[page/50] = {
@@ -130,19 +137,18 @@ async function getAnimeListFromApi(page = 0){
 
     function createSearchEngine() {
         const animeList = get.Local('animeList')
+
         if (animeList) {
             // Array auxiliar usado para receber os valores
             let auxArray = []
     
             // Percorre todas as linhas de dados dentro do array salvo na localStorage
-            for (const row of get.Local('animeList').data) {
+            for (const row of animeList.data) {
     
                 //percorre cada anime dentro da linha
-                for (const item of row.animes) {
-    
-                    // Remove "keys" do objeto e adiciona o array que o método retorna isso
-                    // Reduz o espaço usado  a lista e acelera a velocidade da pesquisa.
-                    auxArray.push(item)
+                for (const anime of row.animes) {
+
+                    auxArray.push(anime)
                 }
             }
     
@@ -160,40 +166,6 @@ async function getAnimeListFromApi(page = 0){
     }
 }
 
-function showAnimeList(page = 0) {
-    deleteOldAnimeCards()
-    
-    const currentPage = (
-        get.Local('animeList').data[page]
-    )
-
-    mountCurrentPage()
-
-    setNextPage()
-    //End of showAnimeList()
-
-    function deleteOldAnimeCards() {
-        if (!page) get.Queries('.anime')
-            .forEach(del.element)
-    }
-
-    function mountCurrentPage() {
-        for (const anime of currentPage.animes) {
-            createAnimeCard(anime)
-        }
-    }
-
-    function setNextPage() {
-        if (currentPage.Next) 
-            set.Session(
-                'nextPage',
-                currentPage.Next/50
-            )
-        else 
-            del.fromSession('nextPage')
-    }
-}
-
 const current = {
     // Recebe lista de animes da LocalStorage, caso exista
     animeList: get.Local('animeList'),
@@ -206,5 +178,3 @@ const current = {
 }
 
 ;(principal)()
-
-export default showAnimeList

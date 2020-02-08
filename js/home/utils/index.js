@@ -1,5 +1,5 @@
-import showAnimeList from '../index.js'
-import { get } from '../../frameworks/czark.js'
+import createAnimeCard from '../../templates/animes.js'
+import { get, set, del } from '../../frameworks/czark.js'
 
 const d = document
 
@@ -42,7 +42,42 @@ function fixApiBug(data) {
     return resFixed
 }
 
+function showAnimeList(page = 0) {
+    deleteOldAnimeCards()
+    
+    const currentPage = (
+        get.Local('animeList').data[page]
+    )
+
+    mountCurrentPage()
+
+    setNextPage()
+    //End of showAnimeList()
+
+    function deleteOldAnimeCards() {
+        if (!page) get.Queries('.anime')
+            .forEach(del.element)
+    }
+
+    function mountCurrentPage() {
+        for (const anime of currentPage.animes) {
+            createAnimeCard(anime)
+        }
+    }
+
+    function setNextPage() {
+        if (currentPage.Next) 
+            set.Session(
+                'nextPage',
+                currentPage.Next/50
+            )
+        else 
+            del.fromSession('nextPage')
+    }
+}
+
 export {
     nextPage,
     fixApiBug,
+    showAnimeList,
 }
