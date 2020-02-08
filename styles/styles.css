@@ -73,6 +73,10 @@ header {
     box-shadow: 1px 1px 50px 100vmax rgba(0, 0, 0, 0.5);
 }
 
+.descricao {
+  margin: 20px auto 10px auto;
+}
+
 .jq-toast-wrap {
     z-index: 9999;
 }

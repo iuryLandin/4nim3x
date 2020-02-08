@@ -4,7 +4,7 @@ import { get, truncate } from '../frameworks/czark.js'
 function createAnimeCard(animeData) {
     const anime = (
        `<div class='anime'>
-            <a href="../../page/anime/?id=${animeData[0]}">
+            <a href="/page/anime/?id=${animeData[0]}">
                 <img src="${safeImg(animeData[3])}"/>
             </a>
             <legend>${truncate(animeData[1], 15)}</legend>

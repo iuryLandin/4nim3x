@@ -23,8 +23,8 @@ function createPlaylist(episodeId) {
             if (episodes[i].Id == episodeId) {
     
                 const playlist = {
-                    'previous': episodes[i+1],
-                    'next': episodes[i-1]
+                    'previous': episodes[i+1] || null,
+                    'next': episodes[i-1] || null
                 }
     
                 set.Session('playlist', playlist)

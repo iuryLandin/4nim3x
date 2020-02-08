@@ -15,21 +15,21 @@ function principal() {
     
     function treatAnimeData() {
         const fix = {
-        Title() {
-            animeData[1] = fixString(
-                animeData[1]
-            )
-        },
-        Desc() {
-            animeData[2] = fixString(
-                animeData[2]
-            )
-        },
-        ImgUrl() {
-            animeData[3] = (
-                `http://png.techrevolution.com.br/${animeData[3]}`
-            )
-        }
+            Title() {
+                animeData[1] = fixString(
+                    animeData[1]
+                )
+            },
+            Desc() {
+                animeData[2] = fixString(
+                    animeData[2]
+                )
+            },
+            ImgUrl() {
+                animeData[3] = (
+                    `http://png.techrevolution.com.br/${animeData[3]}`
+                )
+            }
         }
 
         fix.Title()
@@ -51,7 +51,7 @@ function principal() {
     }
 
     function loadPage() {
-        location = `../../page/anime/?id=${animeData[0]}`
+        location = `/page/anime/?id=${animeData[0]}`
     }
 }
 

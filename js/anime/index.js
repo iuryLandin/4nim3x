@@ -38,7 +38,7 @@ async function principal() {
             
             const epElem = (
                `<div id="${ep.Id}">
-                    <a href="../video/?id=${ep.Id}=${ep.Nome}">
+                    <a href="/page/video/?id=${ep.Id}=${ep.Nome}">
                         <li class="${epStyle}">${ep.Nome}</li>
                     </a>
                 </div>`

@@ -69,10 +69,8 @@ function toggleFullScreen() {
 function getNextCover(){
     let obj = JSON.parse(sessionStorage.getItem('playlist'));
 
-    if(!obj['next']){
-        html = (
-          `<p style='color: white;'> Você chegou ao fim da lista :) </p>`
-        );
+    if(!obj.next){
+        html = `<p style='color: white;'> Você chegou ao fim da lista :) </p>`;
         $(".pl-item").html(html);
         return 0;
     }
@@ -101,12 +99,10 @@ function getNextCover(){
         return 0;
     }
 
-     html = (
-       `<p style='color: white;' class="a-seguir" onclick='iniciarProximo();'> Próximo episódio <i class='fa fa-forward'></i> </p>`
-     );
+     html = `<p style='color: white;' class="a-seguir" onclick='iniciarProximo();'> Próximo episódio <i class='fa fa-forward'></i> </p>`;
         $(".pl-item").html(html);
 
-    let newUrl = 'https://qgeletronicos.com/animeapi/thumb?anim='  + obj.next.Nome  ;
+    let newUrl = `https://qgeletronicos.com/animeapi/thumb?anim=${obj.next.Nome}`  ;
     let videoId = obj.next.Id;
     let titulo = obj.next.Nome;
     $(".a-seguir").attr('src', newUrl);
@@ -122,6 +118,8 @@ function getNextCover(){
     
     saveNextAnime2Watchedlist()
 
+    updatePlaylist()
+
     location = `/page/video/?id=${videoId}=${titulo}`;
 
     function saveNextAnime2Watchedlist() {
@@ -135,6 +133,37 @@ function getNextCover(){
 
 
     }
+
+    function updatePlaylist(episodeId) {
+      const episodes = getEpisodesOnPage()
+      
+      savePlaylist()
+      //End of createPlaylist()
+      
+      function getEpisodesOnPage() {
+          const currentAnime = (
+              JSON.parse(sessionStorage.getItem('currentAnime'))
+          )
+  
+          return (
+            JSON.parse(sessionStorage.getItem(currentAnime))
+          )
+      }
+  
+      function savePlaylist() {
+          for (let i=0; i < episodes.length; i++) {
+              if (episodes[i].Id == videoId) {
+      
+                  const playlist = {
+                      'previous': episodes[i+1] || null,
+                      'next': episodes[i-1] || null
+                  }
+      
+                  sessionStorage.setItem('playlist', JSON.stringify(playlist))
+              }
+          }
+      }
+  }
  }
 
 // Event listeners
