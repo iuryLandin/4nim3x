@@ -25,7 +25,7 @@ async function principal() {
 
     function showLastSearch() {
         current.searchBar
-           .value = current.lastSearch
+           .value = get.Session('lastSearch')
         mudaPesq()
         pesquisa()
     }
@@ -73,7 +73,7 @@ async function principal() {
     function montAnimeList() {
         if (current.lastSearch)
             showLastSearch()
-        else
+        else 
             showAnimeList()
     }
 }

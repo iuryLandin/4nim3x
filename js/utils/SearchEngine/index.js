@@ -1,6 +1,6 @@
 import devFunctions from './utils/devFunc.js'
 import showAnimeList from '../../home/index.js'
-import montAnimeCard from '../../templates/animes.js'
+import createAnimeCard from '../../templates/animes.js'
 import { get, set, del } from '../../frameworks/czark.js'
 
 const searchBar = get.Id('searchbar')
@@ -29,7 +29,7 @@ function pesquisa() {
     
     const results = findResults()
 
-    if (results.length > 500) showAnimeList()
+    if (results.length > 500) showFirstPage()
     else displayResults()
     //End of pesquisa()
 
@@ -50,13 +50,48 @@ function pesquisa() {
             .forEach(deleteAnime)
 
         for(const anime of results) {
-            montAnimeCard(anime)
+            createAnimeCard(anime)
         }
 
         function deleteAnime(item) {
             item.remove()
         }
     }
+
+    function showFirstPage() {
+        deleteOldAnimeCards()
+        
+        const currentPage = (
+            get.Local('animeList').data[0]
+        )
+    
+        mountCurrentPage()
+    
+        setNextPage()
+        //End of showAnimeList()
+    
+        function deleteOldAnimeCards() {
+            get.Queries('.anime')
+                .forEach(del.element)
+        }
+    
+        function mountCurrentPage() {
+            for (const anime of currentPage.animes) {
+                createAnimeCard(anime)
+            }
+        }
+    
+        function setNextPage() {
+            if (currentPage.Next) 
+                set.Session(
+                    'nextPage',
+                    currentPage.Next/50
+                )
+            else 
+                del.fromSession('nextPage')
+        }
+    }
+    
 }
 
 function getAnimeById(animeId) {

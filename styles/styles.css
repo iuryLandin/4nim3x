@@ -7,6 +7,17 @@
     text-decoration: none;
 }
 
+.material-icons {
+    cursor: pointer;
+    margin: auto 10px;
+    font-size: 30px !important;
+}
+
+main {
+    margin-top: 100px;
+    transition-duration: .5s;
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif
@@ -24,12 +35,6 @@ header {
     color: white;
     width: 100vw;
     top: 0;
-}
-
-.material-icons {
-    cursor: pointer;
-    margin: auto 10px;
-    font-size: 30px !important;
 }
 
 #logo {
@@ -71,6 +76,7 @@ header {
 .jq-toast-wrap {
     z-index: 9999;
 }
+
 .shareDiv>.social {
     display: inline-table;
     padding: 12px;
@@ -85,10 +91,6 @@ header .logo {
 .contentAnime {
     margin-top: 3vw;
     padding: 2vw;
-}
-main {
-    margin-top: 100px;
-    transition-duration: .5s;
 }
 
 #lista {
@@ -139,6 +141,11 @@ main {
     padding: 1vh;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 1px 1px 50vmax 100vmax rgba(0, 0, 0, 0.2);
+}
+
+.loading-content {
+    display: flex;
+    justify-content: center;
 }
 
 .loading-animes{
