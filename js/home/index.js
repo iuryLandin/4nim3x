@@ -1,5 +1,5 @@
 import { busca, pesquisa, mudaPesq } from '../utils/SearchEngine/index.js'
-import { Endp, getApiLink as api } from '../utils/endpoints.js'
+import { Endp, getApiLink as api, Head } from '../utils/endpoints.js'
 import { get, set, listen } from '../frameworks/czark.js'
 import { fixApiBug, nextPage, showAnimeList } from './utils/index.js'
 
@@ -37,16 +37,17 @@ async function principal() {
         let lastPageFromApi = get.Session(LastPage.Next)
         if (!lastPageFromApi) {
             // Recebe da api a última página salva na session, para comparação
-            lastPageFromApi = await axios
-                .get(
-                    api(Endp.anime + LastPage.Next)
-                )
-                .then(res => res.data)
+            lastPageFromApi = await $
+                .ajax({
+                    url: api(Endp.anime + LastPage.Next),
+                    type: 'GET'
+                })
+                .fail(console.warn)
             
             if (typeof lastPageFromApi == 'string')
                 lastPageFromApi = fixApiBug(lastPageFromApi)
     
-            // Salva na sessão o resultado do axios para evitar sobrecarga na api
+            // Salva na sessão o resultado do ajax para evitar sobrecarga na api
             set.Session(LastPage.Next, lastPageFromApi)
         }
     
@@ -90,12 +91,12 @@ async function getAnimeListFromApi(page = 0){
     //End of getAnimeListFromApi()
     
     async function callApi() {
-        return await axios
-            .get(
-                api(Endp.anime + page)
-            )
-            .then(res => res.data)
-            .catch(console.warn)
+        return await $
+            .ajax({
+                url: api(Endp.anime + page),
+                type: 'GET'
+            })
+            .fail(console.warn)
     }
 
     function createLocalAnimeList() {
@@ -118,7 +119,7 @@ async function getAnimeListFromApi(page = 0){
             )
         }
 
-        // Adiciona à lista de animes o retorno do axios "comprimido"
+        // Adiciona à lista de animes o retorno do ajax "comprimido"
         animeList.data[page/50] = {
             animes,
             'Next': data.Next

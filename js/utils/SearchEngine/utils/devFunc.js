@@ -11,7 +11,7 @@ const devFunctions = {
       let escolha = confirm('Está ação irá apagar a lista de animes e irá criar uma nova, não feche o site durante o processo.');
       if (escolha) {
         del.fromLocal('animeList');
-        checkLocalAnimeList();
+        location.reload();
       }
     },
     
@@ -26,7 +26,9 @@ const devFunctions = {
     animexAppVersion() {
       searchBar.value = ''
       pesquisa()
-      alert(get.Local('appVersion'))
+      alert(
+        get.Local('appVersion')
+      )
     },
   
     listAllAnimes() {

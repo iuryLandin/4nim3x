@@ -43,12 +43,13 @@ async function principal() {
     async function createReleaseList() {
         loading(true)
     
-        await axios
-            .get(
-                api(Endp.lanca)
-            )
-            .then(mountList)
-            .catch(console.warn)
+        await $
+            .ajax({
+                url: api(Endp.lanca),
+                type: 'GET'
+            })
+            .done(mountList)
+            .fail(console.warn)
     
         loading(false)
     
@@ -61,7 +62,7 @@ async function principal() {
             }
     
             // Comprime a lista de Lançamentos para reduzir o espaço ocupado no telefone
-            for (const anime of animes.data){
+            for (const anime of animes){
                 releaseList.data.push(Object.values(anime))
             }
     

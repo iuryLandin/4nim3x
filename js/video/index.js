@@ -26,12 +26,12 @@ async function principal() {
     }
 
     async function getVideOptions() {
-        return await axios
-            .get(
-                api(Endp.video + video.id)
-            )
-            .then(res => res.data)
-            .catch(console.warn)
+        return await $
+            .ajax({
+                url: api(Endp.video + video.id),
+                type: 'GET'
+            })
+            .fail(console.warn)
     }
 
     async function mountOptionsList() {

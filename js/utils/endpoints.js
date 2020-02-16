@@ -9,7 +9,7 @@ const Endp = {
     lanca : '/lancamento',     //lista de animes da temporada
     episo : '/episodio?id=',   //endpoint para acesso aos episodios
     baseUrl() {
-        return `https://cors-anywhere.herokuapp.com/${this.cinex}` //API
+        return this.qgElet //API
     },
 }
 

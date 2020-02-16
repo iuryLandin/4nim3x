@@ -64,12 +64,12 @@ async function principal() {
 
         if (epData) return epData
         else {
-            epData = await axios
-                .get(
-                    api(Endp.episo + id)
-                )
-                .then(res => res.data)
-                .catch(console.warn)
+            epData = await $
+                .ajax({
+                    url: api(Endp.episo + id),
+                    type: 'GET'
+                })
+                .fail(console.warn)
             
             set.Session(id, epData)
             set.Session('currentAnime', id)
