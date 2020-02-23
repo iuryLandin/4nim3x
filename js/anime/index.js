@@ -24,7 +24,9 @@ async function principal() {
     //End of principal()
 
     function applyAnimeDataOnPage() {
-        $("#titulo").html(anime[1]);
+        for(const name of get.Queries('.page-name')) {
+            name.innerHTML = anime[1]
+        }
         $("#desc")  .html(`<div class="descricao">${anime[2]}</div>`);
         $(".back")  .css('background-image', `url(${safeImg(anime[3])})`);
         $("#poster").attr('src', safeImg(anime[3]));

@@ -20,7 +20,7 @@ function busca() {
 
     function runSearch() {
         set.Session("lastSearch", searchBar.value)
-        setTimeout(pesquisa, 1000)
+        setTimeout(pesquisa, 500)
     }
 }
 
