@@ -113,6 +113,10 @@ header .logo {
     padding: 12px;
     display: inline-block;
     text-align: center;
+    transition-duration: .5s;
+}
+.anime:hover {
+    transform: scale(1.05);
 }
 
 .back {
