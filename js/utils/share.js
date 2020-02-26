@@ -53,7 +53,9 @@ function getShareLink() {
         anime[3].split('.br/')[1]
     ]
 
-    return ( `${location.origin}/page/share/?id=${data2Share.join('=')}` )
+    const baseShareUrl = location.origin.includes('herokuapp') ? location.origin : `${location.origin}/4nim3x`
+
+    return ( `${baseShareUrl}/page/share/?id=${data2Share.join('=')}` )
     //End of getShareLink()
 
     function replaceQuotesAndSpaces(elem) {
