@@ -51,7 +51,7 @@ function principal() {
     }
 
     function loadPage() {
-        location = `../page/anime/?id=${animeData[0]}`
+        location = `../anime/?id=${animeData[0]}`
     }
 }
 
