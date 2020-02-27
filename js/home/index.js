@@ -1,5 +1,5 @@
 import { busca, pesquisa, mudaPesq } from '../utils/SearchEngine/index.js'
-import { Endp, getApiLink as api, Head } from '../utils/endpoints.js'
+import { Endp, getApiLink as api } from '../utils/endpoints.js'
 import { get, set, listen } from '../frameworks/czark.js'
 import { fixApiBug, nextPage, showAnimeList } from './utils/index.js'
 
@@ -11,7 +11,7 @@ if (
 async function principal() {
     const lastSearch = get.Session('lastSearch')
     
-    if (!current.animeList) {
+    if ( !get.Local('animeList-0') ) {
         await getAnimeListFromApi()
     }
     else checkListStatus()
@@ -24,22 +24,18 @@ async function principal() {
     //End of principal()
 
     async function checkListStatus() {
-        const animeList = current.animeList.data
-        // Recebe o tamanho do array salvo na local Storage
-        const i = animeList.length
-    
-        //Recebe a ultima pagina página salva na local Storage
-        const LastPage = {
-            data: animeList[i-1],
-            Next: animeList[i-2].Next
-        }
+        const lastPage = get.Local('lastPageLocal')
+
+        const animeList = get.Local(`animeList-${lastPage}`)
+
         // Recebe da session a página salva, caso exista
-        let lastPageFromApi = get.Session(LastPage.Next)
+        let lastPageFromApi = get.Session(lastPage)
+
         if (!lastPageFromApi) {
             // Recebe da api a última página salva na session, para comparação
             lastPageFromApi = await $
                 .ajax({
-                    url: api(Endp.anime + LastPage.Next),
+                    url: api(Endp.anime + lastPage),
                     type: 'GET'
                 })
                 .fail(console.warn)
@@ -48,19 +44,19 @@ async function principal() {
                 lastPageFromApi = fixApiBug(lastPageFromApi)
     
             // Salva na sessão o resultado do ajax para evitar sobrecarga na api
-            set.Session(LastPage.Next, lastPageFromApi)
+            set.Session(lastPage, lastPageFromApi)
         }
     
         // Analiza se ainda existem itens a serem adicionados a lista de animes
         if ( existNextPage() || newAnimeAdd() ) 
-            getAnimeListFromApi(LastPage.Next)
+            getAnimeListFromApi(lastPage)
 
         function existNextPage() {
             return (!!lastPageFromApi.Next)
         }
 
         function newAnimeAdd() {
-            return (!!lastPageFromApi.anime.length > LastPage.data.animes.length)
+            return (!!lastPageFromApi.anime.length > animeList.animes.length)
         }
     }
 
@@ -75,8 +71,7 @@ async function principal() {
     function showLastSearch() {
         mudaPesq()
 
-        current.searchBar
-            .value = lastSearch
+        searchBar.value = lastSearch
 
         pesquisa()
     }
@@ -100,11 +95,6 @@ async function getAnimeListFromApi(page = 0){
     }
 
     function createLocalAnimeList() {
-        // Recebe da localStorage a lista mais recente, caso nao exista
-        // Cria uma do zero
-        let animeList = get.Local('animeList') ||
-            {created: get.Date(), data: []}
-
         // Corrige o problema da ultima página da Api retornar conteudo HTML
         if(typeof data == 'string')
             data = fixApiBug(data)
@@ -116,65 +106,42 @@ async function getAnimeListFromApi(page = 0){
         for (const item of data.anime) {
             animes.push(
                 Object.values(item)
-            )
-        }
-
-        // Adiciona à lista de animes o retorno do ajax "comprimido"
-        animeList.data[page/50] = {
-            animes,
-            'Next': data.Next
-        }
+                )
+            }
+            
+            // Adiciona à lista de animes o retorno do ajax "comprimido"
+        const animeList = { 'created': get.Date(), animes, 'Next': data.Next }
 
         // Salva na Local Storage a lista de Animes
-        set.Local('animeList', animeList)
+        set.Local(`animeList-${page}`, animeList)
 
         // Aciona Recursividade caso exista mais itens para salvar
         if (data.Next)
             getAnimeListFromApi(data.Next)
 
+        set.Local('lastPageLocal', page)
+
         createSearchEngine()
     }
 
     function createSearchEngine() {
-        const animeList = get.Local('animeList')
+        const animeList = get.Local(`animeList-${page}`)
 
         if (animeList) {
             // Array auxiliar usado para receber os valores
-            let auxArray = []
-    
-            // Percorre todas as linhas de dados dentro do array salvo na localStorage
-            for (const row of animeList.data) {
-    
-                //percorre cada anime dentro da linha
-                for (const anime of row.animes) {
+            let auxArray = [animeList.Next]
 
-                    auxArray.push(anime)
-                }
+            //percorre cada anime dentro da linha
+            for (const anime of animeList.animes) {
+                auxArray.push(anime)
             }
-    
-            // Organiza o array do motor de busca em ordem alfábetica
-            auxArray
-                .sort((a, b) => {
-                    if ( a[1] > b[1] ) return 1
-                    if ( b[1] > a[1] ) return -1
-                    return 0
-                })
             
             // Salva na localStorage o motor de buscas otimizado
-            set.Local('searchEngine', auxArray)
+            set.Local(`searchEngine-${page}`, auxArray)
         }
     }
 }
 
-const current = {
-    // Recebe lista de animes da LocalStorage, caso exista
-    animeList: get.Local('animeList'),
-
-    // Verifica se alguma busca foi feita pelo usuário anteriormente
-    lastSearch: get.Session('lastSearch'),
-
-    //Caminho direto para a searchBar na página
-    searchBar: get.Id('searchbar')
-}
+const searchBar = get.Id('searchbar')
 
 ;(principal)()

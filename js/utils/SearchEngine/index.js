@@ -1,10 +1,10 @@
-import devFunctions from './utils/devFunc.js'
-import createAnimeCard from '../../templates/animes.js'
-import { get, set, del } from '../../frameworks/czark.js'
 import { showAnimeList } from '../../home/utils/index.js'
+import { get, set, del } from '../../frameworks/czark.js'
+import getSearchEngine from './utils/getSearchEngine.js'
+import createAnimeCard from '../../templates/animes.js'
+import devFunctions from './utils/devFunc.js'
 
 const searchBar = get.Id('searchbar')
-const searchEngine = get.Local('searchEngine')
 
 function busca() {
     const audit = devFunctions[searchBar.value]
@@ -26,6 +26,8 @@ function busca() {
 
 function pesquisa() {
     del.fromSession('nextPage')
+
+    const searchEngine = getSearchEngine()
     
     const results = findResults()
 
@@ -37,9 +39,7 @@ function pesquisa() {
         const term = searchBar.value.toLowerCase()
 
         const matches = searchEngine
-            .filter(
-                anime => (anime[1].toLowerCase().indexOf(term)+1)
-            )
+            .filter( anime => anime[1].toLowerCase().includes(term) )
 
         return matches
     }
@@ -60,6 +60,8 @@ function pesquisa() {
 }
 
 function getAnimeById(animeId) {
+    const searchEngine = getSearchEngine()
+    
     let animeData = findAnimeDataInLocalFiles()
 
     if (!animeData) animeData = findAnimeInReleases()

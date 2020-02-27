@@ -107,16 +107,20 @@ header .logo {
     height: 210px;
 }
 
+.anime, .episodio, .episodio-visto {
+    transition-duration: .7s;
+}
+.anime:hover, .episodio:hover, .episodio-visto:hover {
+    transform: scale(1.03);
+    transition-duration: .3s;
+}
+
 .anime {
     width: 150px;
     height: 210px;
     padding: 12px;
     display: inline-block;
     text-align: center;
-    transition-duration: .5s;
-}
-.anime:hover {
-    transform: scale(1.05);
 }
 
 .back {

@@ -45,9 +45,7 @@ function fixApiBug(data) {
 function showAnimeList(page = 0) {
     deleteOldAnimeCards()
     
-    const currentPage = (
-        get.Local('animeList').data[page]
-    )
+    const currentPage = get.Local(`animeList-${page}`)
 
     mountCurrentPage()
 
@@ -69,7 +67,7 @@ function showAnimeList(page = 0) {
         if (currentPage.Next) 
             set.Session(
                 'nextPage',
-                currentPage.Next/50
+                currentPage.Next
             )
         else 
             del.fromSession('nextPage')

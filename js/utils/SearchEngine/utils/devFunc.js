@@ -1,5 +1,6 @@
-import { get, del } from '../../../frameworks/czark.js'
 import montAnimeCard from '../../../templates/animes.js'
+import { get, del } from '../../../frameworks/czark.js'
+import getSearchEngine from './getSearchEngine.js'
 import { pesquisa } from '../index.js'
 
 const searchBar = get.Id('searchbar')
@@ -10,8 +11,20 @@ const devFunctions = {
       pesquisa()
       let escolha = confirm('Está ação irá apagar a lista de animes e irá criar uma nova, não feche o site durante o processo.');
       if (escolha) {
-        del.fromLocal('animeList');
+        deleteList();
         location.reload();
+      }
+
+      function deleteList(pos = 0) {
+        const enginePage = get.Local(`animeList-${pos}`)
+
+        if(!enginePage) return
+
+        const next = enginePage[0]
+
+        del.fromLocal(`animeList-${pos}`)
+
+        if (next) deleteList(next)
       }
     },
     
@@ -38,7 +51,7 @@ const devFunctions = {
           .Queries(".anime")
           .forEach(del.element)
   
-        const allAnimes = get.Local('searchEngine')
+        const allAnimes = getSearchEngine()
   
         for (const anime of allAnimes) {
           setTimeout(() => montAnimeCard(anime), 500)
