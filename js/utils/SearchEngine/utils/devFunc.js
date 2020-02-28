@@ -62,6 +62,14 @@ const devFunctions = {
         searchBar.value = ''
         pesquisa()
       }
+    },
+
+    openSite() {
+      let site = prompt("qual site você deseja abrir?")
+
+      if(confirm(`confirma que deseja abrir o site: ${site}  ?`)) {
+        location = site
+      }else searchBar.value = ''
     }
 }
 
