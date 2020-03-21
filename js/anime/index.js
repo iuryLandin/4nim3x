@@ -28,8 +28,8 @@ async function principal() {
             name.innerHTML = anime[1]
         }
         $("#desc")  .html(`<div class="descricao">${anime[2]}</div>`);
-        $(".back")  .css('background-image', `url(${safeImg(anime[3])})`);
-        $("#poster").attr('src', safeImg(anime[3]));
+        $(".back")  .css('background-image', `url(${anime[3]})`);
+        $("#poster").attr('src', anime[3]);
     }
     
     async function mountEpisodesList() {
