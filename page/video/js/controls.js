@@ -9,9 +9,14 @@ const controls = {
         video.currentTime -= parseFloat( 10 )
     },
     ArrowUp() {
-        if ( video.volume < 1 ) video.volume += parseFloat( 0.05 )
+        if ( video.volume < 0.94 ) video.volume += parseFloat( 0.05 )
+        else video.volume = parseFloat( 1 )
     },
     ArrowDown() {
-        if ( video.volume ) video.volume -= parseFloat( 0.05 )
+        if ( video.volume > 0.05 ) video.volume -= parseFloat( 0.05 )
+        else video.volume = parseFloat( 0 )
+    },
+    KeyF() {
+        video.webkitRequestFullScreen();
     }
 }
