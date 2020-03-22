@@ -4,9 +4,8 @@ import { get, set, listen } from '../frameworks/czark.js'
 import { fixApiBug, nextPage, showAnimeList } from './utils/index.js'
 
 listen('keyup', busca)
-if (
-    get.Id('searchbtn')
-) $('#searchbtn').click(mudaPesq)
+
+if ( get.Id('searchbtn') ) $('#searchbtn').click(mudaPesq)
 
 async function principal() {
     const lastSearch = get.Session('lastSearch')
@@ -20,7 +19,7 @@ async function principal() {
     
     nextPage.activate()
 
-    set.Local('appVersion', '1.2.8')
+    set.Local('appVersion', '1.5.2')
     //End of principal()
 
     async function checkListStatus() {
