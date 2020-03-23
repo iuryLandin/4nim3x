@@ -115,6 +115,10 @@ header .logo {
     transition-duration: .3s;
 }
 
+.episodio:hover, .episodio-visto:hover {
+    background-color: #661c65;
+}
+
 .anime {
     width: 150px;
     height: 210px;
