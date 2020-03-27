@@ -18,7 +18,7 @@ const controls = {
     },
     KeyF() {    
         if (document.fullscreenElement) video.exitFullscreen()
-        else video.requestFullScreen()
+        else video.requestFullscreen()
     },
     KeyM() {
         video.muted = !video.muted
