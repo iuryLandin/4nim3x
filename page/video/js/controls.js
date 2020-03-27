@@ -17,7 +17,7 @@ const controls = {
         else video.volume = parseFloat( 0 )
     },
     KeyF() {    
-        if (document.fullscreenElement) video.exitFullscreen()
+        if (document.fullscreenElement) document.exitFullscreen()
         else video.requestFullscreen()
     },
     KeyM() {
