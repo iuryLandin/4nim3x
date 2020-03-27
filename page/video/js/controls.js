@@ -16,7 +16,11 @@ const controls = {
         if ( video.volume > 0.05 ) video.volume -= parseFloat( 0.05 )
         else video.volume = parseFloat( 0 )
     },
-    KeyF() {
-        video.webkitRequestFullScreen();
+    KeyF() {    
+        if (document.fullscreenElement) video.webkitExitFullscreen()
+        else video.webkitEnterFullscreen()
+    },
+    KeyM() {
+        video.muted = !video.muted
     }
 }
