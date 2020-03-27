@@ -3,10 +3,10 @@ const controls = {
         togglePlay()
     },
     ArrowRight() {
-        video.currentTime += parseFloat( 10 )
+        video.currentTime += parseFloat( 10.0 )
     },
     ArrowLeft() {
-        video.currentTime -= parseFloat( 10 )
+        video.currentTime -= parseFloat(  2.5 )
     },
     ArrowUp() {
         if ( video.volume < 0.94 ) video.volume += parseFloat( 0.05 )
