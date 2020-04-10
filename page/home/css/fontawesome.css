@@ -1,0 +1,10 @@
+.navbar .fas {
+    font-size: 50px;
+    color: var(--infos);
+}
+
+@media (max-width: 830px) {
+    .navbar .fas {
+        font-size: 29px;
+    }
+}

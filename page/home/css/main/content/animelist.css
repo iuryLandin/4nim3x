@@ -1,0 +1,72 @@
+.anime-list {
+    flex-wrap: wrap;
+    margin: 0px auto;
+}
+
+.anime {
+    /* Estilo */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    filter: grayscale(50%) opacity(.7);
+    background: var(--accent);
+    transition: 300ms !important;
+
+    /* Posicionamento */
+    flex-direction: column;
+    align-items: center;
+    
+    /* Dimensionamento */
+    border-radius: 20px;
+    height: 310px;
+    margin: 20px;
+    width: 192px;
+}
+
+.anime .img {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 20px 0 0;
+    background: var(--primary);
+    height: 270px;
+    width: 192px;
+}
+
+.anime-title {
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 0 0 20px 20px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 40px;
+    width: 192px;
+}
+
+/* Animação */
+.anime:hover{
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.01);
+}
+
+@media (max-width: 750px) {
+    .anime-list {
+        justify-content: space-evenly;
+    }
+
+    .searchbox {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 510px) {
+    .anime {
+        width: 100px;
+        height: 160px;
+    }
+
+    .anime .img {
+        width: 100px;
+        height: 140px;
+    }
+
+    .anime-title {
+        font-size: 9px;
+    }
+}

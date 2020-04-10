@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css');
+
+/* estilos do conteúdo na página */
+@import './css/fontawesome.css';
+@import './css/navbar.css';
+@import './css/mainpage.css';
+@import './css/themes.css';
+
+/* Reseta o Estilo da página */
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    border: unset;
+    padding: 0;
+    margin: 0;
+}
+
+/* Define o display para flex em toda a página por padrão */
+.app, .app * {
+    display: flex;
+    transition: background .3s;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+.mobile {
+    display: none !important;
+}
+
+@media (max-width: 830px) {
+    .mobile {
+        display: block !important;
+    }
+
+    .desktop {
+        display: none !important;
+    }
+}

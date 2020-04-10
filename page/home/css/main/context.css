@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.material-icons {
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.context {
+    width: 100%;
+    padding: 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    color: currentColor;
+    font-size: 76px;
+}
+
+.searchbox {
+    background: var(--accent);
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 250px;
+}
+
+.search-container {
+    color: var(--infos);
+    height: 35px;
+    width: 90%;
+    justify-content: space-evenly;
+}
+
+.searchbar {
+    background: transparent;
+    color: currentColor;
+    font-size: 25px;
+    outline: unset;
+    width: calc(90% - 35px);
+    
+}
+
+.search-icon {
+    position: relative;
+    right: -15px;
+}
+
+@media (max-width: 750px) {
+    .context {
+        flex-direction: column;
+    }
+
+    .searchbox {
+        margin-top: 70px;
+        max-width: 350px;
+    }
+}

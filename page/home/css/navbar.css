@@ -1,0 +1,78 @@
+/* Barra de Navegação */
+.navbar {
+    transition: width .5s ease !important;
+    background: var(--accent_2);
+    overflow-x: hidden;
+
+    /* Ajusta o tamanho da barra */
+    height: 100vh;
+    width: 76px;
+
+    /* torna a barra em persistente à esquerda */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+}
+
+.selected {
+    border-bottom: 2px solid currentColor;
+}
+
+/* Barra de Navegação (semântica) */
+.navbar-nav {
+    height: 100%;
+
+    /* posiciona os items ao centro e em coluna */
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.navbar-item:last-child {
+    margin-top: auto;
+}
+
+/* Item clicável */
+.nav-link {
+    align-items: center;
+    height: 50px;
+    margin: 13px;
+}
+
+/* Nome do icone */
+.link-label {
+    justify-content: center;
+    display: none !important;
+    font-family: 'Ubuntu';
+    font-size: 1rem;
+    margin: 0 10px;
+}
+
+/* Animação da Barra */
+@media (min-width: 830px) {
+    .navbar:hover {
+        width: 200px;
+    }
+    
+    .navbar:hover .link-label {
+        display: block !important;
+    }
+}
+
+@media (max-width: 830px) {
+    .navbar {
+        width: 100vw;
+        height: 60px;
+        bottom: 0;
+    }
+
+    .navbar-nav {
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navbar-item:last-child {
+        display: none;
+    }
+}

@@ -1,0 +1,34 @@
+.loading-svg {
+    color: var(--primary);
+    width: 80px;
+    height: 80px;
+}
+
+.loading-container, .loading-container > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-container {
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 5;
+}
+
+.loading {
+    background: var(--background);
+    border-radius: 20px;
+    height: 100px;
+    width: 100px;
+}
+
+.hide {
+    display: none !important;
+}
+
+.show {
+    display: flex !important;
+}
