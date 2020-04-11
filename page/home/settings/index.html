@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Settings</title>
+    <meta charset="UTF-8">
+
+    <link rel="shortcut icon" href="../static/fav.svg" type="image/x-icon">
+
+    <script src="../themes/themes.js" defer></script>
+    <link rel="stylesheet" href="../themes/themes.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="app" class="app">
+
+        <div class="context">
+            <h1 class="title">Configurações</h1>
+        </div>
+
+        <div class="content">
+            <form class="form" action="saveSettings">
+
+                <label class="label" for="initial-screen">Tela inicial do app:</label>
+                <select id="initial-screen" name="initial-screen">
+                  <option value="alphabetic">Lista Alfabética</option>
+                  <option value="releases">Lançamentos</option>
+                </select>
+
+                <label class="label" for="order-type">Lista de episódios:</label>
+                <select id="order-type" name="order-type">
+                  <option value="AZ">Crescente</option>
+                  <option value="ZA">Descrescente</option>
+                </select>
+
+                <label class="label" for="app-theme">Tema do app:</label>
+                <select id="app-theme" name="app-theme">
+                  <option value="light">light</option>
+                  <option selected value="dark">dark</option>
+                  <option value="purple">purple</option>
+                  <option value="aquamarine">aquamarine</option>
+                  <option value="costum">costumizado</option>
+                </select>
+
+                <div class="costum-theme">
+                    <h3 class="label">Tema Costumizado:</h3>
+                
+                    <div class="costum-theme-options">
+                        <div class="option">
+                            <input id="primary" type="color" value="#610061"/>
+                            <label for="primary">Cor primária</label>
+                        </div>
+                        <div class="option">
+                            <input id="accent" type="color" value="#800080"/>
+                            <label for="accent">Cor dos destaque</label>
+                        </div>
+                        <div class="option">
+                            <input id="accent2" type="color" value="#4d194d"/>
+                            <label for="accent2">Cor dos 2° destaque</label>
+                        </div>
+                        <div class="option">
+                            <input id="background" type="color" value="#ffffff"/>
+                            <label for="background">Cor do Background</label>
+                        </div>
+                        <div class="option">
+                            <input id="background2" type="color" value="#ffffff"/>
+                            <label for="background2">Cor do 2° Background</label>
+                        </div>
+                        <div class="option">
+                            <input id="infos" type="color" value="#ffffff"/>
+                            <label for="infos">Cor das informações</label>
+                        </div>
+                        <div class="option">
+                            <input id="font-color" type="color" value="#800080"/>
+                            <label for="font-color">Cor das Fontes</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit">Resetar Configurações</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://julczar.github.io/CzarK/index.js"></script>
+
+    <script src="../js/settings.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

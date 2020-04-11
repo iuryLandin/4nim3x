@@ -1,22 +1,29 @@
+// armazena o id que a função setTimeout retorna para caso
+// seja necessário parar de salvar as configurações.
+var timeoutId = null
+
+listen('beforeunload', saveSettings);
+
 var settings = {
     autoplay: false,
-    defaultLaunch: 'home',
-    episodeOrder: 'AZ',
-    theme: 'light',
+    defaultLaunch:  'alphabetic',
+    episodeOrder:   'AZ',
+    theme:          'dark',
     costumTheme: {
-        primary: '#610061',
-        accent: '#800080',
-        accent2: '#4d194d',
-        background: '#baabba',
-        icons: '#fff',
-        fontColor: '#800080'
+        primary:    '#610061',
+        accent:     '#800080',
+        accent2:    '#4d194d',
+        background: '#ffffff',
+        background2:'#ededed',
+        infos:      '#ffffff',
+        fontColor:  '#800080'
     }
 }
 
 // Carrega as configurações do usuário
 function loadSettings () {
     const loaded = get.Local('settings')
-    if (loaded && (typeof loaded == 'object')) settings = loaded
+    if (loaded) settings = loaded
 }
 
 // Salva as configurações da do usuário
@@ -27,9 +34,8 @@ async function saveSettings () {
     }
 
     // torna a função recursiva
-    setTimeout(saveSettings, 5000)
+    this.timeoutId = setTimeout(saveSettings, 5000)
 }
 
 loadSettings();
 saveSettings();
-listen('beforeunload', saveSettings);

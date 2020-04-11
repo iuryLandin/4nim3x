@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+@import './css/form.css';
+
+/* Aconselho Recolher essa barra para
+ * visualizar melhor os temas. */
+* {
+    /* Reseta o Estilo da página */
+    box-sizing: border-box;
+    text-decoration: none;
+    border: unset;
+    padding: 0;
+    margin: 0;
+    
+    /* Animação na mudança de temas */
+    transition: background .3s;
+}
+
+.app, .form, .costum-theme { flex-direction: column }
+.costum-theme-options { flex-flow: wrap column; }
+.app, .app > *, .option { align-items: center; }
+.costum-theme { margin-top: 15px }
+.app, .app * { display: flex }
+.title { font-size: 2.5em; }
+.label { color: var(--accent)}
+
+.app {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--background);
+    min-height: 100vh;
+}
+
+.context {
+    padding: 20px 17px;
+    padding: 0px 20px;
+    margin-top: 20px;
+    height: 60px;
+    width: 100vw;
+}
+
+.content {
+    height: calc(100vh - 80px);
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+@media (max-width: 350px) {
+    .content {
+        margin-top: 50px;
+    }
+}

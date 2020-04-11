@@ -1,0 +1,51 @@
+.form {
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,.4);
+    background: var(--background_2);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    width: 290px;
+}
+
+.option {
+    padding: 5px;
+    align-items: center;
+}
+
+select {
+    background: var(--background);
+    box-shadow: 0px 0px 4px .5px rgba(0,0,0,.3);
+    padding: 5px !important;
+    color: currentColor;
+    border-radius: 10px;
+    outline: unset;
+    height: 30px;
+}
+
+option:last-child {
+    border-radius: 0px 0px 10px 10px;
+}
+
+input[type="color"] {
+    background: transparent;
+    height: 25px;
+    width: 23px;
+}
+
+button {
+    font-family: 'Ubuntu', sans-serif;
+    border: 2px solid var(--accent);
+    background: var(--background);
+    justify-content: center;
+    color: currentColor;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    height: 70px;
+}
+
+.label {
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 24px;
+}

@@ -34,9 +34,9 @@
     border-radius: 0 0 20px 20px;
     justify-content: center;
     align-items: center;
+    width: fit-content;
     color: white;
     height: 40px;
-    width: 192px;
 }
 
 /* Animação */
@@ -55,18 +55,19 @@
     }
 }
 
-@media (max-width: 510px) {
+@media (max-width: 505px) {
     .anime {
-        width: 100px;
-        height: 160px;
+        height: 56vw;
+        margin: 3vw;
+        width: 35vw;
     }
 
     .anime .img {
-        width: 100px;
-        height: 140px;
+        height: 49vw;
+        width: 35vw;
     }
 
     .anime-title {
-        font-size: 9px;
+        font-size: 3vw;
     }
 }
