@@ -1,13 +1,22 @@
 function changeTheme() {
+    // pega direto na página o tema que está aplicado atualmente
     let currentTheme = d.body.classList.value
+
+    // pega das configurações o tema que o usuário quer aplicar
     let { theme: newTheme } = settings
+    
+    // substitui o tema que estava aplicado na página com o novo
     d.body.classList.replace(currentTheme, newTheme)
+
+    // Recarrega na tela os valores do tema costumizado.
     loadTheme()
 }
 
 function loadTheme() {
-    // pega das configurações o tema selecionado atualmente e o carrega na página
+    // Pega das configurações o tema selecionado atualmente e o carrega na página
     let { theme, costumTheme } = settings
+    
+    // Adiciona o tema 
     d.body.classList.add(theme)
     
     // Cria uma tag style contendo todas as configurações do tema costumizado
