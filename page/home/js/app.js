@@ -108,13 +108,14 @@ async function getApiData(url) {
     return await $.get(url).fail(console.warn)
 }
 
-// Executa a função assíncrona getList, e, ao final, é executa também a função que irá
-// carregar os lancamentos ou a lista alfabética na tela com base nas configurações.
+// Da início ao carregamento da página
 getLists()
+    // Executa a função assíncrona getList, e, ao final, é executa também a função que irá
+    // carregar os lancamentos ou a lista alfabética na tela com base nas configurações.
     .then(load[defaultLaunch])
+    // Adiciona uma função que é executada toda vez que ocorre uma rolagem na página
+    // serve para carregar a lista automaticamente enquanto a página vai sendo rolada
     .then(function loadNextPage() {
-        // Adiciona uma função que é executada toda vez que ocorre uma rolagem na página
-        // serve para carregar a lista automaticamente enquanto a página vai sendo rolada
         window.onscroll = function loadNextPage() {
             // Eu explicaria o que acontece aqui se mas peguei do google, só sei que basicamente,
             // recebe true se a rolagem ta no fim da página e se tem próxima página pra carregar.
@@ -126,8 +127,8 @@ getLists()
             if (endOfPage) load.home(nextPage)
         }
     })
+    // ativa a mudança de telas via clique nos botões da tela inicial
     .then(function loadSwapScreens() {
-        // essa função ativa a mudança de telas via clique nos botões da tela inicial
         $('.load-all').click(load.home)
         $('.load-rel').click(load.releases)
     })
