@@ -24,7 +24,7 @@
 
 .tab-box .item:not(:last-child) {
     border-right: 1px solid currentColor;
-    padding-right: 7px;
+    padding-right: 10px;
 }
 
 .tab-box .item span {

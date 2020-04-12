@@ -47,7 +47,7 @@
 
 @media (max-width: 750px) {
     .anime-list {
-        justify-content: space-evenly;
+        justify-content: space-between;
     }
 
     .searchbox {

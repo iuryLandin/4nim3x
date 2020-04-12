@@ -1,10 +1,10 @@
-// As seguintes variáveis vão receber a lista de animes que serão exibidos
+// As seguintes variáveis receberão a lista de animes que serão exibidos
 var animeList = new Array()
 var releaseList = new Array()
-// Recebe o mecanismo de busca
-var searchEngine = new Array()
-// Recebe das configurações, qual tela deve ser carregada quando o app abrir
+
+// Receberá das configurações, qual tela deve ser carregada quando o app abrir
 const { defaultLaunch } = settings
+
 // salva qual a tela está sendo exibida para prevenir o carregamento de animes ao fim do scroll da página fora da lista de animes
 var currentScreen = defaultLaunch
 // variável que armazena qual a próxima tela sera carregada (só é usada quando se está exibindo a lista completa)
@@ -15,21 +15,17 @@ async function getLists(pos = 0) {
     releaseList = await getApiData('https://qgeletronicos.com/animeapi/lancamento')
     
     // carrega a lista de animes na posição que a função foi chamada
-    let { anime, Next: next } = await getApiData(`https://qgeletronicos.com/animeapi/anime?next=${pos}`)
+    let { anime, Next } = await getApiData(`https://qgeletronicos.com/animeapi/anime?next=${pos}`)
     animeList[pos/50] = anime
     
-    // dispara recursividade para carregar a lista completa de animes
-    if (next) getLists(next)
-
+    // dispara recursividade para carregar toda a lista de animes
+    if (Next) getLists(Next)
+    
     // Esconde a mensagem de carregamento da busca de animes
     else $('#loading-list').hide()
-
-    // inicia o processo de atualização do mecanismo de busca para mantê-lo atualizado
-    // essa condicional é proposital, desse modo a lista antiga só é atualizada quando a atual está completa.
-    if (next) createSearchEngine()
-    // Salva a lista na localStorage para ser possível acessar após o app abrir a primeira vez
-    // e nao precisar carregar toda vez que o app abrir.
-    else set.Local('searchEngine', searchEngine)
+    
+    // inicia o processo de atualização do mecanismo de busca para evitar dessincronizações com a api
+    createOrUpdateSearchEngine(Next)
 
     // Esconde o modal de carregamento, liberando o acesso do usuário à pagina 
     hideLoading()
@@ -78,29 +74,23 @@ const load = {
     }
 }
 
-function createSearchEngine() {
+function createOrUpdateSearchEngine() {
+    // Limpa todos os animes anteriores para evitar duplicação de dados
+    searchEngine = new Array()
     // itera sobre todas as páginas que estão contidas dentro da lista de animes
-    for (const page of animeList) {
-        // itera sobre todos os animes contidos em cada página da lista de animes
-        for (const anime of page) {
-            // Filtra as informações mais importantes da lista de animes para reduzir seu tamanho e acelerar a pesquisa
+    for (let i in animeList) {
+        let searchPage = new Array(0)
+        for (const anime of animeList[i]) {
             let { Id, Nome, Desc, Imagem } = anime
-            // Adiciona ao mecanismo de buscas o anime que está atualmente no ciclo de iteração.
-            searchEngine.push({ Id, Nome, Desc, Imagem })
+            searchPage.push({ Id, Nome, Desc, Imagem })
         }
+        set.Local(`searchengine-${i}`, searchPage)
     }
-
-    // organiza a engine em ordem alfabética
-    searchEngine.sort((a, b) => {
-        if ( a[1] > b[1] ) return ( 1)
-        if ( b[1] > a[1] ) return (-1)
-        return ( 0)
-    })
 }
 
 // função que devolve o card de cada anime, minimifiquei pra melhorar a identação
 function getAnimeCard({ Id, Nome, Desc, Imagem }) {
-    return `<a href="/page/anime/?id=${Id}&name=${Nome}&desc=${Desc}&img=${Imagem}" class="anime"><img src="${Imagem}" draggable="false" class="img"><div class="anime-title"><h3>${truncate(Nome, 15)}</h3></div></a>`
+    return `<a href="page/anime/?id=${Id}&name=${Nome}&desc=${Desc}&img=${Imagem}" class="anime"><img src="${Imagem}" draggable="false" class="img"><div class="anime-title"><h3>${truncate(Nome, 15)}</h3></div></a>`
 }
 
 // encapsulamento usado para acesso à api
@@ -113,6 +103,11 @@ getLists()
     // Executa a função assíncrona getList, e, ao final, é executa também a função que irá
     // carregar os lancamentos ou a lista alfabética na tela com base nas configurações.
     .then(load[defaultLaunch])
+    // ativa a mudança de telas via clique nos botões da tela inicial
+    .then(function loadSwapScreens() {
+        $('.load-all').click(load.home)
+        $('.load-rel').click(load.releases)
+    })
     // Adiciona uma função que é executada toda vez que ocorre uma rolagem na página
     // serve para carregar a lista automaticamente enquanto a página vai sendo rolada
     .then(function loadNextPage() {
@@ -127,9 +122,7 @@ getLists()
             if (endOfPage) load.home(nextPage)
         }
     })
-    // ativa a mudança de telas via clique nos botões da tela inicial
-    .then(function loadSwapScreens() {
-        $('.load-all').click(load.home)
-        $('.load-rel').click(load.releases)
+    .then(function setAppVersion() {
+        set.Local('appVersion', '2.0.0')
     })
     .catch(console.warn)

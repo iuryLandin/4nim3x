@@ -26,10 +26,6 @@
     <meta charset="UTF-8">
     
     <link rel="stylesheet" href="style.css"/>
-    
-    <!-- Configurações para os temas funcionarem -->
-    <link rel="stylesheet" href="./themes/themes.css">
-    <script src="./themes/themes.js" defer></script>
 
     <!-- configurações do modal de carregamento -->
     <link rel="stylesheet" href="css/loading.css"/>
@@ -51,7 +47,7 @@
         </div>
 
         <div id="loading-list" class="loading-list">
-            <div class="info">Atualizando os Animes</div>
+            <div class="info">Sincronizando animes</div>
             <svg id="loading-title" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="loading">
                 <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="30" stroke-dasharray="141.37166941154067 49.12388980384689">
                 <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"/>
@@ -95,9 +91,9 @@
 
                 <!-- Informações -->
                 <li class="navbar-item">
-                    <a href="#" class="fas fa-info-circle nav-link desktop">
+                    <div class="fas fa-info-circle nav-link desktop">
                         <span class="link-label">Devs JulCzar e Iury Landin</span>
-                    </a>
+                    </div>
                 </li>
 
             </ul>
@@ -110,7 +106,7 @@
                 <h1 class="title">AnimeX</h1>
                 <div id="searchbox" class="searchbox">
                     <div class="search-container">
-                        <input class="searchbar" type="text" name="searchbar" id="searchbar">
+                        <input class="searchbar" type="text" name="searchbar" id="searchbar" >
                         <label class="search-icon" for="searchbar">
                             <i class="material-icons">search</i>
                         </label>
@@ -137,18 +133,22 @@
     </div>
 
     <!-- Frameworks -->
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"
-    ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="></script>
     <script src="https://julczar.github.io/CzarK/index.js"></script>
 
-    <!-- Page Scripts -->
+    <!-- Configurações do app, deve ser carregado antes de qualquer outro script que vai
+        fazer uso delas, para garantir, aconselho ainda o uso de "defer" no script -->
     <script src="./js/settings.js"></script>
-    <script src="./js/utils/loader.js" defer></script>
-    <script type="module" src="./js/app.js" defer ></script>
+
+    <!-- App Scripts -->
+        <!-- script principal do app -->
+        <script src="./js/app.js" defer ></script>
+        <script type="module" src="./js/search.js" defer></script>
+
+        <!-- Configurações para os temas funcionarem -->
+        <link rel="stylesheet" href="./themes/themes.css">
+        <script src="./themes/themes.js" defer></script>
 
     <!-- script temporário de limpeza de arquivos antigos em desuso -->
     <script src="./temp/removeOldAnimeList.js"></script>

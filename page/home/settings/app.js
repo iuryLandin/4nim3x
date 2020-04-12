@@ -5,10 +5,11 @@ listen('submit', resetConfigs)
 
 // Carrega na página as configurações atualmente salvas na localStorage
 ;(function loadPage() {
-    let { defaultLaunch, episodeOrder, theme, costumTheme } = settings
+    let { autoplay, defaultLaunch, episodeOrder, theme, costumTheme } = settings
     let { primary, accent, accent2, background, background2, infos, fontColor } = costumTheme
 
     // Carrega as configurações de uso do app salvas
+    get.Id('autoplay').value        = autoplay
     get.Id('initial-screen').value  = defaultLaunch
     get.Id('order-type').value      = episodeOrder
     get.Id('app-theme').value       = theme
@@ -26,6 +27,7 @@ listen('submit', resetConfigs)
 // Atualiza as configurações toda vez que houver um input por parte do usuário
 function updateSettings() {
     settings = {
+        autoplay:       get.Id('autoplay').value,
         defaultLaunch:  get.Id('initial-screen').value,
         episodeOrder:   get.Id('order-type').value,
         theme:          get.Id('app-theme').value,

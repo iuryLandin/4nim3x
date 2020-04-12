@@ -5,7 +5,7 @@ var timeoutId = null
 // configurações padrão que a página irá utilizar na primeira inicilização
 // também é a variável global que o app acessa buscando as configs salvas.
 var settings = {
-    autoplay: false,
+    autoplay: null,
     defaultLaunch:  'home',
     episodeOrder:   'AZ',
     theme:          'dark',
@@ -21,9 +21,9 @@ var settings = {
 }
 
 // Carrega as configurações do usuário
-function loadSettings () {
-    const loaded = get.Local('settings')
-    if (loaded) settings = loaded
+async function loadSettings () {
+    let settingsSaved = get.Local('settings')
+    if (settingsSaved) settings = settingsSaved
 }
 
 // Salva as configurações da do usuário
@@ -38,4 +38,4 @@ async function saveSettings () {
 }
 
 loadSettings()
-saveSettings()
+    .then(saveSettings)

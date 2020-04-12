@@ -31,7 +31,7 @@ function loadTheme() {
             --background:   ${background};
             --background_2: ${background2};
             --infos:        ${infos};
-            color:          ${fontColor}
+            color:          ${fontColor};
         }
     `)
     // verifica se já existe uma configuração anterior salva e a apaga

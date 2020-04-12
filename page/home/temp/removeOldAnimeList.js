@@ -5,6 +5,7 @@ function clearAnimeList(pos = 0) {
     
     const enginePage = get.Local(`animeList-${pos}`)
     
+    if (!enginePage) return
     const {Next} = enginePage
     
     del.fromLocal(`searchEngine-${pos}`)
