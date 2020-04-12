@@ -1,17 +1,15 @@
+import { loadSearchEngine, loadSearchResults,searchEngine } from "../search.js"
+
 const searchbar = get.Id('searchbar')
 
 const devFunctions = {
     clearWatchedList() {
-      searchbar.value = ''
-      load[currentScreen]()
       if (confirm('Seu progresso salvo será completamente excluído.\n Deseja continuar?')) {
         del.fromLocal('watchedList')
       }
     },
   
     animexAppVersion() {
-      searchbar.value = ''
-      load[currentScreen]()
       alert(
         get.Local('appVersion')
       )
@@ -23,17 +21,10 @@ const devFunctions = {
         get
           .Queries(".anime")
           .forEach(del.element)
-  
-        const allAnimes = getSearchEngine()
-  
-        for (const anime of allAnimes) {
-          setTimeout(() => montAnimeCard(anime), 500)
-        }
 
-        del.fromSession('nextPage')
-      }else {
-        searchbar.value = ''
-        load[currentScreen]()
+        loadSearchEngine()
+  
+        loadSearchResults(searchEngine)
       }
     },
 
@@ -42,7 +33,7 @@ const devFunctions = {
 
       if(confirm(`confirma que deseja abrir o site: ${site}  ?`)) {
         location = site
-      }else searchbar.value = ''
+      }
     }
 }
 

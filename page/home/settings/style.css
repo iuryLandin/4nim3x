@@ -19,7 +19,6 @@
 .app, .form, .costum-theme { flex-direction: column }
 .costum-theme-options { flex-flow: wrap column; }
 .app, .app > *, .option { align-items: center; }
-.costum-theme { margin-top: 15px }
 .app, .app * { display: flex }
 .title { font-size: 2.5em; }
 .label { color: var(--accent)}
@@ -30,23 +29,9 @@
     min-height: 100vh;
 }
 
-.context {
-    padding: 20px 17px;
-    padding: 0px 20px;
-    margin-top: 20px;
-    height: 60px;
-    width: 100vw;
-}
-
 .content {
-    height: calc(100vh - 80px);
+    min-height: 100vh;
     justify-content: center;
     align-items: center;
     width: 100vw;
-}
-
-@media (max-width: 350px) {
-    .content {
-        margin-top: 50px;
-    }
 }

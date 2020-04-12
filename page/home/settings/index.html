@@ -2,23 +2,19 @@
 <html lang="pt-br">
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <title>Settings</title>
+    <title>Configurações</title>
     <meta charset="UTF-8">
 
     <link rel="shortcut icon" href="../static/fav.svg" type="image/x-icon">
 
     <script src="../themes/themes.js" defer></script>
     <link rel="stylesheet" href="../themes/themes.css">
+
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
     <div id="app" class="app">
-
-        <div class="context">
-            <h1 class="title">Configurações</h1>
-        </div>
-
         <div class="content">
             <form class="form" action="saveSettings">
 
@@ -43,8 +39,9 @@
                 <label class="label" for="app-theme">Tema do app:</label>
                 <select id="app-theme" name="app-theme">
                   <option value="light">light</option>
-                  <option selected value="dark">dark</option>
+                  <option value="dark">dark</option>
                   <option value="purple">purple</option>
+                  <option value="purple-dark">purple dark</option>
                   <option value="aquamarine">aquamarine</option>
                   <option value="costum">costumizado</option>
                 </select>

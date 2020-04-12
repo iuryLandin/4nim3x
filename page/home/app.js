@@ -11,8 +11,10 @@ var currentScreen = defaultLaunch
 var nextPage = 0
 
 async function getLists(pos = 0) {
-    $('#loading-list').show()
-    // carrega a lista de lançamentos
+    // verifica se a lista já foi carregada alguma vez e oculta o icone de sincronização dos animes ná página
+    if (get.Local('completed-once')) $('#loading-list').fadeOut()
+
+    // atualiza a lista de lançamentos
     releaseList = await getApiData('https://qgeletronicos.com/animeapi/lancamento')
     
     // carrega a lista de animes na posição que a função foi chamada
@@ -23,10 +25,13 @@ async function getLists(pos = 0) {
     if (Next) getLists(Next)
     
     // Esconde a mensagem de carregamento da busca de animes
-    else $('#loading-list').hide()
+    else {
+        $('#loading-list').fadeOut()
+        set.Local('completed-once', true)
+    }
     
     // inicia o processo de atualização do mecanismo de busca para evitar dessincronizações com a api
-    createOrUpdateSearchEngine(Next)
+    updateSearchEngine(Next)
 
     // Esconde o modal de carregamento, liberando o acesso do usuário à pagina 
     hideLoading()
@@ -75,7 +80,7 @@ const load = {
     }
 }
 
-function createOrUpdateSearchEngine() {
+function updateSearchEngine() {
     // Limpa todos os animes anteriores para evitar duplicação de dados
     searchEngine = new Array()
     // itera sobre todas as páginas que estão contidas dentro da lista de animes

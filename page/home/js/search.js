@@ -28,7 +28,6 @@ function search() {
         let result = findAnimes(query.toLowerCase())
         if(result.length < 300)
             loadSearchResults(result)
-        $('#loading-list').hide()
     }
 }
 
@@ -71,4 +70,10 @@ function loadSearchEngine(pos = 0) {
         // recursividade para solicitar a pŕoxima página na localStorage
         loadSearchEngine(++pos)
     }
+}
+
+export {
+    loadSearchEngine,
+    loadSearchResults,
+    searchEngine
 }
