@@ -2,11 +2,11 @@
 // seja necessário parar de salvar as configurações.
 var timeoutId = null
 
-listen('beforeunload', saveSettings);
-
+// configurações padrão que a página irá utilizar na primeira inicilização
+// também é a variável global que o app acessa buscando as configs salvas.
 var settings = {
     autoplay: false,
-    defaultLaunch:  'alphabetic',
+    defaultLaunch:  'home',
     episodeOrder:   'AZ',
     theme:          'dark',
     costumTheme: {
@@ -37,5 +37,5 @@ async function saveSettings () {
     this.timeoutId = setTimeout(saveSettings, 5000)
 }
 
-loadSettings();
-saveSettings();
+loadSettings()
+saveSettings()

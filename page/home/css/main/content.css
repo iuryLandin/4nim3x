@@ -27,6 +27,15 @@
     padding-right: 7px;
 }
 
+.tab-box .item span {
+    border-bottom: 2px solid transparent;
+    transition: border .3s;
+}
+
+.tab-box .item:hover span{
+    border-bottom: 2px solid currentColor;
+}
+
 @media (max-width: 830px) {
     .content {
         margin-top: 50px;

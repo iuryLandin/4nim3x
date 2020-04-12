@@ -14,10 +14,6 @@
     left: 0;
 }
 
-.selected {
-    border-bottom: 2px solid currentColor;
-}
-
 /* Barra de Navegação (semântica) */
 .navbar-nav {
     height: 100%;
