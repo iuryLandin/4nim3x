@@ -13,19 +13,22 @@ function search() {
     let query = searchbar.value
 
     // caso a barra de pesquisa fique vazia, é carregada a tela padrão
-    if (!query.length) load[defaultLaunch]()
+    if (!query.length) {
+        load[defaultLaunch]()
+    }
     // senão, é feita a pesquisa normalmente 
     else {
         // busca uma função de auditória com o nome da pesquisa, e executa caso encontre
+        // ignora a pesquisa caso execute alguma função de auditória
         const dev = devFunc[query]
         if (dev) dev()
-        // ignora a pesquisa caso execute alguma função de auditória
         if (dev) return
         
         // localiza todos os animes que correspondem a pesquisa
         let result = findAnimes(query.toLowerCase())
         if(result.length < 300)
             loadSearchResults(result)
+        $('#loading-list').hide()
     }
 }
 
@@ -68,5 +71,4 @@ function loadSearchEngine(pos = 0) {
         // recursividade para solicitar a pŕoxima página na localStorage
         loadSearchEngine(++pos)
     }
-    $('#loading-list').hide()
 }

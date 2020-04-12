@@ -11,6 +11,7 @@ var currentScreen = defaultLaunch
 var nextPage = 0
 
 async function getLists(pos = 0) {
+    $('#loading-list').show()
     // carrega a lista de lançamentos
     releaseList = await getApiData('https://qgeletronicos.com/animeapi/lancamento')
     

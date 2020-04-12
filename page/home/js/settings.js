@@ -28,13 +28,15 @@ async function loadSettings () {
 
 // Salva as configurações da do usuário
 async function saveSettings () {
-    if (typeof settings == 'object') {
+    // Camada de segurança que evita que configurações inválidas sejam salvas
+    if (typeof settings == 'object')
         set.Local('settings', settings)
-        console.log('configurações salvas!')
+    else {
+        console.log('houve um erro ao salvar as configurações, restaurando o ultimo estado válido')
+        loadSettings()
     }
-
-    // torna a função recursiva
-    this.timeoutId = setTimeout(saveSettings, 5000)
+    // torna a função recursiva para que a página seja salva automaticamente enquanto estiver aberta
+    this.timeoutId = setTimeout(saveSettings, 500)
 }
 
 loadSettings()
