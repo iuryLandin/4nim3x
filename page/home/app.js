@@ -31,7 +31,7 @@ async function getLists(pos = 0) {
     }
     
     // inicia o processo de atualização do mecanismo de busca para evitar dessincronizações com a api
-    updateSearchEngine(Next)
+    updateSearchEngine()
 
     // Esconde o modal de carregamento, liberando o acesso do usuário à pagina 
     hideLoading()
@@ -40,32 +40,33 @@ async function getLists(pos = 0) {
 // Objeto que contêm o método de carregamento da tela de lançamentos e da tela em ordem de 
 const load = {
     home() {
+        // atualiza o contexto da variável para a realidade atual
+        currentScreen = 'home'
+
         // apaga todos os animes que estão na tela, caso exista algum, para carregar a lista
         if(!nextPage) get.Queries('.anime').forEach(anime => anime.remove())
 
         // itera sobre a lista de animes para carregar os cards
         for (const anime of animeList[nextPage]) {
             let animeCard = getAnimeCard(anime)
-            get.Id('anime-list')
-                .insertAdjacentHTML('beforeend', animeCard)
+            get.Id('anime-list').insertAdjacentHTML('beforeend', animeCard)
         }
         // adicionam um "charme as opções na tela pra demonstrar em qual tela o app está atualmente aberto"
         get.Queries('.load-all').forEach(item => item.classList.add('selected'))
         get.Queries('.load-rel').forEach(item => item.classList.remove('selected'))
 
-        // atualiza o contexto da variável para a realidade atual
-        currentScreen = 'home'
-
         // atualiza o contador de próxima página
         nextPage++
     },
     releases() {
+        // atualiza o contexto da variável para a realidade atual
+        currentScreen = 'releases'
+
         // apaga todos os animes que estão na tela, caso exista algum, para carregar a lista
         get.Queries('.anime').forEach(anime => anime.remove())
 
         // reseta o valor da proxima página a ser carregada na função home()
         nextPage = 0
-
         // itera sobre a lista de lancamentos para carregar os cards
         for (const anime of releaseList) {
             let animeCard = getAnimeCard(anime)
@@ -74,9 +75,6 @@ const load = {
         // adicionam um "charme as opções na tela pra demonstrar em qual tela o app está atualmente aberto"
         get.Queries('.load-all').forEach(item => item.classList.remove('selected'))
         get.Queries('.load-rel').forEach(item => item.classList.add('selected'))
-
-        // atualiza o contexto da variável para a realidade atual
-        currentScreen = 'releases'
     }
 }
 
@@ -96,7 +94,7 @@ function updateSearchEngine() {
 
 // função que devolve o card de cada anime, minimifiquei pra melhorar a identação
 function getAnimeCard({ Id, Nome, Desc, Imagem }) {
-    return `<a href="page/anime/?id=${Id}&name=${Nome}&desc=${Desc}&img=${Imagem}" class="anime"><img src="${Imagem}" draggable="false" class="img"><div class="anime-title"><h3>${truncate(Nome, 15)}</h3></div></a>`
+    return `<a href="page/anime/?id=${Id}&name=${Nome}&desc=${encodeURIComponent(Desc)}&img=${Imagem}&origin=${currentScreen}" class="anime"><img src="${Imagem}" draggable="false" class="img"><div class="anime-title"><h3>${truncate(Nome, 15)}</h3></div></a>`
 }
 
 // encapsulamento usado para acesso à api
@@ -118,7 +116,7 @@ getLists()
     // serve para carregar a lista automaticamente enquanto a página vai sendo rolada
     .then(function loadNextPage() {
         window.onscroll = function loadNextPage() {
-            // Eu explicaria o que acontece aqui se mas peguei do google, só sei que basicamente,
+            // Eu explicaria o que acontece aqui mas eu peguei do google, só sei que basicamente,
             // recebe true se a rolagem ta no fim da página e se tem próxima página pra carregar.
             let endOfPage = ( (window.innerHeight + window.scrollY) >= d.body.offsetHeight )
                 && (animeList.length > nextPage)

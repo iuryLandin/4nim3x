@@ -4,39 +4,51 @@ var searchEngine = new Array()
 // Caminho para a barra de pesquisa
 const searchbar = get.Id('searchbar')
 // Escutador de eventos de input na barra de pesquisa
-listen('input', search, searchbar)
+if(searchbar) listen('input', search, searchbar)
 
 // função que executa a busca ou a 
 function search() {
     loadSearchEngine()
+
+    // organiza em ordem alfabética a lista de pesquisa
+    searchEngine = searchEngine.sort((a, b) => {
+        a = a.Nome.toLowerCase()
+        b = b.Nome.toLowerCase()
+        if ( a > b ) return ( 1)
+        if ( b > a ) return (-1)
+        return ( 0)
+    })
+
     // pega o valor digitado pelo usuário na barra de pesquisa
-    let query = searchbar.value
+    const query = searchbar.value.toLowerCase()
 
     // caso a barra de pesquisa fique vazia, é carregada a tela padrão
-    if (!query.length) {
-        load[defaultLaunch]()
-    }
+    if (!query.length) load[defaultLaunch]()
+
     // senão, é feita a pesquisa normalmente 
     else {
         // busca uma função de auditória com o nome da pesquisa, e executa caso encontre
         // ignora a pesquisa caso execute alguma função de auditória
         const dev = devFunc[query]
-        if (dev) dev()
+        if (dev) dev ()
         if (dev) return
         
         // localiza todos os animes que correspondem a pesquisa
-        let result = findAnimes(query.toLowerCase())
-        if(result.length < 300)
+        const result = findAnimes(query)
+        if (result.length < 300)
             loadSearchResults(result)
     }
 }
 
 function findAnimes(query) {
     // realiza uma filtragem de todos os animes que possuem o termo digitado 
-    return searchEngine.filter(anime => anime.Nome.toLowerCase().includes(query))
+    return searchEngine.filter( ( { Nome } ) => Nome.toLowerCase().includes(query) )
 }
 
 function loadSearchResults(animes) {
+    // atualiza o contexto da variável para a realidade atual
+    currentScreen = 'search'
+
     // apaga todos os animes que estão na tela, caso exista algum, para carregar a lista
     get.Queries('.anime').forEach(anime => anime.remove())
 
@@ -48,12 +60,10 @@ function loadSearchResults(animes) {
         let animeCard = getAnimeCard(anime)
         get.Id('anime-list').insertAdjacentHTML('beforeend', animeCard)
     }
+
     // adicionam um "charme as opções na tela pra demonstrar em qual tela o app está atualmente aberto"
     get.Queries('.load-all').forEach(item => item.classList.remove('selected'))
     get.Queries('.load-rel').forEach(item => item.classList.remove('selected'))
-
-    // atualiza o contexto da variável para a realidade atual
-    currentScreen = 'search'
 }
 
 function loadSearchEngine(pos = 0) {
@@ -62,7 +72,7 @@ function loadSearchEngine(pos = 0) {
     // soicita a localStorage a primeira pagina do mecanismo de busca
     let localSearchEngine = get.Local(`searchengine-${pos}`)
 
-    // verifica se essa página existe
+    // verifica se a página `searchengine-${pos}` existe na localStorage
     if (localSearchEngine) {
         // adiciona os animes da página ao mecanismo de busca
         searchEngine = [...searchEngine,...localSearchEngine]
@@ -70,10 +80,18 @@ function loadSearchEngine(pos = 0) {
         // recursividade para solicitar a pŕoxima página na localStorage
         loadSearchEngine(++pos)
     }
+    
+}
+
+function getAnimeById(animeId) {
+    loadSearchEngine()
+
+    return searchEngine.filter(({ Id }) => Id == animeId)
 }
 
 export {
     loadSearchEngine,
     loadSearchResults,
+    getAnimeById,
     searchEngine
 }
