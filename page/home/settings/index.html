@@ -43,40 +43,182 @@
                   <option value="purple">purple</option>
                   <option value="purple-dark">purple dark</option>
                   <option value="aquamarine">aquamarine</option>
-                  <option value="costum">costumizado</option>
+                  <option value="costum">costomizado</option>
                 </select>
 
                 <div class="costum-theme">
                     <h3 class="label">Tema Costumizado:</h3>
                 
                     <div class="costum-theme-options">
-                        <div class="option">
-                            <input id="primary" type="color" value="#610061"/>
-                            <label for="primary">Cor primária</label>
+                        <div class="color-selector">
+                            <div class="option">
+                                <input id="primary" type="color" value="#610061"/>
+                                <label class="selector-option-name" for="primary">Cor primária</label>
+                            </div>
+                            <div class="option">
+                                <input id="accent" type="color" value="#800080"/>
+                                <label class="selector-option-name" for="accent">Cor de destaque</label>
+                            </div>
+                            <div class="option">
+                                <input id="accent2" type="color" value="#4d194d"/>
+                                <label class="selector-option-name" for="accent2">Cor de dest. secundários</label>
+                            </div>
+                            <div class="option">
+                                <input id="background" type="color" value="#ffffff"/>
+                                <label class="selector-option-name" for="background">Cor de Background</label>
+                            </div>
+                            <div class="option">
+                                <input id="background2" type="color" value="#ffffff"/>
+                                <label class="selector-option-name" for="background2">Cor de Background Sec.</label>
+                            </div>
+                            <div class="option">
+                                <input id="infos" type="color" value="#ffffff"/>
+                                <label class="selector-option-name" for="infos">Cor das informações</label>
+                            </div>
+                            <div class="option">
+                                <input id="font-color" type="color" value="#800080"/>
+                                <label class="selector-option-name" for="font-color">Cor das Fontes</label>
+                            </div>
                         </div>
-                        <div class="option">
-                            <input id="accent" type="color" value="#800080"/>
-                            <label for="accent">Cor dos destaque</label>
+                        <!-- preview das alterações -->
+                        <div class="preview hide-preview-600">
+                            <div class="navbar-preview">
+                                <i class="fas fa-home item mobile"></i>
+                                <i class="fas fa-bars item desktop"></i>
+                                <i class="fas fa-rocket item mobile"></i>
+                                <i class="fas fa-bug item"></i>
+                                <i class="fas fa-cog item"></i>
+                                <i class="fas fa-info-circle item desktop"></i>
+                            </div>
+                            <div class="page-preview">
+                                <div class="preview-title">
+                                    <span class="material-icons">visibility</span>
+                                    <span>Preview</span>
+                                </div>
+                                <div class="context-preview">
+                                    <div class="loading-preview">
+                                        <div>Sincronizando animes</div>
+                                        <svg id="loading-title" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="loading">
+                                            <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="30" stroke-dasharray="141.37166941154067 49.12388980384689">
+                                            <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"/>
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                    <div class="title-preview">AnimeX</div>
+                                    <div class="searchbox-preview">
+                                        <i class="material-icons">search</i>
+                                    </div>
+                                </div>
+                                <div class="content-preview">
+                                    <div class="top-preview desktop">
+                                        <div class="tag-selector-preview">Todos os Animes</div>
+                                        <div class="tag-selector-preview">Lançamentos</div>
+                                    </div>
+                                    <div class="anime-list-preview">
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                        <div class="anime-preview">
+                                            <div class="img-preview"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="option">
-                            <input id="accent2" type="color" value="#4d194d"/>
-                            <label for="accent2">Cor dos 2° destaque</label>
+                    </div>
+                </div>
+                <!-- preview mobile com quebra de linha -->
+                <div class="preview show-preview-600">
+                    <div class="preview-mobile-container">
+                        <div class="navbar-preview">
+                            <i class="fas fa-home item mobile"></i>
+                            <i class="fas fa-bars item desktop"></i>
+                            <i class="fas fa-rocket item mobile"></i>
+                            <i class="fas fa-bug item"></i>
+                            <i class="fas fa-cog item"></i>
+                            <i class="fas fa-info-circle item desktop"></i>
                         </div>
-                        <div class="option">
-                            <input id="background" type="color" value="#ffffff"/>
-                            <label for="background">Cor do Background</label>
-                        </div>
-                        <div class="option">
-                            <input id="background2" type="color" value="#ffffff"/>
-                            <label for="background2">Cor do 2° Background</label>
-                        </div>
-                        <div class="option">
-                            <input id="infos" type="color" value="#ffffff"/>
-                            <label for="infos">Cor das informações</label>
-                        </div>
-                        <div class="option">
-                            <input id="font-color" type="color" value="#800080"/>
-                            <label for="font-color">Cor das Fontes</label>
+                        <div class="page-preview">
+                            <div class="preview-title">
+                                <span class="material-icons">visibility</span>
+                                <span>Preview</span>
+                            </div>
+                            <div class="context-preview">
+                                <div class="loading-preview">
+                                    <div>Sincronizando animes</div>
+                                    <svg id="loading-title" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="loading">
+                                        <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="30" stroke-dasharray="141.37166941154067 49.12388980384689">
+                                        <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"/>
+                                        </circle>
+                                    </svg>
+                                </div>
+                                <div class="title-preview">AnimeX</div>
+                                <div class="searchbox-preview">
+                                    <i class="material-icons">search</i>
+                                </div>
+                            </div>
+                            <div class="content-preview">
+                                <div class="top-preview desktop">
+                                    <div class="tag-selector-preview">Todos os Animes</div>
+                                    <div class="tag-selector-preview">Lançamentos</div>
+                                </div>
+                                <div class="anime-list-preview">
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                    <div class="anime-preview">
+                                        <div class="img-preview"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @import './css/form.css';
+@import './css/preview.css';
 
 /* Aconselho Recolher essa barra para
  * visualizar melhor os temas. */
@@ -17,11 +18,15 @@
 }
 
 .app, .form, .costum-theme { flex-direction: column }
-.costum-theme-options { flex-flow: wrap column; }
 .app, .app > *, .option { align-items: center; }
+.color-selector { flex-flow: wrap row;}
+.label { color: var(--accent)}
 .app, .app * { display: flex }
 .title { font-size: 2.5em; }
-.label { color: var(--accent)}
+
+.costum-theme-option{
+    justify-content: space-between;
+}
 
 .app {
     font-family: 'Montserrat', sans-serif;

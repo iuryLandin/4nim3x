@@ -10,11 +10,8 @@
     display: flex;
 }
 
-.mobile {
-    display: none !important;
-}
-
 .loading-list {
+    color: var(--primary);
     align-items: center;
     position: fixed;
     z-index: 5;
@@ -29,18 +26,4 @@
 
 .selected {
     border-bottom: 2px solid currentColor !important;
-}
-
-@media (max-width: 830px) {
-    ::-webkit-scrollbar {
-        width: 0;
-    }
-
-    .mobile {
-        display: block !important;
-    }
-
-    .desktop {
-        display: none !important;
-    }
 }

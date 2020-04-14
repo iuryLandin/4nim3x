@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
@@ -61,7 +62,7 @@
 .aquamarine {
     --primary:      #014289;
     --accent:       #009ac0;
-    --accent_2:     #014289;
+    --accent_2:     #0255af;
     --background:   #ffffff;
     --infos:        #60f3aB;
     color:          #009ac0;
@@ -75,4 +76,21 @@
 
 .show {
     display: flex !important;
+}
+
+.mobile {
+    display: none !important;
+}
+
+@media (max-width: 830px) {
+    .mobile {
+        display: flex !important;
+    }
+
+    .desktop {
+        display: none !important;
+    }
+    ::-webkit-scrollbar {
+        width: 0;
+    }
 }

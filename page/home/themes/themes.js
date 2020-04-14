@@ -34,7 +34,7 @@ function loadTheme() {
             color:          ${fontColor};
         }
     `)
-    // verifica se já existe uma configuração anterior salva e a apaga
+    // verifica se já existe uma configuração anterior salva, e a apaga
     if (get.Id('costum-theme')) get.Id('costum-theme').remove()
 
     // Adiciona a tag na pagina para que o tema seja carregado

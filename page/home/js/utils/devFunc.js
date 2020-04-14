@@ -1,7 +1,5 @@
 import { loadSearchEngine, loadSearchResults,searchEngine } from "../search.js"
 
-const searchbar = get.Id('searchbar')
-
 const devFunctions = {
     clearWatchedList() {
       if (confirm('Seu progresso salvo será completamente excluído.\n Deseja continuar?')) {
