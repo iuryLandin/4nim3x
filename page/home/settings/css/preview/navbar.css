@@ -18,9 +18,9 @@
 
 @media (max-width: 830px) {
     .navbar-preview {
+        justify-content: space-between;
         flex-direction: row;
         position: absolute;
-        justify-content: space-between;
         width: 220px;
         height: 30px;
         bottom: 0;

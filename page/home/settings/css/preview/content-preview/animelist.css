@@ -9,9 +9,9 @@
 .anime-preview {
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,.3);
     filter: grayscale(50%) opacity(.7);
+    transition: .9s !important;
     background: var(--accent_2);
     border-radius: 10px;
-    transition: filter .3s;
     margin: 10px;
     height: 90px;
     width: 60px;
@@ -19,6 +19,8 @@
 
 .anime-preview:hover {
     filter: grayscale(0) opacity(1);
+    transition: .3s !important;
+    transform: scale(1.02);
 }
 
 .img-preview {
