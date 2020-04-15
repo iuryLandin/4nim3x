@@ -22,7 +22,7 @@ var settings = {
 
 // Carrega as configurações do usuário
 async function loadSettings () {
-    let settingsSaved = get.Local('settings')
+    const settingsSaved = get.Local('settings')
     if (settingsSaved) settings = settingsSaved
 }
 
@@ -36,7 +36,7 @@ async function saveSettings () {
         loadSettings()
     }
     // torna a função recursiva para que a página seja salva automaticamente enquanto estiver aberta
-    this.timeoutId = setTimeout(saveSettings, 500)
+    timeoutId = setTimeout(saveSettings, 500)
 }
 
 loadSettings()

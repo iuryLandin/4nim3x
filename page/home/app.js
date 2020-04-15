@@ -94,7 +94,7 @@ function updateSearchEngine() {
 
 // função que devolve o card de cada anime, minimifiquei pra melhorar a identação
 function getAnimeCard({ Id, Nome, Desc, Imagem }) {
-    return `<a href="page/anime/?id=${Id}&name=${Nome}&desc=${encodeURIComponent(Desc)}&img=${Imagem}&origin=${currentScreen}" class="anime"><img src="${Imagem}" draggable="false" class="img"><div class="anime-title"><h3>${truncate(Nome, 15)}</h3></div></a>`
+    return `<a href="page/anime/index.html?id=${Id}&name=${Nome}&desc=${encodeURIComponent(Desc)}&img=${Imagem}&origin=${currentScreen}" class="anime"><img src="${Imagem}" draggable="false" class="img"><div class="anime-title"><h3>${truncate(Nome, 15)}</h3></div></a>`
 }
 
 // encapsulamento usado para acesso à api

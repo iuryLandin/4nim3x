@@ -16,9 +16,7 @@ const devFunctions = {
     listAllAnimes() {
       if(confirm("Você tem certeza?")) {
         // Analiza se ja existem animes na tela e os remove se necessário
-        get
-          .Queries(".anime")
-          .forEach(del.element)
+        get.Queries(".anime").forEach(del.element)
 
         loadSearchEngine()
   
