@@ -1,4 +1,4 @@
 import { get } from "../frameworks/czark";
 
-if(get.Local('useNewTemplate'))
-    location = '/page/home'
+if(get.Local('useNewLayout'))
+    location = 'page/home'

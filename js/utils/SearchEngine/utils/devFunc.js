@@ -73,7 +73,7 @@ const devFunctions = {
     },
     useNewLayout() {
       set.Local('useNewLayout', true)
-      location = '/page/home'
+      location = 'page/home'
     }
 }
 
