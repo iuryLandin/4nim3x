@@ -82,6 +82,16 @@
     display: none !important;
 }
 
+::-webkit-scrollbar {
+    background: var(--background_2);
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 5px;
+}
+
 @media (max-width: 830px) {
     .mobile {
         display: flex !important;
@@ -89,8 +99,5 @@
 
     .desktop {
         display: none !important;
-    }
-    ::-webkit-scrollbar {
-        width: 0;
     }
 }

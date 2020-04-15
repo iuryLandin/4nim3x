@@ -2,7 +2,7 @@
 .navbar {
     transition: width .5s ease !important;
     background: var(--accent_2);
-    overflow-x: hidden;
+    overflow: hidden;
 
     /* Ajusta o tamanho da barra */
     height: 100vh;

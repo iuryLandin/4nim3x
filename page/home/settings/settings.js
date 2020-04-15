@@ -7,8 +7,8 @@ var timeoutId = null
 var settings = {
     autoplay: null,
     defaultLaunch:  'home',
-    episodeOrder:   'AZ',
-    theme:          'dark',
+    episodeSortMode:'afterbegin',
+    theme:          'purple',
     costumTheme: {
         primary:    '#610061',
         accent:     '#800080',
@@ -37,6 +37,11 @@ async function saveSettings () {
     }
     // torna a função recursiva para que a página seja salva automaticamente enquanto estiver aberta
     timeoutId = setTimeout(saveSettings, 500)
+}
+
+// encapsulamento usado para acesso à api em todos os ambientes que for necessário.
+async function getApiData(endpoint) {
+    return await $.get(`https://qgeletronicos.com/animeapi/${endpoint}`).fail(console.warn)
 }
 
 loadSettings()

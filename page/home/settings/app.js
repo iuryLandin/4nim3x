@@ -5,13 +5,13 @@ listen('submit', resetConfigs)
 
 // Carrega na página as configurações atualmente salvas na localStorage
 ;(function loadPage() {
-    let { autoplay, defaultLaunch, episodeOrder, theme, costumTheme } = settings
+    let { autoplay, defaultLaunch, episodeSortMode, theme, costumTheme } = settings
     let { primary, accent, accent2, background, background2, infos, fontColor } = costumTheme
 
     // Carrega as configurações de uso do app salvas
     get.Id('autoplay').value        = autoplay
     get.Id('initial-screen').value  = defaultLaunch
-    get.Id('order-type').value      = episodeOrder
+    get.Id('order-type').value      = episodeSortMode
     get.Id('app-theme').value       = theme
 
     // Carrega os valores do tema costumizado atualmente aplicado
@@ -29,7 +29,7 @@ function updateSettings() {
     settings = {
         autoplay:       get.Id('autoplay').value,
         defaultLaunch:  get.Id('initial-screen').value,
-        episodeOrder:   get.Id('order-type').value,
+        episodeSortMode:get.Id('order-type').value,
         theme:          get.Id('app-theme').value,
         costumTheme: {
             primary:        get.Id('primary').value,

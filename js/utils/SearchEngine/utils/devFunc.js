@@ -1,5 +1,5 @@
 import montAnimeCard from '../../../templates/animes.js'
-import { get, del } from '../../../frameworks/czark.js'
+import { get, del, set } from '../../../frameworks/czark.js'
 import getSearchEngine from './getSearchEngine.js'
 import { pesquisa } from '../index.js'
 
@@ -70,6 +70,10 @@ const devFunctions = {
       if(confirm(`confirma que deseja abrir o site: ${site}  ?`)) {
         location = site
       }else searchBar.value = ''
+    },
+    useNewLayout() {
+      set.Local('useNewLayout', true)
+      location = '/page/home'
     }
 }
 

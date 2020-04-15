@@ -1,0 +1,9 @@
+.disqus {
+    margin-top: 30px;
+}
+
+@media (min-width: 831px) {
+    .disqus {
+        margin-top: 70px;
+    }
+}

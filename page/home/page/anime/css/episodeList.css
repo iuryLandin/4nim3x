@@ -1,0 +1,71 @@
+.episode-list-container {
+    flex-direction: column;
+}
+
+.sortby {
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px;
+    width: 100%;
+}
+
+.sortby .line {
+    background: currentColor;
+    width: calc(100% - 55px);
+    border-radius: 2px;
+    height: 3px;
+}
+
+.sort-mode {
+    font-family: 'Ubuntu', sans-serif !important;
+    padding-left: 20px;
+    cursor: pointer;
+    width: 55px;
+}
+
+.episode-list {
+    flex-direction: column;
+}
+
+.episode {
+    font-family: 'Ubuntu', sans-serif;
+    border: 2px solid var(--accent);
+    justify-content: center;
+    color: var(--accent);
+    border-radius: 20px;
+    align-items: center;
+    text-align: center;
+    min-height: 50px;
+    margin: 7px 0px;
+    font-size: 18px;
+    width: 100%;
+}
+
+.episode:hover, .episode:active, .seen {
+    color: var(--infos)
+}
+
+.episode:hover {
+    background: var(--accent);
+}
+
+.episode:active {
+    transform: scale(1.01);
+    background: var(--accent_2);
+}
+
+.seen {
+    background: var(--accent);
+}
+
+@media (min-width: 831px) {
+    .episode-list {
+        overflow-y: scroll;
+        padding:0px 5px;
+        height: 95.5vh;
+    }
+    
+    .sortby {
+        margin-top: 0;
+    }
+}

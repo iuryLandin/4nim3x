@@ -1,0 +1,45 @@
+.img-blur, .anime-img-container { height: 32vh; }
+
+.img-blur {
+    box-shadow: inset 0px 0px 4px 2px rgba(0,0,0,.3);
+    filter: blur(1.2px) brightness(75%);
+    background: var(--accent_2);
+
+    /* Dimensionamento */
+    width: calc(100vw - 20px);
+    border-radius: 20px;
+
+    /* posicionamento */
+    background-position: center !important;
+    background-size: cover !important;
+    position: absolute;
+}
+
+.anime-img-container {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.anime-img {
+    background: var(--primary);
+    box-shadow: 0px 0px 4px 4px rgba(0,0,0,.3);
+    border-radius: 20px;
+    height: auto;
+    width: 20vh;
+    z-index: 1;
+}
+
+@media (min-width: 831px) {
+    .anime-img-container, .img-blur {
+        width: calc(30vw - 20px);
+        /* max-width: 360px; */
+    }
+    .img-blur, .anime-img-container {
+        height: 40vh
+    }
+    .anime-img {
+        width: 26vh
+    }
+}
+    

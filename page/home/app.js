@@ -15,10 +15,10 @@ async function getLists(pos = 0) {
     if (get.Local('completed-once')) $('#loading-list').fadeOut()
 
     // atualiza a lista de lançamentos
-    releaseList = await getApiData('https://qgeletronicos.com/animeapi/lancamento')
+    releaseList = await getApiData('lancamento')
     
     // carrega a lista de animes na posição que a função foi chamada
-    let { anime, Next } = await getApiData(`https://qgeletronicos.com/animeapi/anime?next=${pos}`)
+    let { anime, Next } = await getApiData(`anime?next=${pos}`)
     animeList[pos/50] = anime
     
     // dispara recursividade para carregar toda a lista de animes
@@ -95,11 +95,6 @@ function updateSearchEngine() {
 // função que devolve o card de cada anime, minimifiquei pra melhorar a identação
 function getAnimeCard({ Id, Nome, Desc, Imagem }) {
     return `<a href="page/anime/index.html?id=${Id}&name=${Nome}&desc=${encodeURIComponent(Desc)}&img=${Imagem}&origin=${currentScreen}" class="anime"><img src="${Imagem}" draggable="false" class="img"><div class="anime-title"><h3>${truncate(Nome, 15)}</h3></div></a>`
-}
-
-// encapsulamento usado para acesso à api
-async function getApiData(url) {
-    return await $.get(url).fail(console.warn)
 }
 
 // Da início ao carregamento da página

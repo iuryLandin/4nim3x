@@ -1,0 +1,18 @@
+.anime-title {
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px 10px 0px 10px;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    text-align: center;
+    max-width: 1200px;
+    font-weight: 700;
+    font-size: 24px;
+    width: 100%;
+}
+
+@media (min-width: 831px) {
+    .anime-title {
+        font-size: 36px;
+    }
+}

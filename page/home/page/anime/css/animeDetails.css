@@ -1,0 +1,44 @@
+@import './animeDetails/animeImg.css';
+
+.anime-details {
+    flex-direction: column;
+}
+
+.desc {
+    font-family: 'Roboto', sans-serif;
+    width: calc(100vw - 20px);
+    height: fit-content;
+    text-align: justify;
+    position: relative;
+    line-height: 1.5;
+    margin-top: 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.see-all {
+    text-transform: capitalize;
+    text-decoration: underline;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+@media (min-width: 831px) {
+    .anime-details { flex-direction: row;}
+
+    .desc {
+        
+        font-size-adjust: initial;
+        height: 40vh;
+        margin: 0
+    }
+
+    .see-all {
+        right: 10px;
+    }
+
+    .desc-content {
+        padding: 0px 10px;
+    }
+}
