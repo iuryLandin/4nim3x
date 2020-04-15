@@ -1,4 +1,6 @@
-import { get } from "../frameworks/czark";
+import { get } from "../frameworks/czark.js";
 
-if(get.Local('useNewLayout'))
+(function () {
+    if(get.Local('useNewLayout'))
     location = 'page/home'
+})()
