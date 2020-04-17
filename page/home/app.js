@@ -52,7 +52,7 @@ const load = {
         if(!nextPage) get.Queries('.anime').forEach(anime => anime.remove())
 
         // itera sobre a lista de animes para carregar os cards
-        for (const anime of animeList[nextPage]) {
+        for (const anime of get.Local(`searchengine-${nextPage}`) ) {
             let animeCard = getAnimeCard(anime)
             get.Id('anime-list').insertAdjacentHTML('beforeend', animeCard)
         }
