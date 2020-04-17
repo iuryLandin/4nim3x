@@ -58,12 +58,7 @@ async function getEpisodeList() {
     
     // caso não exista, busca da api e salva na sessão
     else {
-        episodeList = await axios.get(`https://cors-anywhere.herokuapp.com/http://cinex.96.lt/animeapi/episodio?id=${id}`, {
-            'Access-Control-Allow-Origin': '*'
-        })
-        .then(res => res.data)
-        .catch(console.warn)
-
+        episodeList = await getApiData(`episodio?id=${id}`)
         set.Session(id, episodeList)
     }
 }

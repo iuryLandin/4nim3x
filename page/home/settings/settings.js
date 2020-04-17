@@ -43,7 +43,7 @@ async function saveSettings () {
 
 // encapsulamento usado para acesso à api em todos os ambientes que for necessário.
 async function getApiData(endpoint) {
-    return await $.get(`https://qgeletronicos.com/animeapi/${endpoint}`).fail(console.warn)
+    return await $.get(`https://cors-anywhere.herokuapp.com/http://cinex.96.lt/animeapi/${endpoint}`).fail(console.warn)
 }
 
 loadSettings()
