@@ -10,7 +10,10 @@ var currentScreen = defaultLaunch
 // variável que armazena qual a próxima tela sera carregada (só é usada quando se está exibindo a lista completa)
 var nextPage = 0
 
-async function getLists(pos = 0) {
+async function getLists() {
+    // recebe da localStorage a última página que foi carregada para dar seguimento ao processo de carregamento da lista
+    const pos = get.Local('currNext') || 0
+
     // verifica se a lista já foi carregada alguma vez e oculta o icone de sincronização dos animes ná página
     if (get.Local('completed-once')) $('#loading-list').fadeOut()
 
@@ -20,9 +23,11 @@ async function getLists(pos = 0) {
     // carrega a lista de animes na posição que a função foi chamada
     let { anime, Next } = await getApiData(`anime?next=${pos}`)
     animeList[pos/50] = anime
+
+    set.Local('currNext', Next)
     
     // dispara recursividade para carregar toda a lista de animes
-    if (Next) getLists(Next)
+    if (Next) getLists()
     
     // Esconde a mensagem de carregamento da busca de animes
     else {
