@@ -68,6 +68,16 @@
     color:          #009ac0;
 }
 
+.midnight-violet {
+    --primary:      #7500bf;
+    --accent:       #8b04ec;
+    --accent_2:     #5a00b6;
+    --background:   #2c2c2c;
+    --background_2: #1d1d1d;
+    --infos:        #ffffff;
+    color:          #ffffff;
+}
+
 
 /* confiugurações padrão que podem ser aplicadas na página de acordo com a necessidade */
 .hide {
