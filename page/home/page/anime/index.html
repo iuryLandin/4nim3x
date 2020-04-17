@@ -46,14 +46,12 @@
                 </div>
             </div>
 
-            <div id="full-desc" class="full-desc-container" onclick="$('#full-desc').fadeOut()">
-                <div class="full-desc-modal">
-
-                </div>
+            <div id="full-desc" class="full-desc-container">
+                <div class="full-desc-modal"></div>
             </div>
 
             <!-- Titulo da Página -->
-            <h1 class="anime-title"></h1>
+            <h1 class="anime-title">Carregando Informações do Anime</h1>
             <!-- Conteúdo da página // Informações do anime -->
             <div class="content">
 
@@ -63,23 +61,25 @@
                     <div class="anime-details">
                         <div class="img-container">
                             <!-- Container auxiliar pra executar o efeito de blur sem desfocar a imagem do aniem -->
-                            <div class="img-blur" style="background: url('');"></div>
+                            <div class="img-blur-container">
+                                <img class="img-blur img-place" src="">
+                            </div>
 
                             <!-- Container que carregará  -->
                             <div class="anime-img-container">
-                                <img draggable="false" class="anime-img" src="">
+                                <img draggable="false" class="anime-img img-place" src="">
                             </div>
                         </div>
 
                         <!-- Container que carregará na versão mobile a descrição do anime -->
-                        <div class="desc mobile" onclick="$('#full-desc').fadeIn()">
-                            <div id="desc-mobile" class="desc-content"></div>
+                        <div class="desc mobile">
+                            <div id="desc-mobile" class="desc-content">As Informações do anime aparecerão aqui em instântes, caso essa mensagem persista considere voltar a tela inicial e abrir o anime novamente após a mensagem de sincronização dos animes sumir.</div>
                             <span id="see-all-mobl" class="see-all">leia mais...</span>
                         </div>
 
                         <!-- Container que carregaraá a versão desktop da descrição -->
-                        <div class="desc desktop" onclick="$('#full-desc').fadeIn()">
-                            <div id="desc-desktop" class="desc-content"></div>
+                        <div class="desc desktop">
+                            <div id="desc-desktop" class="desc-content">As Informações do anime aparecerão aqui em instântes, caso essa mensagem persista considere voltar a tela inicial e abrir o anime novamente após a mensagem de sincronização sumir.</div>
                             <span id="see-all-desk" class="see-all">leia mais...</span>
                         </div>
                     </div>
@@ -134,6 +134,7 @@
     <!-- App Scripts -->
         <!-- script principal do app -->
         <script src="app.js" defer ></script>
+        <script src="./js/saveProgress.js"></script>
 
         <!-- Configurações para os temas funcionarem -->
         <link rel="stylesheet" href="../../themes/themes.css">

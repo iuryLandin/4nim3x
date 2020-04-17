@@ -82,12 +82,12 @@
     display: none !important;
 }
 
-::-webkit-scrollbar {
+*::-webkit-scrollbar {
     background: var(--background_2);
     width: 4px;
 }
 
-::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background: var(--accent);
     border-radius: 5px;
 }

@@ -56,6 +56,11 @@
 
 .seen {
     background: var(--accent);
+    transition: .3s;
+}
+
+.seen:hover {
+    transform: scale(1.01);
 }
 
 @media (min-width: 831px) {
@@ -65,6 +70,16 @@
         height: 95.5vh;
     }
     
+    .episode-list::-webkit-scrollbar {
+        background: var(--background_2);
+        width: 4px;
+    }
+    
+    .episode-list::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 5px;
+    }
+
     .sortby {
         margin-top: 0;
     }

@@ -22,7 +22,9 @@ var settings = {
 
 // Carrega as configurações do usuário
 async function loadSettings () {
+    // carrega as configurações do usuario salva na localStorage
     const settingsSaved = get.Local('settings')
+    // verifica se as configurações existem na local Storage antes de substituir na variável global das configurações
     if (settingsSaved) settings = settingsSaved
 }
 
