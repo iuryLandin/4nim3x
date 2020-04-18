@@ -5,6 +5,9 @@ var releaseList = new Array()
 // Receberá das configurações, qual tela deve ser carregada quando o app abrir
 const { defaultLaunch } = settings
 
+// recebe da localStorage se o carregamento da lista já foi concluido uma vez
+const completedOnce = get.Local('completed-once')
+
 // salva qual a tela está sendo exibida para prevenir o carregamento de animes ao fim do scroll da página fora da lista de animes
 var currentScreen = defaultLaunch
 // variável que armazena qual a próxima tela sera carregada (só é usada quando se está exibindo a lista completa)
@@ -15,13 +18,13 @@ async function getLists() {
     const pos = get.Local('currNext') || 0
 
     // verifica se a lista já foi carregada alguma vez e oculta o icone de sincronização dos animes ná página
-    if (get.Local('completed-once')) $('#loading-list').fadeOut()
+    if (completedOnce) $('#loading-list').fadeOut()
 
     // atualiza a lista de lançamentos
     releaseList = await getApiData('lancamento')
     
     // carrega a lista de animes na posição que a função foi chamada
-    let { anime, Next } = await getApiData(`anime?next=${pos}`)
+    let { anime, Next } = await getApiData(`animes?next=${pos}`)
     animeList[pos/50] = anime
 
     set.Local('currNext', Next)
@@ -127,6 +130,7 @@ getLists()
         }
     })
     .then(function setAppVersion() {
+        // configuração estética que armazena a versão do app ,-,
         set.Local('appVersion', '2.0.0')
     })
     .catch(console.warn)
