@@ -6,7 +6,7 @@ const Endp = {
     video : '/video?id=',      //endpoint para acesso aos videos
     lanca : '/lancamento',     //lista de animes da temporada
     episo : '/episodio?id=',   //endpoint para acesso aos episodios
-    baseUrl: 'https://animexapi.herokuapp.com/'
+    baseUrl: 'https://animexapi.herokuapp.com'
 }
 
 function safeImg(imgURL) {
