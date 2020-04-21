@@ -66,7 +66,7 @@ function toggleFullScreen() {
   video.webkitRequestFullScreen();
 }
 
-function getNextCover(){
+/* function getNextCover(){
     let obj = JSON.parse(sessionStorage.getItem('playlist'));
 
     if(!obj.next){
@@ -164,7 +164,7 @@ function getNextCover(){
           }
       }
   }
- }
+ }*/
 
 // Event listeners
 
