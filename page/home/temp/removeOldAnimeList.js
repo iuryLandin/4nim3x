@@ -4,10 +4,10 @@ function clearAnimeList(pos = 0) {
     del.fromLocal('lastPageLocal')
     
     const enginePage = get.Local(`animeList-${pos}`)
-    
     if (!enginePage) return
-    const {Next} = enginePage
-    
+
+    const { Next } = enginePage
+
     del.fromLocal(`searchEngine-${pos}`)
     del.fromLocal(`animeList-${pos}`)
 
