@@ -1,3 +1,5 @@
+listen('keydown', detectFunction)
+
 const controls = {
     Space() {
         if (player.paused)
@@ -32,4 +34,10 @@ const controls = {
     KeyM() {
         player.muted = !player.muted
     }
+}
+
+function detectFunction(evt) {
+    control = controls[evt.code]
+
+    if (control) control()
 }
