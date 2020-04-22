@@ -1,0 +1,46 @@
+.material-icons {
+    font-size: 3vmax !important;
+    align-content: center;
+    color: var(--accent);
+    border-radius: 50%;
+    text-align: center;
+    padding: 7px;
+    margin: .5vw;
+}
+
+.material-icons:hover, .material-icons:active {
+    background: rgba(0,0,0,.3);
+    color: var(--infos) !important;
+}
+
+.material-icons:active {
+    transform: scale(1.05);
+}
+
+.material-box {
+    align-items: center;
+}
+
+.actions {
+    align-items: center;
+    color: var(--accent);
+    font-size: 1.8vw;
+}
+
+.actions > * {
+    align-items: center;
+    cursor: pointer;
+}
+
+.actions > *:last-child {
+    margin-left: auto;
+}
+
+.actions span {
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+}
+
+.unchecked {
+    filter: grayscale(50%);
+}

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+@import './css/player.css';
+@import './css/actions.css';
+@import './css/quality.css';
+
+.app, .app * {
+    box-sizing: border-box;
+    display: flex;
+}
+
+.app {
+    background: var(--background);
+    background-size: auto;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.app > *:not(.modal) {
+    max-width: 1150px;
+    width: 95%;
+}
+
+.video-title {
+    font-family: 'Montserrat', sans-serif;
+    justify-content: center;
+    color: var(--infos);
+    margin-bottom: 1%;
+    font-size: 3vw;
+}

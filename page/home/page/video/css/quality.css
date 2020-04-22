@@ -1,0 +1,57 @@
+.quality_modal_container {
+    background: rgba(0,0,0,.3);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 5;
+}
+
+.quality_modal {
+    border: 5px solid var(--accent_2);
+    background: var(--background_2);
+    justify-content: space-between;
+    flex-direction: column;
+    border-radius: 20px;
+    align-items: center;
+    height: 90vmin;
+    width: 90vmin;
+}
+
+.info_text {
+    font-family: Montserrat, sans-serif;
+    font-size: 5.3vmin;
+}
+
+.quality_list {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.video_option {
+    font-family: Ubuntu, sans-serif;
+    border: 5px solid var(--accent_2);
+    background: var(--accent);
+    justify-content: center;
+    transition: filter .3s;
+    color: var(--infos);
+    border-radius: 20px;
+    align-items: center;
+    font-size: 3vmin;
+    cursor: pointer;
+    padding: 2vmin;
+    margin: 5px;
+    width: 90%;
+}
+
+.video_option:hover {
+    filter: brightness(70%);
+}
+
+.video_option:active {
+    transform: scale(1.01);
+}
