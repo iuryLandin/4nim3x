@@ -64,6 +64,7 @@
     --accent:       #009ac0;
     --accent_2:     #0255af;
     --background:   #ffffff;
+    --background_2: #e0e0e0;
     --infos:        #60f3aB;
     color:          #009ac0;
 }
@@ -92,12 +93,13 @@
     display: none !important;
 }
 
-*::-webkit-scrollbar {
+::-webkit-scrollbar {
     background: var(--background_2);
+    position: fixed !important;
     width: 4px;
 }
 
-*::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: var(--accent);
     border-radius: 5px;
 }

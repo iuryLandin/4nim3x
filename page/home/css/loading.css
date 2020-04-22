@@ -1,26 +1,33 @@
-.loading-svg {
-    color: var(--primary);
-    width: 80px;
-    height: 80px;
-}
-
-.loading-container, .loading-container > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#loading {
+    transition: .5s;
 }
 
 .loading-container {
     background: rgba(0,0,0,.3);
+    justify-content: center;
+    align-items: center;
     position: fixed;
+    display: flex;
     height: 100vh;
     width: 100vw;
     z-index: 5;
 }
 
-.loading {
+.loading-box {
     background: var(--background);
     border-radius: 20px;
-    height: 100px;
-    width: 100px;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px;
 }
+
+.loading {
+    border: 10px solid var(--primary);
+    border-left-color: rgba(0, 0, 0, 0.1);
+    animation: spin 1s linear infinite;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+}
+
+@keyframes spin { to { transform: rotate(360deg) } }

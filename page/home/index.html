@@ -35,23 +35,15 @@
 <body>
     <div id="app" class="app">
         <!-- Loading Modal -->
-        <div id="loading" class="loading-container show">
-            <div class="loading">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="loading-svg">
-                    <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="30" stroke-dasharray="141.37166941154067 49.12388980384689">
-                    <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"/>
-                    </circle>
-                </svg>
+        <div id="loading" class="loading-container show" style="opacity: 1;">
+            <div class="loading-box">
+                <div class="loading"></div>
             </div>
         </div>
 
         <div id="loading-list" class="loading-list">
             <div>Sincronizando animes</div>
-            <svg id="loading-title" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="loading">
-                <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="30" stroke-dasharray="141.37166941154067 49.12388980384689">
-                <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
+            <div class="loading"></div>
         </div>
 
         <!-- Navbar -->
