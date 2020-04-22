@@ -72,7 +72,7 @@ function loadEpisodeList() {
     const { episodeSortMode: sortMode } = settings
 
     for (const { Id, Nome } of episodeList) {
-        const episodeButtom = `<a href="/page/video/index.html?id=${Id}&episode=${Nome}" class="episode ${(watchedEpsd.includes(Id))?'seen':'unseen'}" onclick="saveEpisode(${Id})">${Nome}</a>`
+        const episodeButtom = `<a href="../video/index.html?id=${Id}&episode=${Nome}" class="episode ${(watchedEpsd.includes(Id))?'seen':'unseen'}" onclick="saveEpisode(${Id})">${Nome}</a>`
         get.Queries('.episode-list').forEach(tag => tag.insertAdjacentHTML(sortMode, episodeButtom))
         
         $('.sort-mode').text( (sortMode == 'beforeend') ? 'Z - A' : 'A - Z' )

@@ -3,7 +3,7 @@ function saveEpisode(Id) {
     let watchedList = get.Local('watchedList') || new Object()
     let watchedEpsd = watchedList[id]          || new  Array()
     
-    // verifica se o episódio já está salvo na lista para evitar 
+    // verifica se o episódio já está salvo na lista para evitar duplicações
     if(!watchedEpsd.includes(Id)) watchedEpsd.push(Id)
 
     watchedList[id] = watchedEpsd.sort((a, b) => {
@@ -13,7 +13,4 @@ function saveEpisode(Id) {
     })
 
     set.Local('watchedList', watchedList)
-
-    get.Queries('.episode').forEach(del.element)
-    loadEpisodeList()
 }
