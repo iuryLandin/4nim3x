@@ -9,7 +9,7 @@
 }
 
 .full-desc-modal {
-    max-height: calc(100vmax - 5vmin);
+    max-height: calc(100vh - 5vmin);
     background: var(--background);
     border-radius: 20px;
     height: fit-content;
