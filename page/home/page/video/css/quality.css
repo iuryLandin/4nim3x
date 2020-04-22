@@ -16,7 +16,7 @@
     border-radius: 20px;
     align-items: center;
     height: 90vmin;
-    width: 90vmin;
+    width: 90vw;
 }
 
 .info_text {
@@ -41,6 +41,7 @@
     color: var(--infos);
     border-radius: 20px;
     align-items: center;
+    max-width: 800px;
     font-size: 3vmin;
     cursor: pointer;
     padding: 2vmin;
