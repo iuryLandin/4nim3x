@@ -1,4 +1,4 @@
-import { loadSearchEngine, loadSearchResults,searchEngine } from "../search.js"
+import { loadSearchEngine, loadSearchResults, searchEngine, sortSearchEngine } from "../search.js"
 
 const devFunctions = {
     clearWatchedList() {
@@ -8,9 +8,8 @@ const devFunctions = {
     },
   
     animexAppVersion() {
-      alert(
-        get.Local('appVersion')
-      )
+      alert( get.Local('appVersion') )
+      console.log(get.Local('appVersion'))
     },
   
     listAllAnimes() {
@@ -19,6 +18,9 @@ const devFunctions = {
         get.Queries(".anime").forEach(del.element)
 
         loadSearchEngine()
+
+        // organiza em ordem alfabética a lista de animes
+        sortSearchEngine
   
         loadSearchResults(searchEngine)
       }
