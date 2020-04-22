@@ -1,28 +1,7 @@
-const themeSelection = get.Id('theme')
-
+// Escutadores de eventos da página de configurações, buscam atualizar as configurações da página
+// e o tema atualmente aplicado na mesma
 listen('input', updateSettings)
 listen('submit', resetConfigs)
-
-// Carrega na página as configurações atualmente salvas na localStorage
-;(function loadPage() {
-    let { autoplay, defaultLaunch, episodeSortMode, theme, costumTheme } = settings
-    let { primary, accent, accent2, background, background2, infos, fontColor } = costumTheme
-
-    // Carrega as configurações de uso do app salvas
-    get.Id('autoplay').value        = autoplay
-    get.Id('initial-screen').value  = defaultLaunch
-    get.Id('order-type').value      = episodeSortMode
-    get.Id('app-theme').value       = theme
-
-    // Carrega os valores do tema costumizado atualmente aplicado
-    get.Id('primary').value     = primary
-    get.Id('accent').value      = accent
-    get.Id('accent2').value     = accent2
-    get.Id('background').value  = background
-    get.Id('background2').value = background2
-    get.Id('infos').value       = infos
-    get.Id('font-color').value  = fontColor
-})()
 
 // Atualiza as configurações toda vez que houver um input por parte do usuário
 function updateSettings() {
@@ -49,6 +28,31 @@ function updateSettings() {
 // restaura as configurações ao padrão
 function resetConfigs(e) {
     e.preventDefault()
+
+    // Deleta da localStorage as configurações salvas
     del.fromLocal('settings')
+
+    // Recarrega a página.
     location.reload();
 }
+
+// Carrega na página as configurações atualmente salvas na localStorage
+;(function loadPage() {
+    const { autoplay, defaultLaunch, episodeSortMode, theme, costumTheme } = settings
+    const { primary, accent, accent2, background, background2, infos, fontColor } = costumTheme
+
+    // Carrega as configurações de uso do app salvas
+    get.Id('autoplay').value        = autoplay
+    get.Id('initial-screen').value  = defaultLaunch
+    get.Id('order-type').value      = episodeSortMode
+    get.Id('app-theme').value       = theme
+
+    // Carrega os valores do tema costumizado atualmente salvo
+    get.Id('primary').value     = primary
+    get.Id('accent').value      = accent
+    get.Id('accent2').value     = accent2
+    get.Id('background').value  = background
+    get.Id('background2').value = background2
+    get.Id('infos').value       = infos
+    get.Id('font-color').value  = fontColor
+})()

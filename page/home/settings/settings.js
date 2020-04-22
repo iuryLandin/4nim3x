@@ -1,3 +1,13 @@
+/**
+ * Arquivo que armazena e inicializa as configurações do app
+ * Neste arquivo é salvo globalmente uma variável 'settings'
+ * que será acessível em todas as páginas do site para modi-
+ * ficação de recursos na página.
+ * 
+ * Criado por JulCzar
+ * Ultima modificação - JulCzar - 22/04/2020
+ */
+
 // armazena o id que a função setTimeout retorna para caso
 // seja necessário parar de salvar as configurações.
 var timeoutId = null
@@ -5,7 +15,7 @@ var timeoutId = null
 // configurações padrão que a página irá utilizar na primeira inicilização
 // também é a variável global que o app acessa buscando as configs salvas.
 var settings = {
-    autoplay: null,
+    autoplay: false,
     defaultLaunch:  'home',
     episodeSortMode:'afterbegin',
     theme:          'purple',
@@ -24,7 +34,8 @@ var settings = {
 async function loadSettings () {
     // carrega as configurações do usuario salva na localStorage
     const settingsSaved = get.Local('settings')
-    // verifica se as configurações existem na local Storage antes de substituir na variável global das configurações
+    // verifica se as configurações existem na local Storage antes
+    // de substituir na variável global settings.
     if (settingsSaved) settings = settingsSaved
 }
 

@@ -50,6 +50,10 @@ button {
     height: 70px;
 }
 
+button:active {
+    transform: scale(1.01);
+}
+
 .label {
     font-weight: bold;
     margin-top: 20px;
