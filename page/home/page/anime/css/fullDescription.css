@@ -9,14 +9,14 @@
 }
 
 .full-desc-modal {
+    max-height: calc(100vmax - 5vmin);
     background: var(--background);
     border-radius: 20px;
     height: fit-content;
     text-align: justify;
     overflow-y: scroll;
     padding: 10px 20px;
-    width: 50vmin;
-    max-height: 95vh;
+    max-width: 95vmin;
     line-height: 2;
 }
 
