@@ -1,51 +1,48 @@
 @charset "UTF-8";
 
-.shareDiv {
-    padding: 1%;
-    width: 98%;
-    height: 200px;
-    position: fixed;
-    bottom: 0;
-    margin-top: 80%;
-    background: white;
-    box-shadow: 0 0 8px black;
-    display: none;
+@import './css/animeTitle.css';
+@import './css/fullDescription.css';
+@import './css/animeDetails.css';
+@import './css/episodeList.css';
+@import './css/disqus.css';
+
+.app, .app * {
+    display: flex;
 }
 
-.url-2-copy {
-    transform: translateY(-1vh) translateX(1.2vw);
-    background-color: #e2e2e2;
-    outline: none;
-    border: none;
-    padding: 1.5vmin;
-    border-radius: 2.5vmin;
+.app {
+    background: var(--background);
+    overflow-x: hidden;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-.descricao {
-    padding-top: 3vmin;
-    text-align: justify;
+.page-container {
+    box-shadow: 0px 0px 4px 4px rgba(0,0,0,.3);
+    background: var(--background_2);
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
 }
 
-.episodio-visto {
-    background: #692567 !important;
+.left {
+    flex-direction: column;
+    padding: 10px;
 }
 
-.episodio-visto::before {
-    font-family: 'Font Awesome 5 Free';
-    content: "\f06e";
-    padding-right: 10px;
-}
+@media (min-width: 831px) {
+    .left {
+        width: 60%;
+        padding-right: 20px;
+    }
 
-.episodio-visto, .episodio {
-    color: white;
-}
+    .right {
+        width: 40%;
+    }
 
-#share-btn{
-    margin-right: 10px;
-}
-
-@media (max-width: 450px) {
-    .url-2-copy {
-        width: 45vw;
+    .page-container .content {
+        max-width: 95vw;
+        padding: 20px;
+        width: 100vw;
     }
 }

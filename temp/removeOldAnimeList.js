@@ -2,6 +2,7 @@
 function clearAnimeList(pos = 0) {
     del.fromLocal('releaseList')
     del.fromLocal('lastPageLocal')
+    del.fromLocal('useNewLayout')
     
     const enginePage = get.Local(`animeList-${pos}`)
     if (!enginePage) return

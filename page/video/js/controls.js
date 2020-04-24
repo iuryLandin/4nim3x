@@ -1,26 +1,43 @@
+listen('keydown', detectFunction)
+
 const controls = {
     Space() {
-        togglePlay()
+        if (player.paused)
+            player.play()
+        else
+            player.pause()
     },
     ArrowRight() {
-        video.currentTime += parseFloat( 10.0 )
+        player.currentTime += parseFloat( 10.0 )
     },
     ArrowLeft() {
-        video.currentTime -= parseFloat(  2.5 )
+        player.currentTime -= parseFloat(  2.5 )
     },
     ArrowUp() {
-        if ( video.volume < 0.94 ) video.volume += parseFloat( 0.05 )
-        else video.volume = parseFloat( 1 )
+        if (player.volume < 0.94 )
+            player.volume += parseFloat( 0.05 )
+        else
+            player.volume = parseFloat( 1 )
     },
     ArrowDown() {
-        if ( video.volume > 0.05 ) video.volume -= parseFloat( 0.05 )
-        else video.volume = parseFloat( 0 )
+        if (player.volume > 0.05 )
+            player.volume -= parseFloat( 0.05 )
+        else
+            player.volume = parseFloat( 0 )
     },
     KeyF() {    
-        if (document.fullscreenElement) document.exitFullscreen()
-        else video.requestFullscreen()
+        if (d.fullscreenElement)
+            d.exitFullscreen()
+        else
+            player.requestFullscreen()
     },
     KeyM() {
-        video.muted = !video.muted
+        player.muted = !player.muted
     }
+}
+
+function detectFunction(evt) {
+    control = controls[evt.code]
+
+    if (control) control()
 }
