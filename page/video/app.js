@@ -27,35 +27,33 @@ async function getEpisodeList() {
     console.log(episodeList)
 }
 
-async function getVideoQualities(id = ep) {
-    videoQualities = await getApiData(`video?id=${ep}`)
-    player.src = `../player/?url=${videoQualities[1].Endereco}`
-    console.log(videoQualities)
+async function getVideoQualities() {
+    return await getApiData(`video?id=${ep}`)
 }
 
 getEpisodeList().then(getVideoQualities)
 
 
-// async function loadPage() {
-//     // Adiciona o titulo do episódio na página
-//     $('#video-title').text(episode)
+async function loadPage() {
+    // Adiciona o titulo do episódio na página
+    // $('#video-title').text(episode)
     
-//     // Carrega a lista de qualidades do video da api
-//     videoQualities = await getApiData(`video?id=${id}`)
+    // Carrega a lista de qualidades do video da api
+    videoQualities = await getVideoQualities()
     
-//     // itera sobre a lista carregando apenas os dados do nome e da url do video
-//     for(const { Nome, Endereco } of videoQualities) {
-//         // adiciona no modal as qualidade que a api retornou
-//         get.Id('quality_list').insertAdjacentHTML('beforeend', `<div class="video_option" onclick="loadVideo('${Endereco}')">${Nome}</div>`)
-//     }
-//     // Exibe o modal de qualidades
-//     $('.quality_modal_container').fadeIn()
+    // itera sobre a lista carregando apenas os dados do nome e da url do video
+    for(const { Nome, Endereco } of videoQualities) {
+        // adiciona no modal as qualidade que a api retornou
+        get.Id('quality_list').insertAdjacentHTML('beforeend', `<div class="video_option" onclick="loadVideo('${Endereco}')">${Nome}</div>`)
+    }
+    // Exibe o modal de qualidades
+    $('.quality_modal_container').fadeIn()
     
-//     // por enquanto estético, mas carrega a opção salva pelo usuário de autoplay
-//     changeVideoAutoplay()
-// }
+    // por enquanto estético, mas carrega a opção salva pelo usuário de autoplay
+    // changeVideoAutoplay()
+}
 
-// // Função que carrega o estado de autoPlay que o usuário selecionou nas configurações
+// Função que carrega o estado de autoPlay que o usuário selecionou nas configurações
 // function changeVideoAutoplay() {
 //     if(settings.autoplay == 'true'){
 //         $('#autoplay').text('toggle_off')
@@ -69,15 +67,14 @@ getEpisodeList().then(getVideoQualities)
 //     }
 // }
 
-// // função que carrega a url no player e inicia o vídeo
-// function loadVideo(url) {
-//     $('.quality_modal_container').fadeOut()
+// função que carrega a url no player e inicia o vídeo
+function loadVideo(url) {
+    $('.quality_modal_container').fadeOut()
 
-//     player.src = url
-//     player.play()
+    player.src = `../player/index.html?url=${url}`
 
-// }
+}
 
-// // Função que é carregada quando a página está pronta para carrega as informações na tela e ocultar o loading
-// (loadPage)()
-//     .then(hideLoading)
+// Função que é carregada quando a página está pronta para carrega as informações na tela e ocultar o loading
+(loadPage)()
+    .then(hideLoading)
