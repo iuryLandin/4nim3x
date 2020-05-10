@@ -14,9 +14,9 @@ function showAndHideControls() {
   // shows the div that control the play/pause
   // event when clicking at the player-view
   //
-  // Obs: This timeout are used to guarantee that
-  // mobile sers don't pause instantly at click
-  setTimeout(a => $('.play-pause').show(), 50)
+  // Obs: This timeout is used to guarantee that
+  // mobile users don't pause instantly at click
+  setTimeout(a => $('.player-view').show(), 50)
 
   // activate a timeout and save its id to hide the controlsBar
   hideCtrls = setTimeout(hideControls, 2500)
@@ -28,7 +28,7 @@ function showAndHideControls() {
  */
 function hideControls() {
   $('#controls').removeClass('show-controls')
-  $('.play-pause').hide()
+  $('.player-view').hide()
 }
 
 // get the url to be loaded from a query param at the URL
