@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>player</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="../../static/fav.png" type="image/x-icon">
 
   <link rel="stylesheet" href="../../themes/themes.css">
 </head>
@@ -14,7 +15,7 @@
 
     <!-- controles do video -->
     <div class="video-controls">
-      <div class="player-view play-pause"></div>
+      <div class="player-view play-pause" style="display: none;"></div>
 
       <!-- Barra que exibe o progresso da reprodução do vídeo -->
       <div id="progress-bar" class="progressbar playr-seek">
@@ -27,21 +28,20 @@
 
         <!-- controles de tempo -->
         <div class="player-controls">
-          <a id="play-btn" class="material-icons-round play-pause"></a>
-          <a class="material-icons-round back-5-sec">skip_previous</a>
-          <a class="material-icons-round add-10-sec">skip_next</a>
+          <i id="play-btn" class="fas fa-play play-pause"></i>
+          <i class="fas fa-backward back-5-sec"></i>
+          <i class="fas fa-forward add-10-sec"></i>
         </div>
 
         <!-- controles de configurações -->
         <div class="player-aspect">
-          <i class="material-icons-round">settings</i>
           <div class="volume-control">
             <div class="vol-slider-container">
               <input type="range" min="0" max="100" value="100" class="vol-slider" id="vol-slider">
             </div>
-            <i id="volume" class="material-icons-round vol-contrl"></i>
+            <i id="volume" class="fas vol-contrl"></i>
           </div>
-          <i class="material-icons-round fullscreen">fullscreen</i>
+          <i id="fullscreen" class="fas fa-expand fullscreen"></i>
         </div>
       </div>
     </div>

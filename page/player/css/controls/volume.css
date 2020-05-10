@@ -3,7 +3,6 @@
 }
 
 .vol-slider-container {
-  transition-delay: 250ms !important;
   justify-content: flex-end;
   align-items: center;
   border-radius: 5px;
@@ -14,8 +13,15 @@
 }
 
 .volume-control:hover .vol-slider-container {
-  transition-delay: 0s !important;
   width: 100px;
+}
+
+#volume {
+  z-index: -1
+}
+
+.volume-control:hover #volume {
+  z-index: 1;
 }
 
 .vol-slider {

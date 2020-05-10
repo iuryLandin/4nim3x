@@ -1,7 +1,9 @@
 @import './controls/volume.css';
 
-.material-icons-round {
-    font-size: 45px !important;
+.fas {
+    font-size: 25px !important;
+    width: 25px;
+    margin: 10px;
     cursor: pointer;
     color: white;
 }
@@ -26,4 +28,4 @@
     width: 100%;
 }
 
-.show-controls, .controls:hover { height: 50px !important }
+.show-controls { height: 45px !important}

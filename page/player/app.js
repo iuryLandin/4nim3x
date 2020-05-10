@@ -1,17 +1,39 @@
 const videoContainer = get.Id('video-container')
-const { url } = get.UrlData()
-var hoverControls
+let hideCtrls
 
-listen('mousemove', showHideControls, videoContainer)
+listen('mousemove', showAndHideControls, videoContainer)
+listen(  'click'  , showAndHideControls, videoContainer)
 
-player.src = url
+function showAndHideControls() {
+  // clear the last timeout to prevent the controlsBar to close
+  clearTimeout(hideCtrls)
+  
+  // show the controlsBar
+  $('#controls').addClass('show-controls')
 
-function showHideControls() {
-  clearTimeout(hoverControls)
-  get.Id('controls').classList.add('show-controls')
-  hoverControls = setTimeout(hideControls, 1500)
+  // shows the div that control the play/pause
+  // event when clicking at the player-view
+  //
+  // Obs: This timeout are used to guarantee that
+  // mobile sers don't pause instantly at click
+  setTimeout(a => $('.play-pause').show(), 50)
+
+  // activate a timeout and save its id to hide the controlsBar
+  hideCtrls = setTimeout(hideControls, 2500)
 }
 
+/**
+ * Function with the responsability to hide the controlsbar
+ * and the play/pause div
+ */
 function hideControls() {
-  get.Id('controls').classList.remove('show-controls')
+  $('#controls').removeClass('show-controls')
+  $('.play-pause').hide()
 }
+
+// get the url to be loaded from a query param at the URL
+// and apply it at the page.
+(function loadUrl() {
+  const { url } = get.UrlData()
+  player.src = url
+})()

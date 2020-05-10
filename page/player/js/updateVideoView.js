@@ -1,23 +1,40 @@
 const updateVideoView = () => {
-  const { paused, muted, progress, volume } = getVideoState()
+  const { muted, paused, progress, volume } = getVideoState()
 
+  // update progressBar with the current time of the player
   $('#progress').width(progress)
-  $('.vol-active').width(`${85 - ((volume * 100)-(volume*15))}px`)
-  $('#play-btn').text(paused ? 'play_arrow':'pause')
 
-  if (!volume) 
-    $('#volume').text('volume_mute')
-  else
-    $('#volume').text((volume > 0.5) ? 'volume_up':'volume_down')
+  // update the play/pause button to the current video state
+  $('#play-btn')
+    .removeClass('fa-play fa-pause')
+    .addClass(paused ? 'fa-play':'fa-pause')
+
+  // remove the current icon of volume indicator
+  $('#volume').removeClass('fa-volume-off fa-volume-down fa-volume-up fa-volume-mute')
+
+  // update the current icon of volume indicator
   if (muted)
-    $('#volume').text('volume_off')
+    $('#volume').addClass('fa-volume-mute')
+  else if (!volume) 
+    $('#volume').addClass('fa-volume-off')
+  else if (volume < 0.5)
+    $('#volume').addClass('fa-volume-down')
+  else
+    $('#volume').addClass('fa-volume-up')
 
+  // update the fullscreen indicator
+  if (d.fullscreenElement)
+    $('.fullscreen').removeClass('fa-expand').addClass('fa-compress')
+  else
+    $('.fullscreen').removeClass('fa-compress').addClass('fa-expand')
+
+  // Recusively and optimaly calls its function again to keep the player updated
   requestAnimationFrame(updateVideoView)
 }
 
 /**
- * Função que coleta e organiza as informações do estado do player de video
- * @returns {{ paused: Boolean, muted: Boolean, progress: String, volume: Number }}
+ * function that get and return the state of the video with some tweaks
+ * @returns {{ muted: Boolean, paused: Boolean, progress: String, volume: Number }}
  */
 function getVideoState() {
   // Pega as informações do estado do player de vídeo
@@ -29,11 +46,10 @@ function getVideoState() {
     muted
   } = player
 
-  // converte o tempo em milissegundos para porcentagem assistida
+  // convert a ms time to the watched percentage
   const progress = `${( (currentTime / duration) * 100).toFixed(2)}%`
 
-  // retorna os dados do video dentro de um objeto para modificar a view
   return { paused, muted, progress, volume }
 }
 
-updateVideoView()
+;(updateVideoView)()

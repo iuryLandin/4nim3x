@@ -12,7 +12,7 @@
 }
 
 body {
-    background: var(--background);
+    background: var(--background_2);
 }
 
 .video-container, .video-container * {
