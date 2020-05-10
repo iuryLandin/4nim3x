@@ -31,9 +31,14 @@ function hideControls() {
   $('.player-view').hide()
 }
 
+
+
 // get the url to be loaded from a query param at the URL
 // and apply it at the page.
 (function loadUrl() {
   const { url } = get.UrlData()
   player.src = url
+
+  const i = Math.ceil( Math.random() * 9 )
+  player.poster = `static/poster-${i}.jpg`
 })()
