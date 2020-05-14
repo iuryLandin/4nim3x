@@ -72,7 +72,7 @@ function loadEpisodeList() {
     const { episodeSortMode: sortMode } = settings
 
     for (const { Id, Nome } of episodeList) {
-        const episodeButtom = `<a href="../video/index.html?anime=${id}&ep=${Id}" class="episode ${(watchedEpsd.includes(Id))?'seen':'unseen'}" onclick="saveEpisode(${Id})">${Nome}</a>`
+        const episodeButtom = `<a href="../video/index.html?anime=${id}&ep=${Id}" class="episode ${(watchedEpsd.includes(Id))?'seen':'unseen'}">${Nome}</a>`
         get.Queries('.episode-list').forEach(tag => tag.insertAdjacentHTML(sortMode, episodeButtom))
         
         $('.sort-mode').text( (sortMode == 'beforeend') ? 'Z - A' : 'A - Z' )
@@ -92,12 +92,13 @@ getEpisodeList()
 
             settings.episodeSortMode = (sortMode == 'beforeend') ? 'afterbegin' : 'beforeend'
 
+            clearTimeout(timeoutId)
             saveSettings()
             get.Queries('.episode').forEach(del.element)
 
             loadEpisodeList()
         })
         $('.desc').click( () => $('#full-desc').fadeIn() )
-        $('#full-desc').click( () => $('#full-desc').fadeOut() )
+        // $('#full-desc').click( () => $('#full-desc').fadeOut() )
     })
     .catch(console.warn)

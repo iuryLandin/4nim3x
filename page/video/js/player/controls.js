@@ -1,18 +1,23 @@
+import showControls from '../player.js'
+
 const videoContnr = get.Id('video-container')
 const progressBar = get.Id('progress-bar')
+const volSlider   = get.Id('vol-slider')
 
-$('.back-5-sec').click(backFiveSec)
+$('.back-5-sec').click(returnFiveSec)
 $('.vol-contrl').click(toogleMute)
 $('.playr-seek').click(seekVideo)
 $('.play-pause').click(playPause)
 $('.add-10-sec').click(addTenSec)
 $('.fullscreen').click(toogleFS)
 
+listen('input', changeVol)
+
 const keyboard = {
   ArrowRight: addTenSec,
-  ArrowDown: decVolume,
-  ArrowLeft: backFiveSec,
-  ArrowUp: incVolume,
+  ArrowDown: decreaseVolume,
+  ArrowLeft: returnFiveSec,
+  ArrowUp: increaseVolume,
   Space: playPause,
   KeyM: toogleMute,
   KeyF: toogleFS
@@ -33,7 +38,7 @@ function playPause() {
 /**
  * Function that increase the player volume by 1/20
  */
-function incVolume() {
+function increaseVolume() {
   if (player.volume < 0.94 )
     player.volume += parseFloat(1/20)
   else
@@ -43,7 +48,7 @@ function incVolume() {
 /**
  * Function that descrease the player volume by 1/20
  */
-function decVolume() {
+function decreaseVolume() {
   if (player.volume > 0.05 )
     player.volume -= parseFloat(1/20)
   else
@@ -77,13 +82,13 @@ function addTenSec() {
 /**
  * function that remove 5s to the current time of the player
  */
-function backFiveSec() {
+function returnFiveSec() {
   player.currentTime -= parseFloat(  5.0 )
 }
 
 /**
  * Function with the responsability of seeking the video playback when the progressbar is clicked
- * @param {{offsetX: Number}} param0 offsetX contains the click position user clicked
+ * @param {{offsetX: Number}} param0 offsetX contains the click position that user clicked
  */
 function seekVideo({ offsetX: clickXPos }) {
   // get from the player the current video duration
@@ -98,3 +103,16 @@ function seekVideo({ offsetX: clickXPos }) {
   // apply the new time to the player
   player.currentTime = newTime
 }
+
+function changeVol() {
+  // prevents the controls from hide while the volume is modified
+  showControls()
+
+  // get the current input value at the volume slider
+  const { value } = volSlider
+
+  // apply the value to the player
+  player.volume = value / 100
+}
+
+export default keyboard

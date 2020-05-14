@@ -37,7 +37,7 @@
 <body>
   <div id="app" class="app">
     <!-- Loading Modal -->
-    <div id="loading" class="loading-container hide modal">
+    <div id="loading" class="loading-container show modal">
       <div class="loading-box">
         <div class="loading"></div>
       </div>
@@ -51,22 +51,16 @@
       </div>
     </div>
 
-    <!-- Titulo da Página -->
-    <h1 id="video-title" class="video-title"></h1>
+    <div class="video-place">
+      <!-- Player do video -->
+      <div id="player-container" class="player"></div>
+      
+      <!-- Titulo da Página -->
+      <h1 id="video-title" class="video-title"></h1>
+    </div>
 
-    <!-- Player do video -->
-    <iframe id="player" class="player"></iframe>
-
-    <!-- Interações que o usuário pode fazer na página -->
-    <!-- <div class="actions">
-      <i class="material-icons">comment</i>
-      <i class="material-icons">get_app</i>
-      <i class="material-icons">share</i>
-      <div class="material-box toggle-ap" onclick="changeVideoAutoplay()">
-        <span>autoplay</span>
-        <i id="autoplay" class="material-icons unchecked">toggle_off</i>
-      </div>
-    </div> -->
+    <div class="episode-list" id="episode-list"></div>
+    
   </div>
 
   <!-- Frameworks -->
@@ -80,7 +74,9 @@
 
   <!-- App Scripts -->
     <!-- script principal do app -->
-    <script src="app.js" defer ></script>
+    <script src="./js/utils/saveProgress.js"></script>
+    <script src="app.js"></script>
+    <script src="./js/player.js" type="module" defer></script>
 
     <!-- script para os temas funcionarem -->
     <script src="../../themes/themes.js"></script>

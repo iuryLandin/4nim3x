@@ -16,11 +16,12 @@
   width: 100px;
 }
 
-#volume {
-  z-index: -1
+.vol-icon {
+  transition-delay: 50ms !important;
+  z-index: -1;
 }
 
-.volume-control:hover #volume {
+.volume-control:hover .vol-icon {
   z-index: 1;
 }
 
@@ -46,11 +47,11 @@
 }
 
 .vol-slider::-webkit-slider-thumb {
-  box-shadow: calc(-100vw - 6px) 0 0 100vw var(--accent);
-  background: var(--accent_2);
+  box-shadow: calc(-100vw - 6px) 0 0 100vw #808;
   -webkit-appearance: none;
   box-sizing: border-box;
   border-radius: 10px;
+  background: #505;
   appearance: none;
   cursor: pointer;
   height: 10px;
@@ -58,8 +59,8 @@
 }
 
 .vol-slider::-moz-range-thumb {
-  box-shadow: calc(-100vw - 6px) 0 0 100vw var(--accent);
-  background: var(--accent_2);
+  box-shadow: calc(-100vw - 6px) 0 0 100vw #808;
+  background: #fff;
   cursor: pointer;
   outline: none;
   height: 10px;

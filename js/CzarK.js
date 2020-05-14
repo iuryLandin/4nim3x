@@ -1,11 +1,13 @@
 /**
  * JulCzar javascript framework
  * Made by Júlio César Barcelo Monteiro
- * Date: 12/19/2018
- * Last Edit: 05/01/2019
+ * created: 12/19/2018
+ * Last Edit: 05/12/2019
  */
 
-const d = document
+const d  = document
+const LS = localStorage
+const SS = sessionStorage
 
 const get = {
   /**
@@ -24,17 +26,17 @@ const get = {
   },
   /**
    * Find the first element that match with the query specified
-   * @param {String} item Query you want to locate
+   * @param {String} elemQuery Query you want to locate
    */
-  Query (elementQuery) {
-    return d.querySelector(elementQuery)
+  Query (elemQuery) {
+    return d.querySelector(elemQuery)
   },
   /**
    * Find all elements that match with the query specified
-   * @param {String} item Query you want to locate
+   * @param {String} elemQuery Query you want to locate
    */
-  Queries (elementsQuery) {
-    return d.querySelectorAll(elementsQuery)
+  Queries (elemQuery) {
+    return d.querySelectorAll(elemQuery)
   },
   /**
    * Gives you the current time in miliseconds
@@ -43,12 +45,12 @@ const get = {
     return new Date().getTime()
   },
   /**
-   * Find in the SessionStorage the key requested and return the value parsed
+   * Find in the SS the key requested and return the value parsed
    * @param {String} key
    * @returns {JSON}
    */
   Session (key) {
-    const value = sessionStorage.getItem(key)
+    const value = SS.getItem(key)
     return JSON.parse(value)
   },
   /**
@@ -57,7 +59,7 @@ const get = {
    * @returns {JSON}
    */
   Local (key) {
-    const value = localStorage.getItem(key)
+    const value = LS.getItem(key)
     return JSON.parse(value)
   },
   /**
@@ -81,16 +83,16 @@ const set = {
    */
   Local (key, data) {
     const value = JSON.stringify(data)
-    localStorage.setItem(key, value)
+    LS.setItem(key, value)
   },
   /**
-   * Save in the SessionStorage any data
+   * Save in the SS any data
    * @param {String} key Key where the data will be stored
    * @param {*} data data to be stored
    */
   Session (key, data) {
     const value = JSON.stringify(data)
-    sessionStorage.setItem(key, value)
+    SS.setItem(key, value)
   }
 }
 
@@ -100,18 +102,18 @@ const del = {
    * @param {String} key Key to be deleted
    */
   fromLocal (key) {
-    localStorage.removeItem(key)
+    LS.removeItem(key)
   },
   /**
-   * Delete from SessionStorage a key
+   * Delete from SS a key
    * @param {String} key
    */
   fromSession (key) {
-    sessionStorage.removeItem(key)
+    SS.removeItem(key)
   },
   /**
    * Remove from the DOM an element
-   * @param {Element} elem
+   * @param {HTMLElement} elem
    */
   element (elem) {
     elem.remove()
@@ -122,7 +124,7 @@ const del = {
  * Adds an event listener to a target in DOM
  * @param {String} event Event that will be listened
  * @param {Function} func Function that will be executed when the event is located
- * @param {Element} target Target. (default = document)
+ * @param {HTMLElement} target Target. (default = document)
  */
 const listen = (event, func, target = d) => {
   target.addEventListener(event, func)
@@ -132,7 +134,8 @@ const listen = (event, func, target = d) => {
  * Compare the length of a String with a specified value and return it truncated if (str.length > maxLength),
  * @param {String} str string you want to analize
  * @param {Number} maxLength pos you want to cut the string if it is higher than
- * @param {String | Number } sufix will be added at the end of the truncated string
+ * @param {*} sufix will be added at the end of the truncated string
+ * ( default = '...' )
  */
 const truncate = (str, maxLength, sufix = '...') => {
   if (str.length > maxLength)

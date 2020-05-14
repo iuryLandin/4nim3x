@@ -9,6 +9,7 @@
 }
 
 .full-desc-modal {
+    border: 1.5px solid var(--accent);
     max-height: calc(100vh - 5vmin);
     background: var(--background);
     border-radius: 20px;
