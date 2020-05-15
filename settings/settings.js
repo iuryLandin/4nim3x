@@ -14,7 +14,7 @@ var timeoutId = null
 
 // configurações padrão que a página irá utilizar na primeira inicilização
 // também é a variável global que o app acessa buscando as configs salvas.
-const Settings = {
+const settings = {
     autoplay: false,
     defaultLaunch:  'home',
     episodeSortMode:'afterbegin',
