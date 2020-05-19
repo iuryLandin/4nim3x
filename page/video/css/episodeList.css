@@ -1,0 +1,71 @@
+.next-episodes {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.episode-list-container {
+    flex-direction: column;
+}
+
+.episode-list {
+    flex-direction: column;
+}
+
+.episode {
+    font-family: 'Ubuntu', sans-serif;
+    border: 2px solid var(--accent);
+    justify-content: center;
+    color: var(--accent);
+    border-radius: 20px;
+    align-items: center;
+    text-align: center;
+    min-height: 50px;
+    font-size: 18px;
+    margin: 7px 0px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.episode:hover, .episode:active, .seen {
+    color: var(--infos)
+}
+
+.episode:hover {
+    background: var(--accent);
+}
+
+.episode:active {
+    transform: scale(1.01);
+    background: var(--accent_2);
+}
+
+.seen {
+    background: var(--accent);
+    transition: .3s;
+}
+
+.seen:hover {
+    transform: scale(1.01);
+}
+
+@media (min-width: 831px) {
+    .next-episodes {
+        overflow-y: scroll;
+        padding: 0px 5px;
+        height: 95.5vh;
+    }
+    
+    .episode-list::-webkit-scrollbar {
+        background: var(--background_2);
+        width: 4px;
+    }
+    
+    .episode-list::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 5px;
+    }
+
+    .sortby {
+        margin-top: 0;
+    }
+}

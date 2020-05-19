@@ -1,0 +1,46 @@
+<!-- Container que contêm o player junto com seus controles -->
+<div id="video-container" class="video-container">
+
+  <!-- controles do video -->
+  <div class="video-controls">
+    <div class="player-view play-pause"></div>
+
+    <!-- Barra que exibe o progresso da reprodução do vídeo -->
+    <div id="progress-bar" class="progressbar playr-seek">
+      <div class="progress-indicator progress">
+      </div>
+    </div>
+
+    <!-- Controles da reprodução do vídeo -->
+    <div id="controls" class="controls">
+
+      <!-- controles de tempo -->
+      <div class="player-controls">
+        <i class="fas fa-play play-pause play-btn"></i>
+        <i class="fas fa-backward back-5-sec"></i>
+        <i class="fas fa-forward add-10-sec"></i>
+      </div>
+
+      <!-- controles de configurações -->
+      <div class="player-aspect">
+        <div class="volume-control">
+          <div class="vol-slider-container">
+            <input
+              class="vol-slider"
+              id="vol-slider"
+              type="range"
+              value="100"
+              max="100"
+              min="0"
+            />
+          </div>
+          <i class="fas vol-contrl vol-icon"></i>
+        </div>
+        <i id="fullscreen" class="fas fa-expand fullscreen"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- player com os controles ocultos -->
+  <video id="player" class="player"></video>
+</div>

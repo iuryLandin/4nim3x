@@ -24,7 +24,7 @@ async function getLists() {
     releaseList = await getApiData('lancamento')
     
     // carrega a lista de animes na posição que a função foi chamada
-    let { anime, Next } = await getApiData(`animes?next=${pos}`)
+    const { anime, Next } = await getApiData(`animes?next=${pos}`)
     animeList[pos/50] = anime
 
     set.Local('currNext', Next)

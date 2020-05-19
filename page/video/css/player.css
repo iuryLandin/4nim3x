@@ -1,5 +1,58 @@
+@import './player/controls.css';
+@import './player/progress.css';
+
+.video-place {
+    font-family: Montserrat, sans-serif;
+    flex-direction: column;
+    text-indent: 5px;
+    font-size: 1.5vw;
+}
+
+.video-place .video-title {
+    margin: 20px 0;
+}
+
+.video-container {
+    background: var(--background_2);
+    border-radius: .5vmin;
+    position: relative;
+    min-width: 280px;
+    overflow: hidden;
+    width: 65vw;
+}
+
 .player {
-    box-shadow: 2px 2px 10px 2px rgba(0,0,0,.3);
-    border-radius: 1vw;
-    outline: none;
+    max-height: 100%;
+    width: 100%;
+}
+
+.player-view {
+    cursor: pointer;
+    height: 100%;
+    z-index: 1;
+}
+
+.player-container {
+    position: relative;
+}
+
+.next-episodes .title {
+    border-bottom: 2px solid currentColor;
+    font-family: Montserrat, sans-serif;
+    justify-content: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+    font-size: 4vmin;
+    width: 100%;
+}
+
+@media (max-width: 1100px) {
+    .video-container {
+        width: calc(100vw - 30px);
+    }
+
+    .video-place .video-title {
+        font-size: 2.5vh;
+    }
 }

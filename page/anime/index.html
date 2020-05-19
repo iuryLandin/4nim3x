@@ -1,141 +1,144 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <!-- Search Engine -->
-    <meta name="description" content="Animes Online Grátis e sem anúncios">
-    <meta name="image" content="https://animexonline.herokuapp.com/img/fav.png">
+  <!-- Search Engine -->
+  <meta name="description" content="Animes Online Grátis e sem anúncios">
+  <meta name="image" content="https://animexonline.herokuapp.com/img/fav.png">
 
-    <!-- Schema.org for Google -->
-    <meta itemprop="name" content="AnimeX">
-    <meta itemprop="description" content="Animes Online Grátis e sem anúncios">
-    <meta itemprop="image" content="https://animexonline.herokuapp.com/img/fav.png">
+  <!-- Schema.org for Google -->
+  <meta itemprop="name" content="AnimeX">
+  <meta itemprop="description" content="Animes Online Grátis e sem anúncios">
+  <meta itemprop="image" content="https://animexonline.herokuapp.com/img/fav.png">
 
-    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-    <meta name="og:title" content="AnimeX">
-    <meta name="og:description" content="Animes Online Grátis e sem anúncios">
-    <meta name="og:image" content="https://animexonline.herokuapp.com/img/fav.png">
-    <meta name="og:url" content="https://animexonline.herokuapp.com/">
-    <meta name="og:site_name" content="AnimeX">
-    <meta name="og:locale" content="pt_BR">
-    <meta name="og:type" content="website">
-    
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="../../static/fav.png" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <meta charset="UTF-8">
-    
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="../../themes/themes.css">
+  <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+  <meta name="og:title" content="AnimeX">
+  <meta name="og:description" content="Animes Online Grátis e sem anúncios">
+  <meta name="og:image" content="https://animexonline.herokuapp.com/img/fav.png">
+  <meta name="og:url" content="https://animexonline.herokuapp.com/">
+  <meta name="og:site_name" content="AnimeX">
+  <meta name="og:locale" content="pt_BR">
+  <meta name="og:type" content="website">
+  
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="../../static/fav.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta charset="UTF-8">
+  
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="../../themes/themes.css">
 
-    <!-- configurações do modal de carregamento -->
-    <link rel="stylesheet" href="../../css/loading.css"/>
-    <script src="../../js/loading.js"></script>
+  <!-- configurações do modal de carregamento -->
+  <link rel="stylesheet" href="../../css/loading.css"/>
+  <script src="../../js/loading.js"></script>
 
-    <title>4nim3x</title>
+  <title>4nim3x</title>
 </head>
 <body>
-    <div id="app" class="app">
-        <div class="page-container">
-            <!-- Loading Modal -->
-            <div id="loading" class="loading-container show">
-                <div class="loading-box">
-                    <div class="loading"></div>
-                </div>
-            </div>
-
-            <div id="full-desc" class="full-desc-container">
-                <div class="full-desc-modal"></div>
-            </div>
-
-            <!-- Titulo da Página -->
-            <h1 class="anime-title">Carregando Informações do Anime</h1>
-            <!-- Conteúdo da página // Informações do anime -->
-            <div class="content">
-
-                <!-- Informações que ficarão a esquerda na view desktop -->
-                <div class="left">
-                    <!-- Detalhes do anime -->
-                    <div class="anime-details">
-                        <div class="img-container">
-                            <!-- Container auxiliar pra executar o efeito de blur sem desfocar a imagem do aniem -->
-                            <div class="img-blur-container">
-                                <img class="img-blur img-place" src="">
-                            </div>
-
-                            <!-- Container que carregará  -->
-                            <div class="anime-img-container">
-                                <img draggable="false" class="anime-img img-place" src="">
-                            </div>
-                        </div>
-
-                        <!-- Container que carregará na versão mobile a descrição do anime -->
-                        <div class="desc mobile">
-                            <div id="desc-mobile" class="desc-content">As Informações do anime aparecerão aqui em instântes, caso essa mensagem persista considere voltar a tela inicial e abrir o anime novamente após a mensagem de sincronização dos animes sumir.</div>
-                            <span id="see-all-mobl" class="see-all">leia mais...</span>
-                        </div>
-
-                        <!-- Container que carregaraá a versão desktop da descrição -->
-                        <div class="desc desktop">
-                            <div id="desc-desktop" class="desc-content">As Informações do anime aparecerão aqui em instântes, caso essa mensagem persista considere voltar a tela inicial e abrir o anime novamente após a mensagem de sincronização sumir.</div>
-                            <span id="see-all-desk" class="see-all">leia mais...</span>
-                        </div>
-                    </div>
-
-                    <!-- Container da versão mobile da aba que carregará a lista de episódios -->
-                    <div class="episode-list-container mobile">
-                        <!-- Seletor do método de montágem do  -->
-                        <div class="sortby">
-                            <div class="line"></div>
-                            <div class="sort-mode"></div>
-                        </div>
-
-                        <!-- Container que receberá a lista de episódios -->
-                        <div id="episode-list-mobile" class="episode-list">
-                        </div>
-
-                    </div>
-
-                    <!-- espaço reservado para a construção do disqus -->
-                    <div id="disqus_thread" class="disqus">
-                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    </div>
-                </div>
-
-                <!-- Container da versão desktop da aba que carregará a lista de episódios -->
-                <div class="right episode-list-container desktop">
-                    <!-- Seletor do método de montágem do  -->
-                    <div class="sortby">
-                        <div class="line"></div>
-                        <div class="sort-mode"></div>
-                    </div>
-
-                    <!-- Container que receberá a lista de episódios da versão desktop -->
-                    <div id="episode-list-desktop" class="episode-list">
-                    </div>
-
-                </div>
-            </div>
+  <div id="app" class="app">
+    <div class="page-container">
+      <!-- Loading Modal -->
+      <div id="loading" class="loading-container show">
+        <div class="loading-box">
+          <div class="loading"></div>
         </div>
+      </div>
+
+      <div
+        id="full-desc"
+        class="full-desc-container"
+        onclick="$('#full-desc').fadeOut()"
+      >
+        <div class="full-desc-modal"></div>
+      </div>
+
+      <!-- Titulo da Página -->
+      <h1 class="anime-title">Carregando Informações do Anime</h1>
+      <!-- Conteúdo da página // Informações do anime -->
+      <div class="content">
+
+        <!-- Informações que ficarão a esquerda na view desktop -->
+        <div class="left">
+          <!-- Detalhes do anime -->
+          <div class="anime-details">
+            <div class="img-container">
+              <!-- Container auxiliar pra executar o efeito de blur sem desfocar a imagem do aniem -->
+              <div class="img-blur-container">
+                <img class="img-blur img-place" src="">
+              </div>
+
+              <!-- Container que carregará  -->
+              <div class="anime-img-container">
+                <img draggable="false" class="anime-img img-place" src="">
+              </div>
+            </div>
+
+            <!-- Container que carregará na versão mobile a descrição do anime -->
+            <div class="desc mobile">
+              <div id="desc-mobile" class="desc-content">As Informações do anime aparecerão aqui em instântes, caso essa mensagem persista considere voltar a tela inicial e abrir o anime novamente após a mensagem de sincronização dos animes sumir.</div>
+              <span id="see-all-mobl" class="see-all">leia mais...</span>
+            </div>
+
+            <!-- Container que carregaraá a versão desktop da descrição -->
+            <div class="desc desktop">
+              <div id="desc-desktop" class="desc-content">As Informações do anime aparecerão aqui em instântes, caso essa mensagem persista considere voltar a tela inicial e abrir o anime novamente após a mensagem de sincronização sumir.</div>
+              <span id="see-all-desk" class="see-all">leia mais...</span>
+            </div>
+          </div>
+
+          <!-- Container da versão mobile da aba que carregará a lista de episódios -->
+          <div class="episode-list-container mobile">
+            <!-- Seletor do método de montágem do  -->
+            <div class="sortby">
+              <div class="line"></div>
+              <div class="sort-mode"></div>
+            </div>
+
+            <!-- Container que receberá a lista de episódios -->
+            <div id="episode-list-mobile" class="episode-list">
+            </div>
+
+          </div>
+
+          <!-- espaço reservado para a construção do disqus -->
+          <div id="disqus_thread" class="disqus">
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+        </div>
+
+        <!-- Container da versão desktop da aba que carregará a lista de episódios -->
+        <div class="right episode-list-container desktop">
+          <!-- Seletor do método de montágem do  -->
+          <div class="sortby">
+            <div class="line"></div>
+            <div class="sort-mode"></div>
+          </div>
+
+          <!-- Container que receberá a lista de episódios da versão desktop -->
+          <div id="episode-list-desktop" class="episode-list">
+          </div>
+
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Frameworks -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="></script>
-    <script src="https://julczar.github.io/CzarK/index.js"></script>
+  <!-- Frameworks -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="></script>
+  <script src="../../js/CzarK.js"></script>
 
-    <!-- Configurações do app, deve ser carregado antes de qualquer outro script que vai
-        fazer uso delas, para garantir, aconselho ainda o uso de "defer" no script -->
-    <script src="../../settings/settings.js"></script>
+  <!-- Configurações do app, deve ser carregado antes de qualquer outro script que vai
+    fazer uso delas, para garantir, aconselho ainda o uso de "defer" no script -->
+  <script src="../../settings/settings.js"></script>
 
-    <!-- App Scripts -->
-        <!-- script principal do app -->
-        <script src="app.js" defer ></script>
-        <script src="./js/saveProgress.js"></script>
+  <!-- App Scripts -->
+    <!-- script principal do app -->
+    <script src="app.js" defer ></script>
 
-        <!-- script para os temas funcionarem -->
-        <script src="../../themes/themes.js"></script>
+    <!-- script para os temas funcionarem -->
+    <script src="../../themes/themes.js"></script>
 
-        <!-- codigo do disqus -->
-        <script src="../../js/utils/loadDisqus.js"></script>
+    <!-- codigo do disqus -->
+    <script src="../../js/utils/loadDisqus.js"></script>
 </body>
 </html>

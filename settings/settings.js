@@ -14,7 +14,7 @@ var timeoutId = null
 
 // configurações padrão que a página irá utilizar na primeira inicilização
 // também é a variável global que o app acessa buscando as configs salvas.
-var settings = {
+let settings = {
     autoplay: false,
     defaultLaunch:  'home',
     episodeSortMode:'afterbegin',
@@ -49,7 +49,7 @@ async function saveSettings () {
         loadSettings()
     }
     // torna a função recursiva para que a página seja salva automaticamente enquanto estiver aberta
-    timeoutId = setTimeout(saveSettings, 500)
+    timeoutId = setTimeout(saveSettings, 100)
 }
 
 // encapsulamento usado para acesso à api em todos os ambientes que for necessário.
