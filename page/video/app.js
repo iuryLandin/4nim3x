@@ -52,16 +52,16 @@ async function loadPage() {
 function loadEpisodeList() {
     const watchedList = get.Local('watchedList') || new Object()
     const watchedEpsd = watchedList[anime]       || new  Array()
+    const nextToWatch = episodeList.data.filter(({ Id }) => Id > ep)
     
-    for (const { Id, Nome } of episodeList.data) {
-        if (Id >= ep)
+    if (nextToWatch.length)
+        for (const { Id, Nome } of nextToWatch) {
             epsdList.insertAdjacentHTML('afterbegin', `<div class="episode ${(watchedEpsd.includes(Id))?'seen':'unseen'}" onclick="jumpToVideo(${Id})">${Nome}</div>`)
-    }
+        }
+    else epsdList.innerHTML = `<div class="episode" onclick="alert('você chegou ao fim da lista')">Não há próximo episódio</div>`
 }
 
 function jumpToVideo(epId) {
-    
-    
     location.search = `?anime=${anime}&ep=${epId}`
 }
 

@@ -1,13 +1,23 @@
 @import './player/controls.css';
 @import './player/progress.css';
 
+.video-place {
+    font-family: Montserrat, sans-serif;
+    flex-direction: column;
+    text-indent: 5px;
+    font-size: 1.5vw;
+}
+
+.video-place .video-title {
+    margin: 20px 0;
+}
+
 .video-container {
     background: var(--background_2);
     border-radius: .5vmin;
-    overflow: hidden;
     position: relative;
-    width: fit-content;
-    min-width: 300px;
+    min-width: 280px;
+    overflow: hidden;
     width: 65vw;
 }
 
@@ -26,8 +36,23 @@
     position: relative;
 }
 
+.next-episodes .title {
+    border-bottom: 2px solid currentColor;
+    font-family: Montserrat, sans-serif;
+    justify-content: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+    font-size: 4vmin;
+    width: 100%;
+}
+
 @media (max-width: 1100px) {
     .video-container {
-        width: calc(100vw - 40px);
+        width: calc(100vw - 30px);
+    }
+
+    .video-place .video-title {
+        font-size: 2.5vh;
     }
 }

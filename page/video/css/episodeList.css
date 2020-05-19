@@ -1,3 +1,8 @@
+.next-episodes {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 .episode-list-container {
     flex-direction: column;
 }
@@ -44,9 +49,9 @@
 }
 
 @media (min-width: 831px) {
-    .episode-list {
+    .next-episodes {
         overflow-y: scroll;
-        padding:0px 5px;
+        padding: 0px 5px;
         height: 95.5vh;
     }
     
