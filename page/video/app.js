@@ -1,81 +1,87 @@
-// Recebe os dados do episodio da URL
+import { getEpisodeList, getVideoQualities } from '../common/api.js'
+import { saveEpisode } from './js/utils/saveProgress.js'
+import { hideLoading } from '../../js/loading.js'
+import { getters } from '../common/States.js'
+import { get } from '../../js/utils/CzarK.js'
+
+import './js/player.js'
+import { loadSettings } from '../../settings/settings.js'
+import { loadTheme } from '../../themes/themes.js'
+
 const { anime, ep } = get.UrlData()
-const epsdList = get.Id('episode-list')
 
-// receberá a lista de episódios da api
-const episodeList = {}
-const videoQualities = {}
+const ASC = 'afterbegin'
+const DES = 'beforeend'
+const VIDEO_TITLE = $('#video-title')
+const QLTS_LIST = get.Id('quality_list')
+const EPSD_LIST = get.Id('episode-list')
+const QUALIT_CTNR = $('.quality_modal_container')
+const NO_NEXT = `<div class="episode" onclick="alert('você chegou ao fim da lista')">Não há próximo episódio</div>`
 
-async function getEpisodeList() {
-    // recebe da sessão a lista carregada, caso exista
-    const episodeListOnSession = get.Session(anime)
-    if ( episodeListOnSession )
-        episodeList.data = episodeListOnSession
-    
-    // caso não exista, busca da api e salva na sessão
-    else {
-        episodeList.data = await getApiData(`episodio?id=${anime}`)
-        set.Session(anime, episodeList)
-    }
-}
+;(function openPage() {
+  saveEpisode()
 
-async function getVideoQualities() {
-    return await getApiData(`video?id=${ep}`)
-}
+  loadSettings()
+  loadTheme()
 
+  getEpisodeList()
+    .then(loadNextEpisodeList)
+    .then(loadVideoData)
 
-function loadPlayer() {
-    saveEpisode(parseInt(ep))
-
-    $('#player-container').load('components/player.html')
-}
-
-async function loadPage() {
-    // Adiciona o titulo do episódio na página
-    const epName = episodeList.data.filter(eps => eps.Id == ep)
-    $('#video-title').text(epName[0].Nome)
-    
-    // Carrega a lista de qualidades do video da api
-    videoQualities.data = await getVideoQualities()
-
-    get.Queries('.video_option').forEach(del.element)
-    
-    // itera sobre a lista carregando apenas os dados do nome e da url do video
-    for (const { Nome, Endereco } of videoQualities.data) {
-        // adiciona no modal as qualidade que a api retornou
-        get.Id('quality_list').insertAdjacentHTML('beforeend', `<div class="video_option" onclick="loadVideo('${Endereco}')">${Nome}</div>`)
-    }
-    // Exibe o modal de qualidades
-    $('.quality_modal_container').fadeIn()
-}
-
-function loadEpisodeList() {
-    const watchedList = get.Local('watchedList') || new Object()
-    const watchedEpsd = watchedList[anime]       || new  Array()
-    const nextToWatch = episodeList.data.filter(({ Id }) => Id > ep)
-    
-    if (nextToWatch.length)
-        for (const { Id, Nome } of nextToWatch) {
-            epsdList.insertAdjacentHTML('afterbegin', `<div class="episode ${(watchedEpsd.includes(Id))?'seen':'unseen'}" onclick="jumpToVideo(${Id})">${Nome}</div>`)
-        }
-    else epsdList.innerHTML = `<div class="episode" onclick="alert('você chegou ao fim da lista')">Não há próximo episódio</div>`
-}
-
-function jumpToVideo(epId) {
-    location.search = `?anime=${anime}&ep=${epId}`
-}
-
-// função que carrega a url no player e inicia o vídeo
-async function loadVideo(url) {
-    $('.quality_modal_container').fadeOut()
-
-    get.Id('player').src = url
-}
-
-// Função que é carregada quando a página está pronta para carrega as informações na tela e ocultar o loading
-getEpisodeList()
-    .then(loadPlayer)
-    .then(loadEpisodeList)
-    .then(loadPage)
-    .then(getVideoQualities)
+  getVideoQualities()
+    .then(loadVideoQualities)
     .then(hideLoading)
+})()
+
+
+function loadNextEpisodeList() {
+  const episodeList = getters.getEpisodeList()
+  const nextToWatch = episodeList.filter(({ Id }) => Id > ep)
+
+  if (!nextToWatch.length)
+    EPSD_LIST.innerHTML = NO_NEXT
+
+  else
+    for (const episode of nextToWatch) {
+      const episodeCard = getEpisodeCard(episode)
+      EPSD_LIST.insertAdjacentHTML(ASC, episodeCard)
+    }
+}
+
+function loadVideoQualities() {
+  const videoQualities = getters.getEpsdQualits()
+
+  for (const quality of videoQualities) {
+    const qualityCard = getQualityCard(quality)
+    QLTS_LIST.insertAdjacentHTML(DES, qualityCard)
+  }
+
+  QUALIT_CTNR.fadeIn()
+}
+
+function loadVideoData() {
+  const episodeList = getters.getEpisodeList()
+  const currentEpsd = episodeList.filter(eps => eps.Id == ep)
+  const episodeName = currentEpsd[0].Nome
+
+  VIDEO_TITLE.text(episodeName)
+}
+
+function getQualityCard({ Nome, Endereco }) {
+  return `<div
+    class='video_option'
+    onclick="loadVideo('${ Endereco }')"
+  > ${ Nome } </div>`
+}
+
+function getEpisodeCard({ Id, Nome }) {
+  const watchedList = getters.getWatchedList()
+  const watchedStts = watchedList.includes(Id)
+  ? 'seen'
+  : 'unseen'
+  
+  return `<a
+    href="./index.html?anime=${ anime }&ep=${ Id }"
+    class="episode ${watchedStts}"
+  > ${ Nome } </a>`
+}

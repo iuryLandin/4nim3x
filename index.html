@@ -28,9 +28,7 @@
     <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="./themes/themes.css">
 
-    <!-- configurações do modal de carregamento -->
     <link rel="stylesheet" href="css/loading.css"/>
-    <script src="./js/loading.js"></script>
 
     <title>4nim3x</title>
 </head>
@@ -43,22 +41,17 @@
             </div>
         </div>
 
-        <div id="loading-list" class="loading-list">
-            <div>Sincronizando animes</div>
-            <div class="loading"></div>
-        </div>
-
         <!-- Navbar -->
         <nav class="navbar">
             <ul class="navbar-nav">
                 <!--link para a tela inicial  -->
                 <li class="navbar-item mobile">
-                    <a href="javascript:void(0)" class="fas fa-home nav-link load-all"></a>
+                    <a href="javascript:void(0)" class="fas fa-home nav-link loader load-all"></a>
                 </li>
 
                 <!-- Link para os lançamentos -->
                 <li class="navbar-item mobile">
-                    <a href="javascript:void(0)" class="fas fa-rocket nav-link load-rel"></a>
+                    <a href="javascript:void(0)" class="fas fa-rocket nav-link loader load-rel"></a>
                 </li>
 
                 <!-- reportar erros -->
@@ -107,8 +100,8 @@
                 <div class="top desktop">
                     <!-- Seletor de Páginas -->
                     <ul class="tab-box">
-                        <li class="item"><span class="load-all">Todos os animes</span></li>
-                        <li class="item"><span class="load-rel">Lançamentos</span></li>
+                        <li class="item"><span class="loader load-all">Lista Alfabética</span></li>
+                        <li class="item"><span class="loader load-rel">Lançamentos</span></li>
                     </ul>
                 </div>
 
@@ -116,29 +109,24 @@
                 <div id="anime-list" class="anime-list"> </div>
             </div>
         </main>
+
+        <!-- FAB -->
+        <a id="fab" class="fab-container hide" href="#searchbar">
+            <div class="search-fab">
+                <span class="material-icons">search</span>
+            </div>
+        </a>
     </div>
 
     <!-- Frameworks -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="></script>
-    <script src="js/CzarK.js"></script>
+    <script src="./js/CzarK.js"></script>
 
-    <!-- Configurações do app, deve ser carregado antes de qualquer outro script que vai
-        fazer uso delas, para garantir, aconselho ainda o uso de "defer" no script -->
-    <script src="./settings/settings.js"></script>
+    <!-- script principal do app -->
+    <script type="module" src="./app.js" defer ></script>
 
-    <!-- App Scripts -->
-        <!-- script principal do app -->
-        <script src="./app.js" defer ></script>
-
-        <!-- script para o mecanismo de busca -->
-        <script type="module" src="./js/search.js" defer></script>
-
-        <!-- script para os temas funcionarem -->
-        <script src="./themes/themes.js"></script>
-
-    <!-- script temporário de limpeza de arquivos antigos em desuso ou atualização de conteúdo -->
-    <script src="./temp/removeOldAnimeList.js"></script>
-    <script src="./temp/updateWatchedList.js"></script>
+    <!-- script para o mecanismo de busca -->
+    <script type="module" src="./js/search.js" defer></script>
 </body>
 </html>

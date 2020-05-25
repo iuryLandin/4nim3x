@@ -1,86 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import './costumizations/fonts.css';
+@import './costumizations/themes.css';
 
-/* Aconselho Recolher essa barra para
- * visualizar melhor os temas. */
 * {
-    /* Reseta o Estilo da página */
     box-sizing: border-box;
     text-decoration: none;
     border: unset;
     padding: 0;
     margin: 0;
-    
-    /* Animação na mudança de temas */
-    transition: background .3s;
 }
 
-
-/* temas do app */
-.light {
-    --primary:      #c4c4c4;
-    --accent:       #9e9e9e;
-    --accent_2:     #6c6c6c;
-    --background:   #ffffff;
-    --background_2: #ededed;
-    --infos:        #ffffff;
-    color:          #000000;
-}
-
-.purple {
-    --primary:      #610061;
-    --accent:       #800080;
-    --accent_2:     #4d194d;
-    --background:   #ffffff;
-    --background_2: #ededed;
-    --infos:        #ffffff;
-    color:          #800080;
-}
-
-.dark {
-    --primary:      #0e0e0e;
-    --accent:       #909090;
-    --accent_2:     #4d4d4d;
-    --background:   #2b2b2b;
-    --background_2: #4f4a4a;
-    --infos:        #ffffff;
-    color:          #a5a5a5;
-}
-
-.purple-dark{
-    --primary:      #610061;
-    --accent:       #cd00bf;
-    --accent_2:     #970097;
-    --background:   #202020;
-    --background_2: #282828;
-    --infos:        #ffffff;
-    color:          #c300c3;
-}
-
-.aquamarine {
-    --primary:      #014289;
-    --accent:       #009ac0;
-    --accent_2:     #0255af;
-    --background:   #ffffff;
-    --background_2: #e0e0e0;
-    --infos:        #60f3aB;
-    color:          #009ac0;
-}
-
-.midnight-violet {
-    --primary:      #7500bf;
-    --accent:       #8b04ec;
-    --accent_2:     #5a00b6;
-    --background:   #2c2c2c;
-    --background_2: #1d1d1d;
-    --infos:        #ffffff;
-    color:          #ffffff;
-}
-
-
-/* confiugurações padrão que podem ser aplicadas na página de acordo com a necessidade */
 .hide {
     display: none !important;
 }

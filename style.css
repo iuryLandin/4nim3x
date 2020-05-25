@@ -4,6 +4,7 @@
 @import './css/fontawesome.css';
 @import './css/mainpage.css';
 @import './css/navbar.css';
+@import './css/fab.css';
 
 /* Define o display para flex em toda a página por padrão */
 .app, .app * {

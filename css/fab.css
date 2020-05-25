@@ -1,0 +1,24 @@
+.search-fab {
+  width: 60px;
+  right: 20px;
+  bottom: 25px;
+  height: 60px;
+  color: white;
+  position: fixed;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  box-shadow: 1px 1px 2px 1.5px rgba(0, 0, 0, 0.3);
+}
+
+.search-fab span {
+  color: white;
+}
+
+@media (max-width: 830px) {
+  .search-fab {
+    bottom: 75px;
+    right: 10px;
+  }
+}

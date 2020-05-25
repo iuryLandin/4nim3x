@@ -33,7 +33,6 @@
 .anime-img {
     box-shadow: 0px 0px 5px 4px rgba(0,0,0,.3);
     background: var(--accent);
-    min-width: 200px;
     height: 95%;
     margin: 5%;
 }

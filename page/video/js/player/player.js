@@ -1,6 +1,5 @@
+import { listen, get } from '../../../../js/utils/CzarK.js'
 import keyboard from './controls.js'
-
-const player = get.Id('player')
 
 const volumeBar = $('#vol-slider')
 
@@ -25,5 +24,6 @@ function keybFunc({ code }) {
  * Update the volume slider position after a keypress
  */
 function updateVolume() {
+  const player = get.Id('player')
   volumeBar.val(player.volume * 100)
 }

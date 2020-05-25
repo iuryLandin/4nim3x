@@ -29,7 +29,6 @@
 
   <!-- configurações do modal de carregamento -->
   <link rel="stylesheet" href="../../css/loading.css"/>
-  <script src="../../js/loading.js"></script>
 
   <title>4nim3x</title>
 </head>
@@ -45,6 +44,7 @@
 
       <div
         id="full-desc"
+        style="display: none"
         class="full-desc-container"
         onclick="$('#full-desc').fadeOut()"
       >
@@ -101,7 +101,7 @@
 
           <!-- espaço reservado para a construção do disqus -->
           <div id="disqus_thread" class="disqus">
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <noscript>Por favor, ative o JavaScript para visualizar os comentários, providos por <a href="https://disqus.com/?ref_noscript">Disqus</a>.</noscript>
           </div>
         </div>
 
@@ -125,20 +125,11 @@
   <!-- Frameworks -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="></script>
-  <script src="../../js/CzarK.js"></script>
 
-  <!-- Configurações do app, deve ser carregado antes de qualquer outro script que vai
-    fazer uso delas, para garantir, aconselho ainda o uso de "defer" no script -->
-  <script src="../../settings/settings.js"></script>
+  <!-- script principal do app -->
+  <script type="module" src="app.js" defer ></script>
 
-  <!-- App Scripts -->
-    <!-- script principal do app -->
-    <script src="app.js" defer ></script>
-
-    <!-- script para os temas funcionarem -->
-    <script src="../../themes/themes.js"></script>
-
-    <!-- codigo do disqus -->
-    <script src="../../js/utils/loadDisqus.js"></script>
+  <!-- codigo do disqus -->
+  <script src="../../js/utils/loadDisqus.js"></script>
 </body>
 </html>

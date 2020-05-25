@@ -1,26 +1,28 @@
+import { get, listen } from '../../../../js/utils/CzarK.js'
 import showControls from '../player.js'
 
 const videoContnr = get.Id('video-container')
 const progressBar = get.Id('progress-bar')
 const volSlider   = get.Id('vol-slider')
+const player = get.Id('player')
 
-$('.back-5-sec').click(returnFiveSec)
+$('.back-5-sec').click(rtrnFiveSec)
 $('.vol-contrl').click(toogleMute)
 $('.playr-seek').click(seekVideo)
 $('.play-pause').click(playPause)
 $('.add-10-sec').click(addTenSec)
-$('.fullscreen').click(toogleFS)
+$('.fullscreen').click(tgFullScr)
 
 listen('input', changeVol)
 
 const keyboard = {
   ArrowRight: addTenSec,
+  ArrowLeft: rtrnFiveSec,
   ArrowDown: decreaseVolume,
-  ArrowLeft: returnFiveSec,
   ArrowUp: increaseVolume,
   Space: playPause,
   KeyM: toogleMute,
-  KeyF: toogleFS
+  KeyF: tgFullScr
 }
 
 /**
@@ -30,7 +32,7 @@ function playPause() {
   const { paused } = player 
 
   if (paused)
-    player.play ()
+    player.play()
   else
     player.pause()
 }
@@ -58,9 +60,9 @@ function decreaseVolume() {
 /**
  * function that toogle the fullscreen status of the player
  */
-function toogleFS() {
-  if (d.fullscreenElement)
-    d.exitFullscreen()
+function tgFullScr() {
+  if (document.fullscreenElement)
+    document.exitFullscreen()
   else
     videoContnr.requestFullscreen()
 }
@@ -82,7 +84,7 @@ function addTenSec() {
 /**
  * function that remove 5s to the current time of the player
  */
-function returnFiveSec() {
+function rtrnFiveSec() {
   player.currentTime -= parseFloat(  5.0 )
 }
 
@@ -105,6 +107,7 @@ function seekVideo({ offsetX: clickXPos }) {
 }
 
 function changeVol() {
+  const player = get.Id('player')
   // prevents the controls from hide while the volume is modified
   showControls()
 

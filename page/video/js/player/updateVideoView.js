@@ -1,4 +1,4 @@
-const player = get.Id('player')
+import { get } from "../../../../js/utils/CzarK.js"
 
 const progressBar = $('.progress')
 const fullscreen = $('.fullscreen')
@@ -39,7 +39,7 @@ const updateVideoView = () => {
     volIcon.addClass(VOL_HIG)
 
   // update the fullscreen indicator
-  if (d.fullscreenElement)
+  if (document.fullscreenElement)
     fullscreen.removeClass(MAXIMIZE).addClass(MINIMIZE)
   else
     fullscreen.removeClass(MINIMIZE).addClass(MAXIMIZE)
@@ -53,6 +53,7 @@ const updateVideoView = () => {
  * @returns {{ muted: Boolean, paused: Boolean, progress: Number, volume: Number }}
  */
 function getVideoState() {
+  const player = get.Id('player')
   // get Video infos about current state of player
   const {
     currentTime,

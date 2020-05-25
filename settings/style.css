@@ -40,3 +40,8 @@
     align-items: center;
     width: 100vw;
 }
+
+.reset-settings {
+    justify-content: center;
+    align-items: center;
+}

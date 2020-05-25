@@ -1,3 +1,9 @@
+import { setters, getSettings, getCostumTheme, saveSettings, loadSettings } from '../settings/settings.js'
+import { loadTheme, changeTheme } from '../themes/themes.js'
+import { get, del, listen } from "../js/utils/CzarK.js"
+
+import '../themes/themes.js'
+
 const autoPlay = get.Id('autoplay')
 const initScrn = get.Id('initial-screen')
 const order_md = get.Id('order-type')
@@ -17,22 +23,22 @@ listen('submit', resetConfigs)
 
 // Atualiza as configurações toda vez que houver um input por parte do usuário
 function updateSettings() {
-  settings = {
-    autoplay:        autoPlay.value,
-    defaultLaunch:   initScrn.value,
-    episodeSortMode: order_md.value,
-    theme:           appTheme.value,
-    costumTheme: {
-      primary:     pmry.value,
-      accent:      act1.value,
-      accent2:     act2.value,
-      background:  wpp1.value,
-      background2: wpp2.value,
-      infos:       info.value,
-      fontColor:   font.value
-    }
+  const costumTheme = {
+    infos: info.value,
+    accent: act1.value,
+    primary: pmry.value,
+    accent2: act2.value,
+    fontColor: font.value,
+    background: wpp1.value,
+    background2: wpp2.value
   }
-  clearTimeout(timeoutId)
+
+  setters.setTheme(appTheme.value)
+  setters.setAutoPlay(autoPlay.value)
+  setters.setCostumAdjusts(costumTheme)
+  setters.setEpisodeOrder(order_md.value)
+  setters.setDefaultLaunch(initScrn.value)
+
   saveSettings()
   changeTheme()
 }
@@ -43,6 +49,7 @@ function resetConfigs(e) {
 
   // Deleta da localStorage as configurações salvas
   del.fromLocal('settings')
+  del.fromLocal('costum-theme')
 
   // Recarrega a página.
   location.reload();
@@ -50,14 +57,25 @@ function resetConfigs(e) {
 
 // Carrega na página as configurações atualmente salvas na localStorage
 ;(function loadPage() {
+  loadSettings()
+  loadTheme()
+
   const {
+    theme,
     autoplay,
     defaultLaunch,
-    episodeSortMode,
-    theme,
-    costumTheme
-  } = settings
-  const { primary, accent, accent2, background, background2, infos, fontColor } = costumTheme
+    episodeSortMode
+  } = getSettings()
+
+  const {
+    infos,
+    accent,
+    accent2,
+    primary,
+    fontColor,
+    background,
+    background2
+  } = getCostumTheme()
 
   // Carrega as configurações de uso do app salvas
   autoPlay.value = autoplay

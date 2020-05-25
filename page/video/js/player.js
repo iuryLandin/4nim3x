@@ -1,4 +1,5 @@
 import { getters, mutations } from './player/states/Controls.js'
+import { listen, get } from '../../../js/utils/CzarK.js'
 
 const vidContainer = get.Id('video-container')
 
@@ -6,6 +7,7 @@ const SHOW_CONTROLS = 'show-controls'
 
 const playerView = $('.player-view')
 const controlBar = $('#controls')
+const player = get.Id('player')
 
 const TIME_HIDE_CNTRLS = 2500
 const TIME_PRVT_MOBILE = 75
@@ -20,9 +22,10 @@ listen('mousemove', showControls, vidContainer)
 listen(  'click'  , showControls, vidContainer)
 
 function showControls() {
+  let id = getters.getCtrlState()
+
   // clear the last timeout to prevent the controlsBar to close
   // while mouse is moving
-  let id = getters.getCtrlState()
   clearTimeout(id)
   
   // show the controlsBar

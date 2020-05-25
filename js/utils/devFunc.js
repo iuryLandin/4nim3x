@@ -1,38 +1,28 @@
-import { loadSearchEngine, loadSearchResults, searchEngine, sortSearchEngine } from "../search.js"
+import { getAppVersion } from '../States.js'
+import { del } from './CzarK.js'
 
-const devFunctions = {
-    clearWatchedList() {
-      if (confirm('Seu progresso salvo será completamente excluído.\n Deseja continuar?')) {
-        del.fromLocal('watchedList')
-      }
-    },
-  
-    animexAppVersion() {
-      alert( get.Local('appVersion') )
-      console.log(get.Local('appVersion'))
-    },
-  
-    listAllAnimes() {
-      if(confirm("Você tem certeza?")) {
-        // Analiza se ja existem animes na tela e os remove se necessário
-        get.Queries(".anime").forEach(del.element)
+const PROGRESS_DELETE = 'Seu progresso salvo será completamente excluído.\n Deseja continuar?'
+const SITE_2_OPEN_NXT = 'qual site você deseja abrir?'
+const CONFIRM_ENT_URL = `confirma que deseja abrir o endereço?`
+const APP_NOW_IS = 'a versão do app é'
 
-        loadSearchEngine()
 
-        // organiza em ordem alfabética a lista de animes
-        sortSearchEngine
-  
-        loadSearchResults(searchEngine)
-      }
-    },
+export const devFunctions = {
+  clearWatchedList() {
+    const conf = confirm(PROGRESS_DELETE)
+    if (conf) del.fromLocal('watchedList')
+  },
 
-    openSite() {
-      let site = prompt("qual site você deseja abrir?")
+  animexAppVersion() {
+    const version = getAppVersion()
+    alert(version)
+    console.log(APP_NOW_IS, version)
+  },
 
-      if(confirm(`confirma que deseja abrir o site: ${site}  ?`)) {
-        location = site
-      }
-    }
+  openSite() {
+    const site = prompt(SITE_2_OPEN_NXT)
+    const conf = confirm(CONFIRM_ENT_URL)
+
+    if (conf) location = site
+  }
 }
-
-export default devFunctions

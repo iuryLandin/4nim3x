@@ -1,7 +1,8 @@
-function showLoading() {
-    get.Id('loading').classList.replace('hide', 'show')
-}
+import { get } from './utils/CzarK.js'
 
-function hideLoading() {
-    get.Id('loading').classList.replace('show', 'hide')
-}
+const HIDE = 'hide'
+const SHOW = 'show'
+const LOADING = get.Id('loading')
+
+export const showLoading = () => { LOADING.classList.replace(HIDE, SHOW) }
+export const hideLoading = () => { LOADING.classList.replace(SHOW, HIDE) }

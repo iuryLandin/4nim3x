@@ -1,104 +1,98 @@
-// Recolhe os dados do anime pelos parâmetros passados na URL
-var { id, name, desc, img, origin } = get.UrlData()
+import { getEpisodeSortMode, loadSettings, toogleEpisodeOrder } from '../../settings/settings.js'
+import { getAnimeDetail, getEpisodeList } from '../common/api.js'
+import { get, truncate } from '../../js/utils/CzarK.js'
+import { loadTheme } from '../../themes/themes.js'
+import { hideLoading } from '../../js/loading.js'
+import { getters } from '../common/States.js'
 
-// receberá a lista de episódios da api
-var episodeList = new Array();
+import '../../themes/themes.js'
+import '../../js/loading.js'
 
-// Verifica se a lista de animes ja foi carregada por completo alguma vez
-const completedOnce = get.Local('completed-once')
+const { anime } = get.UrlData()
+
+const ASC = 'A - Z'
+const DSC = 'Z - A'
+const DESCRIPTIONS = $('.desc')
+const IMGs_ON_PAGE = $('.img-place')
+const SORT_ORD_BTN = $('.sort-mode')
+const _ANIME_TITLE = $('.anime-title')
+const MOBL_DESCRPT = $('.desc-mobile')
+const DESK_DESCRPT = $('#desc-desktop')
+const MOBL_ALL_BTN = $('#see-all-mobl')
+const DESK_ALL_BTN = $('#see-all-desk')
+const FULL_DSC_CTN = $('#full-desc')
+const FULL_DESCRPT = $('.full-desc-modal')
+const EPISOD_CNTNR = get.Queries('.episode-list')
 
 
-async function loadPage() {
-    // Oculta a o modal que apresenta a descrição completa do anime.
-    $('.full-desc-container').hide()
-    
-    // O endpoint de lancamentos disponibiliza nome e descrição "errados", então caso o
-    // usuário esteja vindo da tela de lançamentos e já tenha carregado a search engine,
-    // esses dados serão substituídos pelos contídos nela.
+;(function loadPage() {
+  loadSettings()
+  loadTheme()
 
-    if ( origin == 'releases' && completedOnce) {
-        // Recebe o modulo que encontra os dados de um anime pelo seu id na lista de animes
-        const { getAnimeById } = await import('../../js/search.js')
+  // carrega os dados do anime na página
+  getAnimeDetail()
+    .then(loadAnimeDetails)
+    .then(hideLoading)
+  
+  // obtém da api e carrega a lista de apisodios na página
+  getEpisodeList()
+    .then(loadEpisodeList)
 
-        // procura o anime que possui o id passado na URL
-        const animeData = getAnimeById(id)
+  //carrega as ações clicáveis na página
+  SORT_ORD_BTN.click(toogleOrderMode)
+  DESCRIPTIONS.click(showFullDescptn)
+})()
 
-        // caso ele encontre na lista salva o anime com o id passado, os dados
-        // de nome e descrição serão sobrescritos pelos que foram encontrados.
-        if ( animeData[0] ) {
-            const { Nome, Desc } = animeData[0]
-            name = Nome
-            desc = Desc
-        }
-    }
-    
-    // adiciona as imagens do anime escolhido na tela
-    get.Queries('.img-place').forEach(place => place.src = img)
-    
-    // Posiciona as descrições nos seus devidos locais na página
-    $('.full-desc-modal').text(desc)
-    $('#desc-mobile' ).text( truncate(desc, 220) )
-    $('#desc-desktop').text( truncate(desc, 340) )
-    
-    // posiciona o título do anime na pagina
-    $('.anime-title').text(name)
-    
-    // oculta ambos os botões "ver mais" da descrição caso a descrição possua menos letras do que o limite
-    if (desc.length < 220) $('#see-all-mobl').hide()
-    // oculta apenas o botão "ver mais" da descrição na view de desktop
-    if (desc.length < 340) $('#see-all-desk').hide()
+function toogleOrderMode() {
+  toogleEpisodeOrder()
+  loadEpisodeList()
 }
 
-// 
-async function getEpisodeList() {
-    // recebe da sessão a lista carregada, caso exista
-    const episodeListOnSession = get.Session(id)
-    if ( episodeListOnSession )
-        episodeList = episodeListOnSession
-    
-    // caso não exista, busca da api e salva na sessão
-    else {
-        episodeList = await getApiData(`episodio?id=${id}`)
-        set.Session(id, episodeList)
-    }
+function loadAnimeDetails() {
+  const { Nome, Desc, Imagem } = getters.getAnimeDetail()
+
+  _ANIME_TITLE.text(Nome)
+  FULL_DESCRPT.text(Desc)
+  IMGs_ON_PAGE.attr('src', Imagem)
+  MOBL_DESCRPT.text( truncate(Desc, 220) )
+  DESK_DESCRPT.text( truncate(Desc, 340) )
+  
+  if (Desc.length < 220) MOBL_ALL_BTN.hide()
+  if (Desc.length < 340) DESK_ALL_BTN.hide()
 }
 
 function loadEpisodeList() {
-    // recebe o progresso do anime atual 
-    const watchedList = get.Local('watchedList') || new Object()
-    const watchedEpsd = watchedList[id]          || new  Array()
+  const episodeList = getters.getEpisodeList()
+  
+  // recebe das configurações o modo de ordenar os episódios escolhido pelo usuário
+  EPISOD_CNTNR.forEach(ctnr => ctnr.innerHTML = '')
+  const sortMode = getEpisodeSortMode()
 
-    // recebe das configurações o modo de ordenar os episódios escolhido pelo usuário
-    const { episodeSortMode: sortMode } = settings
+  const SORT_MODE = (sortMode != 'beforeend')
+  ? ASC
+  : DSC
 
-    for (const { Id, Nome } of episodeList) {
-        const episodeButtom = `<a href="../video/index.html?anime=${id}&ep=${Id}" class="episode ${(watchedEpsd.includes(Id))?'seen':'unseen'}">${Nome}</a>`
-        get.Queries('.episode-list').forEach(tag => tag.insertAdjacentHTML(sortMode, episodeButtom))
-        
-        $('.sort-mode').text( (sortMode == 'beforeend') ? 'Z - A' : 'A - Z' )
+  SORT_ORD_BTN.text(SORT_MODE)
+
+  for (const epsd of episodeList) {
+    const episodeButtom = getEpisodeCard(epsd)
+    for (const container of EPISOD_CNTNR) {
+      container.insertAdjacentHTML(sortMode, episodeButtom)
     }
+  }
 }
 
-// carrega os dados do anime na página
-loadPage()
+function getEpisodeCard({ Id, Nome }) {
+  const watchedList = getters.getWatchedList()
+  const watchedStts = watchedList.includes(Id)
+  ? 'seen'
+  : 'unseen'
 
-// obtém da api e carrega a lista de apisodios na página
-getEpisodeList()
-    .then(loadEpisodeList)
-    .then(hideLoading)
-    .then(function loadClickActions() {
-        $('.sort-mode').click(() => {
-            const { episodeSortMode: sortMode } = settings
+  return `<a
+    href='../video/index.html?anime=${ anime }&ep=${ Id }'
+    class='episode ${watchedStts}'> ${ Nome } </a>`
+}
 
-            settings.episodeSortMode = (sortMode == 'beforeend') ? 'afterbegin' : 'beforeend'
-
-            clearTimeout(timeoutId)
-            saveSettings()
-            get.Queries('.episode').forEach(del.element)
-
-            loadEpisodeList()
-        })
-        $('.desc').click( () => $('#full-desc').fadeIn() )
-        // $('#full-desc').click( () => $('#full-desc').fadeOut() )
-    })
-    .catch(console.warn)
+function showFullDescptn() {
+  FULL_DSC_CTN.fadeIn()
+}
