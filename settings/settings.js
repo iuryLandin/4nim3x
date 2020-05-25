@@ -10,7 +10,7 @@
 
 import { get, set } from "../js/utils/CzarK.js"
 
-const BASE_URL = 'http://127.0.0.1:4000/'
+const BASE_URL = 'https://animexapi.herokuapp.com/'
 const COSTUM_THEME = 'costum-theme'
 const ASCD = 'afterbegin'
 const STNGS = 'settings'
