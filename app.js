@@ -61,7 +61,7 @@ getLists()
       const scrollPos = w.innerHeight + w.scrollY
       const pageHeight = document.body.offsetHeight
 
-      const pageBottom = scrollPos >= pageHeight
+      const pageBottom = (scrollPos >= (pageHeight - 5))
 
       const currenScr = getters.getCurrentScreen()
       const ldngNxtPg = getters.getLoadingStatus()
