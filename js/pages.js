@@ -3,10 +3,11 @@ import { getAnimeCard } from "./models/animeCard.js"
 import { mutations, getters } from "./States.js"
 import { getNextApiPage } from "../app.js"
 import { get, set } from "./utils/CzarK.js"
+import { findResults } from "./search.js"
 
 const EMPTY = ''
 const HOMESC = 'home'
-const SEARCH = 'search'
+const SEARCH = 'reSearch'
 const RELEAS = 'releases'
 const BOTTOM = 'beforeend'
 const LOADERS = $('.loader')
@@ -71,8 +72,15 @@ const search = () => {
   LOADERS.removeClass(BTN_SELECTED)
 }
 
+const reSearch = () => {
+  const lastSearch = get.Session('searchQuery')
+  get.Id('searchbar').value = lastSearch
+  findResults()
+}
+
 export const load = {
   releases,
+  reSearch,
   search,
   home
 }

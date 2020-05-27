@@ -15,7 +15,9 @@ async function search() {
   clearTimeout(inputTimer)
 
   const { value } = searchbar
-  const dev = devFunctions[value]
+  const dev = devFunctions[value
+  ]
+  set.Session('searchQuery', value)
 
   if (!value.length)
     load[crntScrn]()
@@ -27,7 +29,7 @@ async function search() {
   }
 }
 
-async function findResults() {
+export async function findResults() {
   const { value } = searchbar
   const results = await getSearchResults(value)
   mutations.setSearchResult(results)

@@ -18,7 +18,7 @@ const HOM_SCR_BTN = $('.load-all')
 const SHOW_RELEAS = $('.load-rel')
 
 // Receberá das configurações, qual tela deve ser carregada quando o app abrir
-const defaultLaunch = getDefaultLaunch()
+const defaultLaunch = get.Session('crntScrn') || getDefaultLaunch()
 
 export const getNextApiPage = async () => {
   mutations.toogleLoadingNextScrn()
