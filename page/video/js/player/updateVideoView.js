@@ -1,7 +1,11 @@
 import { get } from "../../../../js/utils/CzarK.js"
 
-const progressBar = $('.progress')
+const player = get.Id('player')
+
+const durationTotal = $('.duration-time')
+const progressTime = $('.current-time')
 const fullscreen = $('.fullscreen')
+const progressBar = $('.progress')
 const playBtn = $('.play-btn')
 const volIcon = $('.vol-icon')
 
@@ -15,10 +19,16 @@ const MAXIMIZE = 'fa-expand'
 const MINIMIZE = 'fa-compress'
 
 const updateVideoView = () => {
-  const { muted, paused, progress, volume } = getVideoState()
+  const { muted, paused, progress, volume, durationParsed, crntTimeParsed } = getVideoState()
+  
+  const totalTime = parseTimeAsString(durationParsed)
+  const elapsedtime = parseTimeAsString(crntTimeParsed)
   
   // update progressBar with the current time of the player
   progressBar.width(progress + '%')
+
+  progressTime.text(elapsedtime)
+  durationTotal.text(totalTime)
 
   // update the play/pause button to the current video state
   playBtn
@@ -53,7 +63,6 @@ const updateVideoView = () => {
  * @returns {{ muted: Boolean, paused: Boolean, progress: Number, volume: Number }}
  */
 function getVideoState() {
-  const player = get.Id('player')
   // get Video infos about current state of player
   const {
     currentTime,
@@ -63,10 +72,43 @@ function getVideoState() {
     muted
   } = player
 
+  const durationParsed = parseTime(duration)
+  const crntTimeParsed = parseTime(currentTime)
+
   // convert a ms time to the watched percentage
   const progress = parseFloat((currentTime / duration * 100).toFixed(2))
 
-  return { paused, muted, progress, volume }
+  return {
+    paused,
+    muted,
+    progress,
+    volume,
+    durationParsed,
+    crntTimeParsed
+  }
+}
+
+function parseTime(timeInSec) {
+  const sec = parseInt(timeInSec % 60)
+  const min = parseInt(timeInSec / 60)
+  
+  return {
+    sec,
+    min
+  }
+}
+
+function parseTimeAsString(parsedTime) {
+  const { min, sec } = parsedTime
+
+  const state = {
+    min,
+    sec
+  }
+
+  if (sec < 10) state.sec = `0${sec}`
+
+  return `${state.min}:${state.sec}`
 }
 
 requestAnimationFrame(updateVideoView)
