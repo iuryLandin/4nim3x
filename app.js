@@ -63,7 +63,7 @@ getLists()
 
       const pageBottom = (scrollPos >= (pageHeight - 5))
 
-      const currenScr = getters.getCurrentScreen()
+      const currenScr = get.Session('crntScrn')
       const ldngNxtPg = getters.getLoadingStatus()
 
       // carrega a pŕoxima página de animes ao fim da rolagem
