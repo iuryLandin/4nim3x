@@ -1,4 +1,4 @@
-
+import { getDefaultLaunch } from "../settings/settings.js"
 import { getAnimeCard } from "./models/animeCard.js"
 import { mutations, getters } from "./States.js"
 import { getNextApiPage } from "../app.js"
@@ -75,6 +75,8 @@ const search = () => {
 const reSearch = () => {
   const lastSearch = get.Session('searchQuery')
   get.Id('searchbar').value = lastSearch
+  const defaultLaunch = getDefaultLaunch()
+  mutations.setCurrentScreen(defaultLaunch)
   findResults()
 }
 
