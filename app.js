@@ -6,6 +6,7 @@ import { hideLoading } from './js/loading.js'
 import { load } from './js/pages.js'
 
 import './themes/themes.js'
+import { loadTheme } from './themes/themes.js'
 
 const HSC = 'home'
 const RLS = 'releases'
@@ -73,6 +74,6 @@ getLists()
   .then(load[defaultLaunch])
   .then(loadSwapScreens)
 
-themes.load()
+loadTheme()
 
 listen('scroll', loadNextPage)

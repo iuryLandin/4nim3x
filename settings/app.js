@@ -2,6 +2,7 @@ import { get, del, listen } from "../js/utils/CzarK.js"
 import getSettings from '../settings/settings.js'
 
 import '../themes/themes.js'
+import { loadTheme } from "../themes/themes.js"
 
 const settings = getSettings()
 const autoPlay = get.Id('autoplay')
@@ -57,7 +58,6 @@ function resetConfigs(e) {
 
 // Carrega na página as configurações atualmente salvas na localStorage
 function loadPage() {
-  Theme.load()
   loadTheme()
 
   const {

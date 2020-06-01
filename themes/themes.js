@@ -1,13 +1,15 @@
-import { getTheme, getCostumTheme } from "../settings/settings.js"
 import { getCostumStyleTag } from "./scripts/getCostumStyle.js"
+import getSettings from "../settings/settings.js"
 import { get } from "../js/utils/CzarK.js"
 
 const BODY = document.body
 const HEAD = document.head
 
+const settings = getSettings()
+
 export const changeTheme = () => {
   const currentTheme = BODY.classList.value
-  const newTheme = getTheme()
+  const newTheme = settings.getTheme()
 
   $(BODY)
     .addClass(newTheme)
@@ -17,8 +19,8 @@ export const changeTheme = () => {
 }
 
 export const loadTheme = () => {
-  const theme = getTheme()
-  const costumTheme = getCostumTheme()
+  const theme = settings.getTheme()
+  const costumTheme = settings.getCostumTheme()
   const COSTUM_STYLE = get.Id('costum-theme')
   const style = getCostumStyleTag(costumTheme)
   
