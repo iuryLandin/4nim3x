@@ -1,9 +1,11 @@
-import { getDefaultLaunch } from "../settings/settings.js"
+import getSettings from "../settings/settings.js"
 import { getAnimeCard } from "./models/animeCard.js"
 import { mutations, getters } from "./States.js"
 import { getNextApiPage } from "../app.js"
 import { get, set } from "./utils/CzarK.js"
 import { findResults } from "./search.js"
+
+const settings = getSettings()
 
 const EMPTY = ''
 const HOMESC = 'home'
@@ -75,7 +77,7 @@ const search = () => {
 const reSearch = () => {
   const lastSearch = get.Session('searchQuery')
   get.Id('searchbar').value = lastSearch
-  const defaultLaunch = getDefaultLaunch()
+  const defaultLaunch = settings.getDefaultLaunch()
   mutations.setCurrentScreen(defaultLaunch)
   findResults()
 }

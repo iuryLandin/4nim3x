@@ -1,13 +1,14 @@
 import { getEpisodeList, getVideoQualities } from '../common/api.js'
 import { saveEpisode } from './js/utils/saveProgress.js'
+import getSettings from '../../settings/settings.js'
+import { loadTheme } from '../../themes/themes.js'
 import { hideLoading } from '../../js/loading.js'
 import { getters } from '../common/States.js'
 import { get } from '../../js/utils/CzarK.js'
 
 import './js/player.js'
-import { loadSettings } from '../../settings/settings.js'
-import { loadTheme } from '../../themes/themes.js'
 
+const settings = getSettings()
 const { anime, ep } = get.UrlData()
 
 const ASC = 'afterbegin'
@@ -20,8 +21,6 @@ const NO_NEXT = `<div class="episode" onclick="alert('você chegou ao fim da lis
 
 ;(function openPage() {
   saveEpisode()
-
-  loadSettings()
   loadTheme()
 
   getEpisodeList()

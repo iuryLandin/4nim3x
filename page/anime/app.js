@@ -1,6 +1,6 @@
-import { getEpisodeSortMode, loadSettings, toogleEpisodeOrder } from '../../settings/settings.js'
 import { getAnimeDetail, getEpisodeList } from '../common/api.js'
 import { get, truncate } from '../../js/utils/CzarK.js'
+import getSettings from '../../settings/settings.js'
 import { loadTheme } from '../../themes/themes.js'
 import { hideLoading } from '../../js/loading.js'
 import { getters } from '../common/States.js'
@@ -8,6 +8,7 @@ import { getters } from '../common/States.js'
 import '../../themes/themes.js'
 import '../../js/loading.js'
 
+const settings = getSettings()
 const { anime } = get.UrlData()
 
 const ASC = 'A - Z'
@@ -26,7 +27,6 @@ const EPISOD_CNTNR = get.Queries('.episode-list')
 
 
 ;(function loadPage() {
-  loadSettings()
   loadTheme()
 
   // carrega os dados do anime na página
@@ -44,7 +44,7 @@ const EPISOD_CNTNR = get.Queries('.episode-list')
 })()
 
 function toogleOrderMode() {
-  toogleEpisodeOrder()
+  settings.toogleOrderMode()
   loadEpisodeList()
 }
 
@@ -66,7 +66,7 @@ function loadEpisodeList() {
   
   // recebe das configurações o modo de ordenar os episódios escolhido pelo usuário
   EPISOD_CNTNR.forEach(ctnr => ctnr.innerHTML = '')
-  const sortMode = getEpisodeSortMode()
+  const sortMode = settings.getSortMode()
 
   const SORT_MODE = (sortMode != 'beforeend')
   ? ASC

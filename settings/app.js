@@ -1,9 +1,9 @@
-import { setters, getSettings, getCostumTheme, saveSettings, loadSettings } from '../settings/settings.js'
-import { loadTheme, changeTheme } from '../themes/themes.js'
 import { get, del, listen } from "../js/utils/CzarK.js"
+import getSettings from '../settings/settings.js'
 
 import '../themes/themes.js'
 
+const settings = getSettings()
 const autoPlay = get.Id('autoplay')
 const initScrn = get.Id('initial-screen')
 const order_md = get.Id('order-type')
@@ -33,14 +33,14 @@ function updateSettings() {
     background2: wpp2.value
   }
 
-  setters.setTheme(appTheme.value)
-  setters.setAutoPlay(autoPlay.value)
-  setters.setCostumAdjusts(costumTheme)
-  setters.setEpisodeOrder(order_md.value)
-  setters.setDefaultLaunch(initScrn.value)
+  settings.setTheme(appTheme.value)
+  settings.setCostumTheme(costumTheme)
+  settings.setAutoplay(autoPlay.value)
+  settings.setSortMode(order_md.value)
+  settings.setDefaultLaunch(initScrn.value)
 
-  saveSettings()
-  changeTheme()
+  settings.save()
+  Theme.change()
 }
 
 // restaura as configurações ao padrão
@@ -56,8 +56,8 @@ function resetConfigs(e) {
 }
 
 // Carrega na página as configurações atualmente salvas na localStorage
-;(function loadPage() {
-  loadSettings()
+function loadPage() {
+  Theme.load()
   loadTheme()
 
   const {
@@ -65,7 +65,7 @@ function resetConfigs(e) {
     autoplay,
     defaultLaunch,
     episodeSortMode
-  } = getSettings()
+  } = settings.getSettings()
 
   const {
     infos,
@@ -75,7 +75,7 @@ function resetConfigs(e) {
     fontColor,
     background,
     background2
-  } = getCostumTheme()
+  } = settings.getCostumTheme()
 
   // Carrega as configurações de uso do app salvas
   autoPlay.value = autoplay
@@ -91,4 +91,6 @@ function resetConfigs(e) {
   wpp2.value = background2
   info.value = infos
   font.value = fontColor
-})()
+}
+
+loadPage()

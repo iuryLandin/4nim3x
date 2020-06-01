@@ -1,15 +1,11 @@
-import { getDefaultLaunch, loadSettings, getApiData } from './settings/settings.js'
+import getSettings from './settings/settings.js'
+import getApiData from './js/HTML/getApiData.js'
 import { getters, mutations } from './js/States.js'
-import { loadTheme } from './themes/themes.js'
-import { get, set } from './js/utils/CzarK.js'
+import { get, set, listen } from './js/utils/CzarK.js'
 import { hideLoading } from './js/loading.js'
 import { load } from './js/pages.js'
 
 import './themes/themes.js'
-import './js/loading.js'
-
-// carrega as configurações antes de qualquer código ser executado
-loadSettings()
 
 const HSC = 'home'
 const RLS = 'releases'
@@ -17,8 +13,9 @@ const FAB = $('#fab')
 const HOM_SCR_BTN = $('.load-all')
 const SHOW_RELEAS = $('.load-rel')
 
+const settings = getSettings()
 // Receberá das configurações, qual tela deve ser carregada quando o app abrir
-const defaultLaunch = get.Session('crntScrn') || getDefaultLaunch()
+const defaultLaunch = get.Session('crntScrn') || settings.getDefaultLaunch()
 
 export const getNextApiPage = async () => {
   mutations.toogleLoadingNextScrn()
@@ -47,34 +44,35 @@ const getLists = async () => {
   hideLoading()
 }
 
+function loadSwapScreens() {
+  HOM_SCR_BTN.click(load[HSC])
+  SHOW_RELEAS.click(load[RLS])
+}
+
+function loadNextPage() {
+  const ldngNxtPg = getters.getLoadingStatus()
+  const currenScr = get.Session('crntScrn')
+
+  const { scrollTop, clientHeight, scrollHeight } = document.documentElement
+
+  const scrollPos = scrollTop + clientHeight
+  const pageBottom = scrollPos >= (scrollHeight - 50)
+
+  // carrega a pŕoxima página de animes ao fim da rolagem
+  if (pageBottom && (currenScr == HSC) && !ldngNxtPg) load.home()
+  
+  // mostra e oculta o FAB de pesquisa
+  if (scrollTop > 350)
+    FAB.removeClass('hide')
+
+  else
+    FAB.addClass('hide')
+}
 
 getLists()
   .then(load[defaultLaunch])
-  .then(function loadSwapScreens() {
-    HOM_SCR_BTN.click(load[HSC])
-    SHOW_RELEAS.click(load[RLS])
-  })
-  .then(function loadNextPage() {
-    window.onscroll = function loadNextPage() {
-      const w = window
-      const searchHeight = 910
-      const scrollPos = w.innerHeight + w.scrollY
-      const pageHeight = document.body.offsetHeight
+  .then(loadSwapScreens)
 
-      const pageBottom = (scrollPos >= (pageHeight - 5))
+themes.load()
 
-      const currenScr = get.Session('crntScrn')
-      const ldngNxtPg = getters.getLoadingStatus()
-
-      // carrega a pŕoxima página de animes ao fim da rolagem
-      if (pageBottom && (currenScr == HSC) && !ldngNxtPg) load.home()
-      
-      // mostra e oculta o FAB de pesquisa
-      if (scrollPos > searchHeight)
-        FAB.removeClass('hide')
-
-      else
-        FAB.addClass('hide')
-    }
-  })
-loadTheme()
+listen('scroll', loadNextPage)
