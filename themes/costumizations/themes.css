@@ -1,14 +1,4 @@
 /* temas do app */
-.light {
-  --primary:      #c4c4c4;
-  --accent:       #9e9e9e;
-  --accent_2:     #6c6c6c;
-  --background:   #ffffff;
-  --background_2: #ededed;
-  --infos:        #ffffff;
-  color:          #000000;
-}
-
 .purple {
   --primary:      #610061;
   --accent:       #800080;
@@ -27,6 +17,16 @@
   --background_2: #4f4a4a;
   --infos:        #ffffff;
   color:          #a5a5a5;
+}
+
+.amoled {
+  --primary:      #2e2e2e;
+  --accent:       #6b6b6b;
+  --accent_2:     #1d1d1d;
+  --background:   #000000;
+  --background_2: #000000;
+  --infos:        #ffffff;
+  color:          #ffffff;
 }
 
 .purple-dark{
@@ -57,4 +57,14 @@
   --background_2: #1d1d1d;
   --infos:        #ffffff;
   color:          #ffffff;
+}
+
+.night-ocean {
+  --primary:      #014289;
+  --accent:       #009ac0;
+  --accent_2:     #0255af;
+  --background:   #2c2c2c;
+  --background_2: #1d1d1d;
+  --infos:        #ffffff;
+  color:          #009ac0;
 }

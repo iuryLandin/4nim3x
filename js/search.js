@@ -1,7 +1,7 @@
 import { get, listen, set } from './utils/CzarK.js'
 import { devFunctions } from './utils/devFunc.js'
 import { getters, mutations } from './States.js'
-import getApiData from './HTML/getApiData.js'
+import getApiData from './HTTP/getApiData.js'
 import { load } from './pages.js'
 
 const searchbar = get.Id('searchbar')

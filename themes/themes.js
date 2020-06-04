@@ -1,10 +1,14 @@
-import { getCostumStyleTag } from "./scripts/getCostumStyle.js"
-import { get } from "../js/utils/CzarK.js"
+import { getCostumStyleTag, getNavThemeTag } from "./scripts/getCostumStyle.js"
+import { get, del } from "../js/utils/CzarK.js"
 
 const BODY = document.body
 const HEAD = document.head
 
-export const loadTheme = theme => BODY.classList.add(theme)
+export const loadTheme = theme => {
+  get.Queries('#costum-theme').forEach(del.element)
+  HEAD.append(getNavThemeTag(theme))
+  BODY.classList.add(theme)
+}
 export const loadCostumTheme = costumTheme => {
   const style = getCostumStyleTag(costumTheme)
 
@@ -17,8 +21,6 @@ export const changeTheme = newTheme => {
   $(BODY)
     .addClass(newTheme)
     .removeClass(currentTheme)
-
-  loadTheme()
 }
 
 export const changeCostumTheme = (theme, costumTheme) => {

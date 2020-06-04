@@ -25,7 +25,6 @@ const NO_NEXT = `<div class="episode" onclick="alert('você chegou ao fim da lis
 
 ;(function openPage() {
   saveEpisode()
-  loadTheme()
 
   getEpisodeList()
     .then(loadNextEpisodeList)

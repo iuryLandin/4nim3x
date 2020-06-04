@@ -1,5 +1,5 @@
 import { mutations,loadWatchedList } from './States.js'
-import getApiData from '../../js/HTML/getApiData.js'
+import getApiData from '../../js/HTTP/getApiData.js'
 import { get, set } from '../../js/utils/CzarK.js'
 
 const { anime } = get.UrlData()

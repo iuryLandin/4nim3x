@@ -57,8 +57,6 @@ function resetConfigs(e) {
 
 // Carrega na página as configurações atualmente salvas na localStorage
 function loadPage() {
-  loadTheme()
-
   const {
     theme,
     autoplay,

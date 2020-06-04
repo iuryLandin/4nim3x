@@ -2,7 +2,7 @@ import { loadTheme, loadCostumTheme } from './themes/themes.js'
 import { get, set, listen } from './js/utils/CzarK.js'
 import { getters, mutations } from './js/States.js'
 import getSettings from './settings/settings.js'
-import getApiData from './js/HTML/getApiData.js'
+import getApiData from './js/HTTP/getApiData.js'
 import { hideLoading } from './js/loading.js'
 import { load } from './js/pages.js'
 
@@ -75,7 +75,5 @@ function loadNextPage() {
 getLists()
   .then(load[defaultLaunch])
   .then(loadSwapScreens)
-
-loadTheme()
 
 listen('scroll', loadNextPage)

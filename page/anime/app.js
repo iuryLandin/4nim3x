@@ -1,7 +1,7 @@
+import { loadTheme, loadCostumTheme } from '../../themes/themes.js'
 import { getAnimeDetail, getEpisodeList } from '../common/api.js'
 import { get, truncate } from '../../js/utils/CzarK.js'
 import getSettings from '../../settings/settings.js'
-import { loadTheme, loadCostumTheme } from '../../themes/themes.js'
 import { hideLoading } from '../../js/loading.js'
 import { getters } from '../common/States.js'
 
@@ -32,8 +32,6 @@ const EPISOD_CNTNR = get.Queries('.episode-list')
 
 
 ;(function loadPage() {
-  loadTheme()
-
   // carrega os dados do anime na página
   getAnimeDetail()
     .then(loadAnimeDetails)
