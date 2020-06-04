@@ -1,7 +1,7 @@
 import { getEpisodeList, getVideoQualities } from '../common/api.js'
 import { saveEpisode } from './js/utils/saveProgress.js'
 import getSettings from '../../settings/settings.js'
-import { loadTheme } from '../../themes/themes.js'
+import { loadTheme, loadCostumTheme } from '../../themes/themes.js'
 import { hideLoading } from '../../js/loading.js'
 import { getters } from '../common/States.js'
 import { get } from '../../js/utils/CzarK.js'
@@ -9,6 +9,10 @@ import { get } from '../../js/utils/CzarK.js'
 import './js/player.js'
 
 const settings = getSettings()
+
+loadTheme(settings.getTheme())
+loadCostumTheme(settings.getCostumTheme())
+
 const { anime, ep } = get.UrlData()
 
 const ASC = 'afterbegin'

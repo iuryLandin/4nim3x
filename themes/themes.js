@@ -1,15 +1,18 @@
 import { getCostumStyleTag } from "./scripts/getCostumStyle.js"
-import getSettings from "../settings/settings.js"
 import { get } from "../js/utils/CzarK.js"
 
 const BODY = document.body
 const HEAD = document.head
 
-const settings = getSettings()
+export const loadTheme = theme => BODY.classList.add(theme)
+export const loadCostumTheme = costumTheme => {
+  const style = getCostumStyleTag(costumTheme)
 
-export const changeTheme = () => {
+  HEAD.append(style)
+}
+
+export const changeTheme = newTheme => {
   const currentTheme = BODY.classList.value
-  const newTheme = settings.getTheme()
 
   $(BODY)
     .addClass(newTheme)
@@ -18,14 +21,13 @@ export const changeTheme = () => {
   loadTheme()
 }
 
-export const loadTheme = () => {
-  const theme = settings.getTheme()
-  const costumTheme = settings.getCostumTheme()
+export const changeCostumTheme = (theme, costumTheme) => {
   const COSTUM_STYLE = get.Id('costum-theme')
   const style = getCostumStyleTag(costumTheme)
   
-  if (COSTUM_STYLE) COSTUM_STYLE.remove()
-  
-  BODY.classList.add(theme)
+  if (COSTUM_STYLE)
+    COSTUM_STYLE.remove()
+
+  loadTheme(theme)
   HEAD.append(style)
 }

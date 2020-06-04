@@ -20,20 +20,42 @@ export default function getSettings () {
     }
   }
 
-  const save = () => set.Local('settings', state)
+  const observers ={
+    themeChange: [],
+    sortChange: []
+  }
+
+  const sub2ThemeUpdate = func => observers.themeChange.push(func)
+  const sub2SortUpdate = func => observers.sortChange.push(func)
+
+  const notifyThemeChange = () => {
+    const { theme, costumTheme } = state
+    for (const func of observers.themeChange) func(theme, costumTheme)
+  }
+  const notifySortChange = () => {
+    for (const func of observers.sortChange) func()
+  }
+
   const getSettings = () => state
+  const save = () => set.Local('settings', state)
 
-  const setTheme = theme => state.theme = theme
   const getTheme = () => state.theme
+  const setTheme = theme => {
+    state.theme = theme
+    notifyThemeChange()
+  }
 
-  const setAutoplay = status => state.autoplay = status
   const getAutoplay = () => state.autoplay
+  const setAutoplay = status => state.autoplay = status
 
-  const setDefaultLaunch = option => state.defaultLaunch = option
   const getDefaultLaunch = () => state.defaultLaunch
+  const setDefaultLaunch = option => state.defaultLaunch = option
 
-  const setSortMode = order => state.episodeSortMode = order
   const getSortMode = () => state.episodeSortMode
+  const setSortMode = order => {
+    state.episodeSortMode = order
+    notifySortChange()
+  }
   const togleSortMode = () => {
     const { episodeSortMode } = state
     
@@ -42,38 +64,28 @@ export default function getSettings () {
     : DESC
     
     setSortMode(newMode)
+    notifySortChange()
+
     save()
   }
 
-  const setCostumTheme = themeSchema => state.costumTheme = themeSchema
   const getCostumTheme = () => state.costumTheme
+  const setCostumTheme = themeSchema => state.costumTheme = themeSchema
 
   const loadSettings = () => {
-    const costumTheme = get.Local('costum-theme')
     const settings = get.Local('settings')
 
     const updateSettings = () => {
-      const { theme, autoplay, defaultLaunch, episodeSortMode } = settings
+      const { theme, autoplay, defaultLaunch, episodeSortMode, costumTheme } = settings
   
       setTheme(theme)
       setAutoplay(autoplay)
+      setCostumTheme(costumTheme)
       setSortMode(episodeSortMode)
       setDefaultLaunch(defaultLaunch)
     }
-    const updateCostumTheme = () => {
-      const { infos, accent, primary, accent2, fontColor, background, background2 } = costumTheme
-
-      costumTheme.info = infos
-      costumTheme.accent = accent
-      costumTheme.primary = primary
-      costumTheme.accent2 = accent2
-      costumTheme.fontColor = fontColor
-      costumTheme.background = background
-      costumTheme.background2 = background2
-    }
   
     if (settings) updateSettings()
-    if (costumTheme) updateCostumTheme()
   }
 
   loadSettings()
@@ -91,6 +103,8 @@ export default function getSettings () {
     togleSortMode,
     setCostumTheme,
     getCostumTheme,
-    getSettings
+    getSettings,
+    sub2SortUpdate,
+    sub2ThemeUpdate
   }
 }

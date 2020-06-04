@@ -1,12 +1,12 @@
+import { loadTheme, loadCostumTheme } from './themes/themes.js'
+import { get, set, listen } from './js/utils/CzarK.js'
+import { getters, mutations } from './js/States.js'
 import getSettings from './settings/settings.js'
 import getApiData from './js/HTML/getApiData.js'
-import { getters, mutations } from './js/States.js'
-import { get, set, listen } from './js/utils/CzarK.js'
 import { hideLoading } from './js/loading.js'
 import { load } from './js/pages.js'
 
 import './themes/themes.js'
-import { loadTheme } from './themes/themes.js'
 
 const HSC = 'home'
 const RLS = 'releases'
@@ -15,6 +15,8 @@ const HOM_SCR_BTN = $('.load-all')
 const SHOW_RELEAS = $('.load-rel')
 
 const settings = getSettings()
+loadTheme(settings.getTheme())
+loadCostumTheme(settings.getCostumTheme())
 // Receberá das configurações, qual tela deve ser carregada quando o app abrir
 const defaultLaunch = get.Session('crntScrn') || settings.getDefaultLaunch()
 

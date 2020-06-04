@@ -1,10 +1,15 @@
 import { get, del, listen } from "../js/utils/CzarK.js"
 import getSettings from '../settings/settings.js'
+import { loadTheme, changeTheme, changeCostumTheme, loadCostumTheme } from "../themes/themes.js"
 
 import '../themes/themes.js'
-import { loadTheme } from "../themes/themes.js"
 
 const settings = getSettings()
+loadTheme(settings.getTheme())
+loadCostumTheme(settings.getCostumTheme())
+settings.sub2ThemeUpdate(changeTheme)
+settings.sub2ThemeUpdate(changeCostumTheme)
+
 const autoPlay = get.Id('autoplay')
 const initScrn = get.Id('initial-screen')
 const order_md = get.Id('order-type')
@@ -16,11 +21,6 @@ const wpp1 = get.Id('background')
 const wpp2 = get.Id('background2')
 const info = get.Id('infos')
 const font = get.Id('font-color')
-
-// Escutadores de eventos da página de configurações, buscam atualizar as configurações da página
-// e o tema atualmente aplicado na mesma
-listen('input', updateSettings)
-listen('submit', resetConfigs)
 
 // Atualiza as configurações toda vez que houver um input por parte do usuário
 function updateSettings() {
@@ -41,7 +41,6 @@ function updateSettings() {
   settings.setDefaultLaunch(initScrn.value)
 
   settings.save()
-  Theme.change()
 }
 
 // restaura as configurações ao padrão
@@ -92,5 +91,10 @@ function loadPage() {
   info.value = infos
   font.value = fontColor
 }
+
+// Escutadores de eventos da página de configurações, buscam atualizar as configurações da página
+// e o tema atualmente aplicado na mesma
+listen('input', updateSettings)
+listen('submit', resetConfigs)
 
 loadPage()

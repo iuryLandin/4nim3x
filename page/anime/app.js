@@ -1,7 +1,7 @@
 import { getAnimeDetail, getEpisodeList } from '../common/api.js'
 import { get, truncate } from '../../js/utils/CzarK.js'
 import getSettings from '../../settings/settings.js'
-import { loadTheme } from '../../themes/themes.js'
+import { loadTheme, loadCostumTheme } from '../../themes/themes.js'
 import { hideLoading } from '../../js/loading.js'
 import { getters } from '../common/States.js'
 
@@ -9,6 +9,11 @@ import '../../themes/themes.js'
 import '../../js/loading.js'
 
 const settings = getSettings()
+settings.sub2SortUpdate(loadEpisodeList)
+
+loadTheme(settings.getTheme())
+loadCostumTheme(settings.getCostumTheme())
+
 const { anime } = get.UrlData()
 
 const ASC = 'A - Z'
@@ -39,14 +44,9 @@ const EPISOD_CNTNR = get.Queries('.episode-list')
     .then(loadEpisodeList)
 
   //carrega as ações clicáveis na página
-  SORT_ORD_BTN.click(toogleOrderMode)
+  SORT_ORD_BTN.click(settings.togleSortMode)
   DESCRIPTIONS.click(showFullDescptn)
 })()
-
-function toogleOrderMode() {
-  settings.toogleOrderMode()
-  loadEpisodeList()
-}
 
 function loadAnimeDetails() {
   const { Nome, Desc, Imagem } = getters.getAnimeDetail()
@@ -63,10 +63,10 @@ function loadAnimeDetails() {
 
 function loadEpisodeList() {
   const episodeList = getters.getEpisodeList()
+  const sortMode = settings.getSortMode()
   
   // recebe das configurações o modo de ordenar os episódios escolhido pelo usuário
   EPISOD_CNTNR.forEach(ctnr => ctnr.innerHTML = '')
-  const sortMode = settings.getSortMode()
 
   const SORT_MODE = (sortMode != 'beforeend')
   ? ASC
