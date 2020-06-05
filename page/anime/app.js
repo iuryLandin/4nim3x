@@ -94,3 +94,23 @@ function getEpisodeCard({ Id, Nome }) {
 function showFullDescptn() {
   FULL_DSC_CTN.fadeIn()
 }
+
+const mobileShare = () => {
+  const url = location.href
+  const text = 'Ei! Acho que vai gostar anime! Se liga:'
+  const { Nome: title } = getters.getAnimeDetail()
+
+  // alert(text)
+
+  navigator.share({ title, text, url })
+    .then(() => alert('Obrigado por compartilhar o app! =)'))
+    .catch(console.error);
+}
+
+;(function loadShare() {
+  const FAB = $('.fab-share')
+  // alert(JSON.stringify(navigator))
+  FAB.click(mobileShare)
+
+  if (!navigator.share) FAB.hide()
+})()

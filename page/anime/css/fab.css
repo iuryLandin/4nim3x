@@ -1,0 +1,22 @@
+.fab-share {
+  box-shadow: 1px 1px 4px 4px rgba(0,0,0,.3);
+  background: var(--accent);
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: fixed;
+  outline: none;
+  bottom: 25px;
+  height: 50px;
+  right: 15px;
+  width: 50px;
+  z-index: 5;
+}
+
+.fab-share:active {
+  transform: scale(1.05);
+}
+
+.share-btn {
+  color: white;
+}
