@@ -89,8 +89,8 @@ function getVideoState() {
 }
 
 function parseTime(timeInSec) {
-  const sec = parseInt(timeInSec % 60)
-  const min = parseInt(timeInSec / 60)
+  const sec = parseInt(timeInSec % 60) || 0
+  const min = parseInt(timeInSec / 60) || 0
   
   return {
     sec,
