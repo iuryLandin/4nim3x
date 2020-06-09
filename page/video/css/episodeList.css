@@ -52,7 +52,6 @@
     .next-episodes {
         overflow-y: scroll;
         padding: 0px 5px;
-        height: 95.5vh;
     }
     
     .episode-list::-webkit-scrollbar {
