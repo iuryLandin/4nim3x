@@ -28,6 +28,6 @@ export const devFunctions = {
   
   useHTTP() {
     location.protocol = 'http'
-    set.Session('useHTTP',true)
+    set.Local('useHTTP',true)
   }
 }
