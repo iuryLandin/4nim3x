@@ -125,6 +125,10 @@
 
     <!-- script principal do app -->
     <script type="module" src="./app.js" defer ></script>
+    <script>
+        if (get.Session('useHTTP') && location.protocol != 'http) location.protocol = 'http'
+    </script>
+
 
     <!-- script para o mecanismo de busca -->
     <script type="module" src="./js/search.js" defer></script>
