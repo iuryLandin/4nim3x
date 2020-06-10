@@ -1,5 +1,5 @@
 import { getAppVersion } from '../States.js'
-import { del } from './CzarK.js'
+import { set, del } from './CzarK.js'
 
 const PROGRESS_DELETE = 'Seu progresso salvo será completamente excluído.\n Deseja continuar?'
 const SITE_2_OPEN_NXT = 'qual site você deseja abrir?'
@@ -24,5 +24,10 @@ export const devFunctions = {
     const conf = confirm(CONFIRM_ENT_URL)
 
     if (conf) location = site
+  },
+  
+  useHTTP() {
+    location.protocol = 'http'
+    set.Session('useHTTP',true)
   }
 }
