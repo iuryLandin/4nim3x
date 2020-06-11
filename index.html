@@ -126,7 +126,11 @@
     <!-- script principal do app -->
     <script type="module" src="./app.js" defer ></script>
     <script>
-        if (get.Local('useHTTP') && location.protocol != 'http) location.protocol = 'http'
+        function useHttp(){
+            const isUsingHttp = location.protocol === 'http'
+            const wantToUseHttp = get.Local('useHTTP')
+            if (!isUsingHttp && wantToUseHttp) location.protocol = 'http'
+        }
     </script>
 
 
