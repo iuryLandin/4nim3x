@@ -36,13 +36,11 @@ export const getNextApiPage = async () => {
 
 const getLists = async () => {
   // Obtêm a lista de lançamentos
-  const releases = get.Session(RLS) || await getApiData(RLS)
+  const releases = await getApiData(RLS)
   const homescrn = await getNextApiPage()
 
   mutations.setAnimeList(homescrn)
   mutations.setReleases(releases)
-
-  set.Session(RLS, releases)
 
   hideLoading()
 }
