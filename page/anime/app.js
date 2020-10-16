@@ -29,6 +29,7 @@ const DESK_ALL_BTN = $('#see-all-desk')
 const FULL_DSC_CTN = $('#full-desc')
 const FULL_DESCRPT = $('.full-desc-modal')
 const EPISOD_CNTNR = get.Queries('.episode-list')
+const DESCRIPTION = $('.meta-description')
 
 
 ;(function loadPage() {
@@ -48,7 +49,9 @@ const EPISOD_CNTNR = get.Queries('.episode-list')
 
 function loadAnimeDetails() {
   const { Nome, Desc, Imagem } = getters.getAnimeDetail()
-
+  
+  document.title = Nome
+  DESCRIPTION.text(Desc)
   _ANIME_TITLE.text(Nome)
   FULL_DESCRPT.text(Desc)
   IMGs_ON_PAGE.attr('src', Imagem)
